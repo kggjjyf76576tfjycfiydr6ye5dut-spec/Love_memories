@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ذكريات حبنا</title>
-    <!-- Google Fonts: خط عربي رومانسي -->
-    <!-- تم تحسين طريقة استدعاء الخطوط لتشمل الأوزان المستخدمة فقط لتسريع التحميل -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -18,6 +16,159 @@
             font-family: 'Cairo', sans-serif;
             background: #1a0a0a;
             overflow-x: hidden;
+        }
+
+        /* ===== أمطار القلوب ===== */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall linear infinite;
+            opacity: 0.7;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) scale(0.5);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* ===== شاشة كلمة السر ===== */
+        .password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at center, #2d0a1b, #0a0202);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .password-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .password-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #ff4d6d;
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 77, 109, 0.5);
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .password-box .lock-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .password-box h2 {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            color: #ffd1dc;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff4d6d;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1.4rem;
+            font-family: 'Cairo', sans-serif;
+            border: 2px solid #ff4d6d;
+            border-radius: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffd1dc;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            direction: ltr;
+        }
+
+        .password-input:focus {
+            border-color: #ff758f;
+            box-shadow: 0 0 30px rgba(255, 77, 109, 0.6);
+        }
+
+        .password-input::placeholder {
+            color: rgba(255, 209, 220, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .password-btn {
+            margin-top: 20px;
+            padding: 14px 50px;
+            font-size: 1.4rem;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff4d6d, #c9184a);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 30px #ff4d6d;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .password-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 45px #ff758f;
+        }
+
+        .error-message {
+            color: #ff4d6d;
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            min-height: 40px;
+            text-shadow: 0 0 10px #ff4d6d;
+            animation: shake 0.5s ease;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-8px); }
+            80% { transform: translateX(5px); }
         }
 
         /* ===== شاشة البداية (Landing) ===== */
@@ -49,8 +200,7 @@
             color: #ff4d6d;
             text-shadow: 0 0 20px #ff4d6d;
             user-select: none;
-            /* التصحيح 1: منع تداخل القلب مع النقر */
-            pointer-events: none; 
+            pointer-events: none;
         }
 
         @keyframes heartbeat {
@@ -122,7 +272,6 @@
             max-width: 1200px;
         }
 
-        /* بطاقة الصورة */
         .card {
             position: relative;
             border-radius: 20px;
@@ -136,7 +285,7 @@
 
         .card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.33); /* التصحيح 2: صيغة لون rgba صحيحة */
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.33);
         }
 
         .card img {
@@ -145,7 +294,6 @@
             object-fit: cover;
             display: block;
             transition: filter 0.4s;
-            /* التصحيح 3: ضمان سلاسة التحميل */
             will-change: filter;
         }
 
@@ -194,12 +342,12 @@
 
         .modal-content {
             position: relative;
-            max-width: 90%; /* التصحيح 4: عرض مرن للشاشات الصغيرة */
+            max-width: 90%;
             width: 700px;
             background: #1e1e2f;
             border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 0 50px rgba(255, 77, 109, 0.4); /* تصحيح */
+            box-shadow: 0 0 50px rgba(255, 77, 109, 0.4);
             animation: fadeInUp 0.6s ease;
         }
 
@@ -210,7 +358,7 @@
 
         .modal-image {
             width: 100%;
-            max-height: 50vh; /* التصحيح 5: منع الصورة من أخذ كامل الشاشة طولياً */
+            max-height: 50vh;
             object-fit: cover;
             border-bottom: 3px solid #ff4d6d;
         }
@@ -224,7 +372,7 @@
             line-height: 1.8;
             background: #1e1e2f;
             text-shadow: 0 0 5px #ff4d6d;
-            direction: rtl; /* التصحيح 6: تأكيد اتجاه النص العربي */
+            direction: rtl;
         }
 
         .close-modal {
@@ -252,10 +400,9 @@
             transform: scale(1.1);
         }
 
-        /* زر الرجوع للخلف */
         .back-home {
             margin-top: 40px;
-            margin-bottom: 30px; /* التصحيح 7: مساحة أسفل الصفحة */
+            margin-bottom: 30px;
             padding: 12px 35px;
             background: transparent;
             border: 2px solid #ff4d6d;
@@ -274,7 +421,6 @@
             box-shadow: 0 0 25px #ff4d6d;
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             .landing h1 {
                 font-size: 2.5rem;
@@ -287,13 +433,29 @@
                 font-size: 1.5rem;
             }
             .gallery {
-                /* التصحيح 8: عمود واحد للشاشات الصغيرة جداً */
                 grid-template-columns: 1fr;
+            }
+            .password-box h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
+
+    <!-- ===== أمطار القلوب (هتتضاف بالجافاسكريبت) ===== -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- ========= شاشة كلمة السر ========= -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-box">
+            <span class="lock-icon">🔐</span>
+            <h2>أدخلي كلمة السر<br>يا روحي 🥀</h2>
+            <input type="password" class="password-input" id="passwordInput" placeholder="••••" maxlength="20">
+            <button class="password-btn" id="passwordBtn">💕 دخول</button>
+            <div class="error-message" id="errorMessage">ركزي يا عيوني واكتبي رموز عشقي 💕</div>
+        </div>
+    </div>
 
     <!-- ========= شاشة البداية ========= -->
     <div class="landing" id="landingPage">
@@ -323,7 +485,64 @@
     </div>
 
     <script>
-        // ===== بيانات الحب: كل عنصر عبارة عن صورة (رابط) + بيت الشعر =====
+        // ===== إنشاء أمطار القلوب =====
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['❤️', '💕', '💗', '💖', '💘', '💝', '💟', '🩷', '♥️', '💓'];
+
+            function createHeart() {
+                const heart = document.createElement('span');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 2 + 1.2) + 'rem';
+                heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }
+
+            setInterval(createHeart, 400);
+            for (let i = 0; i < 8; i++) {
+                setTimeout(createHeart, i * 300);
+            }
+        }
+
+        // ===== تشغيل أمطار القلوب =====
+        createFloatingHearts();
+
+        // ===== كلمة السر =====
+        const PASSWORD = 'Love';
+        const passwordScreen = document.getElementById('passwordScreen');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordBtn = document.getElementById('passwordBtn');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function checkPassword() {
+            if (passwordInput.value.trim() === PASSWORD) {
+                passwordScreen.classList.add('hidden');
+                document.body.style.overflow = '';
+            } else {
+                errorMessage.classList.add('show');
+                passwordInput.value = '';
+                passwordInput.focus();
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 2500);
+            }
+        }
+
+        passwordBtn.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // ===== بيانات الحب =====
         const loveData = [
             {
                 img: "img1",
@@ -384,19 +603,17 @@
             modalImage.src = item.img;
             modalPoemText.textContent = item.poem;
             poemModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // منع التمرير خلف المودال
+            document.body.style.overflow = 'hidden';
         }
 
         // إغلاق المودال
         function closeModal() {
             poemModal.classList.remove('active');
-            // التصحيح 9: إعادة التمرير فقط إذا لم تكن شاشة البداية ظاهرة
             if (!landingPage.classList.contains('hidden')) {
-                document.body.style.overflow = ''; 
+                document.body.style.overflow = '';
             } else {
-                // التحقق من وجود مودالات أخرى نشطة (للأمان)
                 if (!document.querySelector('.modal.active')) {
-                     document.body.style.overflow = '';
+                    document.body.style.overflow = '';
                 }
             }
         }
@@ -405,8 +622,7 @@
         startBtn.addEventListener('click', () => {
             landingPage.classList.add('hidden');
             mainContent.classList.add('visible');
-            createCards(); // إنشاء الكاردات عند الدخول لأول مرة
-            // التصحيح 10: إعادة تعيين حالة التمرير إذا كانت قد تغيرت
+            createCards();
             document.body.style.overflow = '';
         });
 
@@ -414,25 +630,16 @@
         backToLandingBtn.addEventListener('click', () => {
             landingPage.classList.remove('hidden');
             mainContent.classList.remove('visible');
-            // التصحيح 11: إغلاق أي مودال مفتوح عند العودة للبداية
             if (poemModal.classList.contains('active')) {
                 closeModal();
             }
         });
 
-        // إغلاق المودال بالضغط على × أو بالضغط خارج المحتوى
+        // إغلاق المودال
         closeModalBtn.addEventListener('click', closeModal);
         poemModal.addEventListener('click', (e) => {
-            // التصحيح 12: التأكد أن النقر كان على الخلفية وليس المحتوى
             if (e.target === poemModal) closeModal();
         });
 
         // دعم لوحة المفاتيح (Esc)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && poemModal.classList.contains('active')) {
-                closeModal();
-            }
-        });
-    </script>
-</body>
-</html>
+        d
