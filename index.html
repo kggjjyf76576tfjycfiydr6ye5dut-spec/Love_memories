@@ -8,128 +8,131 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Cairo',sans-serif;background:#faf8f5;overflow-x:hidden}
-        
-        .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#1a0a2e,#2d1b69,#0a0a1a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;transition:opacity .8s,visibility .8s}
+        body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden}
+
+        /* ===== شاشة البداية ===== */
+        .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#000,#111,#000);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;transition:.8s}
         .landing.hidden{opacity:0;visibility:hidden;pointer-events:none}
-        .landing .logo-icon{font-size:6rem;animation:float 3s infinite}
+        .landing .logo{font-size:6rem;animation:float 3s infinite}
         @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-        .landing h1{font-size:4rem;font-weight:900;color:#d4af37;text-shadow:0 0 30px rgba(212,175,55,.6);letter-spacing:5px;margin:10px 0}
-        .landing .sub{font-size:1.8rem;color:#f0c75e;opacity:.9}
-        .landing .slogan{font-size:1.2rem;color:#fff;opacity:.7;margin:20px 0 40px;text-align:center}
-        .start-btn{padding:18px 60px;font-size:1.6rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#f0c75e);color:#1a0a2e;border:none;border-radius:50px;cursor:pointer;box-shadow:0 0 40px rgba(212,175,55,.5);transition:.3s;letter-spacing:2px}
-        .start-btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(212,175,55,.8)}
-        
-        .main-content{min-height:100vh;background:#faf8f5;display:none;flex-direction:column;align-items:center;padding-top:130px}
+        .landing h1{font-size:4rem;font-weight:900;color:#d4af37;text-shadow:0 0 40px rgba(212,175,55,.4);letter-spacing:8px}
+        .landing .sub{font-size:1.6rem;color:#ccc;opacity:.8;margin:10px 0}
+        .landing .slogan{font-size:1rem;color:#888;margin:15px 0 40px}
+        .start-btn{padding:16px 55px;font-size:1.4rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8941f);color:#000;border:none;border-radius:50px;cursor:pointer;box-shadow:0 0 40px rgba(212,175,55,.3);transition:.3s;letter-spacing:2px}
+        .start-btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(212,175,55,.6)}
+
+        /* ===== المحتوى الرئيسي ===== */
+        .main-content{min-height:100vh;background:#0a0a0a;display:none;flex-direction:column;align-items:center;padding-top:130px}
         .main-content.visible{display:flex}
-        
-        .header{position:fixed;top:0;left:0;right:0;z-index:500;background:linear-gradient(135deg,#1a0a2e,#2d1b69);padding:12px 15px;text-align:center;box-shadow:0 5px 30px rgba(0,0,0,.5);border-bottom:3px solid #d4af37}
-        .header h2{font-size:1.8rem;font-weight:900;color:#d4af37;letter-spacing:3px}
-        .header p{font-size:.85rem;color:#f0c75e;opacity:.9}
-        .search-box{display:flex;align-items:center;gap:10px;width:90%;max-width:600px;margin:15px auto 0;background:rgba(255,255,255,.15);border-radius:50px;padding:8px 15px}
-        .search-box input{flex:1;border:none;background:transparent;color:#fff;font-size:1rem;outline:none;padding:5px;font-family:'Cairo',sans-serif}
-        .search-box input::placeholder{color:rgba(255,255,255,.5)}
-        .search-box button{background:#d4af37;border:none;color:#1a0a2e;width:35px;height:35px;border-radius:50%;cursor:pointer;font-size:1rem;transition:.3s}
-        .search-box button:hover{background:#f0c75e;transform:scale(1.1)}
-        .search-results{color:#f0c75e;font-size:.85rem;margin-top:5px}
-        
-        .cats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:15px;width:90%;max-width:1200px;margin:20px 0}
-        .cats button{padding:10px 25px;font-size:1rem;font-weight:600;background:#fff;border:2px solid #d4af37;color:#1a0a2e;border-radius:50px;cursor:pointer;transition:.3s}
-        .cats button:hover,.cats button.active{background:#d4af37;color:#fff;box-shadow:0 5px 20px rgba(212,175,55,.4)}
-        
+
+        /* ===== هيدر ===== */
+        .header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.95);padding:10px 15px;text-align:center;border-bottom:2px solid #d4af37;backdrop-filter:blur(20px)}
+        .header h2{font-size:1.6rem;font-weight:900;color:#d4af37;letter-spacing:4px}
+        .header p{font-size:.8rem;color:#999}
+        .search-box{display:flex;gap:10px;width:90%;max-width:500px;margin:10px auto 0;background:rgba(255,255,255,.05);border:1px solid #333;border-radius:50px;padding:8px 15px}
+        .search-box input{flex:1;background:transparent;color:#fff;font-size:.95rem;outline:none;border:none;font-family:'Cairo',sans-serif}
+        .search-box input::placeholder{color:#555}
+        .search-box button{background:#d4af37;border:none;color:#000;width:35px;height:35px;border-radius:50%;cursor:pointer}
+        .search-results{color:#888;font-size:.8rem;margin-top:5px}
+
+        /* ===== تصنيفات ===== */
+        .cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:15px;width:90%;max-width:1200px;margin:20px 0}
+        .cats button{padding:8px 22px;font-size:.9rem;font-weight:600;background:transparent;border:1px solid #333;color:#ccc;border-radius:50px;cursor:pointer;transition:.3s}
+        .cats button:hover,.cats button.active{background:#d4af37;border-color:#d4af37;color:#000}
+
+        /* ===== معرض ===== */
         .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;width:90%;max-width:1200px;padding-bottom:30px}
-        .no-results{text-align:center;padding:40px;font-size:1.5rem;color:#999;grid-column:1/-1}
-        
-        .card{position:relative;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 5px 20px rgba(0,0,0,.1);transition:.3s;aspect-ratio:3/4;cursor:pointer;display:block;text-decoration:none;color:inherit}
-        .card:hover{transform:translateY(-8px);box-shadow:0 15px 40px rgba(212,175,55,.3)}
-        .card img{width:100%;height:65%;object-fit:cover;display:block}
+        .no-results{text-align:center;padding:50px;font-size:1.3rem;color:#555;grid-column:1/-1}
+        .card{position:relative;border-radius:15px;overflow:hidden;background:#111;border:1px solid #222;transition:.3s;aspect-ratio:3/4;cursor:pointer}
+        .card:hover{transform:translateY(-8px);border-color:#d4af37;box-shadow:0 15px 40px rgba(212,175,55,.15)}
+        .card img{width:100%;height:65%;object-fit:cover}
         .card .info{padding:15px;text-align:center}
-        .card .info h3{font-size:1rem;font-weight:700;color:#1a0a2e;margin-bottom:5px}
-        .card .info .price{font-size:1.2rem;font-weight:900;color:#d4af37}
-        .card .badge{position:absolute;top:10px;right:10px;background:#d4af37;color:#1a0a2e;padding:5px 15px;border-radius:20px;font-size:.8rem;font-weight:700}
-        
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.9);z-index:2000;justify-content:center;align-items:center;padding:20px}
+        .card .info h3{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:5px}
+        .card .info .price{font-size:1.1rem;font-weight:900;color:#d4af37}
+        .card .badge{position:absolute;top:10px;right:10px;background:#d4af37;color:#000;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700}
+
+        /* ===== مودال ===== */
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:20px}
         .modal.active{display:flex}
-        .modal-content{position:relative;max-width:90%;width:550px;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 0 50px rgba(212,175,55,.5);animation:fadeIn .6s;max-height:90vh;overflow-y:auto}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-        .modal img{width:100%;max-height:40vh;object-fit:cover;border-bottom:3px solid #d4af37}
-        .modal .m-info{padding:25px;text-align:center}
-        .modal .m-info h3{font-size:1.6rem;font-weight:900;color:#1a0a2e;margin-bottom:10px}
-        .modal .m-info .desc{font-size:1rem;color:#666;margin-bottom:15px;line-height:1.8}
-        
-        .quantity-box{background:#f9f5f0;border:2px solid #d4af37;border-radius:15px;padding:20px;margin:15px 0}
-        .quantity-box label{display:block;font-weight:700;color:#1a0a2e;margin-bottom:10px;font-size:1.1rem}
-        .qty-controls{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:15px}
-        .qty-controls button{width:40px;height:40px;border:2px solid #d4af37;background:#fff;color:#1a0a2e;font-size:1.3rem;font-weight:700;border-radius:10px;cursor:pointer;transition:.3s}
-        .qty-controls button:hover{background:#d4af37;color:#fff}
-        .qty-controls input{width:80px;text-align:center;font-size:1.3rem;font-weight:700;border:2px solid #d4af37;border-radius:10px;padding:8px;color:#1a0a2e;outline:none}
-        .price-details{text-align:center;padding:10px;background:#fff;border-radius:10px}
-        .price-details .unit-price{font-size:1rem;color:#666;margin-bottom:5px}
-        .price-details .total-price{font-size:1.8rem;font-weight:900;color:#d4af37}
-        .wholesale-badge{display:inline-block;background:#25D366;color:#fff;padding:5px 15px;border-radius:20px;font-size:.85rem;font-weight:700;margin-top:8px;animation:pulse 2s infinite}
+        .modal-content{position:relative;max-width:90%;width:500px;background:#111;border:1px solid #333;border-radius:20px;overflow:hidden;animation:fadeIn .5s;max-height:90vh;overflow-y:auto}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .modal img{width:100%;max-height:35vh;object-fit:cover;border-bottom:2px solid #d4af37}
+        .modal .m-info{padding:20px;text-align:center}
+        .modal .m-info h3{font-size:1.4rem;font-weight:900;color:#d4af37;margin-bottom:8px}
+        .modal .m-info .desc{font-size:.9rem;color:#999;margin-bottom:12px;line-height:1.7}
+        .qty-box{background:#0a0a0a;border:1px solid #333;border-radius:12px;padding:15px;margin:12px 0}
+        .qty-box label{display:block;font-weight:700;color:#ccc;margin-bottom:8px;font-size:1rem}
+        .qty-ctrl{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+        .qty-ctrl button{width:35px;height:35px;border:1px solid #d4af37;background:transparent;color:#d4af37;font-size:1.2rem;font-weight:700;border-radius:8px;cursor:pointer;transition:.3s}
+        .qty-ctrl button:hover{background:#d4af37;color:#000}
+        .qty-ctrl input{width:70px;text-align:center;font-size:1.2rem;font-weight:700;background:transparent;border:1px solid #333;color:#d4af37;border-radius:8px;padding:6px;outline:none}
+        .price-info{text-align:center;padding:8px}
+        .price-info .unit{font-size:.9rem;color:#888;margin-bottom:3px}
+        .price-info .total{font-size:1.6rem;font-weight:900;color:#d4af37}
+        .ws-badge{display:inline-block;background:#d4af37;color:#000;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:700;margin-top:6px;animation:pulse 2s infinite}
         @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
-        .wholesale-info{color:#666;font-size:.85rem;margin-top:5px}
-        
-        .order-btn{padding:14px 40px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#f0c75e);color:#1a0a2e;border:none;border-radius:50px;cursor:pointer;box-shadow:0 0 20px rgba(212,175,55,.4);transition:.3s;width:100%}
-        .order-btn:hover{transform:scale(1.03);box-shadow:0 0 40px rgba(212,175,55,.7)}
-        
-        .close-modal{position:absolute;top:15px;left:15px;background:#d4af37;border:none;color:#fff;font-size:1.5rem;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;box-shadow:0 0 20px rgba(212,175,55,.5);font-weight:700}
-        .close-modal:hover{background:#1a0a2e;color:#d4af37;transform:scale(1.15)}
-        
-        .back-btn{margin:20px;padding:12px 35px;background:transparent;border:2px solid #d4af37;color:#1a0a2e;font-size:1.2rem;border-radius:30px;cursor:pointer;transition:.3s;font-weight:600}
-        .back-btn:hover{background:#d4af37;color:#fff;box-shadow:0 0 25px rgba(212,175,55,.5)}
-        
-        .contact{width:90%;max-width:700px;margin:20px;padding:30px;background:#fff;border:2px solid #d4af37;border-radius:20px;box-shadow:0 5px 30px rgba(0,0,0,.08);text-align:center}
-        .contact h2{font-size:1.8rem;font-weight:900;color:#1a0a2e;margin-bottom:25px}
-        .contact h2::after{content:'';display:block;width:60px;height:3px;background:#d4af37;margin:8px auto 0;border-radius:5px}
-        .contact-cards{display:flex;flex-wrap:wrap;gap:15px;justify-content:center}
-        .c-card{background:#faf8f5;border:2px solid #eee;border-radius:15px;padding:20px;flex:1;min-width:200px;max-width:220px;text-align:center;transition:.3s}
-        .c-card:hover{border-color:#d4af37;box-shadow:0 10px 30px rgba(212,175,55,.2);transform:translateY(-5px)}
-        .c-card .icon{font-size:2rem;margin-bottom:8px}
-        .c-card .role{font-size:.9rem;font-weight:700;color:#1a0a2e}
-        .c-card .name{font-size:1.2rem;font-weight:900;color:#d4af37;margin:5px 0}
-        .c-card .phone{direction:ltr;font-weight:700;font-size:1rem}
+        .ws-info{color:#666;font-size:.8rem;margin-top:3px}
+        .order-btn{padding:12px 30px;font-size:1.1rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8941f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:.3s;width:100%}
+        .order-btn:hover{transform:scale(1.03);box-shadow:0 0 30px rgba(212,175,55,.4)}
+        .close-modal{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.7);border:1px solid #d4af37;color:#d4af37;font-size:1.2rem;width:35px;height:35px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:.3s}
+        .close-modal:hover{background:#d4af37;color:#000}
+
+        /* ===== أزرار وتواصل ===== */
+        .back-btn{margin:20px;padding:10px 30px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;transition:.3s;font-weight:600}
+        .back-btn:hover{background:#d4af37;color:#000}
+        .contact{width:90%;max-width:700px;margin:20px;padding:25px;background:#111;border:1px solid #222;border-radius:15px;text-align:center}
+        .contact h2{font-size:1.5rem;font-weight:900;color:#d4af37;margin-bottom:20px}
+        .contact h2::after{content:'';display:block;width:50px;height:2px;background:#d4af37;margin:8px auto 0}
+        .contact-cards{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+        .c-card{background:#0a0a0a;border:1px solid #222;border-radius:12px;padding:18px;flex:1;min-width:180px;max-width:200px;text-align:center;transition:.3s}
+        .c-card:hover{border-color:#d4af37;box-shadow:0 10px 30px rgba(212,175,55,.1);transform:translateY(-5px)}
+        .c-card .icon{font-size:1.8rem;margin-bottom:5px}
+        .c-card .role{font-size:.8rem;font-weight:700;color:#888}
+        .c-card .name{font-size:1.1rem;font-weight:900;color:#d4af37;margin:5px 0}
+        .c-card .phone{direction:ltr;font-weight:700;font-size:.9rem;color:#ccc}
         .c-card .phone i{color:#25D366;margin-left:5px}
-        .c-card .call-btn{display:inline-block;margin-top:10px;padding:8px 20px;background:#25D366;color:#fff;border-radius:50px;text-decoration:none;font-size:.9rem;font-weight:700;transition:.3s}
-        .c-card .call-btn:hover{background:#128C7E;transform:scale(1.05)}
-        .contact .note{margin-top:25px;padding:15px;background:linear-gradient(45deg,#1a0a2e,#2d1b69);color:#d4af37;border-radius:15px;font-size:1rem;font-weight:600;line-height:1.8}
-        
-        .footer{text-align:center;padding:25px;margin:20px;color:#1a0a2e;background:#fff;border:2px solid #d4af37;border-radius:20px;width:90%;max-width:600px;box-shadow:0 5px 30px rgba(0,0,0,.1)}
-        .footer .f-name{font-size:1.5rem;font-weight:900;color:#d4af37}
-        .social{margin-top:15px;padding-top:15px;border-top:1px solid #eee;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-        .social a,.social span{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:50px;text-decoration:none;font-size:.9rem;font-weight:600;color:#fff;transition:.3s}
-        .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#000}
-        .social a:hover{transform:scale(1.05);box-shadow:0 5px 20px rgba(0,0,0,.3)}
-        .social .ph{background:#faf8f5;border:2px solid #d4af37;color:#1a0a2e;direction:ltr}
+        .c-card .call-btn{display:inline-block;margin-top:8px;padding:6px 18px;background:#25D366;color:#fff;border-radius:50px;text-decoration:none;font-size:.8rem;font-weight:700}
+        .c-card .call-btn:hover{background:#128C7E}
+        .contact .note{margin-top:20px;padding:12px;background:rgba(212,175,55,.05);border:1px solid #222;color:#ccc;border-radius:12px;font-size:.9rem;font-weight:600;line-height:1.8}
+
+        /* ===== تذييل ===== */
+        .footer{text-align:center;padding:20px;margin:20px;color:#888;background:#111;border:1px solid #222;border-radius:15px;width:90%;max-width:600px}
+        .footer .f-name{font-size:1.3rem;font-weight:900;color:#d4af37}
+        .social{margin-top:12px;padding-top:12px;border-top:1px solid #222;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+        .social a,.social span{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:50px;text-decoration:none;font-size:.85rem;font-weight:600;color:#fff;transition:.3s}
+        .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#000;border:1px solid #333}
+        .social a:hover{transform:scale(1.05)}
+        .social .ph{background:transparent;border:1px solid #d4af37;color:#d4af37;direction:ltr}
         .social .ph i{color:#25D366}
-        
+
         @media(max-width:600px){
-            .landing h1{font-size:2.5rem}.landing .sub{font-size:1.3rem}.start-btn{font-size:1.3rem;padding:14px 40px}
-            .gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:15px;width:95%}
-            .header h2{font-size:1.3rem}.main-content{padding-top:120px}
-            .cats button{padding:8px 15px;font-size:.85rem}
-            .c-card{min-width:100%}.contact h2{font-size:1.4rem}
-            .modal-content{max-width:95%}
+            .landing h1{font-size:2.5rem}.landing .sub{font-size:1.2rem}.start-btn{font-size:1.2rem;padding:12px 35px}
+            .gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;width:95%}
+            .header h2{font-size:1.2rem}.main-content{padding-top:110px}
+            .cats button{padding:6px 15px;font-size:.8rem}
+            .c-card{min-width:100%}
         }
     </style>
 </head>
 <body>
 
+<!-- ===== شاشة البداية ===== -->
 <div class="landing" id="landing">
-    <div class="logo-icon">💎</div>
+    <div class="logo">💎</div>
     <h1>العربي</h1>
     <div class="sub">مستحضرات تجميل أصلية 100%</div>
-    <div class="slogan">✨ أجود الماركات العالمية للعناية بالبشرة ✨</div>
+    <div class="slogan">أجود الماركات العالمية للعناية بالبشرة</div>
     <button class="start-btn" id="startBtn">تصفح المنتجات</button>
 </div>
 
+<!-- ===== المحتوى الرئيسي ===== -->
 <div class="main-content" id="main">
     <div class="header">
         <h2>💎 العربي</h2>
-        <p>مستحضرات تجميل أصلية - ماركات عالمية</p>
+        <p>مستحضرات تجميل أصلية – ماركات عالمية</p>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج...">
-            <button onclick="filterAndRender()"><i class="fas fa-search"></i></button>
+            <button onclick="filter()"><i class="fas fa-search"></i></button>
         </div>
         <div class="search-results" id="searchResults"></div>
     </div>
@@ -167,10 +170,11 @@
             <a href="https://www.instagram.com/mazenalaraby10" class="ig"><i class="fab fa-instagram"></i> انستجرام</a>
             <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="tt"><i class="fab fa-tiktok"></i> تيك توك</a>
         </div>
-        <span style="font-size:.75rem;opacity:.5;display:block;margin-top:10px">© 2026 جميع الحقوق محفوظة</span>
+        <span style="font-size:.7rem;opacity:.4;display:block;margin-top:10px">© 2026 جميع الحقوق محفوظة</span>
     </div>
 </div>
 
+<!-- ===== مودال ===== -->
 <div class="modal" id="modal">
     <div class="modal-content">
         <button class="close-modal" id="closeModal">✕</button>
@@ -178,18 +182,18 @@
         <div class="m-info">
             <h3 id="modalName"></h3>
             <div class="desc" id="modalDesc"></div>
-            <div class="quantity-box">
+            <div class="qty-box">
                 <label>📦 كمية الطلب</label>
-                <div class="qty-controls">
+                <div class="qty-ctrl">
                     <button id="qtyMinus">−</button>
                     <input type="number" id="qtyInput" value="1" min="1" max="10000">
                     <button id="qtyPlus">+</button>
                 </div>
-                <div class="price-details">
-                    <div class="unit-price" id="unitPriceText"></div>
-                    <div class="total-price" id="totalPriceText"></div>
+                <div class="price-info">
+                    <div class="unit" id="unitPriceText"></div>
+                    <div class="total" id="totalPriceText"></div>
                     <div id="wholesaleBadge"></div>
-                    <div class="wholesale-info" id="wholesaleInfo"></div>
+                    <div class="ws-info" id="wholesaleInfo"></div>
                 </div>
             </div>
             <button class="order-btn" onclick="orderNow()">📞 اطلب الآن عبر واتساب</button>
@@ -198,132 +202,103 @@
 </div>
 
 <script>
-// ========== [1] بيانات المنتجات (من الكود القديم) ==========
+// ========== البيانات ==========
 var products = [
-    {id:1,  img:"img1",  name:"سيرم ديزار فيتامين سي",       cat:"face",   desc:"سيروم فيتامين سي مركز لتفتيح البشرة وتوحيد لونها",              price:70},
-    {id:2,  img:"img2",  name:"Makhmaria Perfume IBRAQ",    cat:"face",   desc:"ترطيب يومي عميق للبشرة الجافة والعادية",                       price:85},
-    {id:3,  img:"img3",  name:"غسول لبان الذكر الطبيعي",     cat:"face",   desc:"يشد البشره ويقلل علامات التقدم في السن ويساعد علي توحيد لون البشره وينظف المسام بعمق ويمنحك بشره صافيه", price:35},
-    {id:4,  img:"img4",  name:"غسول ستارفل",                cat:"face",   desc:"غسول ستارفل لنضاره و تغذية البشرة وجعلها اكثر إشراقتها",       price:150},
-    {id:5,  img:"img5",  name:"زيت سيسا الايورفيدي",         cat:"face",   desc:"يعالج جميع مشاكل الشعر ويحافظ عليه مرطبا وخالي من القشره والتساقط", price:140},
-    {id:6,  img:"img6",  name:"Femfresh",                   cat:"face",   desc:"واقي شمس عالي الحماية بمعامل 50+ للبشرة الحساسة",              price:210},
-    {id:7,  img:"img7",  name:"لوشن وايل 2×1",              cat:"eyes",   desc:"كريم مغذي لمحيط العين لتقليل الهالات السوداء والتجاعيد",       price:55},
-    {id:8,  img:"img8",  name:"سيروم تطويل الرموش",          cat:"eyes",   desc:"سيروم طبيعي لتطويل وتكثيف الرموش خلال 4 أسابيع",               price:450},
-    {id:9,  img:"img9",  name:"مزيل مكياج العيون",           cat:"eyes",   desc:"مزيل مكياج لطيف خالي من الزيوت للعيون الحساسة",                price:170},
-    {id:10, img:"img10", name:"قلم حواجب احترافي",            cat:"eyes",   desc:"قلم حواجب يدوم طويلاً برأس دقيق لرسم مثالي",                   price:150},
-    {id:11, img:"img11", name:"مرطب شفاه مغذي",              cat:"lips",   desc:"مرطب شفاه بزيت جوز الهند لترطيب عميق للشفاه الجافة",           price:120},
-    {id:12, img:"img12", name:"روج سائل مات",                cat:"lips",   desc:"روج سائل بتركيبة خفيفة تدوم طويلاً بألوان جذابة",               price:200},
-    {id:13, img:"img13", name:"مقشر شفاه بالسكر",             cat:"lips",   desc:"مقشر طبيعي لإزالة الجلد الميت وتنعيم الشفاه",                  price:140},
-    {id:14, img:"img14", name:"ملمع شفاه شفاف",               cat:"lips",   desc:"ملمع شفاه عالي اللمعان بتركيبة غير لزجة",                      price:160},
-    {id:15, img:"img15", name:"شامبو زيت الارجان",            cat:"hair",   desc:"شامبو طبيعي بزيت الأرجان لتغذية وتقوية الشعر",                 price:260},
-    {id:16, img:"img16", name:"بلسم مرطب للشعر",              cat:"hair",   desc:"بلسم يومي لفك تشابك الشعر وترطيبه",                             price:230},
-    {id:17, img:"img17", name:"ماسك شعر كيراتين",             cat:"hair",   desc:"ماسك علاجي لتنعيم الشعر وإعادة الحيوية له",                     price:340},
-    {id:18, img:"img18", name:"زيت شعر طبيعي",                cat:"hair",   desc:"زيت شعر بخلاصة الأعشاب لتطويل وتكثيف الشعر",                   price:190},
-    {id:19, img:"img19", name:"لوشن جسم مرطب",                cat:"body",   desc:"لوشن يومي لترطيب الجسم بالكامل برائحة منعشة",                  price:200},
-    {id:20, img:"img20", name:"مقشر جسم بالقهوة",             cat:"body",   desc:"مقشر طبيعي بالقهوة لإزالة الخلايا الميتة وتنعيم الجسم",        price:250},
-    {id:21, img:"img21", name:"زيت جسم لامع",                 cat:"body",   desc:"زيت جسم جاف لإضاءة طبيعية ولمعان صحي",                          price:280},
-    {id:22, img:"img22", name:"كريم تفتيح المناطق الحساسة",    cat:"body",   desc:"كريم لطيف لتفتيح وتوحيد لون المناطق الحساسة",                 price:320},
-    {id:23, img:"img23", name:"باليت ظلال عيون",              cat:"makeup", desc:"باليت 12 لون ظلال عيون بدرجات دافئة وباردة",                   price:380},
-    {id:24, img:"img24", name:"ماسكارا تطويل",                cat:"makeup", desc:"ماسكارا سوداء لتطويل وتكثيف الرموش بشكل طبيعي",               price:220},
-    {id:25, img:"img25", name:"أيلاينر سائل",                 cat:"makeup", desc:"أيلاينر أسود سائل برأس دقيق لرسم العين بشكل مثالي",           price:180},
-    {id:26, img:"img26", name:"كريم نهاري بعامل حماية",       cat:"face",   desc:"كريم نهاري خفيف مع حماية من الشمس SPF30",                      price:300},
-    {id:27, img:"img27", name:"كريم ليلي مغذي",               cat:"face",   desc:"كريم ليلي غني لتجديد خلايا البشرة أثناء النوم",                price:350},
-    {id:28, img:"img28", name:"سيرم هيالورونيك",              cat:"face",   desc:"سيرم حمض الهيالورونيك لترطيب عميق وملء التجاعيد",              price:420},
-    {id:29, img:"img29", name:"مقشر وجه إنزيمي",              cat:"face",   desc:"مقشر لطيف بأنزيمات الفواكه لإزالة الخلايا الميتة",             price:270},
-    {id:30, img:"img30", name:"بخاخ ماء الورد",               cat:"face",   desc:"بخاخ منعش للوجه لتثبيت المكياج وإنعاش البشرة",                 price:160},
+    {id:1, img:"img1", name:"سيرم ديزار فيتامين سي", cat:"face", desc:"سيروم فيتامين سي مركز لتفتيح البشرة وتوحيد لونها", price:70},
+    {id:2, img:"img2", name:"Makhmaria Perfume IBRAQ", cat:"face", desc:"ترطيب يومي عميق للبشرة الجافة والعادية", price:85},
+    {id:3, img:"img3", name:"غسول لبان الذكر الطبيعي", cat:"face", desc:"يشد البشره ويقلل علامات التقدم في السن ويساعد علي توحيد لون البشره وينظف المسام بعمق ويمنحك بشره صافيه", price:35},
+    {id:4, img:"img4", name:"غسول ستارفل", cat:"face", desc:"غسول ستارفل لنضاره و تغذية البشرة وجعلها اكثر إشراقتها", price:150},
+    {id:5, img:"img5", name:"زيت سيسا الايورفيدي", cat:"face", desc:"يعالج جميع مشاكل الشعر ويحافظ عليه مرطبا وخالي من القشره والتساقط", price:140},
+    {id:6, img:"img6", name:"Femfresh", cat:"face", desc:"واقي شمس عالي الحماية بمعامل 50+ للبشرة الحساسة", price:210},
+    {id:7, img:"img7", name:"لوشن وايل 2×1", cat:"eyes", desc:"كريم مغذي لمحيط العين لتقليل الهالات السوداء والتجاعيد", price:55},
+    {id:8, img:"img8", name:"سيروم تطويل الرموش", cat:"eyes", desc:"سيروم طبيعي لتطويل وتكثيف الرموش خلال 4 أسابيع", price:450},
+    {id:9, img:"img9", name:"مزيل مكياج العيون", cat:"eyes", desc:"مزيل مكياج لطيف خالي من الزيوت للعيون الحساسة", price:170},
+    {id:10, img:"img10", name:"قلم حواجب احترافي", cat:"eyes", desc:"قلم حواجب يدوم طويلاً برأس دقيق لرسم مثالي", price:150},
+    {id:11, img:"img11", name:"مرطب شفاه مغذي", cat:"lips", desc:"مرطب شفاه بزيت جوز الهند لترطيب عميق للشفاه الجافة", price:120},
+    {id:12, img:"img12", name:"روج سائل مات", cat:"lips", desc:"روج سائل بتركيبة خفيفة تدوم طويلاً بألوان جذابة", price:200},
+    {id:13, img:"img13", name:"مقشر شفاه بالسكر", cat:"lips", desc:"مقشر طبيعي لإزالة الجلد الميت وتنعيم الشفاه", price:140},
+    {id:14, img:"img14", name:"ملمع شفاه شفاف", cat:"lips", desc:"ملمع شفاه عالي اللمعان بتركيبة غير لزجة", price:160},
+    {id:15, img:"img15", name:"شامبو زيت الارجان", cat:"hair", desc:"شامبو طبيعي بزيت الأرجان لتغذية وتقوية الشعر", price:260},
+    {id:16, img:"img16", name:"بلسم مرطب للشعر", cat:"hair", desc:"بلسم يومي لفك تشابك الشعر وترطيبه", price:230},
+    {id:17, img:"img17", name:"ماسك شعر كيراتين", cat:"hair", desc:"ماسك علاجي لتنعيم الشعر وإعادة الحيوية له", price:340},
+    {id:18, img:"img18", name:"زيت شعر طبيعي", cat:"hair", desc:"زيت شعر بخلاصة الأعشاب لتطويل وتكثيف الشعر", price:190},
+    {id:19, img:"img19", name:"لوشن جسم مرطب", cat:"body", desc:"لوشن يومي لترطيب الجسم بالكامل برائحة منعشة", price:200},
+    {id:20, img:"img20", name:"مقشر جسم بالقهوة", cat:"body", desc:"مقشر طبيعي بالقهوة لإزالة الخلايا الميتة وتنعيم الجسم", price:250},
+    {id:21, img:"img21", name:"زيت جسم لامع", cat:"body", desc:"زيت جسم جاف لإضاءة طبيعية ولمعان صحي", price:280},
+    {id:22, img:"img22", name:"كريم تفتيح المناطق الحساسة", cat:"body", desc:"كريم لطيف لتفتيح وتوحيد لون المناطق الحساسة", price:320},
+    {id:23, img:"img23", name:"باليت ظلال عيون", cat:"makeup", desc:"باليت 12 لون ظلال عيون بدرجات دافئة وباردة", price:380},
+    {id:24, img:"img24", name:"ماسكارا تطويل", cat:"makeup", desc:"ماسكارا سوداء لتطويل وتكثيف الرموش بشكل طبيعي", price:220},
+    {id:25, img:"img25", name:"أيلاينر سائل", cat:"makeup", desc:"أيلاينر أسود سائل برأس دقيق لرسم العين بشكل مثالي", price:180},
+    {id:26, img:"img26", name:"كريم نهاري بعامل حماية", cat:"face", desc:"كريم نهاري خفيف مع حماية من الشمس SPF30", price:300},
+    {id:27, img:"img27", name:"كريم ليلي مغذي", cat:"face", desc:"كريم ليلي غني لتجديد خلايا البشرة أثناء النوم", price:350},
+    {id:28, img:"img28", name:"سيرم هيالورونيك", cat:"face", desc:"سيرم حمض الهيالورونيك لترطيب عميق وملء التجاعيد", price:420},
+    {id:29, img:"img29", name:"مقشر وجه إنزيمي", cat:"face", desc:"مقشر لطيف بأنزيمات الفواكه لإزالة الخلايا الميتة", price:270},
+    {id:30, img:"img30", name:"بخاخ ماء الورد", cat:"face", desc:"بخاخ منعش للوجه لتثبيت المكياج وإنعاش البشرة", price:160},
 ];
 
-var cats = {face:"🧴 عناية بالوجه",eyes:"👁️ عناية بالعين",lips:"💋 عناية بالشفاه",hair:"💇‍♀️ عناية بالشعر",body:"🧴 عناية بالجسم",makeup:"💄 مكياج"};
-var currentCat = 'all';
-var currentProduct = null;
-var currentQty = 1;
+var cats = {face:"🧴 وجه",eyes:"👁️ عين",lips:"💋 شفاه",hair:"💇‍♀️ شعر",body:"🧴 جسم",makeup:"💄 مكياج"};
+var curCat = 'all', curProd = null, curQty = 1;
 
-// ========== [2] عرض المنتجات ==========
+// ========== عرض ==========
 function render(list){
     var g = document.getElementById('gallery');
-    g.innerHTML = '';
-    if(list.length === 0){
-        g.innerHTML = '<div class="no-results">😕 لا توجد منتجات مطابقة</div>';
-        return;
-    }
+    g.innerHTML = list.length ? '' : '<div class="no-results">😕 لا توجد منتجات</div>';
     list.forEach(function(p){
         var c = document.createElement('div');
         c.className = 'card';
         c.onclick = function(){openModal(p);};
-        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#f0f0f0\';this.style.objectFit=\'contain\'"><div class="badge">'+cats[p.cat].split(' ')[0]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price+' ج.م</div></div>';
+        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#1a1a1a\';this.style.objectFit=\'contain\'"><div class="badge">'+cats[p.cat].split(' ')[0]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price+' ج.م</div></div>';
         g.appendChild(c);
     });
 }
 
-function filterAndRender(){
-    var list = currentCat === 'all' ? products : products.filter(function(p){return p.cat === currentCat;});
+function filter(){
+    var list = curCat === 'all' ? products : products.filter(function(p){return p.cat === curCat;});
     var q = document.getElementById('searchInput').value.trim().toLowerCase();
-    if(q){
-        list = list.filter(function(p){return p.name.toLowerCase().includes(q);});
-    }
-    document.getElementById('searchResults').textContent = q ? 'نتائج البحث: ' + list.length + ' منتج' : '';
+    if(q) list = list.filter(function(p){return p.name.toLowerCase().includes(q);});
+    document.getElementById('searchResults').textContent = q ? 'نتائج: ' + list.length + ' منتج' : '';
     render(list);
 }
 
-// ========== [3] المودال ==========
+// ========== مودال ==========
 var modal = document.getElementById('modal');
 var mImg = document.getElementById('modalImg');
 var mName = document.getElementById('modalName');
 var mDesc = document.getElementById('modalDesc');
 var qtyInput = document.getElementById('qtyInput');
-var unitPriceText = document.getElementById('unitPriceText');
-var totalPriceText = document.getElementById('totalPriceText');
-var wholesaleBadge = document.getElementById('wholesaleBadge');
-var wholesaleInfo = document.getElementById('wholesaleInfo');
 
 function openModal(p){
-    currentProduct = p;
-    currentQty = 1;
-    qtyInput.value = 1;
-    mImg.src = p.img;
-    mImg.onerror = function(){this.style.background='#f0f0f0';this.style.objectFit='contain';};
-    mName.textContent = p.name;
-    mDesc.textContent = p.desc;
+    curProd = p; curQty = 1; qtyInput.value = 1;
+    mImg.src = p.img; mImg.onerror = function(){this.style.background='#1a1a1a';this.style.objectFit='contain';};
+    mName.textContent = p.name; mDesc.textContent = p.desc;
     updatePrice();
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    modal.classList.add('active'); document.body.style.overflow = 'hidden';
 }
 
 function updatePrice(){
-    var qty = parseInt(qtyInput.value) || 1;
-    if(qty < 1) qty = 1;
-    currentQty = qty;
-    qtyInput.value = qty;
-    
-    var unitPrice = currentProduct.price;
-    var totalPrice;
-    var isWholesale = qty >= 100;
-    
-    if(isWholesale){
-        unitPrice = Math.floor(currentProduct.price * 0.8);
-        totalPrice = unitPrice * qty;
-        unitPriceText.textContent = 'سعر القطعة (جملة): ' + unitPrice + ' ج.م (بعد خصم 20%)';
-        wholesaleBadge.innerHTML = '<span class="wholesale-badge">🏷️ سعر جملة - خصم 20%</span>';
-        wholesaleInfo.textContent = 'السعر الأصلي: ' + currentProduct.price + ' ج.م | التوفير: ' + (currentProduct.price - unitPrice) + ' ج.م لكل قطعة';
-    } else {
-        totalPrice = currentProduct.price * qty;
-        unitPriceText.textContent = 'سعر القطعة: ' + currentProduct.price + ' ج.م';
-        wholesaleBadge.innerHTML = '';
-        wholesaleInfo.textContent = 'اشتري 100 قطعة أو أكثر لتحصل على خصم الجملة 20%';
+    var q = parseInt(qtyInput.value) || 1;
+    if(q < 1) q = 1; curQty = q; qtyInput.value = q;
+    var up = curProd.price, tp, ws = q >= 100;
+    if(ws){ up = Math.floor(curProd.price * 0.8); tp = up * q;
+        document.getElementById('unitPriceText').textContent = 'سعر الجملة: ' + up + ' ج.م (خصم 20%)';
+        document.getElementById('wholesaleBadge').innerHTML = '<span class="ws-badge">🏷️ جملة - خصم 20%</span>';
+        document.getElementById('wholesaleInfo').textContent = 'الأصلي: ' + curProd.price + ' ج.م | التوفير: ' + (curProd.price - up) + ' ج.م';
+    } else { tp = curProd.price * q;
+        document.getElementById('unitPriceText').textContent = 'سعر القطعة: ' + curProd.price + ' ج.م';
+        document.getElementById('wholesaleBadge').innerHTML = '';
+        document.getElementById('wholesaleInfo').textContent = '🔔 100 قطعة فأكثر = خصم 20%';
     }
-    totalPriceText.textContent = 'الإجمالي: ' + totalPrice.toLocaleString() + ' ج.م';
+    document.getElementById('totalPriceText').textContent = 'الإجمالي: ' + tp.toLocaleString() + ' ج.م';
 }
 
-document.getElementById('qtyMinus').onclick = function(){ qtyInput.value = currentQty - 1; updatePrice(); };
-document.getElementById('qtyPlus').onclick = function(){ qtyInput.value = currentQty + 1; updatePrice(); };
-qtyInput.oninput = function(){ updatePrice(); };
+document.getElementById('qtyMinus').onclick = function(){ qtyInput.value = curQty - 1; updatePrice(); };
+document.getElementById('qtyPlus').onclick = function(){ qtyInput.value = curQty + 1; updatePrice(); };
+qtyInput.oninput = updatePrice;
 
 function orderNow(){
-    if(!currentProduct) return;
-    var qty = currentQty;
-    var unitPrice = qty >= 100 ? Math.floor(currentProduct.price * 0.8) : currentProduct.price;
-    var total = unitPrice * qty;
-    var msg = 'طلب منتج:\nالمنتج: ' + currentProduct.name + '\nالكمية: ' + qty + ' قطعة\nسعر الوحدة: ' + unitPrice + ' ج.م\nالإجمالي: ' + total + ' ج.م';
-    window.open('https://wa.me/201100257625?text=' + encodeURIComponent(msg), '_blank');
+    if(!curProd) return;
+    var up = curQty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price;
+    window.open('https://wa.me/201100257625?text=' + encodeURIComponent('طلب: ' + curProd.name + '\nالكمية: ' + curQty + '\nسعر الوحدة: ' + up + ' ج.م\nالإجمالي: ' + (up * curQty) + ' ج.م'), '_blank');
 }
 
 function closeModal(){ modal.classList.remove('active'); document.body.style.overflow = ''; }
@@ -331,24 +306,22 @@ document.getElementById('closeModal').onclick = closeModal;
 modal.onclick = function(e){ if(e.target === modal) closeModal(); };
 document.onkeydown = function(e){ if(e.key === 'Escape' && modal.classList.contains('active')) closeModal(); };
 
-// ========== [4] التصنيفات ==========
+// ========== تصنيفات ==========
 document.querySelectorAll('#cats button').forEach(function(b){
     b.onclick = function(){
         document.querySelectorAll('#cats button').forEach(function(x){x.classList.remove('active');});
-        b.classList.add('active');
-        currentCat = b.getAttribute('data-cat');
-        filterAndRender();
+        b.classList.add('active'); curCat = b.getAttribute('data-cat'); filter();
     };
 });
 
-// ========== [5] البحث اللحظي ==========
-document.getElementById('searchInput').oninput = filterAndRender;
+// ========== بحث ==========
+document.getElementById('searchInput').oninput = filter;
 
-// ========== [6] الأحداث ==========
+// ========== أحداث ==========
 document.getElementById('startBtn').onclick = function(){
     document.getElementById('landing').classList.add('hidden');
     document.getElementById('main').classList.add('visible');
-    filterAndRender();
+    filter();
 };
 document.getElementById('backBtn').onclick = function(){
     document.getElementById('landing').classList.remove('hidden');
