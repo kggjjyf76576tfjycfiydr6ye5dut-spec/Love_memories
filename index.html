@@ -384,6 +384,139 @@
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
         }
 
+        /* ===== قسم التواصل ===== */
+        .contact-section {
+            width: 90%;
+            max-width: 800px;
+            margin: 10px 20px;
+            padding: 30px;
+            background: white;
+            border: 2px solid #d4af37;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #1a0a2e;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-section h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: #d4af37;
+            margin: 8px auto 0;
+            border-radius: 5px;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .contact-card {
+            background: #faf8f5;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1;
+            min-width: 220px;
+            max-width: 250px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: #d4af37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-card .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #d4af37;
+        }
+
+        .contact-card .contact-role {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a0a2e;
+            margin-bottom: 5px;
+        }
+
+        .contact-card .contact-name {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        .contact-card .contact-phone {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a0a2e;
+            direction: ltr;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .contact-card .contact-phone i {
+            color: #25D366;
+            font-size: 1.3rem;
+        }
+
+        .contact-card .call-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 25px;
+            background: #25D366;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card .call-btn:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .contact-note {
+            margin-top: 25px;
+            padding: 15px;
+            background: linear-gradient(45deg, #1a0a2e, #2d1b69);
+            color: #d4af37;
+            border-radius: 15px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.8;
+        }
+
+        .contact-note i {
+            margin: 0 5px;
+        }
+
         /* ===== توقيع ===== */
         .footer-credit {
             text-align: center;
@@ -462,6 +595,9 @@
             .category-btn { padding: 8px 18px; font-size: 0.9rem; }
             .modal-info .modal-product-name { font-size: 1.3rem; }
             .modal-info .modal-product-price { font-size: 1.5rem; }
+            .contact-section { width: 95%; padding: 20px 15px; }
+            .contact-card { min-width: 100%; }
+            .contact-section h2 { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -498,6 +634,48 @@
         <!-- ===== معرض المنتجات ===== -->
         <div class="gallery" id="galleryContainer"></div>
         <button class="back-home" id="backToLandingBtn">🏠 العودة للرئيسية</button>
+
+        <!-- ===== قسم التواصل ===== -->
+        <div class="contact-section">
+            <h2>📞 للتواصل</h2>
+            <div class="contact-cards">
+                <!-- المستشار وليد -->
+                <div class="contact-card">
+                    <div class="contact-icon">👔</div>
+                    <div class="contact-role">المستشار</div>
+                    <div class="contact-name">وليد رفعت ابو الدهب</div>
+                    <div class="contact-phone"><i class="fab fa-whatsapp"></i> 01000000000</div>
+                    <a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال الآن</a>
+                </div>
+
+                <!-- بشمهندس محمد -->
+                <div class="contact-card">
+                    <div class="contact-icon">👨‍💼</div>
+                    <div class="contact-role">بشمهندس</div>
+                    <div class="contact-name">محمد رفعت ابو الدهب</div>
+                    <div class="contact-phone"><i class="fab fa-whatsapp"></i> 01200000000</div>
+                    <a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال الآن</a>
+                </div>
+
+                <!-- بشمهندس احمد -->
+                <div class="contact-card">
+                    <div class="contact-icon">👨‍💻</div>
+                    <div class="contact-role">بشمهندس</div>
+                    <div class="contact-name">احمد رفعت ابو الدهب</div>
+                    <div class="contact-phone"><i class="fab fa-whatsapp"></i> 01500000000</div>
+                    <a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال الآن</a>
+                </div>
+            </div>
+
+            <!-- ملحوظة -->
+            <div class="contact-note">
+                <i class="fas fa-store"></i> نحن مكتب جملة معتمد <i class="fas fa-check-circle"></i>
+                <br>
+                متاح بيع جملة لأصحاب المحلات التجارية وقطاعي
+                <br>
+                <i class="fas fa-truck"></i> توصيل لجميع المحافظات <i class="fas fa-shipping-fast"></i>
+            </div>
+        </div>
 
         <!-- ===== توقيع ===== -->
         <div class="footer-credit">
@@ -669,4 +847,3 @@
     </script>
 </body>
 </html>
-ْ
