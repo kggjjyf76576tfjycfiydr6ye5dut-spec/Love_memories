@@ -9,88 +9,63 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Cairo',sans-serif;background:#faf8f5;overflow-x:hidden}
-        
-        /* ===== هيدر ===== */
         .top-bar{background:linear-gradient(135deg,#1a0a2e,#2d1b69);padding:15px;text-align:center;color:#d4af37;border-bottom:3px solid #d4af37;position:sticky;top:0;z-index:100}
         .top-bar h2{font-size:1.5rem;font-weight:900}
         .back-link{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#d4af37;text-decoration:none;font-size:1.2rem}
-        
-        /* ===== حاوية المنتج ===== */
         .product-container{max-width:800px;margin:20px auto;padding:20px}
-        
-        /* ===== صورة المنتج ===== */
         .product-image{width:100%;max-height:450px;object-fit:contain;background:#fff;border-radius:20px;box-shadow:0 5px 30px rgba(0,0,0,.1);margin-bottom:20px}
-        
-        /* ===== معلومات المنتج ===== */
         .product-name{font-size:2rem;font-weight:900;color:#1a0a2e;margin-bottom:5px}
         .product-category{display:inline-block;background:#d4af37;color:#fff;padding:5px 15px;border-radius:20px;font-size:.9rem;margin-bottom:15px}
         .product-price{font-size:2rem;font-weight:900;color:#d4af37;margin:15px 0}
         .product-desc{font-size:1.1rem;color:#555;line-height:2;margin-bottom:20px;background:#fff;padding:20px;border-radius:15px;box-shadow:0 3px 15px rgba(0,0,0,.05)}
-        
-        /* ===== فيديو ===== */
         .video-section{margin:25px 0}
         .video-section h3{font-size:1.3rem;color:#1a0a2e;margin-bottom:15px}
         .video-wrapper{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:15px;box-shadow:0 5px 30px rgba(0,0,0,.1)}
         .video-wrapper iframe{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:15px}
-        
-        /* ===== اقتراحات ===== */
         .suggestions-section{margin:30px 0}
         .suggestions-section h3{font-size:1.3rem;color:#1a0a2e;margin-bottom:15px}
         .suggestions-slider{display:flex;overflow-x:auto;gap:15px;padding:10px 0;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
         .suggestions-slider::-webkit-scrollbar{height:6px}
         .suggestions-slider::-webkit-scrollbar-thumb{background:#d4af37;border-radius:10px}
-        
-        .suggestion-card{min-width:180px;max-width:180px;background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 3px 15px rgba(0,0,0,.08);cursor:pointer;transition:.3s;flex-shrink:0;text-decoration:none;color:inherit}
+        .suggestion-card{min-width:180px;max-width:180px;background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 3px 15px rgba(0,0,0,.08);cursor:pointer;transition:.3s;flex-shrink:0;text-decoration:none;color:inherit;display:block}
         .suggestion-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(212,175,55,.3)}
         .suggestion-card img{width:100%;height:160px;object-fit:cover}
         .suggestion-card .s-info{padding:12px;text-align:center}
         .suggestion-card .s-info h4{font-size:.9rem;font-weight:700;color:#1a0a2e;margin-bottom:5px}
         .suggestion-card .s-info .s-price{font-size:1rem;font-weight:900;color:#d4af37}
-        
-        /* ===== أزرار التنقل ===== */
         .slider-nav{display:flex;gap:10px;justify-content:center;margin-top:10px}
         .slider-nav button{width:40px;height:40px;border:2px solid #d4af37;background:#fff;color:#d4af37;border-radius:50%;cursor:pointer;font-size:1.2rem;transition:.3s}
         .slider-nav button:hover{background:#d4af37;color:#fff}
-        
-        /* ===== زر الطلب ===== */
         .order-section{text-align:center;margin:30px 0}
         .order-btn{padding:16px 50px;font-size:1.3rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#f0c75e);color:#1a0a2e;border:none;border-radius:50px;cursor:pointer;box-shadow:0 0 30px rgba(212,175,55,.4);transition:.3s}
         .order-btn:hover{transform:scale(1.05);box-shadow:0 0 50px rgba(212,175,55,.7)}
-        
+        .footer{text-align:center;padding:25px;margin:20px;color:#1a0a2e;background:#fff;border:2px solid #d4af37;border-radius:20px;width:90%;max-width:600px;margin:20px auto;box-shadow:0 5px 30px rgba(0,0,0,.1)}
+        .footer .f-name{font-size:1.5rem;font-weight:900;color:#d4af37}
         @media(max-width:600px){
-            .product-name{font-size:1.5rem}
-            .product-price{font-size:1.5rem}
-            .suggestion-card{min-width:150px;max-width:150px}
-            .suggestion-card img{height:130px}
+            .product-name{font-size:1.5rem}.product-price{font-size:1.5rem}
+            .suggestion-card{min-width:150px;max-width:150px}.suggestion-card img{height:130px}
         }
     </style>
 </head>
 <body>
 
 <div class="top-bar">
-    <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-right"></i> رجوع</a>
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> رجوع للمعرض</a>
     <h2>💎 التركي</h2>
 </div>
 
 <div class="product-container">
-    <!-- ===== صورة المنتج ===== -->
     <img class="product-image" id="productImage" src="" alt="">
-    
-    <!-- ===== معلومات ===== -->
     <h1 class="product-name" id="productName"></h1>
     <span class="product-category" id="productCategory"></span>
     <div class="product-price" id="productPrice"></div>
     <div class="product-desc" id="productDesc"></div>
     
-    <!-- ===== فيديو ===== -->
     <div class="video-section">
         <h3>🎬 فيديو المنتج</h3>
-        <div class="video-wrapper">
-            <iframe id="productVideo" src="" frameborder="0" allowfullscreen></iframe>
-        </div>
+        <div class="video-wrapper"><iframe id="productVideo" src="" frameborder="0" allowfullscreen></iframe></div>
     </div>
     
-    <!-- ===== اقتراحات ===== -->
     <div class="suggestions-section">
         <h3>🛍️ منتجات مشابهة قد تعجبك</h3>
         <div class="suggestions-slider" id="suggestionsSlider"></div>
@@ -100,80 +75,75 @@
         </div>
     </div>
     
-    <!-- ===== زر الطلب ===== -->
     <div class="order-section">
         <button class="order-btn" onclick="orderProduct()">📞 اطلب الآن عبر واتساب</button>
     </div>
 </div>
 
+<div class="footer">
+    ⚡ صُنع بواسطة<br><span class="f-name">البشمهندس مازن العربي</span>
+    <br><span style="font-size:.75rem;opacity:.5">© 2026 جميع الحقوق محفوظة</span>
+</div>
+
 <script>
-// ========== [1] بيانات المنتجات ==========
+// ========== نفس داتا المنتجات ==========
 var products = [
-    {id:1,  img:"img1",  name:"سيروم فيتامين سي",       cat:"face",   catName:"🧴 عناية بالوجه", desc:"سيروم فيتامين سي مركز لتفتيح البشرة وتوحيد لونها. مناسب لجميع أنواع البشرة. يحتوي على تركيز عالي من فيتامين سي النقي. يساعد في تقليل البقع الداكنة وتوحيد لون البشرة. استخدميه يومياً صباحاً ومساءً للحصول على أفضل النتائج.", price:350, video:"https://www.youtube.com/embed/VIDEO_ID_1"},
-    {id:2,  img:"img2",  name:"كريم ترطيب عميق",         cat:"face",   catName:"🧴 عناية بالوجه", desc:"كريم ترطيب يومي عميق للبشرة الجافة والعادية. يحتوي على زبدة الشيا وفيتامين E. يرطب البشرة بعمق ويمنع الجفاف طوال اليوم. خفيف وسريع الامتصاص.", price:280, video:"https://www.youtube.com/embed/VIDEO_ID_2"},
-    {id:3,  img:"img3",  name:"تونر ماء الورد",           cat:"face",   catName:"🧴 عناية بالوجه", desc:"تونر طبيعي لإنعاش البشرة وغلق المسام. مصنوع من ماء الورد الطبيعي 100%. يهدئ البشرة ويقلل الالتهابات. مناسب للاستخدام اليومي.", price:220, video:"https://www.youtube.com/embed/VIDEO_ID_3"},
-    {id:4,  img:"img4",  name:"ماسك وجه ذهبي",            cat:"face",   catName:"🧴 عناية بالوجه", desc:"ماسك وجه بماء الذهب لتغذية البشرة وإشراقتها. يمنح البشرة لمعاناً طبيعياً. يحتوي على جزيئات الذهب النقية.", price:420, video:"https://www.youtube.com/embed/VIDEO_ID_4"},
-    {id:5,  img:"img5",  name:"غسول وجه لطيف",            cat:"face",   catName:"🧴 عناية بالوجه", desc:"غسول وجه يومي خالي من الكحول لجميع أنواع البشرة. ينظف البشرة بلطف ويزيل الأوساخ والزيوت الزائدة.", price:190, video:"https://www.youtube.com/embed/VIDEO_ID_5"},
-    {id:6,  img:"img6",  name:"واقي شمس SPF50",           cat:"face",   catName:"🧴 عناية بالوجه", desc:"واقي شمس عالي الحماية بمعامل 50+ للبشرة الحساسة. خفيف وغير دهني. يحمي من الأشعة فوق البنفسجية.", price:310, video:"https://www.youtube.com/embed/VIDEO_ID_6"},
-    {id:7,  img:"img7",  name:"كريم محيط العين",          cat:"eyes",   catName:"👁️ عناية بالعين",  desc:"كريم مغذي لمحيط العين لتقليل الهالات السوداء والتجاعيد. يحتوي على الكافيين وفيتامين K.", price:380, video:"https://www.youtube.com/embed/VIDEO_ID_7"},
-    {id:8,  img:"img8",  name:"سيروم تطويل الرموش",       cat:"eyes",   catName:"👁️ عناية بالعين",  desc:"سيروم طبيعي لتطويل وتكثيف الرموش خلال 4 أسابيع. تركيبة آمنة وخالية من المواد الضارة.", price:450, video:"https://www.youtube.com/embed/VIDEO_ID_8"},
-    {id:9,  img:"img9",  name:"مزيل مكياج العيون",        cat:"eyes",   catName:"👁️ عناية بالعين",  desc:"مزيل مكياج لطيف خالي من الزيوت للعيون الحساسة. يزيل المكياج المقاوم للماء بسهولة.", price:170, video:"https://www.youtube.com/embed/VIDEO_ID_9"},
-    {id:10, img:"img10", name:"قلم حواجب احترافي",         cat:"eyes",   catName:"👁️ عناية بالعين",  desc:"قلم حواجب يدوم طويلاً برأس دقيق لرسم مثالي. متوفر بعدة ألوان تناسب الجميع.", price:150, video:"https://www.youtube.com/embed/VIDEO_ID_10"},
-    {id:11, img:"img11", name:"مرطب شفاه مغذي",           cat:"lips",   catName:"💋 عناية بالشفاه", desc:"مرطب شفاه بزيت جوز الهند لترطيب عميق للشفاه الجافة. يحمي من التشققات.", price:120, video:"https://www.youtube.com/embed/VIDEO_ID_11"},
-    {id:12, img:"img12", name:"روج سائل مات",             cat:"lips",   catName:"💋 عناية بالشفاه", desc:"روج سائل بتركيبة خفيفة تدوم طويلاً بألوان جذابة. ملمس مخملي غير لزج.", price:200, video:"https://www.youtube.com/embed/VIDEO_ID_12"},
-    {id:13, img:"img13", name:"مقشر شفاه بالسكر",          cat:"lips",   catName:"💋 عناية بالشفاه", desc:"مقشر طبيعي لإزالة الجلد الميت وتنعيم الشفاه. برائحة الفانيليا اللذيذة.", price:140, video:"https://www.youtube.com/embed/VIDEO_ID_13"},
-    {id:14, img:"img14", name:"ملمع شفاه شفاف",            cat:"lips",   catName:"💋 عناية بالشفاه", desc:"ملمع شفاه عالي اللمعان بتركيبة غير لزجة. يمنح شفاهك مظهراً جذاباً.", price:160, video:"https://www.youtube.com/embed/VIDEO_ID_14"},
-    {id:15, img:"img15", name:"شامبو زيت الارجان",         cat:"hair",   catName:"💇‍♀️ عناية بالشعر", desc:"شامبو طبيعي بزيت الأرجان لتغذية وتقوية الشعر. خالي من السلفات والبارابين.", price:260, video:"https://www.youtube.com/embed/VIDEO_ID_15"},
-    {id:16, img:"img16", name:"بلسم مرطب للشعر",           cat:"hair",   catName:"💇‍♀️ عناية بالشعر", desc:"بلسم يومي لفك تشابك الشعر وترطيبه. يترك الشعر ناعماً وسهل التصفيف.", price:230, video:"https://www.youtube.com/embed/VIDEO_ID_16"},
-    {id:17, img:"img17", name:"ماسك شعر كيراتين",          cat:"hair",   catName:"💇‍♀️ عناية بالشعر", desc:"ماسك علاجي لتنعيم الشعر وإعادة الحيوية له. يعالج الشعر التالف.", price:340, video:"https://www.youtube.com/embed/VIDEO_ID_17"},
-    {id:18, img:"img18", name:"زيت شعر طبيعي",             cat:"hair",   catName:"💇‍♀️ عناية بالشعر", desc:"زيت شعر بخلاصة الأعشاب لتطويل وتكثيف الشعر. نتائج مذهلة خلال أسابيع.", price:190, video:"https://www.youtube.com/embed/VIDEO_ID_18"},
-    {id:19, img:"img19", name:"لوشن جسم مرطب",             cat:"body",   catName:"🧴 عناية بالجسم", desc:"لوشن يومي لترطيب الجسم بالكامل برائحة منعشة. سريع الامتصاص.", price:200, video:"https://www.youtube.com/embed/VIDEO_ID_19"},
-    {id:20, img:"img20", name:"مقشر جسم بالقهوة",          cat:"body",   catName:"🧴 عناية بالجسم", desc:"مقشر طبيعي بالقهوة لإزالة الخلايا الميتة وتنعيم الجسم. يحفز الدورة الدموية.", price:250, video:"https://www.youtube.com/embed/VIDEO_ID_20"},
-    {id:21, img:"img21", name:"زيت جسم لامع",              cat:"body",   catName:"🧴 عناية بالجسم", desc:"زيت جسم جاف لإضاءة طبيعية ولمعان صحي. غير دهني وسريع الامتصاص.", price:280, video:"https://www.youtube.com/embed/VIDEO_ID_21"},
-    {id:22, img:"img22", name:"كريم تفتيح المناطق الحساسة", cat:"body",   catName:"🧴 عناية بالجسم", desc:"كريم لطيف لتفتيح وتوحيد لون المناطق الحساسة. تركيبة آمنة وفعالة.", price:320, video:"https://www.youtube.com/embed/VIDEO_ID_22"},
-    {id:23, img:"img23", name:"باليت ظلال عيون",           cat:"makeup", catName:"💄 مكياج",        desc:"باليت 12 لون ظلال عيون بدرجات دافئة وباردة. ألوان عالية الصبغة.", price:380, video:"https://www.youtube.com/embed/VIDEO_ID_23"},
-    {id:24, img:"img24", name:"ماسكارا تطويل",             cat:"makeup", catName:"💄 مكياج",        desc:"ماسكارا سوداء لتطويل وتكثيف الرموش بشكل طبيعي. مقاومة للماء.", price:220, video:"https://www.youtube.com/embed/VIDEO_ID_24"},
-    {id:25, img:"img25", name:"أيلاينر سائل",              cat:"makeup", catName:"💄 مكياج",        desc:"أيلاينر أسود سائل برأس دقيق لرسم العين بشكل مثالي. يدوم طويلاً.", price:180, video:"https://www.youtube.com/embed/VIDEO_ID_25"},
+    {id:1, img:"img1", name:"سيروم فيتامين سي", cat:"face", catName:"🧴 عناية بالوجه", desc:"سيروم فيتامين سي مركز لتفتيح البشرة وتوحيد لونها. يحتوي على تركيز 20% فيتامين سي نقي. يساعد في تقليل البقع الداكنة والتصبغات. يمنح البشرة إشراقة طبيعية. مناسب لجميع أنواع البشرة. يستخدم صباحاً ومساءً.", price:350, video:"https://www.youtube.com/embed/VIDEO_ID_1"},
+    {id:2, img:"img2", name:"كريم ترطيب عميق", cat:"face", catName:"🧴 عناية بالوجه", desc:"كريم ترطيب يومي عميق للبشرة الجافة والعادية. يحتوي على زبدة الشيا وفيتامين E. يرطب البشرة لمدة 24 ساعة. خفيف وسريع الامتصاص. لا يسد المسام.", price:280, video:"https://www.youtube.com/embed/VIDEO_ID_2"},
+    {id:3, img:"img3", name:"تونر ماء الورد", cat:"face", catName:"🧴 عناية بالوجه", desc:"تونر طبيعي لإنعاش البشرة وغلق المسام. ماء ورد طبيعي 100%. يهدئ البشرة ويقلل الاحمرار. مناسب للاستخدام اليومي. خالي من الكحول.", price:220, video:"https://www.youtube.com/embed/VIDEO_ID_3"},
+    {id:4, img:"img4", name:"ماسك وجه ذهبي", cat:"face", catName:"🧴 عناية بالوجه", desc:"ماسك وجه بماء الذهب 24 قيراط. يغذي البشرة بعمق ويمنحها إشراقة ملكية. يحتوي على الكولاجين. يستخدم مرة أسبوعياً.", price:420, video:"https://www.youtube.com/embed/VIDEO_ID_4"},
+    {id:5, img:"img5", name:"غسول وجه لطيف", cat:"face", catName:"🧴 عناية بالوجه", desc:"غسول وجه يومي خالي من الكحول. ينظف البشرة بلطف ويزيل الشوائب. مناسب لجميع أنواع البشرة. لا يسبب جفاف.", price:190, video:"https://www.youtube.com/embed/VIDEO_ID_5"},
+    {id:6, img:"img6", name:"واقي شمس SPF50", cat:"face", catName:"🧴 عناية بالوجه", desc:"واقي شمس عالي الحماية SPF50. خفيف وغير دهني. يحمي من الأشعة UVA و UVB. مناسب للبشرة الحساسة.", price:310, video:"https://www.youtube.com/embed/VIDEO_ID_6"},
+    {id:7, img:"img7", name:"كريم محيط العين", cat:"eyes", catName:"👁️ عناية بالعين", desc:"كريم مغذي لمحيط العين. يقلل الهالات السوداء والتجاعيد. يحتوي على الكافيين. نتائج خلال 4 أسابيع.", price:380, video:"https://www.youtube.com/embed/VIDEO_ID_7"},
+    {id:8, img:"img8", name:"سيروم تطويل الرموش", cat:"eyes", catName:"👁️ عناية بالعين", desc:"سيروم طبيعي لتطويل وتكثيف الرموش. نتائج مذهلة خلال 4 أسابيع. تركيبة آمنة. خالي من البروستاجلاندين.", price:450, video:"https://www.youtube.com/embed/VIDEO_ID_8"},
+    {id:9, img:"img9", name:"مزيل مكياج العيون", cat:"eyes", catName:"👁️ عناية بالعين", desc:"مزيل مكياج لطيف خالي من الزيوت. يزيل المكياج المضاد للماء. لا يسبب حرقان للعين. مناسب للعدسات اللاصقة.", price:170, video:"https://www.youtube.com/embed/VIDEO_ID_9"},
+    {id:10, img:"img10", name:"قلم حواجب احترافي", cat:"eyes", catName:"👁️ عناية بالعين", desc:"قلم حواجب يدوم 24 ساعة. رأس دقيق. متوفر بـ 6 ألوان. مقاوم للماء.", price:150, video:"https://www.youtube.com/embed/VIDEO_ID_10"},
+    {id:11, img:"img11", name:"مرطب شفاه مغذي", cat:"lips", catName:"💋 عناية بالشفاه", desc:"مرطب شفاه بزيت جوز الهند. يعالج التشققات. حماية SPF15. يدوم طويلاً.", price:120, video:"https://www.youtube.com/embed/VIDEO_ID_11"},
+    {id:12, img:"img12", name:"روج سائل مات", cat:"lips", catName:"💋 عناية بالشفاه", desc:"روج سائل مات بتركيبة خفيفة. يدوم 12 ساعة. 18 لون. ملمس مخملي.", price:200, video:"https://www.youtube.com/embed/VIDEO_ID_12"},
+    {id:13, img:"img13", name:"مقشر شفاه بالسكر", cat:"lips", catName:"💋 عناية بالشفاه", desc:"مقشر شفاه طبيعي. يزيل الجلد الميت. برائحة الفانيليا. مناسب للاستخدام اليومي.", price:140, video:"https://www.youtube.com/embed/VIDEO_ID_13"},
+    {id:14, img:"img14", name:"ملمع شفاه شفاف", cat:"lips", catName:"💋 عناية بالشفاه", desc:"ملمع شفاه عالي اللمعان. تركيبة غير لزجة. يمنح حجم مضاعف. يمكن استخدامه فوق الروج.", price:160, video:"https://www.youtube.com/embed/VIDEO_ID_14"},
+    {id:15, img:"img15", name:"شامبو زيت الارجان", cat:"hair", catName:"💇‍♀️ عناية بالشعر", desc:"شامبو بزيت الأرجان الطبيعي. يغذي ويقوي الشعر. خالي من السلفات. مناسب لجميع أنواع الشعر.", price:260, video:"https://www.youtube.com/embed/VIDEO_ID_15"},
+    {id:16, img:"img16", name:"بلسم مرطب للشعر", cat:"hair", catName:"💇‍♀️ عناية بالشعر", desc:"بلسم يومي. يفك تشابك الشعر. يرطب بعمق. يترك الشعر ناعماً.", price:230, video:"https://www.youtube.com/embed/VIDEO_ID_16"},
+    {id:17, img:"img17", name:"ماسك شعر كيراتين", cat:"hair", catName:"💇‍♀️ عناية بالشعر", desc:"ماسك علاجي بالكيراتين. يعيد الحيوية للشعر التالف. يستخدم مرة أسبوعياً.", price:340, video:"https://www.youtube.com/embed/VIDEO_ID_17"},
+    {id:18, img:"img18", name:"زيت شعر طبيعي", cat:"hair", catName:"💇‍♀️ عناية بالشعر", desc:"زيت شعر بخلاصة 7 أعشاب. يطول ويكثف الشعر. نتائج من أول استخدام.", price:190, video:"https://www.youtube.com/embed/VIDEO_ID_18"},
+    {id:19, img:"img19", name:"لوشن جسم مرطب", cat:"body", catName:"🧴 عناية بالجسم", desc:"لوشن جسم يومي. يرطب 48 ساعة. برائحة منعشة. سريع الامتصاص.", price:200, video:"https://www.youtube.com/embed/VIDEO_ID_19"},
+    {id:20, img:"img20", name:"مقشر جسم بالقهوة", cat:"body", catName:"🧴 عناية بالجسم", desc:"مقشر طبيعي بالقهوة. يزيل الخلايا الميتة. يحفز الدورة الدموية. يقلل السيلوليت.", price:250, video:"https://www.youtube.com/embed/VIDEO_ID_20"},
+    {id:21, img:"img21", name:"زيت جسم لامع", cat:"body", catName:"🧴 عناية بالجسم", desc:"زيت جسم جاف. يمنح لمعان طبيعي. غير دهني. سريع الامتصاص.", price:280, video:"https://www.youtube.com/embed/VIDEO_ID_21"},
+    {id:22, img:"img22", name:"كريم تفتيح", cat:"body", catName:"🧴 عناية بالجسم", desc:"كريم تفتيح المناطق الحساسة. تركيبة آمنة. خالي من الهيدروكينون. نتائج خلال أسبوعين.", price:320, video:"https://www.youtube.com/embed/VIDEO_ID_22"},
+    {id:23, img:"img23", name:"باليت ظلال عيون", cat:"makeup", catName:"💄 مكياج", desc:"باليت 12 لون. ألوان عالية الصبغة. درجات دافئة وباردة. تدوم طويلاً.", price:380, video:"https://www.youtube.com/embed/VIDEO_ID_23"},
+    {id:24, img:"img24", name:"ماسكارا تطويل", cat:"makeup", catName:"💄 مكياج", desc:"ماسكارا تطويل وتكثيف. مقاومة للماء. فرشاة دقيقة. لون أسود غامق.", price:220, video:"https://www.youtube.com/embed/VIDEO_ID_24"},
+    {id:25, img:"img25", name:"أيلاينر سائل", cat:"makeup", catName:"💄 مكياج", desc:"أيلاينر أسود سائل. رأس دقيق. يدوم 24 ساعة. مقاوم للماء.", price:180, video:"https://www.youtube.com/embed/VIDEO_ID_25"},
 ];
 
-// ========== [2] قراءة ID المنتج من الرابط ==========
+// ========== حمل المنتج ==========
 var urlParams = new URLSearchParams(window.location.search);
 var productId = parseInt(urlParams.get('id')) || 1;
-
-// ========== [3] عرض المنتج ==========
 var product = products.find(function(p){return p.id === productId;}) || products[0];
 
-if(product){
-    document.getElementById('productImage').src = product.img;
-    document.getElementById('productName').textContent = product.name;
-    document.getElementById('productCategory').textContent = product.catName;
-    document.getElementById('productPrice').textContent = product.price + ' ج.م';
-    document.getElementById('productDesc').textContent = product.desc;
-    document.getElementById('productVideo').src = product.video;
-    document.title = product.name + ' - التركي';
-}
+document.getElementById('productImage').src = product.img;
+document.getElementById('productName').textContent = product.name;
+document.getElementById('productCategory').textContent = product.catName;
+document.getElementById('productPrice').textContent = product.price + ' ج.م';
+document.getElementById('productDesc').textContent = product.desc;
+document.getElementById('productVideo').src = product.video;
+document.title = product.name + ' - التركي';
 
-// ========== [4] اقتراحات مشابهة ==========
-var suggestions = products.filter(function(p){
-    return p.cat === product.cat && p.id !== product.id;
-});
-
+// ========== اقتراحات ==========
+var suggestions = products.filter(function(p){return p.cat === product.cat && p.id !== product.id;});
 var slider = document.getElementById('suggestionsSlider');
 suggestions.forEach(function(p){
-    var card = document.createElement('a');
-    card.className = 'suggestion-card';
-    card.href = '?id=' + p.id;
-    card.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#f0f0f0\';this.style.objectFit=\'contain\'"><div class="s-info"><h4>'+p.name+'</h4><div class="s-price">'+p.price+' ج.م</div></div>';
-    slider.appendChild(card);
+    var a = document.createElement('a');
+    a.className = 'suggestion-card';
+    a.href = 'product.html?id=' + p.id;
+    a.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#f0f0f0\';this.style.objectFit=\'contain\'"><div class="s-info"><h4>'+p.name+'</h4><div class="s-price">'+p.price+' ج.م</div></div>';
+    slider.appendChild(a);
 });
 
-// ========== [5] التنقل في الشريط ==========
 function slideLeft(){slider.scrollBy({left:-250,behavior:'smooth'});}
 function slideRight(){slider.scrollBy({left:250,behavior:'smooth'});}
 
-// ========== [6] الطلب ==========
 function orderProduct(){
-    window.open('https://wa.me/201100257625?text='+encodeURIComponent('طلب منتج: '+product.name+' - السعر: '+product.price+' ج.م'), '_blank');
+    window.open('https://wa.me/201100257625?text='+encodeURIComponent('طلب منتج: '+product.name+' | السعر: '+product.price+' ج.م'), '_blank');
 }
 </script>
 </body>
