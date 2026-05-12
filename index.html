@@ -4,846 +4,300 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>التركي - مستحضرات تجميل أصلية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: #faf8f5;
-            overflow-x: hidden;
-        }
-
-        /* ===== شاشة البداية ===== */
-        .landing {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #1a0a2e, #2d1b69, #0a0a1a);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .landing.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .landing .logo-icon {
-            font-size: 6rem;
-            margin-bottom: 20px;
-            animation: float 3s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .landing .brand-title {
-            font-family: 'Cairo', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            color: #d4af37;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-        }
-
-        .landing .brand-subtitle {
-            font-family: 'Amiri', serif;
-            font-size: 1.8rem;
-            color: #f0c75e;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .landing .brand-slogan {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.2rem;
-            color: #fff;
-            opacity: 0.7;
-            margin-bottom: 40px;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        .start-btn {
-            padding: 18px 60px;
-            font-size: 1.6rem;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            background: linear-gradient(45deg, #d4af37, #f0c75e);
-            color: #1a0a2e;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
-        }
-
-        .start-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.8);
-        }
-
-        /* ===== المحتوى الرئيسي ===== */
-        .main-content {
-            min-height: 100vh;
-            background: #faf8f5;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 130px;
-        }
-
-        .main-content.visible {
-            display: flex;
-        }
-
-        /* ===== هيدر ثابت ===== */
-        .main-header {
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 500;
-            background: linear-gradient(135deg, #1a0a2e, #2d1b69);
-            padding: 15px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
-            border-bottom: 3px solid #d4af37;
-        }
-
-        .main-header .header-brand {
-            font-family: 'Cairo', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            color: #d4af37;
-            letter-spacing: 3px;
-        }
-
-        .main-header .header-tagline {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            color: #f0c75e;
-            opacity: 0.9;
-        }
-
-        /* ===== شريط التصنيفات ===== */
-        .category-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            padding: 15px;
-            width: 90%;
-            max-width: 1200px;
-            margin-bottom: 20px;
-        }
-
-        .category-btn {
-            padding: 10px 25px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            background: white;
-            border: 2px solid #d4af37;
-            color: #1a0a2e;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: #d4af37;
-            color: white;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
-        }
-
-        /* ===== معرض المنتجات ===== */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            width: 90%;
-            max-width: 1200px;
-            padding-bottom: 30px;
-        }
-
-        /* ===== كارد المنتج ===== */
-        .card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: white;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 3/4;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
-        }
-
-        .card img {
-            width: 100%;
-            height: 70%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .card-info {
-            padding: 15px;
-            text-align: center;
-            background: white;
-        }
-
-        .card-info .product-name {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1a0a2e;
-            margin-bottom: 5px;
-        }
-
-        .card-info .product-price {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 900;
-            color: #d4af37;
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #d4af37;
-            color: #1a0a2e;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        /* ===== المودال ===== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            width: 600px;
-            background: white;
-            border-radius: 30px;
-            overflow: visible;
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
-            animation: fadeInUp 0.6s ease;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .modal-image {
-            width: 100%;
-            max-height: 50vh;
-            object-fit: cover;
-            border-bottom: 3px solid #d4af37;
-            border-radius: 30px 30px 0 0;
-        }
-
-        .modal-info {
-            padding: 30px 25px;
-            text-align: center;
-            background: white;
-            border-radius: 0 0 30px 30px;
-        }
-
-        .modal-info .modal-product-name {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #1a0a2e;
-            margin-bottom: 10px;
-        }
-
-        .modal-info .modal-product-desc {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-
-        .modal-info .modal-product-price {
-            font-family: 'Cairo', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            color: #d4af37;
-            margin-bottom: 20px;
-        }
-
-        .modal-info .order-btn {
-            padding: 14px 40px;
-            font-size: 1.3rem;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            background: linear-gradient(45deg, #d4af37, #f0c75e);
-            color: #1a0a2e;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .modal-info .order-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.7);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            background: #d4af37;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-            font-weight: bold;
-        }
-
-        .close-modal:hover {
-            background: #1a0a2e;
-            color: #d4af37;
-            transform: scale(1.15);
-        }
-
-        /* ===== زرار العودة ===== */
-        .back-home {
-            margin: 20px;
-            padding: 12px 35px;
-            background: transparent;
-            border: 2px solid #d4af37;
-            color: #1a0a2e;
-            font-size: 1.2rem;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-        }
-
-        .back-home:hover {
-            background: #d4af37;
-            color: white;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-        }
-
-        /* ===== قسم التواصل ===== */
-        .contact-section {
-            width: 90%;
-            max-width: 800px;
-            margin: 10px 20px;
-            padding: 30px;
-            background: white;
-            border: 2px solid #d4af37;
-            border-radius: 20px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        .contact-section h2 {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #1a0a2e;
-            margin-bottom: 25px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .contact-section h2::after {
-            content: '';
-            display: block;
-            width: 60%;
-            height: 3px;
-            background: #d4af37;
-            margin: 8px auto 0;
-            border-radius: 5px;
-        }
-
-        .contact-cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .contact-card {
-            background: #faf8f5;
-            border: 2px solid #eee;
-            border-radius: 15px;
-            padding: 20px;
-            flex: 1;
-            min-width: 220px;
-            max-width: 250px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            border-color: #d4af37;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .contact-card .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #d4af37;
-        }
-
-        .contact-card .contact-role {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1a0a2e;
-            margin-bottom: 5px;
-        }
-
-        .contact-card .contact-name {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #d4af37;
-            margin-bottom: 10px;
-        }
-
-        .contact-card .contact-phone {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #1a0a2e;
-            direction: ltr;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .contact-card .contact-phone i {
-            color: #25D366;
-            font-size: 1.3rem;
-        }
-
-        .contact-card .call-btn {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 8px 25px;
-            background: #25D366;
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card .call-btn:hover {
-            background: #128C7E;
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        .contact-note {
-            margin-top: 25px;
-            padding: 15px;
-            background: linear-gradient(45deg, #1a0a2e, #2d1b69);
-            color: #d4af37;
-            border-radius: 15px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: 1.8;
-        }
-
-        .contact-note i {
-            margin: 0 5px;
-        }
-
-        /* ===== توقيع ===== */
-        .footer-credit {
-            text-align: center;
-            padding: 30px 20px;
-            margin: 20px;
-            color: #1a0a2e;
-            font-family: 'Cairo', sans-serif;
-            background: white;
-            border: 2px solid #d4af37;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer-credit .name {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #d4af37;
-        }
-
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 18px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn.whatsapp { background: #25D366; }
-        .social-btn.facebook { background: #1877F2; }
-        .social-btn.instagram { background: #E4405F; }
-        .social-btn.tiktok { background: #000; }
-        .social-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-
-        .phone-number {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 18px;
-            border-radius: 50px;
-            background: #faf8f5;
-            border: 2px solid #d4af37;
-            color: #1a0a2e;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            direction: ltr;
-        }
-
-        .phone-number i { color: #25D366; }
-
-        @media (max-width: 600px) {
-            .landing .brand-title { font-size: 2.5rem; }
-            .landing .brand-subtitle { font-size: 1.3rem; }
-            .start-btn { font-size: 1.3rem; padding: 14px 40px; }
-            .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; width: 95%; }
-            .main-header .header-brand { font-size: 1.5rem; }
-            .main-content { padding-top: 100px; }
-            .category-btn { padding: 8px 18px; font-size: 0.9rem; }
-            .modal-info .modal-product-name { font-size: 1.3rem; }
-            .modal-info .modal-product-price { font-size: 1.5rem; }
-            .contact-section { width: 95%; padding: 20px 15px; }
-            .contact-card { min-width: 100%; }
-            .contact-section h2 { font-size: 1.4rem; }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Cairo',sans-serif;background:#faf8f5;overflow-x:hidden}
+        
+        .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#1a0a2e,#2d1b69,#0a0a1a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;transition:opacity .8s,visibility .8s}
+        .landing.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .landing .logo-icon{font-size:6rem;animation:float 3s infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+        .landing h1{font-size:4rem;font-weight:900;color:#d4af37;text-shadow:0 0 30px rgba(212,175,55,.6);letter-spacing:5px;margin:10px 0}
+        .landing .sub{font-size:1.8rem;color:#f0c75e;opacity:.9}
+        .landing .slogan{font-size:1.2rem;color:#fff;opacity:.7;margin:20px 0 40px;text-align:center}
+        .start-btn{padding:18px 60px;font-size:1.6rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#f0c75e);color:#1a0a2e;border:none;border-radius:50px;cursor:pointer;box-shadow:0 0 40px rgba(212,175,55,.5);transition:.3s;letter-spacing:2px}
+        .start-btn:hover{transform:scale(1.08);box-shadow:0 0 60px rgba(212,175,55,.8)}
+        
+        .main-content{min-height:100vh;background:#faf8f5;display:none;flex-direction:column;align-items:center;padding-top:100px}
+        .main-content.visible{display:flex}
+        
+        .header{position:fixed;top:0;left:0;right:0;z-index:500;background:linear-gradient(135deg,#1a0a2e,#2d1b69);padding:15px;text-align:center;box-shadow:0 5px 30px rgba(0,0,0,.5);border-bottom:3px solid #d4af37}
+        .header h2{font-size:2rem;font-weight:900;color:#d4af37;letter-spacing:3px}
+        .header p{font-size:1rem;color:#f0c75e;opacity:.9}
+        
+        .cats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:15px;width:90%;max-width:1200px;margin:20px 0}
+        .cats button{padding:10px 25px;font-size:1rem;font-weight:600;background:#fff;border:2px solid #d4af37;color:#1a0a2e;border-radius:50px;cursor:pointer;transition:.3s}
+        .cats button:hover,.cats button.active{background:#d4af37;color:#fff;box-shadow:0 5px 20px rgba(212,175,55,.4)}
+        
+        .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;width:90%;max-width:1200px;padding-bottom:30px}
+        
+        .card{position:relative;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 5px 20px rgba(0,0,0,.1);transition:.3s;aspect-ratio:3/4;cursor:pointer}
+        .card:hover{transform:translateY(-8px);box-shadow:0 15px 40px rgba(212,175,55,.3)}
+        .card img{width:100%;height:65%;object-fit:cover}
+        .card .info{padding:15px;text-align:center}
+        .card .info h3{font-size:1rem;font-weight:700;color:#1a0a2e;margin-bottom:5px}
+        .card .info .price{font-size:1.2rem;font-weight:900;color:#d4af37}
+        .card .badge{position:absolute;top:10px;right:10px;background:#d4af37;color:#1a0a2e;padding:5px 15px;border-radius:20px;font-size:.8rem;font-weight:700}
+        
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.9);z-index:2000;justify-content:center;align-items:center;padding:20px}
+        .modal.active{display:flex}
+        .modal-content{position:relative;max-width:90%;width:500px;background:#fff;border-radius:30px;overflow:visible;box-shadow:0 0 50px rgba(212,175,55,.5);animation:fadeIn .6s}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+        .modal img{width:100%;max-height:45vh;object-fit:cover;border-bottom:3px solid #d4af37;border-radius:30px 30px 0 0}
+        .modal .m-info{padding:25px;text-align:center}
+        .modal .m-info h3{font-size:1.6rem;font-weight:900;color:#1a0a2e;margin-bottom:10px}
+        .modal .m-info .desc{font-size:1rem;color:#666;margin-bottom:15px;line-height:1.8}
+        .modal .m-info .price{font-size:1.8rem;font-weight:900;color:#d4af37;margin-bottom:20px}
+        .modal .m-info .order-btn{padding:14px 40px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#f0c75e);color:#1a0a2e;border:none;border-radius:50px;cursor:pointer;box-shadow:0 0 20px rgba(212,175,55,.4);transition:.3s}
+        .modal .m-info .order-btn:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(212,175,55,.7)}
+        .close-modal{position:absolute;top:-15px;left:-15px;background:#d4af37;border:none;color:#fff;font-size:1.5rem;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;box-shadow:0 0 20px rgba(212,175,55,.5);font-weight:700}
+        .close-modal:hover{background:#1a0a2e;color:#d4af37;transform:scale(1.15)}
+        
+        .back-btn{margin:20px;padding:12px 35px;background:transparent;border:2px solid #d4af37;color:#1a0a2e;font-size:1.2rem;border-radius:30px;cursor:pointer;transition:.3s;font-weight:600}
+        .back-btn:hover{background:#d4af37;color:#fff;box-shadow:0 0 25px rgba(212,175,55,.5)}
+        
+        .contact{width:90%;max-width:700px;margin:20px;padding:30px;background:#fff;border:2px solid #d4af37;border-radius:20px;box-shadow:0 5px 30px rgba(0,0,0,.08);text-align:center}
+        .contact h2{font-size:1.8rem;font-weight:900;color:#1a0a2e;margin-bottom:25px}
+        .contact h2::after{content:'';display:block;width:60px;height:3px;background:#d4af37;margin:8px auto 0;border-radius:5px}
+        .contact-cards{display:flex;flex-wrap:wrap;gap:15px;justify-content:center}
+        .c-card{background:#faf8f5;border:2px solid #eee;border-radius:15px;padding:20px;flex:1;min-width:200px;max-width:220px;text-align:center;transition:.3s}
+        .c-card:hover{border-color:#d4af37;box-shadow:0 10px 30px rgba(212,175,55,.2);transform:translateY(-5px)}
+        .c-card .icon{font-size:2rem;margin-bottom:8px}
+        .c-card .role{font-size:.9rem;font-weight:700;color:#1a0a2e}
+        .c-card .name{font-size:1.2rem;font-weight:900;color:#d4af37;margin:5px 0}
+        .c-card .phone{direction:ltr;font-weight:700;font-size:1rem}
+        .c-card .phone i{color:#25D366;margin-left:5px}
+        .c-card .call-btn{display:inline-block;margin-top:10px;padding:8px 20px;background:#25D366;color:#fff;border-radius:50px;text-decoration:none;font-size:.9rem;font-weight:700;transition:.3s}
+        .c-card .call-btn:hover{background:#128C7E;transform:scale(1.05)}
+        .contact .note{margin-top:25px;padding:15px;background:linear-gradient(45deg,#1a0a2e,#2d1b69);color:#d4af37;border-radius:15px;font-size:1rem;font-weight:600;line-height:1.8}
+        
+        .footer{text-align:center;padding:25px;margin:20px;color:#1a0a2e;background:#fff;border:2px solid #d4af37;border-radius:20px;width:90%;max-width:600px;box-shadow:0 5px 30px rgba(0,0,0,.1)}
+        .footer .f-name{font-size:1.5rem;font-weight:900;color:#d4af37}
+        .social{margin-top:15px;padding-top:15px;border-top:1px solid #eee;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+        .social a,.social span{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:50px;text-decoration:none;font-size:.9rem;font-weight:600;color:#fff;transition:.3s}
+        .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#000}
+        .social a:hover{transform:scale(1.05);box-shadow:0 5px 20px rgba(0,0,0,.3)}
+        .social .ph{background:#faf8f5;border:2px solid #d4af37;color:#1a0a2e;direction:ltr}
+        .social .ph i{color:#25D366}
+        
+        @media(max-width:600px){
+            .landing h1{font-size:2.5rem}.landing .sub{font-size:1.3rem}.start-btn{font-size:1.3rem;padding:14px 40px}
+            .gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:15px;width:95%}
+            .header h2{font-size:1.5rem}.main-content{padding-top:90px}
+            .cats button{padding:8px 15px;font-size:.85rem}
+            .c-card{min-width:100%}.contact h2{font-size:1.4rem}
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== شاشة البداية ===== -->
-    <div class="landing" id="landingPage">
-        <div class="logo-icon">💎</div>
-        <div class="brand-title">التركي</div>
-        <div class="brand-subtitle">مستحضرات تجميل أصلية 100%</div>
-        <div class="brand-slogan">✨ أجود الماركات العالمية للعناية بالبشرة ✨</div>
-        <button class="start-btn" id="startBtn">تصفح المنتجات</button>
+<div class="landing" id="landing">
+    <div class="logo-icon">💎</div>
+    <h1>التركي</h1>
+    <div class="sub">مستحضرات تجميل أصلية 100%</div>
+    <div class="slogan">✨ أجود الماركات العالمية للعناية بالبشرة ✨</div>
+    <button class="start-btn" id="startBtn">تصفح المنتجات</button>
+</div>
+
+<div class="main-content" id="main">
+    <div class="header">
+        <h2>💎 التركي</h2>
+        <p>مستحضرات تجميل أصلية - ماركات عالمية</p>
     </div>
 
-    <!-- ===== المحتوى الرئيسي ===== -->
-    <div class="main-content" id="mainContent">
-        <!-- ===== هيدر ثابت ===== -->
-        <div class="main-header">
-            <div class="header-brand">💎 التركي</div>
-            <div class="header-tagline">مستحضرات تجميل أصلية - ماركات عالمية</div>
-        </div>
-
-        <!-- ===== شريط التصنيفات ===== -->
-        <div class="category-bar" id="categoryBar">
-            <button class="category-btn active" data-category="all">✨ الكل</button>
-            <button class="category-btn" data-category="face">🧴 عناية بالوجه</button>
-            <button class="category-btn" data-category="eyes">👁️ عناية بالعين</button>
-            <button class="category-btn" data-category="lips">💋 عناية بالشفاه</button>
-            <button class="category-btn" data-category="hair">💇‍♀️ عناية بالشعر</button>
-            <button class="category-btn" data-category="body">🧴 عناية بالجسم</button>
-            <button class="category-btn" data-category="makeup">💄 مكياج</button>
-        </div>
-
-        <!-- ===== معرض المنتجات ===== -->
-        <div class="gallery" id="galleryContainer"></div>
-        <button class="back-home" id="backToLandingBtn">🏠 العودة للرئيسية</button>
-
-        <!-- ===== قسم التواصل ===== -->
-        <div class="contact-section">
-            <h2>📞 للتواصل</h2>
-            <div class="contact-cards">
-                <!-- المستشار وليد -->
-                <div class="contact-card">
-                    <div class="contact-icon">👔</div>
-                    <div class="contact-role">المستشار</div>
-                    <div class="contact-name">وليد رفعت ابو الدهب</div>
-                    <div class="contact-phone"><i class="fab fa-whatsapp"></i> 01000000000</div>
-                    <a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال الآن</a>
-                </div>
-
-                <!-- بشمهندس محمد -->
-                <div class="contact-card">
-                    <div class="contact-icon">👨‍💼</div>
-                    <div class="contact-role">بشمهندس</div>
-                    <div class="contact-name">محمد رفعت ابو الدهب</div>
-                    <div class="contact-phone"><i class="fab fa-whatsapp"></i> 01200000000</div>
-                    <a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال الآن</a>
-                </div>
-
-                <!-- بشمهندس احمد -->
-                <div class="contact-card">
-                    <div class="contact-icon">👨‍💻</div>
-                    <div class="contact-role">بشمهندس</div>
-                    <div class="contact-name">احمد رفعت ابو الدهب</div>
-                    <div class="contact-phone"><i class="fab fa-whatsapp"></i> 01500000000</div>
-                    <a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال الآن</a>
-                </div>
-            </div>
-
-            <!-- ملحوظة -->
-            <div class="contact-note">
-                <i class="fas fa-store"></i> نحن مكتب جملة معتمد <i class="fas fa-check-circle"></i>
-                <br>
-                متاح بيع جملة لأصحاب المحلات التجارية وقطاعي
-                <br>
-                <i class="fas fa-truck"></i> توصيل لجميع المحافظات <i class="fas fa-shipping-fast"></i>
-            </div>
-        </div>
-
-        <!-- ===== توقيع ===== -->
-        <div class="footer-credit">
-            <span>⚡ صُنع بواسطة</span>
-            <br>
-            <span class="name">البشمهندس مازن العربي</span>
-            <div class="social-links">
-                <span class="phone-number"><i class="fab fa-whatsapp"></i> 01100257625</span>
-                <a href="https://wa.me/201100257625" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
-                <a href="https://www.facebook.com/share/1J5pRHd8g5/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i> فيسبوك</a>
-                <a href="https://www.instagram.com/mazenalaraby10?igsh=YnFhaGFlODhmcGw4&utm_source=qr" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i> انستجرام</a>
-                <a href="https://www.tiktok.com/@mazenmohamedalaraby?_r=1&_t=ZS-96I5OvpGIqY" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i> تيك توك</a>
-            </div>
-            <span style="font-size:0.8rem;opacity:0.5;display:block;margin-top:10px;">© 2026 جميع الحقوق محفوظة</span>
-        </div>
+    <div class="cats" id="cats">
+        <button class="active" data-cat="all">✨ الكل</button>
+        <button data-cat="face">🧴 وجه</button>
+        <button data-cat="eyes">👁️ عين</button>
+        <button data-cat="lips">💋 شفاه</button>
+        <button data-cat="hair">💇‍♀️ شعر</button>
+        <button data-cat="body">🧴 جسم</button>
+        <button data-cat="makeup">💄 مكياج</button>
     </div>
 
-    <!-- ===== المودال ===== -->
-    <div class="modal" id="productModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeModalBtn">✕</button>
-            <img class="modal-image" id="modalImage" src="" alt="منتج">
-            <div class="modal-info">
-                <div class="modal-product-name" id="modalProductName"></div>
-                <div class="modal-product-desc" id="modalProductDesc"></div>
-                <div class="modal-product-price" id="modalProductPrice"></div>
-                <button class="order-btn" onclick="window.open('https://wa.me/201100257625', '_blank')">
-                    📞 اطلب الآن عبر واتساب
-                </button>
+    <div class="gallery" id="gallery"></div>
+    <button class="back-btn" id="backBtn">🏠 العودة للرئيسية</button>
+
+    <div class="contact">
+        <h2>📞 للتواصل</h2>
+        <div class="contact-cards">
+            <div class="c-card">
+                <div class="icon">👔</div><div class="role">المستشار</div>
+                <div class="name">وليد رفعت ابو الدهب</div>
+                <div class="phone"><i class="fab fa-whatsapp"></i>01000000000</div>
+                <a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a>
+            </div>
+            <div class="c-card">
+                <div class="icon">👨‍💼</div><div class="role">بشمهندس</div>
+                <div class="name">محمد رفعت ابو الدهب</div>
+                <div class="phone"><i class="fab fa-whatsapp"></i>01200000000</div>
+                <a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a>
+            </div>
+            <div class="c-card">
+                <div class="icon">👨‍💻</div><div class="role">بشمهندس</div>
+                <div class="name">احمد رفعت ابو الدهب</div>
+                <div class="phone"><i class="fab fa-whatsapp"></i>01500000000</div>
+                <a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a>
             </div>
         </div>
+        <div class="note">✅ نحن مكتب جملة معتمد | متاح بيع جملة وقطاعي | 🚚 توصيل لجميع المحافظات</div>
     </div>
 
-    <script>
-        // ===== بيانات المنتجات الـ 100 =====
-        var categories = {
-            face: '🧴 عناية بالوجه',
-            eyes: '👁️ عناية بالعين',
-            lips: '💋 عناية بالشفاه',
-            hair: '💇‍♀️ عناية بالشعر',
-            body: '🧴 عناية بالجسم',
-            makeup: '💄 مكياج'
-        };
+    <div class="footer">
+        ⚡ صُنع بواسطة<br>
+        <span class="f-name">البشمهندس مازن العربي</span>
+        <div class="social">
+            <span class="ph"><i class="fab fa-whatsapp"></i> 01100257625</span>
+            <a href="https://wa.me/201100257625" class="wa"><i class="fab fa-whatsapp"></i> واتساب</a>
+            <a href="https://www.facebook.com/share/1J5pRHd8g5/?mibextid=wwXIfr" class="fb"><i class="fab fa-facebook-f"></i> فيسبوك</a>
+            <a href="https://www.instagram.com/mazenalaraby10" class="ig"><i class="fab fa-instagram"></i> انستجرام</a>
+            <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="tt"><i class="fab fa-tiktok"></i> تيك توك</a>
+        </div>
+        <span style="font-size:.75rem;opacity:.5;display:block;margin-top:10px">© 2026 جميع الحقوق محفوظة</span>
+    </div>
+</div>
 
-        var productNames = {
-            face: ['سيروم فيتامين سي', 'كريم ترطيب عميق', 'تونر منعش', 'ماسك وجه ذهبي', 'غسول وجه لطيف', 'كريم نهاري', 'كريم ليلي', 'سيرم هيالورونيك', 'مقشر وجه', 'واقي شمس', 'كريم أساس', 'برايمر', 'كونسيلر', 'بودرة تثبيت', 'بخاخ مثبت', 'جل الصبار'],
-            eyes: ['كريم محيط العين', 'سيرم رموش', 'مزيل مكياج عيون', 'قلم حواجب', 'جل حواجب', 'ماسك عين'],
-            lips: ['مرطب شفاه', 'مقشر شفاه', 'روج سائل', 'ملمع شفاه', 'قلم تحديد شفاه', 'ماسك شفاه'],
-            hair: ['شامبو مغذي', 'بلسم مرطب', 'ماسك شعر', 'زيت شعر', 'سيرم شعر', 'بخاخ حماية حرارية'],
-            body: ['لوشن جسم', 'مقشر جسم', 'زيت جسم', 'كريم تفتيح', 'مزيل عرق', 'صابون طبيعي'],
-            makeup: ['باليت ظلال', 'ماسكارا', 'أيلاينر', 'أحمر خدود', 'هايلايتر', 'كونتور', 'بودرة وجه', 'بخاخ تثبيت']
-        };
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <button class="close-modal" id="closeModal">✕</button>
+        <img id="modalImg" src="" alt="">
+        <div class="m-info">
+            <h3 id="modalName"></h3>
+            <div class="desc" id="modalDesc"></div>
+            <div class="price" id="modalPrice"></div>
+            <button class="order-btn" onclick="window.open('https://wa.me/201100257625','_blank')">📞 اطلب الآن عبر واتساب</button>
+        </div>
+    </div>
+</div>
 
-        var allCategories = Object.keys(categories);
-        var products = [];
+<script>
+// ========== [1] بيانات المنتجات - عدل هنا فقط ==========
+var products = [
+    // {img:"img1", name:"اسم المنتج", cat:"face", desc:"وصف المنتج", price:250},
+    
+    // 👇 اكتب منتجاتك تحت بالترتيب 👇
+    {img:"img1",  name:"سيروم فيتامين سي",       cat:"face",   desc:"سيروم فيتامين سي مركز لتفتيح البشرة وتوحيد لونها",              price:350},
+    {img:"img2",  name:"كريم ترطيب عميق",         cat:"face",   desc:"كريم ترطيب يومي عميق للبشرة الجافة والعادية",                  price:280},
+    {img:"img3",  name:"تونر ماء الورد",           cat:"face",   desc:"تونر طبيعي لإنعاش البشرة وغلق المسام",                        price:220},
+    {img:"img4",  name:"ماسك وجه ذهبي",            cat:"face",   desc:"ماسك وجه بماء الذهب لتغذية البشرة وإشراقتها",                 price:420},
+    {img:"img5",  name:"غسول وجه لطيف",            cat:"face",   desc:"غسول وجه يومي خالي من الكحول لجميع أنواع البشرة",             price:190},
+    {img:"img6",  name:"واقي شمس SPF50",           cat:"face",   desc:"واقي شمس عالي الحماية بمعامل 50+ للبشرة الحساسة",            price:310},
+    
+    {img:"img7",  name:"كريم محيط العين",          cat:"eyes",   desc:"كريم مغذي لمحيط العين لتقليل الهالات السوداء والتجاعيد",     price:380},
+    {img:"img8",  name:"سيروم تطويل الرموش",       cat:"eyes",   desc:"سيروم طبيعي لتطويل وتكثيف الرموش خلال 4 أسابيع",             price:450},
+    {img:"img9",  name:"مزيل مكياج العيون",        cat:"eyes",   desc:"مزيل مكياج لطيف خالي من الزيوت للعيون الحساسة",              price:170},
+    {img:"img10", name:"قلم حواجب احترافي",         cat:"eyes",   desc:"قلم حواجب يدوم طويلاً برأس دقيق لرسم مثالي",                 price:150},
+    
+    {img:"img11", name:"مرطب شفاه مغذي",           cat:"lips",   desc:"مرطب شفاه بزيت جوز الهند لترطيب عميق للشفاه الجافة",         price:120},
+    {img:"img12", name:"روج سائل مات",             cat:"lips",   desc:"روج سائل بتركيبة خفيفة تدوم طويلاً بألوان جذابة",             price:200},
+    {img:"img13", name:"مقشر شفاه بالسكر",          cat:"lips",   desc:"مقشر طبيعي لإزالة الجلد الميت وتنعيم الشفاه",                price:140},
+    {img:"img14", name:"ملمع شفاه شفاف",            cat:"lips",   desc:"ملمع شفاه عالي اللمعان بتركيبة غير لزجة",                    price:160},
+    
+    {img:"img15", name:"شامبو زيت الارجان",         cat:"hair",   desc:"شامبو طبيعي بزيت الأرجان لتغذية وتقوية الشعر",               price:260},
+    {img:"img16", name:"بلسم مرطب للشعر",           cat:"hair",   desc:"بلسم يومي لفك تشابك الشعر وترطيبه",                           price:230},
+    {img:"img17", name:"ماسك شعر كيراتين",          cat:"hair",   desc:"ماسك علاجي لتنعيم الشعر وإعادة الحيوية له",                   price:340},
+    {img:"img18", name:"زيت شعر طبيعي",             cat:"hair",   desc:"زيت شعر بخلاصة الأعشاب لتطويل وتكثيف الشعر",                 price:190},
+    
+    {img:"img19", name:"لوشن جسم مرطب",             cat:"body",   desc:"لوشن يومي لترطيب الجسم بالكامل برائحة منعشة",                price:200},
+    {img:"img20", name:"مقشر جسم بالقهوة",          cat:"body",   desc:"مقشر طبيعي بالقهوة لإزالة الخلايا الميتة وتنعيم الجسم",      price:250},
+    {img:"img21", name:"زيت جسم لامع",              cat:"body",   desc:"زيت جسم جاف لإضاءة طبيعية ولمعان صحي",                        price:280},
+    {img:"img22", name:"كريم تفتيح المناطق الحساسة", cat:"body",   desc:"كريم لطيف لتفتيح وتوحيد لون المناطق الحساسة",               price:320},
+    
+    {img:"img23", name:"باليت ظلال عيون",           cat:"makeup", desc:"باليت 12 لون ظلال عيون بدرجات دافئة وباردة",                 price:380},
+    {img:"img24", name:"ماسكارا تطويل",             cat:"makeup", desc:"ماسكارا سوداء لتطويل وتكثيف الرموش بشكل طبيعي",             price:220},
+    {img:"img25", name:"أيلاينر سائل",              cat:"makeup", desc:"أيلاينر أسود سائل برأس دقيق لرسم العين بشكل مثالي",         price:180},
+    
+    {img:"img26", name:"كريم نهاري بعامل حماية",    cat:"face",   desc:"كريم نهاري خفيف مع حماية من الشمس SPF30",                    price:300},
+    {img:"img27", name:"كريم ليلي مغذي",            cat:"face",   desc:"كريم ليلي غني لتجديد خلايا البشرة أثناء النوم",              price:350},
+    {img:"img28", name:"سيرم هيالورونيك",           cat:"face",   desc:"سيرم حمض الهيالورونيك لترطيب عميق وملء التجاعيد",            price:420},
+    {img:"img29", name:"مقشر وجه إنزيمي",           cat:"face",   desc:"مقشر لطيف بأنزيمات الفواكه لإزالة الخلايا الميتة",           price:270},
+    {img:"img30", name:"بخاخ ماء الورد",            cat:"face",   desc:"بخاخ منعش للوجه لتثبيت المكياج وإنعاش البشرة",               price:160},
+    
+    {img:"img31", name:"جل حواجب شفاف",             cat:"eyes",   desc:"جل تثبيت الحواجب شفاف يدوم طوال اليوم",                      price:140},
+    {img:"img32", name:"ماسك عين بالكولاجين",       cat:"eyes",   desc:"ماسك عين بالكولاجين لتقليل الانتفاخات والهالات",             price:200},
+    
+    {img:"img33", name:"قلم تحديد شفاه",            cat:"lips",   desc:"قلم تحديد شفاه كريمي يدوم طويلاً",                           price:130},
+    {img:"img34", name:"ماسك شفاه ليلي",            cat:"lips",   desc:"ماسك ليلي للشفاه بزبدة الشيا لترطيب مكثف",                   price:170},
+    
+    {img:"img35", name:"سيرم مضاد لتساقط الشعر",    cat:"hair",   desc:"سيرم مركز لتقوية بصيلات الشعر ومنع التساقط",                 price:290},
+    {img:"img36", name:"بخاخ حماية من الحرارة",     cat:"hair",   desc:"بخاخ يحمي الشعر من حرارة المكواة والسيشوار",                 price:210},
+    
+    {img:"img37", name:"مزيل عرق طبيعي",            cat:"body",   desc:"مزيل عرق خالي من الألمنيوم برائحة منعشة",                    price:160},
+    {img:"img38", name:"صابون طبيعي بالعسل",        cat:"body",   desc:"صابون طبيعي بالعسل لتنظيف وتغذية البشرة",                    price:90},
+    
+    {img:"img39", name:"أحمر خدود كريمي",           cat:"makeup", desc:"أحمر خدود بتركيبة كريمية سهلة الدمج",                        price:200},
+    {img:"img40", name:"هايلايتر سائل",             cat:"makeup", desc:"هايلايتر سائل لإضاءة طبيعية على الوجه",                      price:250},
+    {img:"img41", name:"كونتور كريمي",              cat:"makeup", desc:"كونتور كريمي لتحديد ملامح الوجه بشكل طبيعي",                price:230},
+    {img:"img42", name:"بودرة تثبيت شفافة",          cat:"makeup", desc:"بودرة شفافة لتثبيت المكياج وإخفاء المسام",                  price:190},
+    {img:"img43", name:"بخاخ تثبيت مكياج",          cat:"makeup", desc:"بخاخ لتثبيت المكياج يدوم حتى 16 ساعة",                       price:220},
+    {img:"img44", name:"برايمر وجه",                cat:"face",   desc:"برايمر لتنعيم البشرة وتقليل المسام قبل المكياج",             price:260},
+    {img:"img45", name:"كونسيلر تغطية كاملة",       cat:"face",   desc:"كونسيلر عالي التغطية للهالات والبقع الداكنة",               price:210},
+    {img:"img46", name:"جل الصبار الطبيعي",         cat:"face",   desc:"جل صبار نقي 100% لتهدئة وترطيب البشرة",                      price:140},
+    {img:"img47", name:"كريم أساس سائل",            cat:"face",   desc:"كريم أساس بتغطية طبيعية خفيف على البشرة",                    price:320},
+    {img:"img48", name:"سيرم نياسيناميد",           cat:"face",   desc:"سيرم نياسيناميد 10% لتقليل المسام وتوحيد لون البشرة",        price:380},
+    {img:"img49", name:"زيت الجوجوبا",              cat:"face",   desc:"زيت جوجوبا طبيعي لترطيب البشرة الدهنية والمختلطة",           price:200},
+    {img:"img50", name:"قناع الطمي المغربي",        cat:"face",   desc:"قناع طمي طبيعي لتنقية البشرة وإزالة السموم",                 price:170}
+];
 
-        // إنشاء 100 منتج
-        for (var i = 1; i <= 100; i++) {
-            var catIndex = (i - 1) % allCategories.length;
-            var cat = allCategories[catIndex];
-            var names = productNames[cat];
-            var nameIndex = (i - 1) % names.length;
-            var productName = names[nameIndex] + ' ' + (Math.floor((i - 1) / names.length) + 1);
-            var price = (Math.floor(Math.random() * 400) + 150);
+var cats = {face:"🧴 عناية بالوجه",eyes:"👁️ عناية بالعين",lips:"💋 عناية بالشفاه",hair:"💇‍♀️ عناية بالشعر",body:"🧴 عناية بالجسم",makeup:"💄 مكياج"};
+var currentCat = 'all';
 
-            products.push({
-                id: i,
-                img: 'img' + i,
-                name: productName,
-                category: cat,
-                categoryName: categories[cat],
-                price: price,
-                desc: 'منتج أصلي 100% من أفضل الماركات العالمية. ' + categories[cat] + ' - ' + productName + '. منتج عالي الجودة للعناية المثالية.'
-            });
-        }
+// ========== [2] عرض المنتجات ==========
+function render(){
+    var g = document.getElementById('gallery');
+    g.innerHTML = '';
+    var list = currentCat === 'all' ? products : products.filter(function(p){return p.cat === currentCat;});
+    list.forEach(function(p){
+        var c = document.createElement('div');
+        c.className = 'card';
+        c.onclick = function(){openModal(p);};
+        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#f0f0f0\';this.style.objectFit=\'contain\'"><div class="badge">'+cats[p.cat].split(' ')[0]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price+' ج.م</div></div>';
+        g.appendChild(c);
+    });
+}
 
-        // ===== التصنيفات =====
-        var currentCategory = 'all';
+// ========== [3] المودال ==========
+var modal = document.getElementById('modal');
+var mImg = document.getElementById('modalImg');
+var mName = document.getElementById('modalName');
+var mDesc = document.getElementById('modalDesc');
+var mPrice = document.getElementById('modalPrice');
 
-        var categoryBtns = document.querySelectorAll('.category-btn');
-        categoryBtns.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                categoryBtns.forEach(function(b) { b.classList.remove('active'); });
-                btn.classList.add('active');
-                currentCategory = btn.getAttribute('data-category');
-                renderProducts();
-            });
-        });
+function openModal(p){
+    mImg.src = p.img; mImg.onerror=function(){this.style.background='#f0f0f0';this.style.objectFit='contain';};
+    mName.textContent = p.name;
+    mDesc.textContent = p.desc;
+    mPrice.textContent = p.price + ' ج.م';
+    modal.classList.add('active'); document.body.style.overflow = 'hidden';
+}
+function closeModal(){modal.classList.remove('active');document.body.style.overflow='';}
+document.getElementById('closeModal').onclick = closeModal;
+modal.onclick = function(e){if(e.target===modal)closeModal();};
+document.onkeydown = function(e){if(e.key==='Escape'&&modal.classList.contains('active'))closeModal();};
 
-        // ===== عرض المنتجات =====
-        function renderProducts() {
-            var container = document.getElementById('galleryContainer');
-            container.innerHTML = '';
+// ========== [4] التصنيفات ==========
+document.querySelectorAll('#cats button').forEach(function(b){
+    b.onclick = function(){
+        document.querySelectorAll('#cats button').forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        currentCat = b.getAttribute('data-cat');
+        render();
+    };
+});
 
-            var filteredProducts = currentCategory === 'all' ? products : products.filter(function(p) {
-                return p.category === currentCategory;
-            });
-
-            filteredProducts.forEach(function(product) {
-                var card = document.createElement('div');
-                card.className = 'card';
-                card.onclick = function() { openModal(product); };
-
-                card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" loading="lazy" onerror="this.style.background='#f0f0f0'; this.style.padding='20px'; this.style.objectFit='contain';">
-                    <div class="card-badge">${product.categoryName.split(' ')[0]}</div>
-                    <div class="card-info">
-                        <div class="product-name">${product.name}</div>
-                        <div class="product-price">${product.price} ج.م</div>
-                    </div>
-                `;
-
-                container.appendChild(card);
-            });
-        }
-
-        // ===== المودال =====
-        var modal = document.getElementById('productModal');
-        var modalImage = document.getElementById('modalImage');
-        var modalProductName = document.getElementById('modalProductName');
-        var modalProductDesc = document.getElementById('modalProductDesc');
-        var modalProductPrice = document.getElementById('modalProductPrice');
-        var closeModalBtn = document.getElementById('closeModalBtn');
-
-        function openModal(product) {
-            modalImage.src = product.img;
-            modalImage.onerror = function() { this.style.background = '#f0f0f0'; this.style.objectFit = 'contain'; };
-            modalProductName.textContent = product.name;
-            modalProductDesc.textContent = product.desc;
-            modalProductPrice.textContent = product.price + ' ج.م';
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        closeModalBtn.onclick = closeModal;
-        modal.onclick = function(e) {
-            if (e.target === modal) closeModal();
-        };
-        document.onkeydown = function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
-            }
-        };
-
-        // ===== أحداث =====
-        var landingPage = document.getElementById('landingPage');
-        var mainContent = document.getElementById('mainContent');
-        var startBtn = document.getElementById('startBtn');
-        var backBtn = document.getElementById('backToLandingBtn');
-
-        startBtn.onclick = function() {
-            landingPage.classList.add('hidden');
-            mainContent.classList.add('visible');
-            renderProducts();
-        };
-
-        backBtn.onclick = function() {
-            landingPage.classList.remove('hidden');
-            mainContent.classList.remove('visible');
-            if (modal.classList.contains('active')) {
-                closeModal();
-            }
-        };
-    </script>
+// ========== [5] الأحداث ==========
+document.getElementById('startBtn').onclick = function(){
+    document.getElementById('landing').classList.add('hidden');
+    document.getElementById('main').classList.add('visible');
+    render();
+};
+document.getElementById('backBtn').onclick = function(){
+    document.getElementById('landing').classList.remove('hidden');
+    document.getElementById('main').classList.remove('visible');
+    if(modal.classList.contains('active'))closeModal();
+};
+</script>
 </body>
-</html>
+    </html>
