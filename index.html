@@ -31,24 +31,19 @@
 
         .floating-heart {
             position: absolute;
-            font-size: 2rem;
+            top: -50px;
             animation: fall linear infinite;
-            opacity: 0.7;
             pointer-events: none;
             user-select: none;
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(-10vh) rotate(0deg) scale(0.5);
+                transform: translateY(0) rotate(0deg) scale(0.5);
                 opacity: 0.9;
             }
-            50% {
-                transform: translateY(50vh) rotate(180deg) scale(1);
-                opacity: 0.6;
-            }
             100% {
-                transform: translateY(110vh) rotate(360deg) scale(0.3);
+                transform: translateY(110vh) rotate(360deg) scale(1.2);
                 opacity: 0;
             }
         }
@@ -66,13 +61,6 @@
             justify-content: center;
             align-items: center;
             z-index: 3000;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .password-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
         }
 
         .password-box {
@@ -84,24 +72,23 @@
             box-shadow: 0 0 50px rgba(255, 77, 109, 0.5);
             max-width: 400px;
             width: 90%;
-            backdrop-filter: blur(10px);
         }
 
-        .password-box .lock-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
+        .lock-icon {
+            font-size: 5rem;
             display: block;
+            margin-bottom: 15px;
         }
 
         .password-box h2 {
             font-family: 'Amiri', serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #ffd1dc;
             margin-bottom: 20px;
             text-shadow: 0 0 10px #ff4d6d;
         }
 
-        .password-input {
+        .password-box input {
             width: 100%;
             padding: 14px 20px;
             font-size: 1.4rem;
@@ -112,23 +99,11 @@
             color: #ffd1dc;
             text-align: center;
             outline: none;
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
+            margin-bottom: 15px;
             direction: ltr;
         }
 
-        .password-input:focus {
-            border-color: #ff758f;
-            box-shadow: 0 0 30px rgba(255, 77, 109, 0.6);
-        }
-
-        .password-input::placeholder {
-            color: rgba(255, 209, 220, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .password-btn {
-            margin-top: 20px;
+        .password-box button {
             padding: 14px 50px;
             font-size: 1.4rem;
             font-family: 'Cairo', sans-serif;
@@ -139,39 +114,29 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 0 30px #ff4d6d;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
         }
 
-        .password-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 45px #ff758f;
-        }
-
-        .error-message {
+        .error-msg {
             color: #ff4d6d;
             font-family: 'Amiri', serif;
-            font-size: 1.5rem;
-            margin-top: 20px;
-            min-height: 40px;
-            text-shadow: 0 0 10px #ff4d6d;
-            animation: shake 0.5s ease;
+            font-size: 1.3rem;
+            margin-top: 15px;
             display: none;
         }
 
-        .error-message.show {
+        .error-msg.show {
             display: block;
+            animation: shake 0.5s ease;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-10px); }
-            40% { transform: translateX(10px); }
-            60% { transform: translateX(-8px); }
-            80% { transform: translateX(5px); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-8px); }
         }
 
-        /* ===== شاشة البداية (Landing) ===== */
+        /* ===== شاشة البداية ===== */
         .landing {
             position: fixed;
             top: 0;
@@ -241,7 +206,7 @@
             background: linear-gradient(45deg, #ff758f, #c9184a);
         }
 
-        /* ===== المحتوى الرئيسي (المعرض) ===== */
+        /* ===== المحتوى الرئيسي ===== */
         .main-content {
             min-height: 100vh;
             background: linear-gradient(135deg, #2d0a1b, #0f0505);
@@ -294,7 +259,6 @@
             object-fit: cover;
             display: block;
             transition: filter 0.4s;
-            will-change: filter;
         }
 
         .card:hover img {
@@ -320,7 +284,7 @@
             opacity: 1;
         }
 
-        /* ===== مودال صفحة التفاصيل ===== */
+        /* ===== المودال ===== */
         .modal {
             display: none;
             position: fixed;
@@ -333,7 +297,6 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            backdrop-filter: blur(8px);
         }
 
         .modal.active {
@@ -436,46 +399,44 @@
                 grid-template-columns: 1fr;
             }
             .password-box h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== أمطار القلوب (هتتضاف بالجافاسكريبت) ===== -->
+    <!-- ===== أمطار القلوب ===== -->
     <div class="hearts-container" id="heartsContainer"></div>
 
-    <!-- ========= شاشة كلمة السر ========= -->
+    <!-- ===== شاشة كلمة السر ===== -->
     <div class="password-screen" id="passwordScreen">
         <div class="password-box">
             <span class="lock-icon">🔐</span>
             <h2>أدخلي كلمة السر<br>يا روحي 🥀</h2>
-            <input type="password" class="password-input" id="passwordInput" placeholder="••••" maxlength="20">
-            <button class="password-btn" id="passwordBtn">💕 دخول</button>
-            <div class="error-message" id="errorMessage">ركزي يا عيوني واكتبي رموز عشقي 💕</div>
+            <input type="password" id="passwordInput" placeholder="••••">
+            <button id="passwordBtn">💕 دخول</button>
+            <div class="error-msg" id="errorMsg">ركزي يا عيوني واكتبي رموز عشقي 💕</div>
         </div>
     </div>
 
-    <!-- ========= شاشة البداية ========= -->
+    <!-- ===== شاشة البداية ===== -->
     <div class="landing" id="landingPage">
         <div class="heart-animation">❤️</div>
         <h1>ذكريات حبنا</h1>
         <button class="start-btn" id="startBtn">لنبدأ ذكريات حبنا</button>
     </div>
 
-    <!-- ========= المحتوى الرئيسي (المعرض) ========= -->
+    <!-- ===== المحتوى الرئيسي ===== -->
     <div class="main-content" id="mainContent">
         <div class="main-header">
             <h2>📜 معرض قصائد الحب والغرام</h2>
         </div>
-        <div class="gallery" id="galleryContainer">
-            <!-- الكاردات هتتضاف بالجافاسكريبت -->
-        </div>
+        <div class="gallery" id="galleryContainer"></div>
         <button class="back-home" id="backToLandingBtn">💔 العودة للبداية</button>
     </div>
 
-    <!-- ========= مودال التفاصيل ========= -->
+    <!-- ===== المودال ===== -->
     <div class="modal" id="poemModal">
         <div class="modal-content">
             <button class="close-modal" id="closeModalBtn">✕</button>
@@ -485,168 +446,135 @@
     </div>
 
     <script>
-        // ===== إنشاء أمطار القلوب =====
-        function createFloatingHearts() {
-            const container = document.getElementById('heartsContainer');
-            const hearts = ['❤️', '💕', '💗', '💖', '💘', '💝', '💟', '🩷', '♥️', '💓'];
+        // ===== 1. أمطار القلوب =====
+        (function() {
+            var container = document.getElementById('heartsContainer');
+            var hearts = ['❤️', '💕', '💗', '💖', '💘', '💝', '💟', '♥️', '💓'];
 
-            function createHeart() {
-                const heart = document.createElement('span');
-                heart.className = 'floating-heart';
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.fontSize = (Math.random() * 2 + 1.2) + 'rem';
-                heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
-                heart.style.animationDelay = Math.random() * 2 + 's';
-                container.appendChild(heart);
-
-                setTimeout(() => {
-                    heart.remove();
-                }, 8000);
+            function makeHeart() {
+                var h = document.createElement('span');
+                h.className = 'floating-heart';
+                h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                h.style.left = Math.random() * 100 + '%';
+                h.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                h.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                h.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(h);
+                setTimeout(function() {
+                    if (h.parentNode) h.parentNode.removeChild(h);
+                }, 10000);
             }
 
-            setInterval(createHeart, 400);
-            for (let i = 0; i < 8; i++) {
-                setTimeout(createHeart, i * 300);
+            setInterval(makeHeart, 500);
+            for (var i = 0; i < 6; i++) {
+                setTimeout(makeHeart, i * 400);
             }
-        }
+        })();
 
-        // ===== تشغيل أمطار القلوب =====
-        createFloatingHearts();
+        // ===== 2. كلمة السر =====
+        (function() {
+            var PASSWORD = 'Love';
+            var screen = document.getElementById('passwordScreen');
+            var input = document.getElementById('passwordInput');
+            var btn = document.getElementById('passwordBtn');
+            var error = document.getElementById('errorMsg');
 
-        // ===== كلمة السر =====
-        const PASSWORD = 'Love';
-        const passwordScreen = document.getElementById('passwordScreen');
-        const passwordInput = document.getElementById('passwordInput');
-        const passwordBtn = document.getElementById('passwordBtn');
-        const errorMessage = document.getElementById('errorMessage');
-
-        function checkPassword() {
-            if (passwordInput.value.trim() === PASSWORD) {
-                passwordScreen.classList.add('hidden');
-                document.body.style.overflow = '';
-            } else {
-                errorMessage.classList.add('show');
-                passwordInput.value = '';
-                passwordInput.focus();
-                setTimeout(() => {
-                    errorMessage.classList.remove('show');
-                }, 2500);
+            function check() {
+                if (input.value === PASSWORD) {
+                    screen.style.display = 'none';
+                    document.body.style.overflow = '';
+                } else {
+                    error.classList.add('show');
+                    input.value = '';
+                    input.focus();
+                    setTimeout(function() {
+                        error.classList.remove('show');
+                    }, 2500);
+                }
             }
-        }
 
-        passwordBtn.addEventListener('click', checkPassword);
-        passwordInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
+            btn.onclick = check;
+            input.onkeydown = function(e) {
+                if (e.key === 'Enter') {
+                    check();
+                }
+            };
+        })();
 
-        // ===== بيانات الحب =====
-        const loveData = [
-            {
-                img: "img1",
-                poem: "عيناكِ بحرٌ أغرقُ فيه بلا نجاة ❤️"
-            },
-            {
-                img: "img2",
-                poem: "أحبكِ عدد أنفاسي وأنفاسك ✨"
-            },
-            {
-                img: "img3",
-                poem: "في قلبي حديقةٌ لا تزهر إلا بكِ 🌹"
-            },
-            {
-                img: "img4",
-                poem: "لوناكِ تغار منه الورود 🌷"
-            },
-            {
-                img: "img5",
-                poem: "لو كان الحب كلمات لكتبتكِ ديواناً 📖"
-            },
-            {
-                img: "https://picsum.photos/seed/love6/400/500",
-                poem: "أنتِ العمر وأجمَلُ أيامه 🕊️"
-            }
+        // ===== 3. بيانات الحب =====
+        var loveData = [
+            { img: "https://picsum.photos/seed/love1/400/500", poem: "عيناكِ بحرٌ أغرقُ فيه بلا نجاة ❤️" },
+            { img: "https://picsum.photos/seed/love2/400/500", poem: "أحبكِ عدد أنفاسي وأنفاسك ✨" },
+            { img: "https://picsum.photos/seed/love3/400/500", poem: "في قلبي حديقةٌ لا تزهر إلا بكِ 🌹" },
+            { img: "https://picsum.photos/seed/love4/400/500", poem: "لوناكِ تغار منه الورود 🌷" },
+            { img: "https://picsum.photos/seed/love5/400/500", poem: "لو كان الحب كلمات لكتبتكِ ديواناً 📖" },
+            { img: "https://picsum.photos/seed/love6/400/500", poem: "أنتِ العمر وأجمَلُ أيامه 🕊️" }
         ];
 
-        // عناصر الـ DOM
-        const landingPage = document.getElementById('landingPage');
-        const mainContent = document.getElementById('mainContent');
-        const startBtn = document.getElementById('startBtn');
-        const backToLandingBtn = document.getElementById('backToLandingBtn');
-        const galleryContainer = document.getElementById('galleryContainer');
-        const poemModal = document.getElementById('poemModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const modalImage = document.getElementById('modalImage');
-        const modalPoemText = document.getElementById('modalPoemText');
+        // ===== 4. عناصر الصفحة =====
+        var landingPage = document.getElementById('landingPage');
+        var mainContent = document.getElementById('mainContent');
+        var startBtn = document.getElementById('startBtn');
+        var backBtn = document.getElementById('backToLandingBtn');
+        var galleryContainer = document.getElementById('galleryContainer');
+        var poemModal = document.getElementById('poemModal');
+        var closeModalBtn = document.getElementById('closeModalBtn');
+        var modalImage = document.getElementById('modalImage');
+        var modalPoemText = document.getElementById('modalPoemText');
 
-        // دالة إنشاء الكاردات
+        // ===== 5. إنشاء الكاردات =====
         function createCards() {
             galleryContainer.innerHTML = '';
-            loveData.forEach((item, index) => {
-                const card = document.createElement('div');
+            loveData.forEach(function(item, index) {
+                var card = document.createElement('div');
                 card.className = 'card';
                 card.setAttribute('data-index', index);
-                card.innerHTML = `
-                    <img src="${item.img}" alt="صورة حب ${index+1}" loading="lazy">
-                    <div class="card-overlay">${item.poem}</div>
-                `;
-                card.addEventListener('click', () => openModal(index));
+                card.innerHTML = '<img src="' + item.img + '" alt="صورة حب ' + (index + 1) + '" loading="lazy"><div class="card-overlay">' + item.poem + '</div>';
+                card.onclick = function() { openModal(index); };
                 galleryContainer.appendChild(card);
             });
         }
 
-        // فتح المودال
+        // ===== 6. فتح وإغلاق المودال =====
         function openModal(index) {
-            const item = loveData[index];
+            var item = loveData[index];
             modalImage.src = item.img;
             modalPoemText.textContent = item.poem;
             poemModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        // إغلاق المودال
         function closeModal() {
             poemModal.classList.remove('active');
-            if (!landingPage.classList.contains('hidden')) {
-                document.body.style.overflow = '';
-            } else {
-                if (!document.querySelector('.modal.active')) {
-                    document.body.style.overflow = '';
-                }
-            }
+            document.body.style.overflow = '';
         }
 
-        // حدث الضغط على زر البداية
-        startBtn.addEventListener('click', () => {
+        // ===== 7. الأحداث =====
+        startBtn.onclick = function() {
             landingPage.classList.add('hidden');
             mainContent.classList.add('visible');
             createCards();
-            document.body.style.overflow = '';
-        });
+        };
 
-        // العودة للـ landing من زر الرجوع
-        backToLandingBtn.addEventListener('click', () => {
+        backBtn.onclick = function() {
             landingPage.classList.remove('hidden');
             mainContent.classList.remove('visible');
             if (poemModal.classList.contains('active')) {
                 closeModal();
             }
-        });
+        };
 
-        // إغلاق المودال
-        closeModalBtn.addEventListener('click', closeModal);
-        poemModal.addEventListener('click', (e) => {
+        closeModalBtn.onclick = closeModal;
+
+        poemModal.onclick = function(e) {
             if (e.target === poemModal) closeModal();
-        });
+        };
 
-        // دعم لوحة المفاتيح (Esc)
-        document.addEventListener('keydown', (e) => {
+        document.onkeydown = function(e) {
             if (e.key === 'Escape' && poemModal.classList.contains('active')) {
                 closeModal();
             }
-        });
+        };
     </script>
 </body>
 </html>
