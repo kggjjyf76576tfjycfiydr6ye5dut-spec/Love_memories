@@ -19,113 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== شاشة كلمة السر ===== */
-        .password-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #1a0a2e, #2d1b69, #0a0a1a);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-        }
-
-        .password-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #d4af37;
-            border-radius: 30px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
-            max-width: 400px;
-            width: 90%;
-            backdrop-filter: blur(20px);
-        }
-
-        .lock-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .password-box h2 {
-            font-family: 'Amiri', serif;
-            font-size: 2rem;
-            color: #d4af37;
-            margin-bottom: 10px;
-        }
-
-        .password-box .brand-name {
-            font-family: 'Cairo', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #d4af37;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-        }
-
-        .password-box input {
-            width: 100%;
-            padding: 14px 20px;
-            font-size: 1.4rem;
-            font-family: 'Cairo', sans-serif;
-            border: 2px solid #d4af37;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #d4af37;
-            text-align: center;
-            outline: none;
-            margin-bottom: 15px;
-            direction: ltr;
-        }
-
-        .password-box input::placeholder {
-            color: rgba(212, 175, 55, 0.5);
-        }
-
-        .password-box button {
-            padding: 14px 50px;
-            font-size: 1.4rem;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            background: linear-gradient(45deg, #d4af37, #f0c75e);
-            color: #1a0a2e;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .password-box button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.8);
-        }
-
-        .error-msg {
-            color: #ff4444;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.2rem;
-            margin-top: 15px;
-            min-height: 30px;
-        }
-
-        .error-msg.shake {
-            animation: shakeMsg 0.5s ease;
-        }
-
-        @keyframes shakeMsg {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            50% { transform: translateX(10px); }
-            75% { transform: translateX(-8px); }
-        }
-
         /* ===== شاشة البداية ===== */
         .landing {
             position: fixed;
@@ -574,18 +467,6 @@
 </head>
 <body>
 
-    <!-- ===== شاشة كلمة السر ===== -->
-    <div class="password-screen" id="passwordScreen">
-        <div class="password-box">
-            <span class="lock-icon">💎</span>
-            <div class="brand-name">التركي</div>
-            <h2>أدخلي كلمة السر</h2>
-            <input type="password" id="passwordInput" placeholder="••••">
-            <button id="passwordBtn">🔓 دخول</button>
-            <div class="error-msg" id="errorMsg"></div>
-        </div>
-    </div>
-
     <!-- ===== شاشة البداية ===== -->
     <div class="landing" id="landingPage">
         <div class="logo-icon">💎</div>
@@ -651,36 +532,7 @@
     </div>
 
     <script>
-        // ===== 1. كلمة السر =====
-        (function() {
-            var PASSWORD = 'Love';
-            var screen = document.getElementById('passwordScreen');
-            var input = document.getElementById('passwordInput');
-            var btn = document.getElementById('passwordBtn');
-            var error = document.getElementById('errorMsg');
-
-            function check() {
-                if (input.value === PASSWORD) {
-                    screen.style.display = 'none';
-                    document.body.style.overflow = '';
-                    error.textContent = '';
-                } else {
-                    error.textContent = '❌ كلمة السر غير صحيحة، حاولي مجدداً';
-                    error.classList.remove('shake');
-                    void error.offsetWidth;
-                    error.classList.add('shake');
-                    input.value = '';
-                    input.focus();
-                }
-            }
-
-            btn.onclick = check;
-            input.onkeydown = function(e) {
-                if (e.key === 'Enter') { check(); }
-            };
-        })();
-
-        // ===== 2. بيانات المنتجات الـ 100 =====
+        // ===== 1. بيانات المنتجات الـ 100 =====
         var categories = {
             face: '🧴 عناية بالوجه',
             eyes: '👁️ عناية بالعين',
@@ -722,7 +574,7 @@
             });
         }
 
-        // ===== 3. التصنيفات =====
+        // ===== 2. التصنيفات =====
         var currentCategory = 'all';
 
         var categoryBtns = document.querySelectorAll('.category-btn');
@@ -735,7 +587,7 @@
             });
         });
 
-        // ===== 4. عرض المنتجات =====
+        // ===== 3. عرض المنتجات =====
         function renderProducts() {
             var container = document.getElementById('galleryContainer');
             container.innerHTML = '';
@@ -762,7 +614,7 @@
             });
         }
 
-        // ===== 5. المودال =====
+        // ===== 4. المودال =====
         var modal = document.getElementById('productModal');
         var modalImage = document.getElementById('modalImage');
         var modalProductName = document.getElementById('modalProductName');
@@ -795,7 +647,7 @@
             }
         };
 
-        // ===== 6. أحداث =====
+        // ===== 5. أحداث =====
         var landingPage = document.getElementById('landingPage');
         var mainContent = document.getElementById('mainContent');
         var startBtn = document.getElementById('startBtn');
