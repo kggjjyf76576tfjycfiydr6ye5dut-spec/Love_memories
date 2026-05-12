@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ذكريات حبنا</title>
+    <!-- Google Fonts: خط عربي رومانسي -->
+    <!-- تم تحسين طريقة استدعاء الخطوط لتشمل الأوزان المستخدمة فقط لتسريع التحميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #1a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* ===== شاشة البداية (Landing) ===== */
+        .landing {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at center, #4a0e2b, #1a0a0a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .landing.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .heart-animation {
+            font-size: 6rem;
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 20px;
+            color: #ff4d6d;
+            text-shadow: 0 0 20px #ff4d6d;
+            user-select: none;
+            /* التصحيح 1: منع تداخل القلب مع النقر */
+            pointer-events: none; 
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+
+        .landing h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            color: #ffd1dc;
+            text-shadow: 0 0 10px #ff4d6d;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .start-btn {
+            padding: 15px 50px;
+            font-size: 1.8rem;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff4d6d, #c9184a);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 30px #ff4d6d;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 45px #ff758f;
+            background: linear-gradient(45deg, #ff758f, #c9184a);
+        }
+
+        /* ===== المحتوى الرئيسي (المعرض) ===== */
+        .main-content {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2d0a1b, #0f0505);
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-content.visible {
+            display: flex;
+        }
+
+        .main-header {
+            text-align: center;
+            margin: 40px 0 30px;
+            color: #ffd1dc;
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px #ff4d6d;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        /* بطاقة الصورة */
+        .card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            aspect-ratio: 3/4;
+            background: #3a0d1c;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.33); /* التصحيح 2: صيغة لون rgba صحيحة */
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: filter 0.4s;
+            /* التصحيح 3: ضمان سلاسة التحميل */
+            will-change: filter;
+        }
+
+        .card:hover img {
+            filter: brightness(0.9);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: #fff;
+            padding: 20px 15px;
+            font-size: 1.4rem;
+            font-family: 'Amiri', serif;
+            text-align: center;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        /* ===== مودال صفحة التفاصيل ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%; /* التصحيح 4: عرض مرن للشاشات الصغيرة */
+            width: 700px;
+            background: #1e1e2f;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 77, 109, 0.4); /* تصحيح */
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 50vh; /* التصحيح 5: منع الصورة من أخذ كامل الشاشة طولياً */
+            object-fit: cover;
+            border-bottom: 3px solid #ff4d6d;
+        }
+
+        .modal-poem {
+            padding: 30px 25px;
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: #ffd1dc;
+            text-align: center;
+            line-height: 1.8;
+            background: #1e1e2f;
+            text-shadow: 0 0 5px #ff4d6d;
+            direction: rtl; /* التصحيح 6: تأكيد اتجاه النص العربي */
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 77, 109, 0.8);
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            z-index: 10;
+            box-shadow: 0 0 15px #ff4d6d;
+        }
+
+        .close-modal:hover {
+            background: #ff4d6d;
+            transform: scale(1.1);
+        }
+
+        /* زر الرجوع للخلف */
+        .back-home {
+            margin-top: 40px;
+            margin-bottom: 30px; /* التصحيح 7: مساحة أسفل الصفحة */
+            padding: 12px 35px;
+            background: transparent;
+            border: 2px solid #ff4d6d;
+            color: #ffd1dc;
+            font-size: 1.3rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 0 25px #ff4d6d;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .landing h1 {
+                font-size: 2.5rem;
+            }
+            .start-btn {
+                font-size: 1.5rem;
+                padding: 12px 35px;
+            }
+            .modal-poem {
+                font-size: 1.5rem;
+            }
+            .gallery {
+                /* التصحيح 8: عمود واحد للشاشات الصغيرة جداً */
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========= شاشة البداية ========= -->
+    <div class="landing" id="landingPage">
+        <div class="heart-animation">❤️</div>
+        <h1>ذكريات حبنا</h1>
+        <button class="start-btn" id="startBtn">لنبدأ ذكريات حبنا</button>
+    </div>
+
+    <!-- ========= المحتوى الرئيسي (المعرض) ========= -->
+    <div class="main-content" id="mainContent">
+        <div class="main-header">
+            <h2>📜 معرض قصائد الحب والغرام</h2>
+        </div>
+        <div class="gallery" id="galleryContainer">
+            <!-- الكاردات هتتضاف بالجافاسكريبت -->
+        </div>
+        <button class="back-home" id="backToLandingBtn">💔 العودة للبداية</button>
+    </div>
+
+    <!-- ========= مودال التفاصيل ========= -->
+    <div class="modal" id="poemModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModalBtn">✕</button>
+            <img class="modal-image" id="modalImage" src="" alt="صورة حب">
+            <div class="modal-poem" id="modalPoemText"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===== بيانات الحب: كل عنصر عبارة عن صورة (رابط) + بيت الشعر =====
+        const loveData = [
+            {
+                img: "https://picsum.photos/seed/love1/400/500",
+                poem: "عيناكِ بحرٌ أغرقُ فيه بلا نجاة ❤️"
+            },
+            {
+                img: "https://picsum.photos/seed/love2/400/500",
+                poem: "أحبكِ عدد أنفاسي وأنفاسك ✨"
+            },
+            {
+                img: "https://picsum.photos/seed/love3/400/500",
+                poem: "في قلبي حديقةٌ لا تزهر إلا بكِ 🌹"
+            },
+            {
+                img: "https://picsum.photos/seed/love4/400/500",
+                poem: "لوناكِ تغار منه الورود 🌷"
+            },
+            {
+                img: "https://picsum.photos/seed/love5/400/500",
+                poem: "لو كان الحب كلمات لكتبتكِ ديواناً 📖"
+            },
+            {
+                img: "https://picsum.photos/seed/love6/400/500",
+                poem: "أنتِ العمر وأجمَلُ أيامه 🕊️"
+            }
+        ];
+
+        // عناصر الـ DOM
+        const landingPage = document.getElementById('landingPage');
+        const mainContent = document.getElementById('mainContent');
+        const startBtn = document.getElementById('startBtn');
+        const backToLandingBtn = document.getElementById('backToLandingBtn');
+        const galleryContainer = document.getElementById('galleryContainer');
+        const poemModal = document.getElementById('poemModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalImage = document.getElementById('modalImage');
+        const modalPoemText = document.getElementById('modalPoemText');
+
+        // دالة إنشاء الكاردات
+        function createCards() {
+            galleryContainer.innerHTML = '';
+            loveData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('data-index', index);
+                card.innerHTML = `
+                    <img src="${item.img}" alt="صورة حب ${index+1}" loading="lazy">
+                    <div class="card-overlay">${item.poem}</div>
+                `;
+                card.addEventListener('click', () => openModal(index));
+                galleryContainer.appendChild(card);
+            });
+        }
+
+        // فتح المودال
+        function openModal(index) {
+            const item = loveData[index];
+            modalImage.src = item.img;
+            modalPoemText.textContent = item.poem;
+            poemModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // منع التمرير خلف المودال
+        }
+
+        // إغلاق المودال
+        function closeModal() {
+            poemModal.classList.remove('active');
+            // التصحيح 9: إعادة التمرير فقط إذا لم تكن شاشة البداية ظاهرة
+            if (!landingPage.classList.contains('hidden')) {
+                document.body.style.overflow = ''; 
+            } else {
+                // التحقق من وجود مودالات أخرى نشطة (للأمان)
+                if (!document.querySelector('.modal.active')) {
+                     document.body.style.overflow = '';
+                }
+            }
+        }
+
+        // حدث الضغط على زر البداية
+        startBtn.addEventListener('click', () => {
+            landingPage.classList.add('hidden');
+            mainContent.classList.add('visible');
+            createCards(); // إنشاء الكاردات عند الدخول لأول مرة
+            // التصحيح 10: إعادة تعيين حالة التمرير إذا كانت قد تغيرت
+            document.body.style.overflow = '';
+        });
+
+        // العودة للـ landing من زر الرجوع
+        backToLandingBtn.addEventListener('click', () => {
+            landingPage.classList.remove('hidden');
+            mainContent.classList.remove('visible');
+            // التصحيح 11: إغلاق أي مودال مفتوح عند العودة للبداية
+            if (poemModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // إغلاق المودال بالضغط على × أو بالضغط خارج المحتوى
+        closeModalBtn.addEventListener('click', closeModal);
+        poemModal.addEventListener('click', (e) => {
+            // التصحيح 12: التأكد أن النقر كان على الخلفية وليس المحتوى
+            if (e.target === poemModal) closeModal();
+        });
+
+        // دعم لوحة المفاتيح (Esc)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && poemModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+  </html>
