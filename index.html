@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ذكريات حبنا</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -24,7 +25,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* ===== طبقة حماية السكرين (دايماً فوق) ===== */
+        /* ===== طبقة حماية السكرين ===== */
         .anti-screenshot-overlay {
             position: fixed;
             top: 0;
@@ -105,14 +106,8 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(0.5);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0.9; }
+            100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
         /* ===== شاشة كلمة السر ===== */
@@ -141,11 +136,7 @@
             width: 90%;
         }
 
-        .lock-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 15px;
-        }
+        .lock-icon { font-size: 5rem; display: block; margin-bottom: 15px; }
 
         .password-box h2 {
             font-family: 'Amiri', serif;
@@ -191,9 +182,7 @@
             min-height: 30px;
         }
 
-        .error-msg.shake {
-            animation: shakeMsg 0.5s ease;
-        }
+        .error-msg.shake { animation: shakeMsg 0.5s ease; }
 
         @keyframes shakeMsg {
             0%, 100% { transform: translateX(0); }
@@ -218,11 +207,7 @@
             transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
-        .landing.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+        .landing.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
         .heart-animation {
             font-size: 6rem;
@@ -282,11 +267,9 @@
             padding-top: 100px;
         }
 
-        .main-content.visible {
-            display: flex;
-        }
+        .main-content.visible { display: flex; }
 
-        /* ===== هيدر ثابت تماماً ===== */
+        /* ===== هيدر ثابت ===== */
         .main-header {
             text-align: center;
             color: #ffd1dc;
@@ -313,7 +296,7 @@
             gap: 30px;
             width: 90%;
             max-width: 600px;
-            padding-bottom: 30px;
+            padding-bottom: 20px;
             padding-top: 20px;
         }
 
@@ -345,9 +328,7 @@
             user-drag: none;
         }
 
-        .card:hover img {
-            filter: brightness(0.85);
-        }
+        .card:hover img { filter: brightness(0.85); }
 
         .card-overlay {
             position: absolute;
@@ -364,10 +345,7 @@
             transition: all 0.3s;
         }
 
-        .card:hover .card-overlay {
-            opacity: 1;
-            padding-bottom: 35px;
-        }
+        .card:hover .card-overlay { opacity: 1; padding-bottom: 35px; }
 
         /* ===== المودال ===== */
         .modal {
@@ -384,9 +362,7 @@
             padding: 20px;
         }
 
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
 
         .modal-content {
             position: relative;
@@ -449,10 +425,7 @@
             font-weight: bold;
         }
 
-        .close-modal:hover {
-            background: #ff1a3d;
-            transform: scale(1.15);
-        }
+        .close-modal:hover { background: #ff1a3d; transform: scale(1.15); }
 
         /* ===== قلوب المودال المنبثقة ===== */
         .modal-hearts {
@@ -475,18 +448,9 @@
         }
 
         @keyframes popUp {
-            0% {
-                transform: translateY(0) scale(0) rotate(0deg);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-100px) scale(1.5) rotate(180deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-250px) scale(0.2) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-100px) scale(1.5) rotate(180deg); opacity: 0.8; }
+            100% { transform: translateY(-250px) scale(0.2) rotate(360deg); opacity: 0; }
         }
 
         .back-home {
@@ -515,7 +479,7 @@
             text-align: center;
             padding: 30px 20px;
             margin-top: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
             color: #ffd1dc;
             font-family: 'Cairo', sans-serif;
             background: rgba(0, 0, 0, 0.4);
@@ -528,14 +492,14 @@
         }
 
         .footer-credit .title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.8;
             margin-bottom: 5px;
             display: block;
         }
 
         .footer-credit .name {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 900;
             background: linear-gradient(45deg, #ff4d6d, #ff758f, #ff4d6d);
             -webkit-background-clip: text;
@@ -551,11 +515,113 @@
             50% { filter: brightness(1.5); }
         }
 
+        /* ===== وسائل التواصل ===== */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 77, 109, 0.3);
+        }
+
+        .social-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-width: 140px;
+        }
+
+        .social-btn i { font-size: 1.2rem; }
+
+        .social-btn.whatsapp {
+            background: #25D366;
+            border-color: #25D366;
+        }
+        .social-btn.whatsapp:hover {
+            background: transparent;
+            color: #25D366;
+            box-shadow: 0 0 20px #25D366;
+        }
+
+        .social-btn.facebook {
+            background: #1877F2;
+            border-color: #1877F2;
+        }
+        .social-btn.facebook:hover {
+            background: transparent;
+            color: #1877F2;
+            box-shadow: 0 0 20px #1877F2;
+        }
+
+        .social-btn.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-color: #dc2743;
+        }
+        .social-btn.instagram:hover {
+            background: transparent;
+            color: #dc2743;
+            box-shadow: 0 0 20px #dc2743;
+        }
+
+        .social-btn.tiktok {
+            background: #000;
+            border-color: #fff;
+        }
+        .social-btn.tiktok:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 20px #fff;
+        }
+
+        .phone-number {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: rgba(255, 77, 109, 0.2);
+            border: 2px solid #ff4d6d;
+            color: #ffd1dc;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            direction: ltr;
+            letter-spacing: 1px;
+        }
+
+        .phone-number i { color: #25D366; font-size: 1.3rem; }
+
+        .footer-credit .copyright {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 15px;
+            display: block;
+        }
+
         .footer-credit .emoji {
-            font-size: 2rem;
+            font-size: 1.5rem;
             animation: bounceEmoji 1s infinite;
             display: inline-block;
-            margin: 0 5px;
+            margin: 0 3px;
         }
 
         @keyframes bounceEmoji {
@@ -563,54 +629,25 @@
             50% { transform: translateY(-12px); }
         }
 
-        .footer-credit .copyright {
-            font-size: 0.9rem;
-            opacity: 0.6;
-            margin-top: 8px;
-            display: block;
-        }
-
         @media (max-width: 600px) {
-            .landing h1 {
-                font-size: 2.5rem;
-            }
-            .start-btn {
-                font-size: 1.5rem;
-                padding: 12px 35px;
-            }
-            .modal-poem {
-                font-size: 1.5rem;
-            }
-            .gallery {
-                width: 95%;
-                gap: 20px;
-            }
-            .card-overlay {
-                font-size: 1.3rem;
-                padding: 20px 15px;
-            }
-            .password-box h2 {
-                font-size: 1.6rem;
-            }
-            .main-header {
-                font-size: 1.6rem;
-                padding: 15px 10px;
-            }
-            .footer-credit .name {
-                font-size: 1.7rem;
-            }
-            .screenshot-warning h2 {
-                font-size: 1.8rem;
-            }
-            .main-content {
-                padding-top: 80px;
-            }
+            .landing h1 { font-size: 2.5rem; }
+            .start-btn { font-size: 1.5rem; padding: 12px 35px; }
+            .modal-poem { font-size: 1.5rem; }
+            .gallery { width: 95%; gap: 20px; }
+            .card-overlay { font-size: 1.3rem; padding: 20px 15px; }
+            .password-box h2 { font-size: 1.6rem; }
+            .main-header { font-size: 1.6rem; padding: 15px 10px; }
+            .footer-credit .name { font-size: 1.5rem; }
+            .screenshot-warning h2 { font-size: 1.8rem; }
+            .main-content { padding-top: 80px; }
+            .social-btn { padding: 8px 15px; font-size: 0.9rem; min-width: 120px; }
+            .phone-number { font-size: 0.9rem; padding: 8px 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== طبقة حماية شفافة ضد السكرين شوت ===== -->
+    <!-- ===== طبقة حماية ضد السكرين ===== -->
     <div class="anti-screenshot-overlay" id="antiScreenshotOverlay"></div>
 
     <!-- ===== تحذير التصوير ===== -->
@@ -620,7 +657,7 @@
         <p>هذه الذكريات خاصة جداً ولا يمكن تصويرها 💕</p>
     </div>
 
-    <!-- ===== أمطار القلوب (الخلفية) ===== -->
+    <!-- ===== أمطار القلوب ===== -->
     <div class="hearts-container" id="heartsContainer"></div>
 
     <!-- ===== شاشة كلمة السر ===== -->
@@ -643,21 +680,49 @@
 
     <!-- ===== المحتوى الرئيسي ===== -->
     <div class="main-content" id="mainContent">
-        <!-- ===== هيدر ثابت بالأعلى ===== -->
+        <!-- ===== هيدر ثابت ===== -->
         <div class="main-header">
             <h2>📜 معرض قصائد الحب والغرام</h2>
         </div>
         <div class="gallery" id="galleryContainer"></div>
         <button class="back-home" id="backToLandingBtn">💔 العودة للبداية</button>
 
-        <!-- ===== توقيع البشمهندس مازن ===== -->
+        <!-- ===== توقيع البشمهندس مازن مع وسائل التواصل ===== -->
         <div class="footer-credit">
             <span class="emoji">⚡</span>
             <span class="title">صُنع بواسطة</span>
             <span class="emoji">👨‍💻</span>
             <br>
             <span class="name">البشمهندس مازن العربي</span>
-            <br>
+
+            <!-- ===== وسائل التواصل ===== -->
+            <div class="social-links">
+                <!-- رقم الواتساب -->
+                <div class="social-row">
+                    <span class="phone-number">
+                        <i class="fab fa-whatsapp"></i> 01100257625
+                    </span>
+                </div>
+
+                <!-- أزرار السوشيال ميديا -->
+                <div class="social-row">
+                    <a href="https://wa.me/201100257625" target="_blank" class="social-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> واتساب
+                    </a>
+                    <a href="https://www.facebook.com/share/1J5pRHd8g5/?mibextid=wwXIfr" target="_blank" class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i> فيسبوك
+                    </a>
+                </div>
+                <div class="social-row">
+                    <a href="https://www.instagram.com/mazenalaraby10?igsh=YnFhaGFlODhmcGw4&utm_source=qr" target="_blank" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i> انستجرام
+                    </a>
+                    <a href="https://www.tiktok.com/@mazenmohamedalaraby?_r=1&_t=ZS-96I5OvpGIqY" target="_blank" class="social-btn tiktok">
+                        <i class="fab fa-tiktok"></i> تيك توك
+                    </a>
+                </div>
+            </div>
+
             <span class="copyright">© 2026 جميع الحقوق محفوظة</span>
         </div>
     </div>
@@ -680,12 +745,9 @@
             var warningTimeout;
             var blockCount = 0;
 
-            // تغطية الشاشة بطبقة شفافة (تمنع السكرين شوت يقرا المحتوى)
             function activateOverlay() {
                 overlay.style.background = 'rgba(0,0,0,0.01)';
-                setTimeout(function() {
-                    overlay.style.background = 'transparent';
-                }, 100);
+                setTimeout(function() { overlay.style.background = 'transparent'; }, 100);
             }
 
             function showWarning() {
@@ -697,141 +759,44 @@
                     warning.classList.remove('show');
                     overlay.style.background = 'transparent';
                 }, 2500);
-
-                // لو حاول كتير نقفل الصفحة
                 if (blockCount > 10) {
                     document.body.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100vh;background:#000;display:flex;justify-content:center;align-items:center;z-index:99999999;"><h1 style="color:#ff4d6d;font-family:Amiri;text-align:center;padding:20px;">🚫 تم قفل الصفحة<br>بسبب محاولات تصوير متكررة</h1></div>';
                     document.body.style.overflow = 'hidden';
                 }
             }
 
-            // منع كليك يمين
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                showWarning();
-                return false;
-            }, true);
-
-            // منع اختصارات الكيبورد
+            document.addEventListener('contextmenu', function(e) { e.preventDefault(); e.stopPropagation(); showWarning(); return false; }, true);
             document.addEventListener('keydown', function(e) {
                 var blockedKeys = ['PrintScreen', 'ScrollLock', 'Pause'];
-                if (blockedKeys.indexOf(e.key) !== -1) {
-                    e.preventDefault();
-                    showWarning();
-                    return false;
-                }
-                if ((e.ctrlKey || e.metaKey) && 
-                    (e.key === 's' || e.key === 'S' ||
-                     e.key === 'u' || e.key === 'U' ||
-                     e.key === 'p' || e.key === 'P' ||
-                     e.key === 'a' || e.key === 'A' ||
-                     e.key === 'c' || e.key === 'C' ||
-                     e.key === 'x' || e.key === 'X' ||
-                     (e.shiftKey && (e.key === 'i' || e.key === 'I' || 
-                                     e.key === 'j' || e.key === 'J' || 
-                                     e.key === 'c' || e.key === 'C' ||
-                                     e.key === 's' || e.key === 'S')))) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    showWarning();
-                    return false;
-                }
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
-                    e.preventDefault();
-                    showWarning();
-                    return false;
-                }
+                if (blockedKeys.indexOf(e.key) !== -1) { e.preventDefault(); showWarning(); return false; }
+                if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'p' || e.key === 'P' || e.key === 'a' || e.key === 'A' || e.key === 'c' || e.key === 'C' || e.key === 'x' || e.key === 'X' || (e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C' || e.key === 's' || e.key === 'S')))) { e.preventDefault(); e.stopPropagation(); showWarning(); return false; }
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) { e.preventDefault(); showWarning(); return false; }
             }, true);
-
-            // منع حدث النسخ
-            document.addEventListener('copy', function(e) {
-                e.preventDefault();
-                e.clipboardData.setData('text/plain', '');
-                showWarning();
-                return false;
-            }, true);
-
-            document.addEventListener('cut', function(e) {
-                e.preventDefault();
-                showWarning();
-                return false;
-            }, true);
-
-            document.addEventListener('paste', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-
-            // كشف visibility change
-            document.addEventListener('visibilitychange', function() {
-                if (document.hidden) {
-                    activateOverlay();
-                    showWarning();
-                }
-            });
-
-            // كشف blur/focus
-            window.addEventListener('blur', function() {
-                activateOverlay();
-                showWarning();
-            });
-
-            window.addEventListener('pagehide', function() {
-                activateOverlay();
-            });
-
-            window.addEventListener('beforeunload', function() {
-                activateOverlay();
-            });
-
-            // منع السحب
-            document.addEventListener('dragstart', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-
-            document.addEventListener('drop', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-
-            // منع Long Press على الموبايل
-            document.addEventListener('touchstart', function(e) {
-                if (e.touches.length > 1) {
-                    e.preventDefault();
-                    showWarning();
-                }
-            }, { passive: false });
-
-            // منع screenshot API
+            document.addEventListener('copy', function(e) { e.preventDefault(); e.clipboardData.setData('text/plain', ''); showWarning(); return false; }, true);
+            document.addEventListener('cut', function(e) { e.preventDefault(); showWarning(); return false; }, true);
+            document.addEventListener('paste', function(e) { e.preventDefault(); return false; }, true);
+            document.addEventListener('visibilitychange', function() { if (document.hidden) { activateOverlay(); showWarning(); } });
+            window.addEventListener('blur', function() { activateOverlay(); showWarning(); });
+            window.addEventListener('pagehide', function() { activateOverlay(); });
+            window.addEventListener('beforeunload', function() { activateOverlay(); });
+            document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; }, true);
+            document.addEventListener('drop', function(e) { e.preventDefault(); return false; }, true);
+            document.addEventListener('touchstart', function(e) { if (e.touches.length > 1) { e.preventDefault(); showWarning(); } }, { passive: false });
             if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
-                navigator.mediaDevices.getDisplayMedia = function() {
-                    showWarning();
-                    return Promise.reject(new Error('ممنوع'));
-                };
+                navigator.mediaDevices.getDisplayMedia = function() { showWarning(); return Promise.reject(new Error('ممنوع')); };
             }
-
-            // حماية كل عناصر الصفحة
-            setInterval(function() {
-                document.body.style.webkitUserSelect = 'none';
-                document.body.style.userSelect = 'none';
-            }, 1000);
-
-            // منع الطباعة
+            setInterval(function() { document.body.style.webkitUserSelect = 'none'; document.body.style.userSelect = 'none'; }, 1000);
             var antiPrintStyle = document.createElement('style');
             antiPrintStyle.textContent = '@media print { * { display: none !important; } html, body { display: none !important; visibility: hidden !important; opacity: 0 !important; } }';
             document.head.appendChild(antiPrintStyle);
-
             console.log('%c⚠️ تحذير: هذه الصفحة محمية', 'color: red; font-size: 30px;');
             console.log('%cالتصوير والسكرين شوت ممنوعان', 'color: #ff4d6d; font-size: 20px;');
         })();
 
-        // ===== 1. أمطار القلوب في الخلفية =====
+        // ===== 1. أمطار القلوب =====
         (function() {
             var container = document.getElementById('heartsContainer');
             var hearts = ['❤️', '💕', '💗', '💖', '💘', '💝', '💟', '♥️', '💓', '🩷', '💞', '❣️'];
-
             function makeHeart() {
                 var h = document.createElement('span');
                 h.className = 'floating-heart';
@@ -841,15 +806,10 @@
                 h.style.animationDuration = (Math.random() * 5 + 4) + 's';
                 h.style.animationDelay = Math.random() * 3 + 's';
                 container.appendChild(h);
-                setTimeout(function() {
-                    if (h.parentNode) h.parentNode.removeChild(h);
-                }, 10000);
+                setTimeout(function() { if (h.parentNode) h.parentNode.removeChild(h); }, 10000);
             }
-
             setInterval(makeHeart, 500);
-            for (var i = 0; i < 8; i++) {
-                setTimeout(makeHeart, i * 400);
-            }
+            for (var i = 0; i < 8; i++) { setTimeout(makeHeart, i * 400); }
         })();
 
         // ===== 2. كلمة السر =====
@@ -859,28 +819,12 @@
             var input = document.getElementById('passwordInput');
             var btn = document.getElementById('passwordBtn');
             var error = document.getElementById('errorMsg');
-
             function check() {
-                if (input.value === PASSWORD) {
-                    screen.style.display = 'none';
-                    document.body.style.overflow = '';
-                    error.textContent = '';
-                } else {
-                    error.textContent = 'ركزي يا عيوني واكتبي رموز عشقي 💕';
-                    error.classList.remove('shake');
-                    void error.offsetWidth;
-                    error.classList.add('shake');
-                    input.value = '';
-                    input.focus();
-                }
+                if (input.value === PASSWORD) { screen.style.display = 'none'; document.body.style.overflow = ''; error.textContent = ''; }
+                else { error.textContent = 'ركزي يا عيوني واكتبي رموز عشقي 💕'; error.classList.remove('shake'); void error.offsetWidth; error.classList.add('shake'); input.value = ''; input.focus(); }
             }
-
             btn.onclick = check;
-            input.onkeydown = function(e) {
-                if (e.key === 'Enter') {
-                    check();
-                }
-            };
+            input.onkeydown = function(e) { if (e.key === 'Enter') { check(); } };
         })();
 
         // ===== 3. بيانات الحب =====
@@ -905,7 +849,7 @@
         var modalPoemText = document.getElementById('modalPoemText');
         var modalHearts = document.getElementById('modalHearts');
 
-        // ===== 5. إنشاء الكاردات عمودية =====
+        // ===== 5. إنشاء الكاردات =====
         function createCards() {
             galleryContainer.innerHTML = '';
             loveData.forEach(function(item, index) {
@@ -933,9 +877,7 @@
                         heart.style.fontSize = (Math.random() * 3 + 1.5) + 'rem';
                         heart.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
                         modalHearts.appendChild(heart);
-                        setTimeout(function() {
-                            if (heart.parentNode) heart.parentNode.removeChild(heart);
-                        }, 3000);
+                        setTimeout(function() { if (heart.parentNode) heart.parentNode.removeChild(heart); }, 3000);
                     }, idx * 80);
                 })(i);
             }
@@ -958,29 +900,11 @@
         }
 
         // ===== 8. الأحداث =====
-        startBtn.onclick = function() {
-            landingPage.classList.add('hidden');
-            mainContent.classList.add('visible');
-            createCards();
-        };
-
-        backBtn.onclick = function() {
-            landingPage.classList.remove('hidden');
-            mainContent.classList.remove('visible');
-            if (poemModal.classList.contains('active')) {
-                closeModal();
-            }
-        };
-
+        startBtn.onclick = function() { landingPage.classList.add('hidden'); mainContent.classList.add('visible'); createCards(); };
+        backBtn.onclick = function() { landingPage.classList.remove('hidden'); mainContent.classList.remove('visible'); if (poemModal.classList.contains('active')) { closeModal(); } };
         closeModalBtn.onclick = closeModal;
-        poemModal.onclick = function(e) {
-            if (e.target === poemModal) closeModal();
-        };
-        document.onkeydown = function(e) {
-            if (e.key === 'Escape' && poemModal.classList.contains('active')) {
-                closeModal();
-            }
-        };
+        poemModal.onclick = function(e) { if (e.target === poemModal) closeModal(); };
+        document.onkeydown = function(e) { if (e.key === 'Escape' && poemModal.classList.contains('active')) { closeModal(); } };
     </script>
 </body>
     </html>
