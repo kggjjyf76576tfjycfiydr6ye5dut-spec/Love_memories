@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التركي - مستحضرات تجميل أصلية</title>
+    <title>العربي - مستحضرات تجميل أصلية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -117,7 +117,7 @@
 
 <div class="landing" id="landing">
     <div class="logo-icon">💎</div>
-    <h1>التركي</h1>
+    <h1>العربي</h1>
     <div class="sub">مستحضرات تجميل أصلية 100%</div>
     <div class="slogan">✨ أجود الماركات العالمية للعناية بالبشرة ✨</div>
     <button class="start-btn" id="startBtn">تصفح المنتجات</button>
@@ -125,7 +125,7 @@
 
 <div class="main-content" id="main">
     <div class="header">
-        <h2>💎 التركي</h2>
+        <h2>💎 العربي</h2>
         <p>مستحضرات تجميل أصلية - ماركات عالمية</p>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج...">
@@ -150,9 +150,9 @@
     <div class="contact">
         <h2>📞 للتواصل</h2>
         <div class="contact-cards">
-            <div class="c-card"><div class="icon">👔</div><div class="role">المستشار</div><div class="name">وليد رفعت ابو الدهب</div><div class="phone"><i class="fab fa-whatsapp"></i>01000000000</div><a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
-            <div class="c-card"><div class="icon">👨‍💼</div><div class="role">بشمهندس</div><div class="name">محمد رفعت ابو الدهب</div><div class="phone"><i class="fab fa-whatsapp"></i>01200000000</div><a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
-            <div class="c-card"><div class="icon">👨‍💻</div><div class="role">بشمهندس</div><div class="name">احمد رفعت ابو الدهب</div><div class="phone"><i class="fab fa-whatsapp"></i>01500000000</div><a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon">👔</div><div class="role">الاستاذ</div><div class="name">محمود عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i>01000000000</div><a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon">👨‍💼</div><div class="role">الاستاذ</div><div class="name">وليد عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i>01200000000</div><a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon">👨‍💻</div><div class="role">البشمهندس</div><div class="name">مازن محمد العربي</div><div class="phone"><i class="fab fa-whatsapp"></i>01500000000</div><a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
         </div>
         <div class="note">✅ نحن مكتب جملة معتمد | متاح بيع جملة وقطاعي | 🚚 توصيل لجميع المحافظات</div>
     </div>
@@ -198,38 +198,38 @@
 </div>
 
 <script>
-// ========== [1] بيانات المنتجات ==========
+// ========== [1] بيانات المنتجات (من الكود القديم) ==========
 var products = [
     {id:1,  img:"img1",  name:"سيرم ديزار فيتامين سي",       cat:"face",   desc:"سيروم فيتامين سي مركز لتفتيح البشرة وتوحيد لونها",              price:70},
-    {id:2,  img:"img2",  name:"Makhmaria Perfume IBRAQ",         cat:"face",   desc:" ترطيب يومي عميق للبشرة الجافة والعادية",                  price:85},
-    {id:3,  img:"img3",  name:"غسول لبان الذكر الطبيعي ",           cat:"face",   desc:"يشد البشره ويقلل علامات التقدم في السن ويساعد علي توحيد لون البشره وينظف المسام بعمق ويمنحك بشره صافيه ",                        price:35},
-    {id:4,  img:"img4",  name:"غسول ستارفل ",            cat:"face",   desc:"غسول ستارفل لنضاره و تغذية البشرة وجعلها اكثر إشراقتها",                 price:150},
-    {id:5,  img:"img5",  name:"زيت سيسا الايورفيدي",            cat:"face",   desc:"يعالج جميع مشاكل الشعر ويحافظ عليه مرطبا وخالي من القشره والتساقك ",             price:140},
-    {id:6,  img:"img6",  name:"Femfresh",           cat:"face",   desc:"واقي شمس عالي الحماية بمعامل 50+ للبشرة الحساسة",            price:210},
-    {id:7,  img:"img7",  name:"لوشن وايل 2×1",          cat:"eyes",   desc:"كريم مغذي لمحيط العين لتقليل الهالات السوداء والتجاعيد",     price:55},
-    {id:8,  img:"img8",  name:"سيروم تطويل الرموش",       cat:"eyes",   desc:"سيروم طبيعي لتطويل وتكثيف الرموش خلال 4 أسابيع",             price:450},
-    {id:9,  img:"img9",  name:"مزيل مكياج العيون",        cat:"eyes",   desc:"مزيل مكياج لطيف خالي من الزيوت للعيون الحساسة",              price:170},
-    {id:10, img:"img10", name:"قلم حواجب احترافي",         cat:"eyes",   desc:"قلم حواجب يدوم طويلاً برأس دقيق لرسم مثالي",                 price:150},
-    {id:11, img:"img11", name:"مرطب شفاه مغذي",           cat:"lips",   desc:"مرطب شفاه بزيت جوز الهند لترطيب عميق للشفاه الجافة",         price:120},
-    {id:12, img:"img12", name:"روج سائل مات",             cat:"lips",   desc:"روج سائل بتركيبة خفيفة تدوم طويلاً بألوان جذابة",             price:200},
-    {id:13, img:"img13", name:"مقشر شفاه بالسكر",          cat:"lips",   desc:"مقشر طبيعي لإزالة الجلد الميت وتنعيم الشفاه",                price:140},
-    {id:14, img:"img14", name:"ملمع شفاه شفاف",            cat:"lips",   desc:"ملمع شفاه عالي اللمعان بتركيبة غير لزجة",                    price:160},
-    {id:15, img:"img15", name:"شامبو زيت الارجان",         cat:"hair",   desc:"شامبو طبيعي بزيت الأرجان لتغذية وتقوية الشعر",               price:260},
-    {id:16, img:"img16", name:"بلسم مرطب للشعر",           cat:"hair",   desc:"بلسم يومي لفك تشابك الشعر وترطيبه",                           price:230},
-    {id:17, img:"img17", name:"ماسك شعر كيراتين",          cat:"hair",   desc:"ماسك علاجي لتنعيم الشعر وإعادة الحيوية له",                   price:340},
-    {id:18, img:"img18", name:"زيت شعر طبيعي",             cat:"hair",   desc:"زيت شعر بخلاصة الأعشاب لتطويل وتكثيف الشعر",                 price:190},
-    {id:19, img:"img19", name:"لوشن جسم مرطب",             cat:"body",   desc:"لوشن يومي لترطيب الجسم بالكامل برائحة منعشة",                price:200},
-    {id:20, img:"img20", name:"مقشر جسم بالقهوة",          cat:"body",   desc:"مقشر طبيعي بالقهوة لإزالة الخلايا الميتة وتنعيم الجسم",      price:250},
-    {id:21, img:"img21", name:"زيت جسم لامع",              cat:"body",   desc:"زيت جسم جاف لإضاءة طبيعية ولمعان صحي",                        price:280},
-    {id:22, img:"img22", name:"كريم تفتيح المناطق الحساسة", cat:"body",   desc:"كريم لطيف لتفتيح وتوحيد لون المناطق الحساسة",               price:320},
-    {id:23, img:"img23", name:"باليت ظلال عيون",           cat:"makeup", desc:"باليت 12 لون ظلال عيون بدرجات دافئة وباردة",                 price:380},
-    {id:24, img:"img24", name:"ماسكارا تطويل",             cat:"makeup", desc:"ماسكارا سوداء لتطويل وتكثيف الرموش بشكل طبيعي",             price:220},
-    {id:25, img:"img25", name:"أيلاينر سائل",              cat:"makeup", desc:"أيلاينر أسود سائل برأس دقيق لرسم العين بشكل مثالي",         price:180},
-    {id:26, img:"img26", name:"كريم نهاري بعامل حماية",    cat:"face",   desc:"كريم نهاري خفيف مع حماية من الشمس SPF30",                    price:300},
-    {id:27, img:"img27", name:"كريم ليلي مغذي",            cat:"face",   desc:"كريم ليلي غني لتجديد خلايا البشرة أثناء النوم",              price:350},
-    {id:28, img:"img28", name:"سيرم هيالورونيك",           cat:"face",   desc:"سيرم حمض الهيالورونيك لترطيب عميق وملء التجاعيد",            price:420},
-    {id:29, img:"img29", name:"مقشر وجه إنزيمي",           cat:"face",   desc:"مقشر لطيف بأنزيمات الفواكه لإزالة الخلايا الميتة",           price:270},
-    {id:30, img:"img30", name:"بخاخ ماء الورد",            cat:"face",   desc:"بخاخ منعش للوجه لتثبيت المكياج وإنعاش البشرة",               price:160},
+    {id:2,  img:"img2",  name:"Makhmaria Perfume IBRAQ",    cat:"face",   desc:"ترطيب يومي عميق للبشرة الجافة والعادية",                       price:85},
+    {id:3,  img:"img3",  name:"غسول لبان الذكر الطبيعي",     cat:"face",   desc:"يشد البشره ويقلل علامات التقدم في السن ويساعد علي توحيد لون البشره وينظف المسام بعمق ويمنحك بشره صافيه", price:35},
+    {id:4,  img:"img4",  name:"غسول ستارفل",                cat:"face",   desc:"غسول ستارفل لنضاره و تغذية البشرة وجعلها اكثر إشراقتها",       price:150},
+    {id:5,  img:"img5",  name:"زيت سيسا الايورفيدي",         cat:"face",   desc:"يعالج جميع مشاكل الشعر ويحافظ عليه مرطبا وخالي من القشره والتساقط", price:140},
+    {id:6,  img:"img6",  name:"Femfresh",                   cat:"face",   desc:"واقي شمس عالي الحماية بمعامل 50+ للبشرة الحساسة",              price:210},
+    {id:7,  img:"img7",  name:"لوشن وايل 2×1",              cat:"eyes",   desc:"كريم مغذي لمحيط العين لتقليل الهالات السوداء والتجاعيد",       price:55},
+    {id:8,  img:"img8",  name:"سيروم تطويل الرموش",          cat:"eyes",   desc:"سيروم طبيعي لتطويل وتكثيف الرموش خلال 4 أسابيع",               price:450},
+    {id:9,  img:"img9",  name:"مزيل مكياج العيون",           cat:"eyes",   desc:"مزيل مكياج لطيف خالي من الزيوت للعيون الحساسة",                price:170},
+    {id:10, img:"img10", name:"قلم حواجب احترافي",            cat:"eyes",   desc:"قلم حواجب يدوم طويلاً برأس دقيق لرسم مثالي",                   price:150},
+    {id:11, img:"img11", name:"مرطب شفاه مغذي",              cat:"lips",   desc:"مرطب شفاه بزيت جوز الهند لترطيب عميق للشفاه الجافة",           price:120},
+    {id:12, img:"img12", name:"روج سائل مات",                cat:"lips",   desc:"روج سائل بتركيبة خفيفة تدوم طويلاً بألوان جذابة",               price:200},
+    {id:13, img:"img13", name:"مقشر شفاه بالسكر",             cat:"lips",   desc:"مقشر طبيعي لإزالة الجلد الميت وتنعيم الشفاه",                  price:140},
+    {id:14, img:"img14", name:"ملمع شفاه شفاف",               cat:"lips",   desc:"ملمع شفاه عالي اللمعان بتركيبة غير لزجة",                      price:160},
+    {id:15, img:"img15", name:"شامبو زيت الارجان",            cat:"hair",   desc:"شامبو طبيعي بزيت الأرجان لتغذية وتقوية الشعر",                 price:260},
+    {id:16, img:"img16", name:"بلسم مرطب للشعر",              cat:"hair",   desc:"بلسم يومي لفك تشابك الشعر وترطيبه",                             price:230},
+    {id:17, img:"img17", name:"ماسك شعر كيراتين",             cat:"hair",   desc:"ماسك علاجي لتنعيم الشعر وإعادة الحيوية له",                     price:340},
+    {id:18, img:"img18", name:"زيت شعر طبيعي",                cat:"hair",   desc:"زيت شعر بخلاصة الأعشاب لتطويل وتكثيف الشعر",                   price:190},
+    {id:19, img:"img19", name:"لوشن جسم مرطب",                cat:"body",   desc:"لوشن يومي لترطيب الجسم بالكامل برائحة منعشة",                  price:200},
+    {id:20, img:"img20", name:"مقشر جسم بالقهوة",             cat:"body",   desc:"مقشر طبيعي بالقهوة لإزالة الخلايا الميتة وتنعيم الجسم",        price:250},
+    {id:21, img:"img21", name:"زيت جسم لامع",                 cat:"body",   desc:"زيت جسم جاف لإضاءة طبيعية ولمعان صحي",                          price:280},
+    {id:22, img:"img22", name:"كريم تفتيح المناطق الحساسة",    cat:"body",   desc:"كريم لطيف لتفتيح وتوحيد لون المناطق الحساسة",                 price:320},
+    {id:23, img:"img23", name:"باليت ظلال عيون",              cat:"makeup", desc:"باليت 12 لون ظلال عيون بدرجات دافئة وباردة",                   price:380},
+    {id:24, img:"img24", name:"ماسكارا تطويل",                cat:"makeup", desc:"ماسكارا سوداء لتطويل وتكثيف الرموش بشكل طبيعي",               price:220},
+    {id:25, img:"img25", name:"أيلاينر سائل",                 cat:"makeup", desc:"أيلاينر أسود سائل برأس دقيق لرسم العين بشكل مثالي",           price:180},
+    {id:26, img:"img26", name:"كريم نهاري بعامل حماية",       cat:"face",   desc:"كريم نهاري خفيف مع حماية من الشمس SPF30",                      price:300},
+    {id:27, img:"img27", name:"كريم ليلي مغذي",               cat:"face",   desc:"كريم ليلي غني لتجديد خلايا البشرة أثناء النوم",                price:350},
+    {id:28, img:"img28", name:"سيرم هيالورونيك",              cat:"face",   desc:"سيرم حمض الهيالورونيك لترطيب عميق وملء التجاعيد",              price:420},
+    {id:29, img:"img29", name:"مقشر وجه إنزيمي",              cat:"face",   desc:"مقشر لطيف بأنزيمات الفواكه لإزالة الخلايا الميتة",             price:270},
+    {id:30, img:"img30", name:"بخاخ ماء الورد",               cat:"face",   desc:"بخاخ منعش للوجه لتثبيت المكياج وإنعاش البشرة",                 price:160},
 ];
 
 var cats = {face:"🧴 عناية بالوجه",eyes:"👁️ عناية بالعين",lips:"💋 عناية بالشفاه",hair:"💇‍♀️ عناية بالشعر",body:"🧴 عناية بالجسم",makeup:"💄 مكياج"};
