@@ -565,7 +565,7 @@
                 poem: "لو كان الحب كلمات لكتبتكِ ديواناً 📖"
             },
             {
-                img: "img6",
+                img: "https://picsum.photos/seed/love6/400/500",
                 poem: "أنتِ العمر وأجمَلُ أيامه 🕊️"
             }
         ];
@@ -642,4 +642,11 @@
         });
 
         // دعم لوحة المفاتيح (Esc)
-        d
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && poemModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
