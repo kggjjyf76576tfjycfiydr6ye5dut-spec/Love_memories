@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ذكريات حبنا</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التركي - مستحضرات تجميل أصلية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -15,99 +15,8 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: #1a0a0a;
+            background: #faf8f5;
             overflow-x: hidden;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* ===== طبقة حماية السكرين ===== */
-        .anti-screenshot-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: transparent;
-            z-index: 999999;
-            pointer-events: none;
-        }
-
-        /* ===== تحذير التصوير ===== */
-        .screenshot-warning {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            z-index: 9999999;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .screenshot-warning.show {
-            display: flex;
-        }
-
-        .screenshot-warning .warning-icon {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            animation: shake 0.5s infinite;
-        }
-
-        .screenshot-warning h2 {
-            font-family: 'Amiri', serif;
-            font-size: 2.5rem;
-            color: #ff4d6d;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px #ff4d6d;
-        }
-
-        .screenshot-warning p {
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.3rem;
-            color: #ffd1dc;
-            opacity: 0.8;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
-            75% { transform: rotate(-5deg); }
-        }
-
-        /* ===== أمطار القلوب (الخلفية) ===== */
-        .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        .floating-heart {
-            position: absolute;
-            top: -50px;
-            animation: fall linear infinite;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0.9; }
-            100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
         /* ===== شاشة كلمة السر ===== */
@@ -117,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: radial-gradient(circle at center, #2d0a1b, #0a0202);
+            background: linear-gradient(135deg, #1a0a2e, #2d1b69, #0a0a1a);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -126,24 +35,38 @@
         }
 
         .password-box {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid #ff4d6d;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #d4af37;
             border-radius: 30px;
             padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 0 50px rgba(255, 77, 109, 0.5);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
             max-width: 400px;
             width: 90%;
+            backdrop-filter: blur(20px);
         }
 
-        .lock-icon { font-size: 5rem; display: block; margin-bottom: 15px; }
+        .lock-icon {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 15px;
+        }
 
         .password-box h2 {
             font-family: 'Amiri', serif;
             font-size: 2rem;
-            color: #ffd1dc;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        .password-box .brand-name {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #d4af37;
             margin-bottom: 20px;
-            text-shadow: 0 0 10px #ff4d6d;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
 
         .password-box input {
@@ -151,14 +74,18 @@
             padding: 14px 20px;
             font-size: 1.4rem;
             font-family: 'Cairo', sans-serif;
-            border: 2px solid #ff4d6d;
+            border: 2px solid #d4af37;
             border-radius: 50px;
-            background: rgba(0, 0, 0, 0.5);
-            color: #ffd1dc;
+            background: rgba(255, 255, 255, 0.1);
+            color: #d4af37;
             text-align: center;
             outline: none;
             margin-bottom: 15px;
             direction: ltr;
+        }
+
+        .password-box input::placeholder {
+            color: rgba(212, 175, 55, 0.5);
         }
 
         .password-box button {
@@ -166,23 +93,31 @@
             font-size: 1.4rem;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
-            background: linear-gradient(45deg, #ff4d6d, #c9184a);
-            color: white;
+            background: linear-gradient(45deg, #d4af37, #f0c75e);
+            color: #1a0a2e;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 30px #ff4d6d;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .password-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.8);
         }
 
         .error-msg {
-            color: #ff4d6d;
-            font-family: 'Amiri', serif;
-            font-size: 1.3rem;
+            color: #ff4444;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
             margin-top: 15px;
             min-height: 30px;
         }
 
-        .error-msg.shake { animation: shakeMsg 0.5s ease; }
+        .error-msg.shake {
+            animation: shakeMsg 0.5s ease;
+        }
 
         @keyframes shakeMsg {
             0%, 100% { transform: translateX(0); }
@@ -198,7 +133,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: radial-gradient(circle at center, #4a0e2b, #1a0a0a);
+            background: linear-gradient(135deg, #1a0a2e, #2d1b69, #0a0a1a);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -207,145 +142,213 @@
             transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
-        .landing.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        .heart-animation {
-            font-size: 6rem;
-            animation: heartbeat 1.2s infinite;
-            margin-bottom: 20px;
-            color: #ff4d6d;
-            text-shadow: 0 0 20px #ff4d6d;
-            user-select: none;
+        .landing.hidden {
+            opacity: 0;
+            visibility: hidden;
             pointer-events: none;
         }
 
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.15); }
+        .landing .logo-icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+            animation: float 3s infinite;
         }
 
-        .landing h1 {
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .landing .brand-title {
+            font-family: 'Cairo', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #d4af37;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        .landing .brand-subtitle {
             font-family: 'Amiri', serif;
-            font-size: 3.5rem;
-            color: #ffd1dc;
-            text-shadow: 0 0 10px #ff4d6d;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
+            font-size: 1.8rem;
+            color: #f0c75e;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .landing .brand-slogan {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            opacity: 0.7;
+            margin-bottom: 40px;
             text-align: center;
+            letter-spacing: 1px;
         }
 
         .start-btn {
-            padding: 15px 50px;
-            font-size: 1.8rem;
+            padding: 18px 60px;
+            font-size: 1.6rem;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
-            background: linear-gradient(45deg, #ff4d6d, #c9184a);
-            color: white;
+            background: linear-gradient(45deg, #d4af37, #f0c75e);
+            color: #1a0a2e;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 30px #ff4d6d;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
             transition: all 0.3s ease;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .start-btn:hover {
             transform: scale(1.08);
-            box-shadow: 0 0 45px #ff758f;
-            background: linear-gradient(45deg, #ff758f, #c9184a);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.8);
         }
 
         /* ===== المحتوى الرئيسي ===== */
         .main-content {
             min-height: 100vh;
-            background: linear-gradient(135deg, #2d0a1b, #0f0505);
+            background: #faf8f5;
             display: none;
             flex-direction: column;
             align-items: center;
-            padding-top: 100px;
+            padding-top: 130px;
         }
 
-        .main-content.visible { display: flex; }
+        .main-content.visible {
+            display: flex;
+        }
 
         /* ===== هيدر ثابت ===== */
         .main-header {
             text-align: center;
-            color: #ffd1dc;
-            font-family: 'Amiri', serif;
-            font-size: 2.5rem;
-            text-shadow: 0 0 15px #ff4d6d;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 500;
-            background: rgba(30, 7, 18, 0.97);
-            padding: 20px 15px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 2px solid rgba(255, 77, 109, 0.5);
+            background: linear-gradient(135deg, #1a0a2e, #2d1b69);
+            padding: 15px;
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 3px solid #d4af37;
         }
 
-        /* ===== معرض عمودي ===== */
-        .gallery {
+        .main-header .header-brand {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #d4af37;
+            letter-spacing: 3px;
+        }
+
+        .main-header .header-tagline {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            color: #f0c75e;
+            opacity: 0.9;
+        }
+
+        /* ===== شريط التصنيفات ===== */
+        .category-bar {
             display: flex;
-            flex-direction: column;
-            gap: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 15px;
             width: 90%;
-            max-width: 600px;
-            padding-bottom: 20px;
-            padding-top: 20px;
+            max-width: 1200px;
+            margin-bottom: 20px;
         }
 
-        /* ===== كارد الصورة ===== */
+        .category-btn {
+            padding: 10px 25px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            background: white;
+            border: 2px solid #d4af37;
+            color: #1a0a2e;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #d4af37;
+            color: white;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ===== معرض المنتجات ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            padding-bottom: 30px;
+        }
+
+        /* ===== كارد المنتج ===== */
         .card {
             position: relative;
-            border-radius: 25px;
+            border-radius: 20px;
             overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             aspect-ratio: 3/4;
-            background: #3a0d1c;
+            cursor: pointer;
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
         }
 
         .card img {
             width: 100%;
-            height: 100%;
+            height: 70%;
             object-fit: cover;
             display: block;
-            transition: filter 0.4s;
-            pointer-events: none;
-            -webkit-user-drag: none;
-            user-drag: none;
         }
 
-        .card:hover img { filter: brightness(0.85); }
-
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.85));
-            color: #fff;
-            padding: 30px 20px;
-            font-size: 1.6rem;
-            font-family: 'Amiri', serif;
+        .card-info {
+            padding: 15px;
             text-align: center;
-            opacity: 0.95;
-            transition: all 0.3s;
+            background: white;
         }
 
-        .card:hover .card-overlay { opacity: 1; padding-bottom: 35px; }
+        .card-info .product-name {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a0a2e;
+            margin-bottom: 5px;
+        }
+
+        .card-info .product-price {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #d4af37;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #d4af37;
+            color: #1a0a2e;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
 
         /* ===== المودال ===== */
         .modal {
@@ -355,23 +358,25 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
 
-        .modal.active { display: flex; }
+        .modal.active {
+            display: flex;
+        }
 
         .modal-content {
             position: relative;
             max-width: 90%;
-            width: 700px;
-            background: #1e1e2f;
+            width: 600px;
+            background: white;
             border-radius: 30px;
             overflow: visible;
-            box-shadow: 0 0 50px rgba(255, 77, 109, 0.5);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
             animation: fadeInUp 0.6s ease;
         }
 
@@ -384,31 +389,65 @@
             width: 100%;
             max-height: 50vh;
             object-fit: cover;
-            border-bottom: 3px solid #ff4d6d;
+            border-bottom: 3px solid #d4af37;
             border-radius: 30px 30px 0 0;
-            pointer-events: none;
-            -webkit-user-drag: none;
-            user-drag: none;
         }
 
-        .modal-poem {
+        .modal-info {
             padding: 30px 25px;
-            font-family: 'Amiri', serif;
-            font-size: 2rem;
-            color: #ffd1dc;
             text-align: center;
-            line-height: 1.8;
-            background: #1e1e2f;
-            text-shadow: 0 0 5px #ff4d6d;
-            direction: rtl;
+            background: white;
             border-radius: 0 0 30px 30px;
+        }
+
+        .modal-info .modal-product-name {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #1a0a2e;
+            margin-bottom: 10px;
+        }
+
+        .modal-info .modal-product-desc {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .modal-info .modal-product-price {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .modal-info .order-btn {
+            padding: 14px 40px;
+            font-size: 1.3rem;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(45deg, #d4af37, #f0c75e);
+            color: #1a0a2e;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .modal-info .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.7);
         }
 
         .close-modal {
             position: absolute;
             top: -15px;
             left: -15px;
-            background: #ff4d6d;
+            background: #d4af37;
             border: none;
             color: white;
             font-size: 1.8rem;
@@ -421,46 +460,24 @@
             justify-content: center;
             transition: 0.3s;
             z-index: 10;
-            box-shadow: 0 0 20px #ff4d6d;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
             font-weight: bold;
         }
 
-        .close-modal:hover { background: #ff1a3d; transform: scale(1.15); }
-
-        /* ===== قلوب المودال المنبثقة ===== */
-        .modal-hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-            border-radius: 30px;
+        .close-modal:hover {
+            background: #1a0a2e;
+            color: #d4af37;
+            transform: scale(1.15);
         }
 
-        .modal-heart {
-            position: absolute;
-            animation: popUp 2s ease-out forwards;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        @keyframes popUp {
-            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 1; }
-            50% { transform: translateY(-100px) scale(1.5) rotate(180deg); opacity: 0.8; }
-            100% { transform: translateY(-250px) scale(0.2) rotate(360deg); opacity: 0; }
-        }
-
+        /* ===== زرار العودة ===== */
         .back-home {
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin: 20px;
             padding: 12px 35px;
             background: transparent;
-            border: 2px solid #ff4d6d;
-            color: #ffd1dc;
-            font-size: 1.3rem;
+            border: 2px solid #d4af37;
+            color: #1a0a2e;
+            font-size: 1.2rem;
             border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
@@ -469,442 +486,334 @@
         }
 
         .back-home:hover {
-            background: #ff4d6d;
+            background: #d4af37;
             color: white;
-            box-shadow: 0 0 25px #ff4d6d;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
         }
 
-        /* ===== توقيع البشمهندس مازن ===== */
+        /* ===== توقيع ===== */
         .footer-credit {
             text-align: center;
             padding: 30px 20px;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            color: #ffd1dc;
+            margin: 20px;
+            color: #1a0a2e;
             font-family: 'Cairo', sans-serif;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 77, 109, 0.4);
+            background: white;
+            border: 2px solid #d4af37;
             border-radius: 20px;
             width: 90%;
             max-width: 600px;
-            box-shadow: 0 0 30px rgba(255, 77, 109, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .footer-credit .title {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 5px;
-            display: block;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
         }
 
         .footer-credit .name {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #ff4d6d, #ff758f, #ff4d6d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
-            animation: glowText 2s infinite;
-            letter-spacing: 2px;
+            color: #d4af37;
         }
 
-        @keyframes glowText {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.5); }
-        }
-
-        /* ===== وسائل التواصل ===== */
         .social-links {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 77, 109, 0.3);
-        }
-
-        .social-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
         }
 
         .social-btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 20px;
+            gap: 6px;
+            padding: 8px 18px;
             border-radius: 50px;
             text-decoration: none;
             font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: white;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-            min-width: 140px;
         }
 
-        .social-btn i { font-size: 1.2rem; }
-
-        .social-btn.whatsapp {
-            background: #25D366;
-            border-color: #25D366;
-        }
-        .social-btn.whatsapp:hover {
-            background: transparent;
-            color: #25D366;
-            box-shadow: 0 0 20px #25D366;
-        }
-
-        .social-btn.facebook {
-            background: #1877F2;
-            border-color: #1877F2;
-        }
-        .social-btn.facebook:hover {
-            background: transparent;
-            color: #1877F2;
-            box-shadow: 0 0 20px #1877F2;
-        }
-
-        .social-btn.instagram {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            border-color: #dc2743;
-        }
-        .social-btn.instagram:hover {
-            background: transparent;
-            color: #dc2743;
-            box-shadow: 0 0 20px #dc2743;
-        }
-
-        .social-btn.tiktok {
-            background: #000;
-            border-color: #fff;
-        }
-        .social-btn.tiktok:hover {
-            background: #fff;
-            color: #000;
-            box-shadow: 0 0 20px #fff;
-        }
+        .social-btn.whatsapp { background: #25D366; }
+        .social-btn.facebook { background: #1877F2; }
+        .social-btn.instagram { background: #E4405F; }
+        .social-btn.tiktok { background: #000; }
+        .social-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
 
         .phone-number {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
+            gap: 6px;
+            padding: 8px 18px;
             border-radius: 50px;
-            background: rgba(255, 77, 109, 0.2);
-            border: 2px solid #ff4d6d;
-            color: #ffd1dc;
+            background: #faf8f5;
+            border: 2px solid #d4af37;
+            color: #1a0a2e;
             font-family: 'Cairo', sans-serif;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             direction: ltr;
-            letter-spacing: 1px;
         }
 
-        .phone-number i { color: #25D366; font-size: 1.3rem; }
-
-        .footer-credit .copyright {
-            font-size: 0.85rem;
-            opacity: 0.6;
-            margin-top: 15px;
-            display: block;
-        }
-
-        .footer-credit .emoji {
-            font-size: 1.5rem;
-            animation: bounceEmoji 1s infinite;
-            display: inline-block;
-            margin: 0 3px;
-        }
-
-        @keyframes bounceEmoji {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
+        .phone-number i { color: #25D366; }
 
         @media (max-width: 600px) {
-            .landing h1 { font-size: 2.5rem; }
-            .start-btn { font-size: 1.5rem; padding: 12px 35px; }
-            .modal-poem { font-size: 1.5rem; }
-            .gallery { width: 95%; gap: 20px; }
-            .card-overlay { font-size: 1.3rem; padding: 20px 15px; }
-            .password-box h2 { font-size: 1.6rem; }
-            .main-header { font-size: 1.6rem; padding: 15px 10px; }
-            .footer-credit .name { font-size: 1.5rem; }
-            .screenshot-warning h2 { font-size: 1.8rem; }
-            .main-content { padding-top: 80px; }
-            .social-btn { padding: 8px 15px; font-size: 0.9rem; min-width: 120px; }
-            .phone-number { font-size: 0.9rem; padding: 8px 15px; }
+            .landing .brand-title { font-size: 2.5rem; }
+            .landing .brand-subtitle { font-size: 1.3rem; }
+            .start-btn { font-size: 1.3rem; padding: 14px 40px; }
+            .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; width: 95%; }
+            .main-header .header-brand { font-size: 1.5rem; }
+            .main-content { padding-top: 100px; }
+            .category-btn { padding: 8px 18px; font-size: 0.9rem; }
+            .modal-info .modal-product-name { font-size: 1.3rem; }
+            .modal-info .modal-product-price { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== طبقة حماية ضد السكرين ===== -->
-    <div class="anti-screenshot-overlay" id="antiScreenshotOverlay"></div>
-
-    <!-- ===== تحذير التصوير ===== -->
-    <div class="screenshot-warning" id="screenshotWarning">
-        <div class="warning-icon">🚫📸</div>
-        <h2>عذراً .. التصوير ممنوع!</h2>
-        <p>هذه الذكريات خاصة جداً ولا يمكن تصويرها 💕</p>
-    </div>
-
-    <!-- ===== أمطار القلوب ===== -->
-    <div class="hearts-container" id="heartsContainer"></div>
-
     <!-- ===== شاشة كلمة السر ===== -->
     <div class="password-screen" id="passwordScreen">
         <div class="password-box">
-            <span class="lock-icon">🔐</span>
-            <h2>أدخلي كلمة السر<br>يا روحي 🥀</h2>
+            <span class="lock-icon">💎</span>
+            <div class="brand-name">التركي</div>
+            <h2>أدخلي كلمة السر</h2>
             <input type="password" id="passwordInput" placeholder="••••">
-            <button id="passwordBtn">💕 دخول</button>
+            <button id="passwordBtn">🔓 دخول</button>
             <div class="error-msg" id="errorMsg"></div>
         </div>
     </div>
 
     <!-- ===== شاشة البداية ===== -->
     <div class="landing" id="landingPage">
-        <div class="heart-animation">❤️</div>
-        <h1>ذكريات حبنا</h1>
-        <button class="start-btn" id="startBtn">لنبدأ ذكريات حبنا</button>
+        <div class="logo-icon">💎</div>
+        <div class="brand-title">التركي</div>
+        <div class="brand-subtitle">مستحضرات تجميل أصلية 100%</div>
+        <div class="brand-slogan">✨ أجود الماركات العالمية للعناية بالبشرة ✨</div>
+        <button class="start-btn" id="startBtn">تصفح المنتجات</button>
     </div>
 
     <!-- ===== المحتوى الرئيسي ===== -->
     <div class="main-content" id="mainContent">
         <!-- ===== هيدر ثابت ===== -->
         <div class="main-header">
-            <h2>📜 معرض قصائد الحب والغرام</h2>
+            <div class="header-brand">💎 التركي</div>
+            <div class="header-tagline">مستحضرات تجميل أصلية - ماركات عالمية</div>
         </div>
-        <div class="gallery" id="galleryContainer"></div>
-        <button class="back-home" id="backToLandingBtn">💔 العودة للبداية</button>
 
-        <!-- ===== توقيع البشمهندس مازن مع وسائل التواصل ===== -->
+        <!-- ===== شريط التصنيفات ===== -->
+        <div class="category-bar" id="categoryBar">
+            <button class="category-btn active" data-category="all">✨ الكل</button>
+            <button class="category-btn" data-category="face">🧴 عناية بالوجه</button>
+            <button class="category-btn" data-category="eyes">👁️ عناية بالعين</button>
+            <button class="category-btn" data-category="lips">💋 عناية بالشفاه</button>
+            <button class="category-btn" data-category="hair">💇‍♀️ عناية بالشعر</button>
+            <button class="category-btn" data-category="body">🧴 عناية بالجسم</button>
+            <button class="category-btn" data-category="makeup">💄 مكياج</button>
+        </div>
+
+        <!-- ===== معرض المنتجات ===== -->
+        <div class="gallery" id="galleryContainer"></div>
+        <button class="back-home" id="backToLandingBtn">🏠 العودة للرئيسية</button>
+
+        <!-- ===== توقيع ===== -->
         <div class="footer-credit">
-            <span class="emoji">⚡</span>
-            <span class="title">صُنع بواسطة</span>
-            <span class="emoji">👨‍💻</span>
+            <span>⚡ صُنع بواسطة</span>
             <br>
             <span class="name">البشمهندس مازن العربي</span>
-
-            <!-- ===== وسائل التواصل ===== -->
             <div class="social-links">
-                <!-- رقم الواتساب -->
-                <div class="social-row">
-                    <span class="phone-number">
-                        <i class="fab fa-whatsapp"></i> 01100257625
-                    </span>
-                </div>
-
-                <!-- أزرار السوشيال ميديا -->
-                <div class="social-row">
-                    <a href="https://wa.me/201100257625" target="_blank" class="social-btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> واتساب
-                    </a>
-                    <a href="https://www.facebook.com/share/1J5pRHd8g5/?mibextid=wwXIfr" target="_blank" class="social-btn facebook">
-                        <i class="fab fa-facebook-f"></i> فيسبوك
-                    </a>
-                </div>
-                <div class="social-row">
-                    <a href="https://www.instagram.com/mazenalaraby10?igsh=YnFhaGFlODhmcGw4&utm_source=qr" target="_blank" class="social-btn instagram">
-                        <i class="fab fa-instagram"></i> انستجرام
-                    </a>
-                    <a href="https://www.tiktok.com/@mazenmohamedalaraby?_r=1&_t=ZS-96I5OvpGIqY" target="_blank" class="social-btn tiktok">
-                        <i class="fab fa-tiktok"></i> تيك توك
-                    </a>
-                </div>
+                <span class="phone-number"><i class="fab fa-whatsapp"></i> 01100257625</span>
+                <a href="https://wa.me/201100257625" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+                <a href="https://www.facebook.com/share/1J5pRHd8g5/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i> فيسبوك</a>
+                <a href="https://www.instagram.com/mazenalaraby10?igsh=YnFhaGFlODhmcGw4&utm_source=qr" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i> انستجرام</a>
+                <a href="https://www.tiktok.com/@mazenmohamedalaraby?_r=1&_t=ZS-96I5OvpGIqY" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i> تيك توك</a>
             </div>
-
-            <span class="copyright">© 2026 جميع الحقوق محفوظة</span>
+            <span style="font-size:0.8rem;opacity:0.5;display:block;margin-top:10px;">© 2026 جميع الحقوق محفوظة</span>
         </div>
     </div>
 
     <!-- ===== المودال ===== -->
-    <div class="modal" id="poemModal">
+    <div class="modal" id="productModal">
         <div class="modal-content">
             <button class="close-modal" id="closeModalBtn">✕</button>
-            <div class="modal-hearts" id="modalHearts"></div>
-            <img class="modal-image" id="modalImage" src="" alt="صورة حب">
-            <div class="modal-poem" id="modalPoemText"></div>
+            <img class="modal-image" id="modalImage" src="" alt="منتج">
+            <div class="modal-info">
+                <div class="modal-product-name" id="modalProductName"></div>
+                <div class="modal-product-desc" id="modalProductDesc"></div>
+                <div class="modal-product-price" id="modalProductPrice"></div>
+                <button class="order-btn" onclick="window.open('https://wa.me/201100257625', '_blank')">
+                    📞 اطلب الآن عبر واتساب
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
-        // ===== 0. الحماية الكاملة من التصوير =====
-        (function() {
-            var warning = document.getElementById('screenshotWarning');
-            var overlay = document.getElementById('antiScreenshotOverlay');
-            var warningTimeout;
-            var blockCount = 0;
-
-            function activateOverlay() {
-                overlay.style.background = 'rgba(0,0,0,0.01)';
-                setTimeout(function() { overlay.style.background = 'transparent'; }, 100);
-            }
-
-            function showWarning() {
-                blockCount++;
-                warning.classList.add('show');
-                overlay.style.background = 'rgba(0,0,0,0.99)';
-                clearTimeout(warningTimeout);
-                warningTimeout = setTimeout(function() {
-                    warning.classList.remove('show');
-                    overlay.style.background = 'transparent';
-                }, 2500);
-                if (blockCount > 10) {
-                    document.body.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100vh;background:#000;display:flex;justify-content:center;align-items:center;z-index:99999999;"><h1 style="color:#ff4d6d;font-family:Amiri;text-align:center;padding:20px;">🚫 تم قفل الصفحة<br>بسبب محاولات تصوير متكررة</h1></div>';
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-
-            document.addEventListener('contextmenu', function(e) { e.preventDefault(); e.stopPropagation(); showWarning(); return false; }, true);
-            document.addEventListener('keydown', function(e) {
-                var blockedKeys = ['PrintScreen', 'ScrollLock', 'Pause'];
-                if (blockedKeys.indexOf(e.key) !== -1) { e.preventDefault(); showWarning(); return false; }
-                if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'p' || e.key === 'P' || e.key === 'a' || e.key === 'A' || e.key === 'c' || e.key === 'C' || e.key === 'x' || e.key === 'X' || (e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C' || e.key === 's' || e.key === 'S')))) { e.preventDefault(); e.stopPropagation(); showWarning(); return false; }
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) { e.preventDefault(); showWarning(); return false; }
-            }, true);
-            document.addEventListener('copy', function(e) { e.preventDefault(); e.clipboardData.setData('text/plain', ''); showWarning(); return false; }, true);
-            document.addEventListener('cut', function(e) { e.preventDefault(); showWarning(); return false; }, true);
-            document.addEventListener('paste', function(e) { e.preventDefault(); return false; }, true);
-            document.addEventListener('visibilitychange', function() { if (document.hidden) { activateOverlay(); showWarning(); } });
-            window.addEventListener('blur', function() { activateOverlay(); showWarning(); });
-            window.addEventListener('pagehide', function() { activateOverlay(); });
-            window.addEventListener('beforeunload', function() { activateOverlay(); });
-            document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; }, true);
-            document.addEventListener('drop', function(e) { e.preventDefault(); return false; }, true);
-            document.addEventListener('touchstart', function(e) { if (e.touches.length > 1) { e.preventDefault(); showWarning(); } }, { passive: false });
-            if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
-                navigator.mediaDevices.getDisplayMedia = function() { showWarning(); return Promise.reject(new Error('ممنوع')); };
-            }
-            setInterval(function() { document.body.style.webkitUserSelect = 'none'; document.body.style.userSelect = 'none'; }, 1000);
-            var antiPrintStyle = document.createElement('style');
-            antiPrintStyle.textContent = '@media print { * { display: none !important; } html, body { display: none !important; visibility: hidden !important; opacity: 0 !important; } }';
-            document.head.appendChild(antiPrintStyle);
-            console.log('%c⚠️ تحذير: هذه الصفحة محمية', 'color: red; font-size: 30px;');
-            console.log('%cالتصوير والسكرين شوت ممنوعان', 'color: #ff4d6d; font-size: 20px;');
-        })();
-
-        // ===== 1. أمطار القلوب =====
-        (function() {
-            var container = document.getElementById('heartsContainer');
-            var hearts = ['❤️', '💕', '💗', '💖', '💘', '💝', '💟', '♥️', '💓', '🩷', '💞', '❣️'];
-            function makeHeart() {
-                var h = document.createElement('span');
-                h.className = 'floating-heart';
-                h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                h.style.left = Math.random() * 100 + '%';
-                h.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
-                h.style.animationDuration = (Math.random() * 5 + 4) + 's';
-                h.style.animationDelay = Math.random() * 3 + 's';
-                container.appendChild(h);
-                setTimeout(function() { if (h.parentNode) h.parentNode.removeChild(h); }, 10000);
-            }
-            setInterval(makeHeart, 500);
-            for (var i = 0; i < 8; i++) { setTimeout(makeHeart, i * 400); }
-        })();
-
-        // ===== 2. كلمة السر =====
+        // ===== 1. كلمة السر =====
         (function() {
             var PASSWORD = 'Love';
             var screen = document.getElementById('passwordScreen');
             var input = document.getElementById('passwordInput');
             var btn = document.getElementById('passwordBtn');
             var error = document.getElementById('errorMsg');
+
             function check() {
-                if (input.value === PASSWORD) { screen.style.display = 'none'; document.body.style.overflow = ''; error.textContent = ''; }
-                else { error.textContent = 'ركزي يا عيوني واكتبي رموز عشقي 💕'; error.classList.remove('shake'); void error.offsetWidth; error.classList.add('shake'); input.value = ''; input.focus(); }
+                if (input.value === PASSWORD) {
+                    screen.style.display = 'none';
+                    document.body.style.overflow = '';
+                    error.textContent = '';
+                } else {
+                    error.textContent = '❌ كلمة السر غير صحيحة، حاولي مجدداً';
+                    error.classList.remove('shake');
+                    void error.offsetWidth;
+                    error.classList.add('shake');
+                    input.value = '';
+                    input.focus();
+                }
             }
+
             btn.onclick = check;
-            input.onkeydown = function(e) { if (e.key === 'Enter') { check(); } };
+            input.onkeydown = function(e) {
+                if (e.key === 'Enter') { check(); }
+            };
         })();
 
-        // ===== 3. بيانات الحب =====
-        var loveData = [
-            { img: "img1", poem: "عيناكِ بحرٌ أغرقُ فيه بلا نجاة ❤️", hearts: ['❤️', '💕', '💗', '💖', '💘', '💝', '💟', '♥️'] },
-            { img: "img2", poem: "أحبكِ عدد أنفاسي وأنفاسك ✨", hearts: ['💛', '🧡', '💚', '💙', '💜', '🩷', '🤍', '🩵'] },
-            { img: "img3", poem: "في قلبي حديقةٌ لا تزهر إلا بكِ 🌹", hearts: ['💝', '💖', '💗', '💓', '💞', '💕', '❤️', '💘'] },
-            { img: "img4", poem: "لوناكِ تغار منه الورود 🌷", hearts: ['🌸', '💮', '🌺', '🌷', '🌹', '💐', '🪷', '🏵️'] },
-            { img: "img5", poem: "لو كان الحب كلمات لكتبتكِ ديواناً 📖", hearts: ['💘', '❣️', '💟', '♥️', '💌', '💋', '🫶', '💑'] },
-            { img: "img6", poem: "أنتِ العمر وأجمَلُ أيامه 🕊️", hearts: ['🕊️', '💫', '✨', '🌟', '⭐', '💖', '💝', '💗'] }
-        ];
+        // ===== 2. بيانات المنتجات الـ 100 =====
+        var categories = {
+            face: '🧴 عناية بالوجه',
+            eyes: '👁️ عناية بالعين',
+            lips: '💋 عناية بالشفاه',
+            hair: '💇‍♀️ عناية بالشعر',
+            body: '🧴 عناية بالجسم',
+            makeup: '💄 مكياج'
+        };
 
-        // ===== 4. عناصر الصفحة =====
+        var productNames = {
+            face: ['سيروم فيتامين سي', 'كريم ترطيب عميق', 'تونر منعش', 'ماسك وجه ذهبي', 'غسول وجه لطيف', 'كريم نهاري', 'كريم ليلي', 'سيرم هيالورونيك', 'مقشر وجه', 'واقي شمس', 'كريم أساس', 'برايمر', 'كونسيلر', 'بودرة تثبيت', 'بخاخ مثبت', 'جل الصبار'],
+            eyes: ['كريم محيط العين', 'سيرم رموش', 'مزيل مكياج عيون', 'قلم حواجب', 'جل حواجب', 'ماسك عين'],
+            lips: ['مرطب شفاه', 'مقشر شفاه', 'روج سائل', 'ملمع شفاه', 'قلم تحديد شفاه', 'ماسك شفاه'],
+            hair: ['شامبو مغذي', 'بلسم مرطب', 'ماسك شعر', 'زيت شعر', 'سيرم شعر', 'بخاخ حماية حرارية'],
+            body: ['لوشن جسم', 'مقشر جسم', 'زيت جسم', 'كريم تفتيح', 'مزيل عرق', 'صابون طبيعي'],
+            makeup: ['باليت ظلال', 'ماسكارا', 'أيلاينر', 'أحمر خدود', 'هايلايتر', 'كونتور', 'بودرة وجه', 'بخاخ تثبيت']
+        };
+
+        var allCategories = Object.keys(categories);
+        var products = [];
+
+        // إنشاء 100 منتج
+        for (var i = 1; i <= 100; i++) {
+            var catIndex = (i - 1) % allCategories.length;
+            var cat = allCategories[catIndex];
+            var names = productNames[cat];
+            var nameIndex = (i - 1) % names.length;
+            var productName = names[nameIndex] + ' ' + (Math.floor((i - 1) / names.length) + 1);
+            var price = (Math.floor(Math.random() * 400) + 150);
+
+            products.push({
+                id: i,
+                img: 'img' + i,
+                name: productName,
+                category: cat,
+                categoryName: categories[cat],
+                price: price,
+                desc: 'منتج أصلي 100% من أفضل الماركات العالمية. ' + categories[cat] + ' - ' + productName + '. منتج عالي الجودة للعناية المثالية.'
+            });
+        }
+
+        // ===== 3. التصنيفات =====
+        var currentCategory = 'all';
+
+        var categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                categoryBtns.forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                currentCategory = btn.getAttribute('data-category');
+                renderProducts();
+            });
+        });
+
+        // ===== 4. عرض المنتجات =====
+        function renderProducts() {
+            var container = document.getElementById('galleryContainer');
+            container.innerHTML = '';
+
+            var filteredProducts = currentCategory === 'all' ? products : products.filter(function(p) {
+                return p.category === currentCategory;
+            });
+
+            filteredProducts.forEach(function(product) {
+                var card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = function() { openModal(product); };
+
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}" loading="lazy" onerror="this.style.background='#f0f0f0'; this.style.padding='20px'; this.style.objectFit='contain';">
+                    <div class="card-badge">${product.categoryName.split(' ')[0]}</div>
+                    <div class="card-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">${product.price} ج.م</div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // ===== 5. المودال =====
+        var modal = document.getElementById('productModal');
+        var modalImage = document.getElementById('modalImage');
+        var modalProductName = document.getElementById('modalProductName');
+        var modalProductDesc = document.getElementById('modalProductDesc');
+        var modalProductPrice = document.getElementById('modalProductPrice');
+        var closeModalBtn = document.getElementById('closeModalBtn');
+
+        function openModal(product) {
+            modalImage.src = product.img;
+            modalImage.onerror = function() { this.style.background = '#f0f0f0'; this.style.objectFit = 'contain'; };
+            modalProductName.textContent = product.name;
+            modalProductDesc.textContent = product.desc;
+            modalProductPrice.textContent = product.price + ' ج.م';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeModalBtn.onclick = closeModal;
+        modal.onclick = function(e) {
+            if (e.target === modal) closeModal();
+        };
+        document.onkeydown = function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        };
+
+        // ===== 6. أحداث =====
         var landingPage = document.getElementById('landingPage');
         var mainContent = document.getElementById('mainContent');
         var startBtn = document.getElementById('startBtn');
         var backBtn = document.getElementById('backToLandingBtn');
-        var galleryContainer = document.getElementById('galleryContainer');
-        var poemModal = document.getElementById('poemModal');
-        var closeModalBtn = document.getElementById('closeModalBtn');
-        var modalImage = document.getElementById('modalImage');
-        var modalPoemText = document.getElementById('modalPoemText');
-        var modalHearts = document.getElementById('modalHearts');
 
-        // ===== 5. إنشاء الكاردات =====
-        function createCards() {
-            galleryContainer.innerHTML = '';
-            loveData.forEach(function(item, index) {
-                var card = document.createElement('div');
-                card.className = 'card';
-                card.setAttribute('data-index', index);
-                card.innerHTML = '<img src="' + item.img + '" alt="صورة حب ' + (index + 1) + '" loading="lazy"><div class="card-overlay">' + item.poem + '</div>';
-                card.onclick = function() { openModal(index); };
-                galleryContainer.appendChild(card);
-            });
-        }
+        startBtn.onclick = function() {
+            landingPage.classList.add('hidden');
+            mainContent.classList.add('visible');
+            renderProducts();
+        };
 
-        // ===== 6. قلوب منبثقة =====
-        function spawnModalHearts(heartArray) {
-            modalHearts.innerHTML = '';
-            var colors = heartArray || ['❤️', '💕', '💗', '💖', '💘'];
-            for (var i = 0; i < 25; i++) {
-                (function(idx) {
-                    setTimeout(function() {
-                        var heart = document.createElement('span');
-                        heart.className = 'modal-heart';
-                        heart.textContent = colors[Math.floor(Math.random() * colors.length)];
-                        heart.style.left = Math.random() * 100 + '%';
-                        heart.style.top = (60 + Math.random() * 40) + '%';
-                        heart.style.fontSize = (Math.random() * 3 + 1.5) + 'rem';
-                        heart.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-                        modalHearts.appendChild(heart);
-                        setTimeout(function() { if (heart.parentNode) heart.parentNode.removeChild(heart); }, 3000);
-                    }, idx * 80);
-                })(i);
+        backBtn.onclick = function() {
+            landingPage.classList.remove('hidden');
+            mainContent.classList.remove('visible');
+            if (modal.classList.contains('active')) {
+                closeModal();
             }
-        }
-
-        // ===== 7. فتح وإغلاق المودال =====
-        function openModal(index) {
-            var item = loveData[index];
-            modalImage.src = item.img;
-            modalPoemText.textContent = item.poem;
-            poemModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            spawnModalHearts(item.hearts);
-        }
-
-        function closeModal() {
-            poemModal.classList.remove('active');
-            modalHearts.innerHTML = '';
-            document.body.style.overflow = '';
-        }
-
-        // ===== 8. الأحداث =====
-        startBtn.onclick = function() { landingPage.classList.add('hidden'); mainContent.classList.add('visible'); createCards(); };
-        backBtn.onclick = function() { landingPage.classList.remove('hidden'); mainContent.classList.remove('visible'); if (poemModal.classList.contains('active')) { closeModal(); } };
-        closeModalBtn.onclick = closeModal;
-        poemModal.onclick = function(e) { if (e.target === poemModal) closeModal(); };
-        document.onkeydown = function(e) { if (e.key === 'Escape' && poemModal.classList.contains('active')) { closeModal(); } };
+        };
     </script>
 </body>
     </html>
