@@ -6,14 +6,10 @@
     <title>العربي - مستحضرات تجميل أصلية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <meta name="theme-color" content="#0a0a0a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
         
-        /* ===== شاشة البداية ===== */
         .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#000,#1a1a1a,#0a0a0a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;transition:opacity .8s,visibility .8s;padding:20px;text-align:center}
         .landing.hidden{opacity:0;visibility:hidden;pointer-events:none}
         .landing .logo{font-size:4rem;animation:float 3s infinite}
@@ -24,11 +20,9 @@
         .btn-gold{padding:14px 40px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:.3s;letter-spacing:1px}
         .btn-gold:active{transform:scale(.95)}
         
-        /* ===== المحتوى الرئيسي ===== */
         .main-content{min-height:100vh;display:none;flex-direction:column;align-items:center;padding-top:100px}
         .main-content.visible{display:flex}
         
-        /* ===== هيدر ===== */
         .header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.95);padding:10px 12px;text-align:center;border-bottom:2px solid #d4af37;backdrop-filter:blur(10px)}
         .header h2{font-size:1.3rem;font-weight:900;color:#d4af37;letter-spacing:2px}
         .header p{font-size:.7rem;color:#aaa}
@@ -38,12 +32,10 @@
         .search-box button{background:#d4af37;border:none;color:#000;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.8rem;flex-shrink:0}
         .search-results{color:#d4af37;font-size:.75rem;margin-top:4px}
         
-        /* ===== تصنيفات ===== */
         .cats{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 8px;width:100%;margin:10px 0}
         .cats button{padding:7px 14px;font-size:.8rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer;transition:.3s;white-space:nowrap}
         .cats button:active,.cats button.active{background:#d4af37;color:#000}
         
-        /* ===== معرض ===== */
         .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:96%;max-width:600px;padding-bottom:20px}
         .no-results{text-align:center;padding:40px 20px;font-size:1.2rem;color:#555;grid-column:1/-1}
         
@@ -55,7 +47,6 @@
         .card .info .price{font-size:1rem;font-weight:900;color:#d4af37}
         .card .badge{position:absolute;top:8px;right:8px;background:#d4af37;color:#000;padding:3px 10px;border-radius:15px;font-size:.65rem;font-weight:700}
         
-        /* ===== مودال المنتج ===== */
         .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:15px}
         .modal.active{display:flex}
         .modal-content{position:relative;width:100%;max-width:420px;background:#1a1a1a;border:1px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(212,175,55,.2);animation:fadeIn .4s;max-height:85vh;overflow-y:auto}
@@ -80,7 +71,6 @@
         
         .close-modal{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
         
-        /* ===== مودال بيانات العميل ===== */
         .order-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:3000;justify-content:center;align-items:center;padding:15px}
         .order-modal.active{display:flex}
         .order-modal-content{position:relative;width:100%;max-width:400px;background:#1a1a1a;border:1px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(212,175,55,.2);animation:fadeIn .4s;max-height:85vh;overflow-y:auto}
@@ -100,18 +90,14 @@
         .btn-submit:active{transform:scale(.97)}
         .close-order{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
         
-        /* ===== رسالة نجاح ===== */
-        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:12px 25px;border-radius:50px;font-weight:700;z-index:9999;font-size:.9rem;display:none;box-shadow:0 5px 30px rgba(37,211,102,.5);animation:slideDown .5s ease}
+        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:12px 25px;border-radius:50px;font-weight:700;z-index:9999;font-size:.9rem;display:none;box-shadow:0 5px 30px rgba(37,211,102,.5)}
         .success-toast.show{display:block}
-        @keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-30px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
         
         .btn-back{margin:15px;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;font-weight:600}
         .btn-back:active{background:#d4af37;color:#000}
         
-        /* ===== التواصل ===== */
         .contact{width:96%;max-width:500px;margin:15px;padding:20px 15px;background:#111;border:1px solid #333;border-radius:12px;text-align:center}
         .contact h2{font-size:1.3rem;font-weight:900;color:#d4af37;margin-bottom:15px}
-        .contact h2 i{margin:0 5px}
         .contact-cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
         .c-card{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:15px;flex:1;min-width:140px;max-width:160px;text-align:center}
         .c-card .icon{font-size:1.5rem;margin-bottom:4px}
@@ -122,7 +108,6 @@
         .c-card .call-btn{display:inline-block;margin-top:6px;padding:5px 15px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-size:.75rem;font-weight:700}
         .contact .note{margin-top:15px;padding:10px;background:#000;color:#d4af37;border-radius:8px;font-size:.8rem;font-weight:600;border:1px solid #333;line-height:1.6}
         
-        /* ===== فوتر ===== */
         .footer{text-align:center;padding:15px;margin:15px;color:#fff;background:#111;border:1px solid #333;border-radius:12px;width:96%;max-width:500px}
         .footer .f-name{font-size:1.1rem;font-weight:900;color:#d4af37}
         .social{margin-top:10px;padding-top:10px;border-top:1px solid #2a2a2a;display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
@@ -130,7 +115,6 @@
         .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#fff;color:#000}
         .social .ph{background:transparent;border:1px solid #d4af37;color:#d4af37;direction:ltr}
         
-        /* ===== شات AI ===== */
         .chat-widget{position:fixed;bottom:15px;left:15px;z-index:9999}
         .chat-toggle{width:50px;height:50px;background:linear-gradient(135deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#d4af37;box-shadow:0 5px 25px rgba(212,175,55,.3);animation:pulse 2s infinite}
         .chat-toggle.open{animation:none}
@@ -155,7 +139,6 @@
 </head>
 <body>
 
-<!-- ===== رسالة نجاح ===== -->
 <div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً</div>
 
 <div class="landing" id="landing">
@@ -171,7 +154,7 @@
         <h2><i class="fas fa-gem"></i> العربي</h2>
         <p>مستحضرات تجميل أصلية - ماركات عالمية</p>
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="&#xf002; ابحث عن منتج...">
+            <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج...">
             <button onclick="filter()"><i class="fas fa-search"></i></button>
         </div>
         <div class="search-results" id="searchResults"></div>
@@ -285,7 +268,10 @@
 </div>
 
 <script>
-// ========== [1] بيانات المنتجات ==========
+// ========== رقم الواتساب الخاص بيك ==========
+var YOUR_PHONE = '201100257625';
+
+// ========== بيانات المنتجات ==========
 var products = [
     {id:1, img:"img1", name:"سيرم ديزار فيتامين سي", cat:"face", desc:"سيروم فيتامين سي مركز لتفتيح البشرة وتوحيد لونها", price:70},
     {id:2, img:"img2", name:"Makhmaria Perfume IBRAQ", cat:"face", desc:"ترطيب يومي عميق للبشرة الجافة والعادية", price:85},
@@ -322,7 +308,7 @@ var products = [
 var cats = {face:"وجه",eyes:"عين",lips:"شفاه",hair:"شعر",body:"جسم",makeup:"مكياج"};
 var curCat = 'all', curProd = null, curQty = 1;
 
-// ========== [2] عرض المنتجات ==========
+// ========== عرض المنتجات ==========
 function render(list){
     var g = document.getElementById('gallery'); g.innerHTML = '';
     if(!list.length){ g.innerHTML = '<div class="no-results">😕 لا توجد منتجات</div>'; return; }
@@ -341,7 +327,7 @@ function filter(){
     render(list);
 }
 
-// ========== [3] مودال المنتج ==========
+// ========== مودال المنتج ==========
 var modal = document.getElementById('modal'), mImg = document.getElementById('modalImg'), mName = document.getElementById('modalName'), mDesc = document.getElementById('modalDesc');
 var qtyInput = document.getElementById('qtyInput'), unitPT = document.getElementById('unitPriceText'), totalPT = document.getElementById('totalPriceText');
 var wsBadge = document.getElementById('wholesaleBadge'), wsInfo = document.getElementById('wholesaleInfo');
@@ -375,9 +361,8 @@ function closeModal(){ modal.classList.remove('active'); document.body.style.ove
 document.getElementById('closeModal').onclick = closeModal;
 modal.onclick = function(e){ if(e.target === modal) closeModal(); };
 
-// ========== [4] مودال بيانات العميل وإرسال الطلب ==========
+// ========== مودال بيانات العميل ==========
 var orderModal = document.getElementById('orderModal');
-var YOUR_PHONE = '201100257625'; // رقمك هنا
 
 function openOrderForm(){
     if(!curProd) return;
@@ -412,43 +397,50 @@ function submitOrder(){
     var qty = curQty, up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price, total = up * qty;
     var type = qty >= 100 ? 'جملة' : 'قطاعي';
     
+    var msg = '🛍️ طلب جديد - متجر العربي\n';
+    msg += '━━━━━━━━━━━━━━━\n\n';
+    msg += '📦 المنتج: ' + curProd.name + '\n';
+    msg += '🔢 الكمية: ' + qty + ' قطعة\n';
+    msg += '💰 سعر الوحدة: ' + up + ' ج.م\n';
+    msg += '💵 الإجمالي: ' + total.toLocaleString() + ' ج.م\n';
+    msg += '🏷️ النوع: ' + type + '\n\n';
+    msg += '👤 بيانات العميل\n';
+    msg += '━━━━━━━━━━━━━━━\n';
+    msg += '📝 الاسم: ' + name + '\n';
+    msg += '📞 الهاتف: ' + phone + '\n';
+    msg += '📍 العنوان: ' + address + '\n';
+    if(notes) msg += '📋 ملاحظات: ' + notes + '\n';
+    msg += '\n✨ تم الطلب من موقع العربي 💎';
+    
     // إرسال الطلب للواتساب بدون فتح للمستخدم
-    var msg = '🛍️ *طلب جديد - متجر العربي*\n━━━━━━━━━━━━━━━\n\n📦 *المنتج:* ' + curProd.name + '\n🔢 *الكمية:* ' + qty + ' قطعة\n💰 *سعر الوحدة:* ' + up + ' ج.م\n💵 *الإجمالي:* ' + total.toLocaleString() + ' ج.م\n🏷️ *النوع:* ' + type + '\n\n👤 *بيانات العميل*\n━━━━━━━━━━━━━━━\n📝 *الاسم:* ' + name + '\n📞 *الهاتف:* ' + phone + '\n📍 *العنوان:* ' + address;
-    if(notes) msg += '\n📋 *ملاحظات:* ' + notes;
-    msg += '\n\n✨ *تم الطلب من موقع العربي* 💎';
-    
-    // إرسال للواتساب - للمالك فقط
-    fetch('https://api.whatsapp.com/send?phone=' + YOUR_PHONE + '&text=' + encodeURIComponent(msg));
-    
-    // فتح واتساب المالك بصمت (iframe trick)
-    var iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = 'https://wa.me/' + YOUR_PHONE + '?text=' + encodeURIComponent(msg);
-    document.body.appendChild(iframe);
-    setTimeout(function(){ document.body.removeChild(iframe); }, 1000);
+    var url = 'https://wa.me/' + YOUR_PHONE + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
     
     // تنظيف وإغلاق
-    ['custName','custPhone','custAddress','custNotes'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('custName').value = '';
+    document.getElementById('custPhone').value = '';
+    document.getElementById('custAddress').value = '';
+    document.getElementById('custNotes').value = '';
     orderModal.classList.remove('active'); modal.classList.remove('active');
     document.body.style.overflow = '';
     showToast('✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً');
 }
 
-// ========== [5] تصنيفات ==========
+// ========== تصنيفات ==========
 document.querySelectorAll('#cats button').forEach(function(b){ b.onclick = function(){
     document.querySelectorAll('#cats button').forEach(function(x){x.classList.remove('active');});
     b.classList.add('active'); curCat = b.getAttribute('data-cat'); filter();
 };});
 
-// ========== [6] بحث ==========
+// ========== بحث ==========
 document.getElementById('searchInput').oninput = filter;
 
-// ========== [7] أحداث ==========
+// ========== أحداث ==========
 document.getElementById('startBtn').onclick = function(){ document.getElementById('landing').classList.add('hidden'); document.getElementById('main').classList.add('visible'); filter(); };
 document.getElementById('backBtn').onclick = function(){ document.getElementById('landing').classList.remove('hidden'); document.getElementById('main').classList.remove('visible'); if(modal.classList.contains('active')) closeModal(); };
 document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classList.contains('active')) closeOrderModal(); else if(modal.classList.contains('active')) closeModal(); }};
 
-// ========== [8] شات AI ==========
+// ========== شات AI ==========
 (function(){
     var panel = document.getElementById('chatPanel'), toggle = document.getElementById('chatToggle'), messages = document.getElementById('chatMessages'), input = document.getElementById('chatInput'), isOpen = false;
     toggle.onclick = function(){ isOpen = !isOpen; panel.classList.toggle('open', isOpen); toggle.classList.toggle('open', isOpen); if(isOpen) input.focus(); };
@@ -457,9 +449,9 @@ document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classLis
         msg = msg.toLowerCase().trim();
         if(/من انت|مين انت|اسمك|تعرف عن نفسك|انت مين/.test(msg)) return '<i class="fas fa-robot"></i> <b>أنا المساعد الذكي لمتجر العربي!</b><br><br>✨ صُممت بواسطة <b>البشمهندس مازن العربي</b><br>💻 لخدمة عملاء العربي<br><br>كيف أقدر أخدمك؟ <i class="fas fa-gem"></i>';
         if(/مازن|البشمهندس|صممك|مطورك/.test(msg)) return '<i class="fas fa-user-graduate"></i> <b>البشمهندس مازن العربي</b> هو من صممني وطورني! 💎 مؤسس المتجر | ⚡ خبير تطوير مواقع | 📞 01100257625';
-        if(/سعر|اسعار|خصم|جملة/.test(msg)) return '<i class="fas fa-money-bill-wave"></i> <b>الأسعار:</b><br><br>• من 35 إلى 450 ج.م<br>• خصم 20% عند 100 قطعة<br>• واتساب: 01100257625';
-        if(/توصيل|شحن/.test(msg)) return '<i class="fas fa-truck"></i> <b>الشحن:</b><br><br>• جميع المحافظات<br>• مدة 2-5 أيام<br>• واتساب: 01100257625';
-        if(/استرجاع|استبدال|ضمان|مكسور/.test(msg)) return '<i class="fas fa-undo"></i> <b>الاسترجاع:</b><br><br>• خلال 14 يوم<br>• المنتج بحالته الأصلية<br>• تلف الشحن علينا';
+        if(/سعر|اسعار|خصم|جملة/.test(msg)) return '<i class="fas fa-money-bill-wave"></i> <b>الأسعار:</b><br>• من 35 إلى 450 ج.م<br>• خصم 20% عند 100 قطعة<br>• واتساب: 01100257625';
+        if(/توصيل|شحن/.test(msg)) return '<i class="fas fa-truck"></i> <b>الشحن:</b><br>• جميع المحافظات<br>• مدة 2-5 أيام<br>• واتساب: 01100257625';
+        if(/استرجاع|استبدال|ضمان|مكسور/.test(msg)) return '<i class="fas fa-undo"></i> <b>الاسترجاع:</b><br>• خلال 14 يوم<br>• المنتج بحالته الأصلية<br>• تلف الشحن علينا';
         if(/وجه|بشره|بشرة/.test(msg)) return '<i class="fas fa-smile"></i> <b>العناية بالوجه:</b><br>• سيرم فيتامين سي - 70 ج.م<br>• غسول لبان الذكر - 35 ج.م<br>• غسول ستارفل - 150 ج.م';
         if(/شعر|شامبو/.test(msg)) return '<i class="fas fa-cut"></i> <b>العناية بالشعر:</b><br>• شامبو الأرجان - 260 ج.م<br>• بلسم - 230 ج.م<br>• ماسك كيراتين - 340 ج.م';
         if(/مكياج|ميك اب/.test(msg)) return '<i class="fas fa-palette"></i> <b>المكياج:</b><br>• باليت ظلال - 380 ج.م<br>• ماسكارا - 220 ج.م<br>• أيلاينر - 180 ج.م';
@@ -473,4 +465,4 @@ document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classLis
 })();
 </script>
 </body>
-    </html>
+                                                                                 </html>
