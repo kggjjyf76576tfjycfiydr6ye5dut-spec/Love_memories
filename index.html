@@ -47,6 +47,7 @@
         .card .info .price{font-size:1.2rem;font-weight:900;color:#d4af37}
         .card .badge{position:absolute;top:10px;right:10px;background:#d4af37;color:#000;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700}
         
+        /* ===== مودال المنتج ===== */
         .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:20px}
         .modal.active{display:flex}
         .modal-content{position:relative;max-width:90%;width:500px;background:#1a1a1a;border:1px solid #d4af37;border-radius:20px;overflow:hidden;box-shadow:0 0 40px rgba(212,175,55,.3);animation:fadeIn .5s;max-height:90vh;overflow-y:auto}
@@ -71,6 +72,28 @@
         
         .close-modal{position:absolute;top:10px;left:10px;background:#d4af37;border:none;color:#000;font-size:1.2rem;width:35px;height:35px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700;transition:.3s}
         .close-modal:hover{background:#fff}
+        
+        /* ===== مودال بيانات العميل ===== */
+        .order-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:3000;justify-content:center;align-items:center;padding:20px}
+        .order-modal.active{display:flex}
+        .order-modal-content{position:relative;max-width:90%;width:450px;background:#1a1a1a;border:1px solid #d4af37;border-radius:20px;overflow:hidden;box-shadow:0 0 40px rgba(212,175,55,.3);animation:fadeIn .5s;max-height:90vh;overflow-y:auto}
+        .order-modal-content .o-header{background:linear-gradient(135deg,#000,#1a1a1a);padding:15px 20px;text-align:center;border-bottom:1px solid #d4af37}
+        .order-modal-content .o-header h3{color:#d4af37;font-size:1.3rem;font-weight:900}
+        .order-modal-content .o-body{padding:20px}
+        .form-group{margin-bottom:15px}
+        .form-group label{display:block;color:#ccc;font-size:.9rem;margin-bottom:6px;font-weight:600}
+        .form-group label span{color:#ff4444}
+        .form-group input,.form-group textarea{width:100%;padding:12px 15px;background:#111;border:1px solid #333;border-radius:10px;color:#fff;font-family:'Cairo',sans-serif;font-size:.95rem;outline:none;transition:.3s}
+        .form-group input:focus,.form-group textarea:focus{border-color:#d4af37}
+        .form-group textarea{min-height:80px;resize:vertical}
+        .order-summary{background:#111;border:1px solid #333;border-radius:10px;padding:12px;margin-bottom:20px;text-align:center}
+        .order-summary h4{color:#d4af37;margin-bottom:8px}
+        .order-summary p{color:#aaa;font-size:.85rem;margin:3px 0}
+        .btn-submit{padding:14px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#25D366,#128C7E);color:#fff;border:none;border-radius:50px;cursor:pointer;width:100%;transition:.3s}
+        .btn-submit:hover{transform:scale(1.03);box-shadow:0 0 30px rgba(37,211,102,.5)}
+        .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+        .close-order{position:absolute;top:10px;left:10px;background:#d4af37;border:none;color:#000;font-size:1.2rem;width:35px;height:35px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700;transition:.3s}
+        .close-order:hover{background:#fff}
         
         .btn-back{margin:20px;padding:10px 30px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1.1rem;border-radius:30px;cursor:pointer;transition:.3s;font-weight:600}
         .btn-back:hover{background:#d4af37;color:#000}
@@ -181,6 +204,7 @@
     </div>
 </div>
 
+<!-- ===== مودال المنتج ===== -->
 <div class="modal" id="modal">
     <div class="modal-content">
         <button class="close-modal" id="closeModal">✕</button>
@@ -202,7 +226,45 @@
                     <div class="info-text" id="wholesaleInfo"></div>
                 </div>
             </div>
-            <button class="btn-gold" onclick="orderNow()" style="width:100%">📞 اطلب الآن عبر واتساب</button>
+            <button class="btn-gold" onclick="openOrderForm()" style="width:100%">📞 اطلب الآن عبر واتساب</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال بيانات العميل ===== -->
+<div class="order-modal" id="orderModal">
+    <div class="order-modal-content">
+        <button class="close-order" id="closeOrder">✕</button>
+        <div class="o-header">
+            <h3>📋 بيانات الطلب</h3>
+        </div>
+        <div class="o-body">
+            <!-- ملخص الطلب -->
+            <div class="order-summary">
+                <h4>🛍️ ملخص الطلب</h4>
+                <p><b>المنتج:</b> <span id="summaryName"></span></p>
+                <p><b>الكمية:</b> <span id="summaryQty"></span></p>
+                <p><b>الإجمالي:</b> <span id="summaryTotal"></span></p>
+            </div>
+            
+            <!-- نموذج البيانات -->
+            <div class="form-group">
+                <label>الاسم الكامل <span>*</span></label>
+                <input type="text" id="custName" placeholder="أدخل اسمك الكامل">
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف <span>*</span></label>
+                <input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr">
+            </div>
+            <div class="form-group">
+                <label>العنوان بالتفصيل <span>*</span></label>
+                <textarea id="custAddress" placeholder="المحافظة - المدينة - الشارع - رقم المنزل"></textarea>
+            </div>
+            <div class="form-group">
+                <label>ملاحظات إضافية</label>
+                <textarea id="custNotes" placeholder="أي ملاحظات تريد إضافتها للطلب..."></textarea>
+            </div>
+            <button class="btn-submit" id="btnSubmit" onclick="submitOrder()">✅ تأكيد وإرسال الطلب للواتساب</button>
         </div>
     </div>
 </div>
@@ -213,9 +275,10 @@
     <div class="chat-panel" id="chatPanel">
         <div class="chat-header">
             <h3>🤖 المساعد الذكي - العربي</h3>
-            <p>اسأل عن المنتجات | الأسعار | الشحن | الجملة</p>
+            <p>صُمم بواسطة البشمهندس مازن العربي</p>
         </div>
         <div class="quick-btns">
+            <button class="quick-btn" onclick="sendQuick('من أنت؟')">🤖 من أنت؟</button>
             <button class="quick-btn" onclick="sendQuick('ما هي أفضل منتجات العناية بالوجه؟')">🧴 العناية بالوجه</button>
             <button class="quick-btn" onclick="sendQuick('كيف أطلب بالجملة؟')">📦 طلب جملة</button>
             <button class="quick-btn" onclick="sendQuick('كم سعر التوصيل؟')">🚚 التوصيل</button>
@@ -223,11 +286,15 @@
         </div>
         <div class="chat-messages" id="chatMessages">
             <div class="msg bot">👋 مرحباً بك في خدمة عملاء العربي!</div>
-            <div class="msg bot">أنا المساعد الذكي، أقدر أساعدك في:
+            <div class="msg bot">🤖 أنا المساعد الذكي المصمم بواسطة <b>البشمهندس مازن العربي</b>.
+<br>
+<br>أقدر أساعدك في:
 <br>• معلومات عن المنتجات والأسعار
 <br>• طلبات الجملة والخصومات
 <br>• الشحن والتوصيل
-<br>• سياسة الاسترجاع والاستبدال</div>
+<br>• سياسة الاسترجاع والاستبدال
+<br>
+<br>اسألني أي شيء! 💎</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="اكتب استفسارك هنا..." onkeydown="if(event.key==='Enter')sendMessage()">
@@ -293,7 +360,7 @@ function filter(){
     render(list);
 }
 
-// ========== [3] المودال ==========
+// ========== [3] مودال المنتج ==========
 var modal = document.getElementById('modal'), mImg = document.getElementById('modalImg'), mName = document.getElementById('modalName'), mDesc = document.getElementById('modalDesc');
 var qtyInput = document.getElementById('qtyInput'), unitPT = document.getElementById('unitPriceText'), totalPT = document.getElementById('totalPriceText');
 var wsBadge = document.getElementById('wholesaleBadge'), wsInfo = document.getElementById('wholesaleInfo');
@@ -323,31 +390,99 @@ document.getElementById('qtyMinus').onclick = function(){ qtyInput.value = curQt
 document.getElementById('qtyPlus').onclick = function(){ qtyInput.value = curQty + 1; updatePrice(); };
 qtyInput.oninput = updatePrice;
 
-function orderNow(){
-    if(!curProd) return;
-    var qty = curQty, up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price, total = up * qty;
-    window.open('https://wa.me/201100257625?text=' + encodeURIComponent('طلب:\n'+curProd.name+'\nالكمية: '+qty+'\nسعر الوحدة: '+up+' ج.م\nالإجمالي: '+total+' ج.م'), '_blank');
-}
-
 function closeModal(){ modal.classList.remove('active'); document.body.style.overflow = ''; }
 document.getElementById('closeModal').onclick = closeModal;
 modal.onclick = function(e){ if(e.target === modal) closeModal(); };
 document.onkeydown = function(e){ if(e.key === 'Escape' && modal.classList.contains('active')) closeModal(); };
 
-// ========== [4] تصنيفات ==========
+// ========== [4] مودال بيانات العميل ==========
+var orderModal = document.getElementById('orderModal');
+var summaryName = document.getElementById('summaryName');
+var summaryQty = document.getElementById('summaryQty');
+var summaryTotal = document.getElementById('summaryTotal');
+
+function openOrderForm(){
+    if(!curProd) return;
+    var qty = curQty;
+    var up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price;
+    var total = up * qty;
+    
+    summaryName.textContent = curProd.name;
+    summaryQty.textContent = qty + ' قطعة';
+    summaryTotal.textContent = total.toLocaleString() + ' ج.م';
+    
+    modal.classList.remove('active');
+    orderModal.classList.add('active');
+    
+    // فتح الحقل الأول تلقائي
+    setTimeout(function(){ document.getElementById('custName').focus(); }, 300);
+}
+
+function closeOrderModal(){
+    orderModal.classList.remove('active');
+    document.body.style.overflow = '';
+    // رجوع لمودال المنتج
+    modal.classList.add('active');
+}
+
+document.getElementById('closeOrder').onclick = closeOrderModal;
+orderModal.onclick = function(e){ if(e.target === orderModal) closeOrderModal(); };
+
+function submitOrder(){
+    var name = document.getElementById('custName').value.trim();
+    var phone = document.getElementById('custPhone').value.trim();
+    var address = document.getElementById('custAddress').value.trim();
+    var notes = document.getElementById('custNotes').value.trim();
+    
+    // تحقق من الحقول الإجبارية
+    if(!name){ alert('❌ الرجاء إدخال الاسم الكامل'); document.getElementById('custName').focus(); return; }
+    if(!phone){ alert('❌ الرجاء إدخال رقم الهاتف'); document.getElementById('custPhone').focus(); return; }
+    if(!address){ alert('❌ الرجاء إدخال العنوان بالتفصيل'); document.getElementById('custAddress').focus(); return; }
+    
+    var qty = curQty;
+    var up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price;
+    var total = up * qty;
+    var type = qty >= 100 ? 'جملة' : 'قطاعي';
+    
+    var msg = '🛍️ *طلب جديد من متجر العربي*\n\n';
+    msg += '📦 *المنتج:* ' + curProd.name + '\n';
+    msg += '🔢 *الكمية:* ' + qty + ' قطعة\n';
+    msg += '💰 *سعر الوحدة:* ' + up + ' ج.م\n';
+    msg += '💵 *الإجمالي:* ' + total.toLocaleString() + ' ج.م\n';
+    msg += '🏷️ *النوع:* ' + type + '\n\n';
+    msg += '👤 *بيانات العميل:*\n';
+    msg += '📝 *الاسم:* ' + name + '\n';
+    msg += '📞 *الهاتف:* ' + phone + '\n';
+    msg += '📍 *العنوان:* ' + address + '\n';
+    if(notes){ msg += '📋 *ملاحظات:* ' + notes + '\n'; }
+    msg += '\n✨ شكراً لثقتكم في العربي! 💎';
+    
+    window.open('https://wa.me/201100257625?text=' + encodeURIComponent(msg), '_blank');
+    
+    // تنظيف الحقول وإغلاق المودال
+    document.getElementById('custName').value = '';
+    document.getElementById('custPhone').value = '';
+    document.getElementById('custAddress').value = '';
+    document.getElementById('custNotes').value = '';
+    orderModal.classList.remove('active');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// ========== [5] تصنيفات ==========
 document.querySelectorAll('#cats button').forEach(function(b){ b.onclick = function(){
     document.querySelectorAll('#cats button').forEach(function(x){x.classList.remove('active');});
     b.classList.add('active'); curCat = b.getAttribute('data-cat'); filter();
 };});
 
-// ========== [5] بحث ==========
+// ========== [6] بحث ==========
 document.getElementById('searchInput').oninput = filter;
 
-// ========== [6] أحداث ==========
+// ========== [7] أحداث ==========
 document.getElementById('startBtn').onclick = function(){ document.getElementById('landing').classList.add('hidden'); document.getElementById('main').classList.add('visible'); filter(); };
 document.getElementById('backBtn').onclick = function(){ document.getElementById('landing').classList.remove('hidden'); document.getElementById('main').classList.remove('visible'); if(modal.classList.contains('active')) closeModal(); };
 
-// ========== [7] شات AI ==========
+// ========== [8] شات AI ==========
 (function(){
     var panel = document.getElementById('chatPanel');
     var toggle = document.getElementById('chatToggle');
@@ -359,7 +494,7 @@ document.getElementById('backBtn').onclick = function(){ document.getElementById
         isOpen = !isOpen;
         panel.classList.toggle('open', isOpen);
         toggle.classList.toggle('open', isOpen);
-        if(isOpen && messages.children.length <= 2){ input.focus(); }
+        if(isOpen){ input.focus(); }
     };
 
     function addMessage(text, type){
@@ -372,11 +507,16 @@ document.getElementById('backBtn').onclick = function(){ document.getElementById
 
     function getAIResponse(msg){
         msg = msg.toLowerCase().trim();
-        
+        if(msg.includes('من انت') || msg.includes('مين انت') || msg.includes('اسمك') || msg.includes('تعرف عن نفسك') || msg.includes('انت مين')){
+            return '🤖 <b>أنا المساعد الذكي لمتجر العربي!</b><br><br>✨ صُممت بواسطة <b>البشمهندس مازن العربي</b><br>💻 لخدمة عملاء العربي لمستحضرات التجميل الأصلية<br><br>أقدر أساعدك في:<br>• معلومات المنتجات والأسعار<br>• طلبات الجملة والخصومات<br>• الشحن والتوصيل<br>• سياسة الاسترجاع<br><br>كيف أقدر أخدمك؟ 💎';
+        }
+        if(msg.includes('مازن') || msg.includes('البشمهندس') || msg.includes('صممك') || msg.includes('مطورك')){
+            return '👨‍💻 <b>البشمهندس مازن العربي</b> هو من صممني وطورني!<br><br>💎 هو مؤسس هذا المتجر الراقي<br>⚡ خبير في تطوير المواقع والذكاء الاصطناعي<br>📞 للتواصل معه: 01100257625<br><br>هل تحتاج مساعدة في شيء آخر؟ 😊';
+        }
         if(msg.includes('سعر') || msg.includes('اسعار') || msg.includes('خصم') || msg.includes('جملة')){
             return '💰 <b>الأسعار والجملة:</b><br><br>• أسعارنا تبدأ من 35 ج.م حتى 450 ج.م حسب المنتج<br>• عند شراء 100 قطعة فأكثر تحصل على <b>خصم 20%</b> (سعر الجملة)<br>• كلما زادت الكمية زادت المميزات<br>• للاستفسار عن عرض خاص: تواصل معنا واتساب 01100257625';
         }
-        if(msg.includes('توصيل') || msg.includes('شحن') || msg.includes('توصيل')){
+        if(msg.includes('توصيل') || msg.includes('شحن')){
             return '🚚 <b>الشحن والتوصيل:</b><br><br>• نوصل لجميع المحافظات المصرية<br>• مدة التوصيل: 2-5 أيام عمل<br>• تكلفة الشحن تحسب حسب المنطقة والوزن<br>• الطلبات الكبيرة (جملة) لها أسعار شحن خاصة<br>• للاستفسار: 01100257625';
         }
         if(msg.includes('استرجاع') || msg.includes('استبدال') || msg.includes('ضمان') || msg.includes('مكسور')){
@@ -419,4 +559,4 @@ document.getElementById('backBtn').onclick = function(){ document.getElementById
 })();
 </script>
 </body>
-                                                                              </html>
+</html>
