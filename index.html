@@ -6,10 +6,14 @@
     <title>العربي - مستحضرات تجميل أصلية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
         
+        /* ===== شاشة البداية ===== */
         .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#000,#1a1a1a,#0a0a0a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;transition:opacity .8s,visibility .8s;padding:20px;text-align:center}
         .landing.hidden{opacity:0;visibility:hidden;pointer-events:none}
         .landing .logo{font-size:4rem;animation:float 3s infinite}
@@ -17,12 +21,14 @@
         .landing h1{font-size:2.8rem;font-weight:900;color:#d4af37;letter-spacing:3px;margin:8px 0}
         .landing .sub{font-size:1.2rem;color:#ccc;opacity:.9}
         .landing .slogan{font-size:1rem;color:#888;margin:15px 0 30px;line-height:1.6}
-        .btn-gold{padding:14px 40px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:.3s;letter-spacing:1px;-webkit-tap-highlight-color:transparent}
+        .btn-gold{padding:14px 40px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:.3s;letter-spacing:1px}
         .btn-gold:active{transform:scale(.95)}
         
+        /* ===== المحتوى الرئيسي ===== */
         .main-content{min-height:100vh;display:none;flex-direction:column;align-items:center;padding-top:100px}
         .main-content.visible{display:flex}
         
+        /* ===== هيدر ===== */
         .header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.95);padding:10px 12px;text-align:center;border-bottom:2px solid #d4af37;backdrop-filter:blur(10px)}
         .header h2{font-size:1.3rem;font-weight:900;color:#d4af37;letter-spacing:2px}
         .header p{font-size:.7rem;color:#aaa}
@@ -32,14 +38,16 @@
         .search-box button{background:#d4af37;border:none;color:#000;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.8rem;flex-shrink:0}
         .search-results{color:#d4af37;font-size:.75rem;margin-top:4px}
         
-        .cats{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 8px;width:100%;max-width:100vw;margin:10px 0}
-        .cats button{padding:7px 14px;font-size:.8rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer;transition:.3s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+        /* ===== تصنيفات ===== */
+        .cats{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 8px;width:100%;margin:10px 0}
+        .cats button{padding:7px 14px;font-size:.8rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer;transition:.3s;white-space:nowrap}
         .cats button:active,.cats button.active{background:#d4af37;color:#000}
         
+        /* ===== معرض ===== */
         .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:96%;max-width:600px;padding-bottom:20px}
         .no-results{text-align:center;padding:40px 20px;font-size:1.2rem;color:#555;grid-column:1/-1}
         
-        .card{position:relative;border-radius:12px;overflow:hidden;background:#1a1a1a;border:1px solid #2a2a2a;transition:.2s;aspect-ratio:3/4;cursor:pointer;-webkit-tap-highlight-color:transparent}
+        .card{position:relative;border-radius:12px;overflow:hidden;background:#1a1a1a;border:1px solid #2a2a2a;transition:.2s;aspect-ratio:3/4;cursor:pointer}
         .card:active{transform:scale(.97);border-color:#d4af37}
         .card img{width:100%;height:65%;object-fit:cover}
         .card .info{padding:10px 8px;text-align:center}
@@ -60,7 +68,7 @@
         .qty-box{background:#111;border:1px solid #333;border-radius:10px;padding:12px;margin:10px 0}
         .qty-box label{display:block;font-weight:700;color:#fff;margin-bottom:6px;font-size:.9rem}
         .qty-controls{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px}
-        .qty-controls button{width:32px;height:32px;border:1px solid #d4af37;background:transparent;color:#d4af37;font-size:1.1rem;font-weight:700;border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+        .qty-controls button{width:32px;height:32px;border:1px solid #d4af37;background:transparent;color:#d4af37;font-size:1.1rem;font-weight:700;border-radius:6px;cursor:pointer}
         .qty-controls button:active{background:#d4af37;color:#000}
         .qty-controls input{width:60px;text-align:center;font-size:1.1rem;font-weight:700;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:6px;padding:6px;outline:none}
         .price-details{text-align:center;padding:6px}
@@ -88,24 +96,33 @@
         .order-summary{background:#111;border:1px solid #333;border-radius:8px;padding:10px;margin-bottom:15px;text-align:center}
         .order-summary h4{color:#d4af37;font-size:.9rem;margin-bottom:6px}
         .order-summary p{color:#aaa;font-size:.8rem;margin:2px 0}
-        .btn-submit{padding:12px;font-size:1.1rem;font-weight:700;background:linear-gradient(45deg,#25D366,#128C7E);color:#fff;border:none;border-radius:50px;cursor:pointer;width:100%;-webkit-tap-highlight-color:transparent}
+        .btn-submit{padding:12px;font-size:1.1rem;font-weight:700;background:linear-gradient(45deg,#25D366,#128C7E);color:#fff;border:none;border-radius:50px;cursor:pointer;width:100%}
         .btn-submit:active{transform:scale(.97)}
         .close-order{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
         
-        .btn-back{margin:15px;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;font-weight:600;-webkit-tap-highlight-color:transparent}
+        /* ===== رسالة نجاح ===== */
+        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:12px 25px;border-radius:50px;font-weight:700;z-index:9999;font-size:.9rem;display:none;box-shadow:0 5px 30px rgba(37,211,102,.5);animation:slideDown .5s ease}
+        .success-toast.show{display:block}
+        @keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-30px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        
+        .btn-back{margin:15px;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;font-weight:600}
         .btn-back:active{background:#d4af37;color:#000}
         
+        /* ===== التواصل ===== */
         .contact{width:96%;max-width:500px;margin:15px;padding:20px 15px;background:#111;border:1px solid #333;border-radius:12px;text-align:center}
         .contact h2{font-size:1.3rem;font-weight:900;color:#d4af37;margin-bottom:15px}
+        .contact h2 i{margin:0 5px}
         .contact-cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
         .c-card{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:15px;flex:1;min-width:140px;max-width:160px;text-align:center}
         .c-card .icon{font-size:1.5rem;margin-bottom:4px}
         .c-card .role{font-size:.75rem;font-weight:700;color:#d4af37}
         .c-card .name{font-size:.9rem;font-weight:900;color:#fff;margin:4px 0}
         .c-card .phone{direction:ltr;font-weight:700;font-size:.8rem;color:#ccc}
+        .c-card .phone i{color:#25D366;margin:0 3px}
         .c-card .call-btn{display:inline-block;margin-top:6px;padding:5px 15px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-size:.75rem;font-weight:700}
         .contact .note{margin-top:15px;padding:10px;background:#000;color:#d4af37;border-radius:8px;font-size:.8rem;font-weight:600;border:1px solid #333;line-height:1.6}
         
+        /* ===== فوتر ===== */
         .footer{text-align:center;padding:15px;margin:15px;color:#fff;background:#111;border:1px solid #333;border-radius:12px;width:96%;max-width:500px}
         .footer .f-name{font-size:1.1rem;font-weight:900;color:#d4af37}
         .social{margin-top:10px;padding-top:10px;border-top:1px solid #2a2a2a;display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
@@ -115,7 +132,7 @@
         
         /* ===== شات AI ===== */
         .chat-widget{position:fixed;bottom:15px;left:15px;z-index:9999}
-        .chat-toggle{width:50px;height:50px;background:linear-gradient(135deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#d4af37;box-shadow:0 5px 25px rgba(212,175,55,.3);animation:pulse 2s infinite;-webkit-tap-highlight-color:transparent}
+        .chat-toggle{width:50px;height:50px;background:linear-gradient(135deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#d4af37;box-shadow:0 5px 25px rgba(212,175,55,.3);animation:pulse 2s infinite}
         .chat-toggle.open{animation:none}
         .chat-panel{display:none;position:fixed;bottom:75px;left:10px;width:calc(100vw - 20px);max-width:350px;height:55vh;max-height:450px;background:#111;border:1px solid #d4af37;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.8);flex-direction:column;overflow:hidden}
         .chat-panel.open{display:flex}
@@ -132,50 +149,60 @@
         .chat-input-area input::placeholder{color:#666;font-size:.75rem}
         .chat-input-area button{background:#d4af37;border:none;color:#000;width:35px;height:35px;border-radius:50%;cursor:pointer;font-size:.9rem;flex-shrink:0}
         .quick-btns{display:flex;flex-wrap:wrap;gap:4px;padding:6px 10px;border-bottom:1px solid #333}
-        .quick-btn{padding:5px 10px;font-size:.65rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:15px;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+        .quick-btn{padding:5px 10px;font-size:.65rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:15px;cursor:pointer;white-space:nowrap}
         .quick-btn:active{background:#d4af37;color:#000}
     </style>
 </head>
 <body>
 
+<!-- ===== رسالة نجاح ===== -->
+<div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً</div>
+
 <div class="landing" id="landing">
-    <div class="logo">💎</div>
+    <div class="logo"><i class="fas fa-gem"></i></div>
     <h1>العربي</h1>
     <div class="sub">مستحضرات تجميل أصلية 100%</div>
-    <div class="slogan">✨ أجود الماركات العالمية للعناية بالبشرة ✨</div>
-    <button class="btn-gold" id="startBtn">تصفح المنتجات</button>
+    <div class="slogan"><i class="fas fa-star"></i> أجود الماركات العالمية للعناية بالبشرة <i class="fas fa-star"></i></div>
+    <button class="btn-gold" id="startBtn"><i class="fas fa-shopping-bag"></i> تصفح المنتجات</button>
 </div>
 
 <div class="main-content" id="main">
     <div class="header">
-        <h2>💎 العربي</h2>
+        <h2><i class="fas fa-gem"></i> العربي</h2>
         <p>مستحضرات تجميل أصلية - ماركات عالمية</p>
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج...">
+            <input type="text" id="searchInput" placeholder="&#xf002; ابحث عن منتج...">
             <button onclick="filter()"><i class="fas fa-search"></i></button>
         </div>
         <div class="search-results" id="searchResults"></div>
     </div>
 
     <div class="cats" id="cats">
-        <button class="active" data-cat="all">✨ الكل</button><button data-cat="face">🧴 وجه</button><button data-cat="eyes">👁️ عين</button><button data-cat="lips">💋 شفاه</button><button data-cat="hair">💇‍♀️ شعر</button><button data-cat="body">🧴 جسم</button><button data-cat="makeup">💄 مكياج</button>
+        <button class="active" data-cat="all"><i class="fas fa-th-large"></i> الكل</button>
+        <button data-cat="face"><i class="fas fa-smile"></i> وجه</button>
+        <button data-cat="eyes"><i class="fas fa-eye"></i> عين</button>
+        <button data-cat="lips"><i class="fas fa-kiss-wink-heart"></i> شفاه</button>
+        <button data-cat="hair"><i class="fas fa-cut"></i> شعر</button>
+        <button data-cat="body"><i class="fas fa-spa"></i> جسم</button>
+        <button data-cat="makeup"><i class="fas fa-palette"></i> مكياج</button>
     </div>
 
     <div class="gallery" id="gallery"></div>
-    <button class="btn-back" id="backBtn">🏠 العودة للرئيسية</button>
+    <button class="btn-back" id="backBtn"><i class="fas fa-home"></i> العودة للرئيسية</button>
 
     <div class="contact">
-        <h2>📞 للتواصل</h2>
+        <h2><i class="fas fa-phone-alt"></i> للتواصل</h2>
         <div class="contact-cards">
-            <div class="c-card"><div class="icon">👔</div><div class="role">الاستاذ</div><div class="name">محمود عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i>01000000000</div><a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
-            <div class="c-card"><div class="icon">👨‍💼</div><div class="role">الاستاذ</div><div class="name">وليد عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i>01200000000</div><a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
-            <div class="c-card"><div class="icon">👨‍💻</div><div class="role">البشمهندس</div><div class="name">مازن محمد العربي</div><div class="phone"><i class="fab fa-whatsapp"></i>01500000000</div><a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon"><i class="fas fa-user-tie"></i></div><div class="role">الاستاذ</div><div class="name">محمود عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i> 01000000000</div><a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon"><i class="fas fa-user-tie"></i></div><div class="role">الاستاذ</div><div class="name">وليد عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i> 01200000000</div><a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon"><i class="fas fa-laptop-code"></i></div><div class="role">البشمهندس</div><div class="name">مازن محمد العربي</div><div class="phone"><i class="fab fa-whatsapp"></i> 01500000000</div><a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
         </div>
-        <div class="note">✅ نحن مكتب جملة معتمد | متاح بيع جملة وقطاعي | 🚚 توصيل لجميع المحافظات</div>
+        <div class="note"><i class="fas fa-check-circle"></i> نحن مكتب جملة معتمد | متاح بيع جملة وقطاعي | <i class="fas fa-truck"></i> توصيل لجميع المحافظات</div>
     </div>
 
     <div class="footer">
-        ⚡ صُنع بواسطة<br><span class="f-name">البشمهندس مازن العربي</span>
+        <i class="fas fa-bolt"></i> صُنع بواسطة<br>
+        <span class="f-name">البشمهندس مازن العربي</span>
         <div class="social">
             <span class="ph"><i class="fab fa-whatsapp"></i> 01100257625</span>
             <a href="https://wa.me/201100257625" class="wa"><i class="fab fa-whatsapp"></i> واتساب</a>
@@ -183,24 +210,24 @@
             <a href="https://www.instagram.com/mazenalaraby10" class="ig"><i class="fab fa-instagram"></i> انستجرام</a>
             <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="tt"><i class="fab fa-tiktok"></i> تيك توك</a>
         </div>
-        <span style="font-size:.65rem;opacity:.4;display:block;margin-top:8px">© 2026 جميع الحقوق محفوظة</span>
+        <span style="font-size:.65rem;opacity:.4;display:block;margin-top:8px"><i class="far fa-copyright"></i> 2026 جميع الحقوق محفوظة</span>
     </div>
 </div>
 
 <!-- ===== مودال المنتج ===== -->
 <div class="modal" id="modal">
     <div class="modal-content">
-        <button class="close-modal" id="closeModal">✕</button>
+        <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
         <img id="modalImg" src="" alt="">
         <div class="m-info">
             <h3 id="modalName"></h3>
             <div class="desc" id="modalDesc"></div>
             <div class="qty-box">
-                <label>📦 كمية الطلب</label>
+                <label><i class="fas fa-box"></i> كمية الطلب</label>
                 <div class="qty-controls">
-                    <button id="qtyMinus">−</button>
+                    <button id="qtyMinus"><i class="fas fa-minus"></i></button>
                     <input type="number" id="qtyInput" value="1" min="1" max="10000">
-                    <button id="qtyPlus">+</button>
+                    <button id="qtyPlus"><i class="fas fa-plus"></i></button>
                 </div>
                 <div class="price-details">
                     <div class="unit-price" id="unitPriceText"></div>
@@ -209,7 +236,7 @@
                     <div class="info-text" id="wholesaleInfo"></div>
                 </div>
             </div>
-            <button class="btn-gold" onclick="openOrderForm()" style="width:100%;margin-top:8px">📞 اطلب الآن عبر واتساب</button>
+            <button class="btn-gold" onclick="openOrderForm()" style="width:100%;margin-top:8px"><i class="fas fa-shopping-cart"></i> طلب المنتج الآن</button>
         </div>
     </div>
 </div>
@@ -217,38 +244,38 @@
 <!-- ===== مودال بيانات العميل ===== -->
 <div class="order-modal" id="orderModal">
     <div class="order-modal-content">
-        <button class="close-order" id="closeOrder">✕</button>
-        <div class="o-header"><h3>📋 بيانات الطلب</h3></div>
+        <button class="close-order" id="closeOrder"><i class="fas fa-times"></i></button>
+        <div class="o-header"><h3><i class="fas fa-clipboard-list"></i> بيانات الطلب</h3></div>
         <div class="o-body">
             <div class="order-summary">
-                <h4>🛍️ ملخص الطلب</h4>
+                <h4><i class="fas fa-shopping-bag"></i> ملخص الطلب</h4>
                 <p><b>المنتج:</b> <span id="summaryName"></span></p>
                 <p><b>الكمية:</b> <span id="summaryQty"></span></p>
                 <p><b>الإجمالي:</b> <span id="summaryTotal"></span></p>
             </div>
-            <div class="form-group"><label>الاسم الكامل <span>*</span></label><input type="text" id="custName" placeholder="أدخل اسمك الكامل"></div>
-            <div class="form-group"><label>رقم الهاتف <span>*</span></label><input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr"></div>
-            <div class="form-group"><label>العنوان بالتفصيل <span>*</span></label><textarea id="custAddress" placeholder="المحافظة - المدينة - الشارع - رقم المنزل"></textarea></div>
-            <div class="form-group"><label>ملاحظات إضافية</label><textarea id="custNotes" placeholder="أي ملاحظات تريد إضافتها..."></textarea></div>
-            <button class="btn-submit" onclick="submitOrder()">✅ تأكيد وإرسال الطلب للواتساب</button>
+            <div class="form-group"><label><i class="fas fa-user"></i> الاسم الكامل <span>*</span></label><input type="text" id="custName" placeholder="أدخل اسمك الكامل"></div>
+            <div class="form-group"><label><i class="fas fa-phone"></i> رقم الهاتف <span>*</span></label><input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr"></div>
+            <div class="form-group"><label><i class="fas fa-map-marker-alt"></i> العنوان بالتفصيل <span>*</span></label><textarea id="custAddress" placeholder="المحافظة - المدينة - الشارع - رقم المنزل"></textarea></div>
+            <div class="form-group"><label><i class="fas fa-sticky-note"></i> ملاحظات إضافية</label><textarea id="custNotes" placeholder="أي ملاحظات تريد إضافتها..."></textarea></div>
+            <button class="btn-submit" onclick="submitOrder()"><i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب</button>
         </div>
     </div>
 </div>
 
 <!-- ===== شات AI ===== -->
 <div class="chat-widget">
-    <div class="chat-toggle" id="chatToggle">💬</div>
+    <div class="chat-toggle" id="chatToggle"><i class="fas fa-comment-dots"></i></div>
     <div class="chat-panel" id="chatPanel">
-        <div class="chat-header"><h3>🤖 المساعد الذكي - العربي</h3><p>صُمم بواسطة البشمهندس مازن العربي</p></div>
+        <div class="chat-header"><h3><i class="fas fa-robot"></i> المساعد الذكي - العربي</h3><p>صُمم بواسطة البشمهندس مازن العربي</p></div>
         <div class="quick-btns">
-            <button class="quick-btn" onclick="sendQuick('من أنت؟')">🤖 من أنت؟</button>
-            <button class="quick-btn" onclick="sendQuick('العناية بالوجه')">🧴 وجه</button>
-            <button class="quick-btn" onclick="sendQuick('طلب جملة')">📦 جملة</button>
-            <button class="quick-btn" onclick="sendQuick('التوصيل')">🚚 توصيل</button>
-            <button class="quick-btn" onclick="sendQuick('استرجاع')">↩️ استرجاع</button>
+            <button class="quick-btn" onclick="sendQuick('من أنت؟')"><i class="fas fa-question-circle"></i> من أنت؟</button>
+            <button class="quick-btn" onclick="sendQuick('العناية بالوجه')"><i class="fas fa-smile"></i> وجه</button>
+            <button class="quick-btn" onclick="sendQuick('طلب جملة')"><i class="fas fa-boxes"></i> جملة</button>
+            <button class="quick-btn" onclick="sendQuick('التوصيل')"><i class="fas fa-truck"></i> توصيل</button>
+            <button class="quick-btn" onclick="sendQuick('استرجاع')"><i class="fas fa-undo"></i> استرجاع</button>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="msg bot">👋 مرحباً بك! أنا المساعد الذكي المصمم بواسطة <b>البشمهندس مازن العربي</b>. اسألني أي شيء! 💎</div>
+            <div class="msg bot"><i class="fas fa-hand-paper"></i> مرحباً بك! أنا المساعد الذكي المصمم بواسطة <b>البشمهندس مازن العربي</b>. اسألني أي شيء! <i class="fas fa-gem"></i></div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="اكتب استفسارك..." onkeydown="if(event.key==='Enter')sendMessage()">
@@ -292,7 +319,7 @@ var products = [
     {id:30, img:"img30", name:"بخاخ ماء الورد", cat:"face", desc:"بخاخ منعش للوجه لتثبيت المكياج وإنعاش البشرة", price:160},
 ];
 
-var cats = {face:"🧴 عناية بالوجه",eyes:"👁️ عناية بالعين",lips:"💋 عناية بالشفاه",hair:"💇‍♀️ عناية بالشعر",body:"🧴 عناية بالجسم",makeup:"💄 مكياج"};
+var cats = {face:"وجه",eyes:"عين",lips:"شفاه",hair:"شعر",body:"جسم",makeup:"مكياج"};
 var curCat = 'all', curProd = null, curQty = 1;
 
 // ========== [2] عرض المنتجات ==========
@@ -301,7 +328,7 @@ function render(list){
     if(!list.length){ g.innerHTML = '<div class="no-results">😕 لا توجد منتجات</div>'; return; }
     list.forEach(function(p){
         var c = document.createElement('div'); c.className = 'card'; c.onclick = function(){openModal(p);};
-        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#111\';this.style.objectFit=\'contain\'"><div class="badge">'+cats[p.cat].split(' ')[0]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price+' ج.م</div></div>';
+        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#111\';this.style.objectFit=\'contain\'"><div class="badge">'+cats[p.cat]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price+' ج.م</div></div>';
         g.appendChild(c);
     });
 }
@@ -331,7 +358,7 @@ function updatePrice(){
     var up = curProd.price, total, ws = qty >= 100;
     if(ws){ up = Math.floor(curProd.price * 0.8); total = up * qty;
         unitPT.textContent = 'سعر القطعة (جملة): ' + up + ' ج.م (خصم 20%)';
-        wsBadge.innerHTML = '<span class="badge-green">🏷️ سعر جملة - خصم 20%</span>';
+        wsBadge.innerHTML = '<span class="badge-green"><i class="fas fa-tag"></i> سعر جملة - خصم 20%</span>';
         wsInfo.textContent = 'السعر الأصلي: ' + curProd.price + ' ج.م | التوفير: ' + (curProd.price - up) + ' ج.م/قطعة';
     } else { total = curProd.price * qty;
         unitPT.textContent = 'سعر القطعة: ' + curProd.price + ' ج.م';
@@ -348,8 +375,9 @@ function closeModal(){ modal.classList.remove('active'); document.body.style.ove
 document.getElementById('closeModal').onclick = closeModal;
 modal.onclick = function(e){ if(e.target === modal) closeModal(); };
 
-// ========== [4] مودال بيانات العميل ==========
+// ========== [4] مودال بيانات العميل وإرسال الطلب ==========
 var orderModal = document.getElementById('orderModal');
+var YOUR_PHONE = '201100257625'; // رقمك هنا
 
 function openOrderForm(){
     if(!curProd) return;
@@ -365,23 +393,45 @@ function closeOrderModal(){ orderModal.classList.remove('active'); modal.classLi
 document.getElementById('closeOrder').onclick = closeOrderModal;
 orderModal.onclick = function(e){ if(e.target === orderModal) closeOrderModal(); };
 
+function showToast(msg){
+    var t = document.getElementById('successToast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 4000);
+}
+
 function submitOrder(){
     var name = document.getElementById('custName').value.trim();
     var phone = document.getElementById('custPhone').value.trim();
     var address = document.getElementById('custAddress').value.trim();
     var notes = document.getElementById('custNotes').value.trim();
+    
     if(!name){ alert('❌ الرجاء إدخال الاسم الكامل'); return; }
     if(!phone){ alert('❌ الرجاء إدخال رقم الهاتف'); return; }
     if(!address){ alert('❌ الرجاء إدخال العنوان'); return; }
     
     var qty = curQty, up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price, total = up * qty;
-    var msg = '🛍️ *طلب جديد - العربي*\n\n📦 *المنتج:* ' + curProd.name + '\n🔢 *الكمية:* ' + qty + '\n💰 *الإجمالي:* ' + total.toLocaleString() + ' ج.م\n\n👤 *الاسم:* ' + name + '\n📞 *الهاتف:* ' + phone + '\n📍 *العنوان:* ' + address;
-    if(notes) msg += '\n📋 *ملاحظات:* ' + notes;
-    msg += '\n\n✨ شكراً لثقتكم في العربي! 💎';
+    var type = qty >= 100 ? 'جملة' : 'قطاعي';
     
-    window.open('https://wa.me/201100257625?text=' + encodeURIComponent(msg), '_blank');
+    // إرسال الطلب للواتساب بدون فتح للمستخدم
+    var msg = '🛍️ *طلب جديد - متجر العربي*\n━━━━━━━━━━━━━━━\n\n📦 *المنتج:* ' + curProd.name + '\n🔢 *الكمية:* ' + qty + ' قطعة\n💰 *سعر الوحدة:* ' + up + ' ج.م\n💵 *الإجمالي:* ' + total.toLocaleString() + ' ج.م\n🏷️ *النوع:* ' + type + '\n\n👤 *بيانات العميل*\n━━━━━━━━━━━━━━━\n📝 *الاسم:* ' + name + '\n📞 *الهاتف:* ' + phone + '\n📍 *العنوان:* ' + address;
+    if(notes) msg += '\n📋 *ملاحظات:* ' + notes;
+    msg += '\n\n✨ *تم الطلب من موقع العربي* 💎';
+    
+    // إرسال للواتساب - للمالك فقط
+    fetch('https://api.whatsapp.com/send?phone=' + YOUR_PHONE + '&text=' + encodeURIComponent(msg));
+    
+    // فتح واتساب المالك بصمت (iframe trick)
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'https://wa.me/' + YOUR_PHONE + '?text=' + encodeURIComponent(msg);
+    document.body.appendChild(iframe);
+    setTimeout(function(){ document.body.removeChild(iframe); }, 1000);
+    
+    // تنظيف وإغلاق
     ['custName','custPhone','custAddress','custNotes'].forEach(function(id){ document.getElementById(id).value = ''; });
-    orderModal.classList.remove('active'); modal.classList.remove('active'); document.body.style.overflow = '';
+    orderModal.classList.remove('active'); modal.classList.remove('active');
+    document.body.style.overflow = '';
+    showToast('✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً');
 }
 
 // ========== [5] تصنيفات ==========
@@ -405,17 +455,17 @@ document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classLis
     function addMessage(text, type){ var m = document.createElement('div'); m.className = 'msg ' + type; m.innerHTML = text.replace(/\n/g, '<br>'); messages.appendChild(m); messages.scrollTop = messages.scrollHeight; }
     function getAI(msg){
         msg = msg.toLowerCase().trim();
-        if(/من انت|مين انت|اسمك|تعرف عن نفسك|انت مين/.test(msg)) return '🤖 <b>أنا المساعد الذكي لمتجر العربي!</b><br><br>✨ صُممت بواسطة <b>البشمهندس مازن العربي</b><br>💻 لخدمة عملاء العربي لمستحضرات التجميل الأصلية<br><br>كيف أقدر أخدمك؟ 💎';
-        if(/مازن|البشمهندس|صممك|مطورك/.test(msg)) return '👨‍💻 <b>البشمهندس مازن العربي</b> هو من صممني وطورني! 💎 مؤسس المتجر | ⚡ خبير تطوير مواقع وذكاء اصطناعي | 📞 01100257625';
-        if(/سعر|اسعار|خصم|جملة/.test(msg)) return '💰 <b>الأسعار والجملة:</b><br><br>• الأسعار من 35 إلى 450 ج.م<br>• خصم 20% عند شراء 100 قطعة<br>• للاستفسار: 01100257625';
-        if(/توصيل|شحن/.test(msg)) return '🚚 <b>الشحن:</b><br><br>• جميع المحافظات<br>• مدة 2-5 أيام<br>• للاستفسار: 01100257625';
-        if(/استرجاع|استبدال|ضمان|مكسور/.test(msg)) return '↩️ <b>الاسترجاع:</b><br><br>• خلال 14 يوم<br>• المنتج بحالته الأصلية<br>• تلف الشحن علينا';
-        if(/وجه|بشره|بشرة/.test(msg)) return '🧴 <b>العناية بالوجه:</b><br>• سيرم فيتامين سي - 70 ج.م<br>• غسول لبان الذكر - 35 ج.م<br>• غسول ستارفل - 150 ج.م';
-        if(/شعر|شامبو/.test(msg)) return '💇‍♀️ <b>العناية بالشعر:</b><br>• شامبو الأرجان - 260 ج.م<br>• بلسم - 230 ج.م<br>• ماسك كيراتين - 340 ج.م';
-        if(/مكياج|ميك اب/.test(msg)) return '💄 <b>المكياج:</b><br>• باليت ظلال - 380 ج.م<br>• ماسكارا - 220 ج.م<br>• أيلاينر - 180 ج.م';
-        if(/سلام|هلا|مرحبا|اهلا/.test(msg)) return '👋 وعليكم السلام! كيف أقدر أساعدك؟ 💎';
-        if(/شكرا|تسلم/.test(msg)) return '🤗 العفو! سعيد بخدمتك 💎';
-        return '🤔 تواصل معنا واتساب: <b>01100257625</b><br>أو اسأل عن: الأسعار | الشحن | الاسترجاع | منتجات محددة';
+        if(/من انت|مين انت|اسمك|تعرف عن نفسك|انت مين/.test(msg)) return '<i class="fas fa-robot"></i> <b>أنا المساعد الذكي لمتجر العربي!</b><br><br>✨ صُممت بواسطة <b>البشمهندس مازن العربي</b><br>💻 لخدمة عملاء العربي<br><br>كيف أقدر أخدمك؟ <i class="fas fa-gem"></i>';
+        if(/مازن|البشمهندس|صممك|مطورك/.test(msg)) return '<i class="fas fa-user-graduate"></i> <b>البشمهندس مازن العربي</b> هو من صممني وطورني! 💎 مؤسس المتجر | ⚡ خبير تطوير مواقع | 📞 01100257625';
+        if(/سعر|اسعار|خصم|جملة/.test(msg)) return '<i class="fas fa-money-bill-wave"></i> <b>الأسعار:</b><br><br>• من 35 إلى 450 ج.م<br>• خصم 20% عند 100 قطعة<br>• واتساب: 01100257625';
+        if(/توصيل|شحن/.test(msg)) return '<i class="fas fa-truck"></i> <b>الشحن:</b><br><br>• جميع المحافظات<br>• مدة 2-5 أيام<br>• واتساب: 01100257625';
+        if(/استرجاع|استبدال|ضمان|مكسور/.test(msg)) return '<i class="fas fa-undo"></i> <b>الاسترجاع:</b><br><br>• خلال 14 يوم<br>• المنتج بحالته الأصلية<br>• تلف الشحن علينا';
+        if(/وجه|بشره|بشرة/.test(msg)) return '<i class="fas fa-smile"></i> <b>العناية بالوجه:</b><br>• سيرم فيتامين سي - 70 ج.م<br>• غسول لبان الذكر - 35 ج.م<br>• غسول ستارفل - 150 ج.م';
+        if(/شعر|شامبو/.test(msg)) return '<i class="fas fa-cut"></i> <b>العناية بالشعر:</b><br>• شامبو الأرجان - 260 ج.م<br>• بلسم - 230 ج.م<br>• ماسك كيراتين - 340 ج.م';
+        if(/مكياج|ميك اب/.test(msg)) return '<i class="fas fa-palette"></i> <b>المكياج:</b><br>• باليت ظلال - 380 ج.م<br>• ماسكارا - 220 ج.م<br>• أيلاينر - 180 ج.م';
+        if(/سلام|هلا|مرحبا|اهلا/.test(msg)) return '<i class="fas fa-hand-paper"></i> وعليكم السلام! كيف أقدر أساعدك؟ 💎';
+        if(/شكرا|تسلم/.test(msg)) return '<i class="fas fa-heart"></i> العفو! سعيد بخدمتك 💎';
+        return '<i class="fas fa-info-circle"></i> تواصل معنا واتساب: <b>01100257625</b><br>أو اسأل عن: الأسعار | الشحن | الاسترجاع | منتجات محددة';
     }
     function send(){ var t = input.value.trim(); if(!t) return; addMessage(t, 'user'); input.value = ''; setTimeout(function(){ addMessage(getAI(t), 'bot'); }, 500); }
     window.sendMessage = send;
@@ -423,4 +473,4 @@ document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classLis
 })();
 </script>
 </body>
-                                                                                                                                                  </html>
+    </html>
