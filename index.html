@@ -88,10 +88,12 @@
         .order-summary p{color:#aaa;font-size:.8rem;margin:2px 0}
         .btn-submit{padding:12px;font-size:1.1rem;font-weight:700;background:linear-gradient(45deg,#25D366,#128C7E);color:#fff;border:none;border-radius:50px;cursor:pointer;width:100%}
         .btn-submit:active{transform:scale(.97)}
+        .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
         .close-order{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
         
-        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:12px 25px;border-radius:50px;font-weight:700;z-index:9999;font-size:.9rem;display:none;box-shadow:0 5px 30px rgba(37,211,102,.5)}
-        .success-toast.show{display:block}
+        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:15px 30px;border-radius:50px;font-weight:700;z-index:9999;font-size:.95rem;display:none;box-shadow:0 10px 40px rgba(37,211,102,.6);text-align:center}
+        .success-toast.show{display:block;animation:slideDown .5s ease}
+        @keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-30px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
         
         .btn-back{margin:15px;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;font-weight:600}
         .btn-back:active{background:#d4af37;color:#000}
@@ -135,11 +137,14 @@
         .quick-btns{display:flex;flex-wrap:wrap;gap:4px;padding:6px 10px;border-bottom:1px solid #333}
         .quick-btn{padding:5px 10px;font-size:.65rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:15px;cursor:pointer;white-space:nowrap}
         .quick-btn:active{background:#d4af37;color:#000}
+        
+        .loading-spinner{display:none;width:30px;height:30px;border:3px solid rgba(255,255,255,.3);border-top:3px solid #25D366;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px}
+        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
     </style>
 </head>
 <body>
 
-<div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً</div>
+<div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح!<br>سنتواصل معك قريباً</div>
 
 <div class="landing" id="landing">
     <div class="logo"><i class="fas fa-gem"></i></div>
@@ -240,7 +245,8 @@
             <div class="form-group"><label><i class="fas fa-phone"></i> رقم الهاتف <span>*</span></label><input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr"></div>
             <div class="form-group"><label><i class="fas fa-map-marker-alt"></i> العنوان بالتفصيل <span>*</span></label><textarea id="custAddress" placeholder="المحافظة - المدينة - الشارع - رقم المنزل"></textarea></div>
             <div class="form-group"><label><i class="fas fa-sticky-note"></i> ملاحظات إضافية</label><textarea id="custNotes" placeholder="أي ملاحظات تريد إضافتها..."></textarea></div>
-            <button class="btn-submit" onclick="submitOrder()"><i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب</button>
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <button class="btn-submit" id="btnSubmit" onclick="submitOrder()"><i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب</button>
         </div>
     </div>
 </div>
@@ -361,7 +367,7 @@ function closeModal(){ modal.classList.remove('active'); document.body.style.ove
 document.getElementById('closeModal').onclick = closeModal;
 modal.onclick = function(e){ if(e.target === modal) closeModal(); };
 
-// ========== مودال بيانات العميل ==========
+// ========== مودال بيانات العميل وإرسال تلقائي ==========
 var orderModal = document.getElementById('orderModal');
 
 function openOrderForm(){
@@ -380,8 +386,8 @@ orderModal.onclick = function(e){ if(e.target === orderModal) closeOrderModal();
 
 function showToast(msg){
     var t = document.getElementById('successToast');
-    t.textContent = msg; t.classList.add('show');
-    setTimeout(function(){ t.classList.remove('show'); }, 4000);
+    t.innerHTML = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 5000);
 }
 
 function submitOrder(){
@@ -394,36 +400,49 @@ function submitOrder(){
     if(!phone){ alert('❌ الرجاء إدخال رقم الهاتف'); return; }
     if(!address){ alert('❌ الرجاء إدخال العنوان'); return; }
     
+    // تعطيل الزر وإظهار التحميل
+    var btn = document.getElementById('btnSubmit');
+    var spinner = document.getElementById('loadingSpinner');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+    spinner.style.display = 'block';
+    
     var qty = curQty, up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price, total = up * qty;
     var type = qty >= 100 ? 'جملة' : 'قطاعي';
     
-    var msg = '🛍️ طلب جديد - متجر العربي\n';
-    msg += '━━━━━━━━━━━━━━━\n\n';
-    msg += '📦 المنتج: ' + curProd.name + '\n';
-    msg += '🔢 الكمية: ' + qty + ' قطعة\n';
-    msg += '💰 سعر الوحدة: ' + up + ' ج.م\n';
-    msg += '💵 الإجمالي: ' + total.toLocaleString() + ' ج.م\n';
-    msg += '🏷️ النوع: ' + type + '\n\n';
-    msg += '👤 بيانات العميل\n';
-    msg += '━━━━━━━━━━━━━━━\n';
-    msg += '📝 الاسم: ' + name + '\n';
-    msg += '📞 الهاتف: ' + phone + '\n';
-    msg += '📍 العنوان: ' + address + '\n';
-    if(notes) msg += '📋 ملاحظات: ' + notes + '\n';
-    msg += '\n✨ تم الطلب من موقع العربي 💎';
+    var msg = '%F0%9F%9B%8D%EF%B8%8F%20*%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF%20-%20%D9%85%D8%AA%D8%AC%D8%B1%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A*%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0A%0A%F0%9F%93%A6%20*%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC:*%20' + encodeURIComponent(curProd.name) + '%0A%F0%9F%94%A2%20*%D8%A7%D9%84%D9%83%D9%85%D9%8A%D8%A9:*%20' + qty + '%20%D9%82%D8%B7%D8%B9%D8%A9%0A%F0%9F%92%B0%20*%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D9%88%D8%AD%D8%AF%D8%A9:*%20' + up + '%20%D8%AC.%D9%85%0A%F0%9F%92%B5%20*%D8%A7%D9%84%D8%A5%D8%AC%D9%85%D8%A7%D9%84%D9%8A:*%20' + total.toLocaleString() + '%20%D8%AC.%D9%85%0A%F0%9F%8F%B7%EF%B8%8F%20*%D8%A7%D9%84%D9%86%D9%88%D8%B9:*%20' + type + '%0A%0A%F0%9F%91%A4%20*%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%85%D9%8A%D9%84*%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0A%F0%9F%93%9D%20*%D8%A7%D9%84%D8%A7%D8%B3%D9%85:*%20' + encodeURIComponent(name) + '%0A%F0%9F%93%9E%20*%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81:*%20' + encodeURIComponent(phone) + '%0A%F0%9F%93%8D%20*%D8%A7%D9%84%D8%B9%D9%86%D9%88%D8%A7%D9%86:*%20' + encodeURIComponent(address);
+    if(notes) msg += '%0A%F0%9F%93%8B%20*%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A7%D8%AA:*%20' + encodeURIComponent(notes);
+    msg += '%0A%0A%E2%9C%A8%20*%D8%AA%D9%85%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A*%20%F0%9F%92%8E';
     
-    // إرسال الطلب للواتساب بدون فتح للمستخدم
-    var url = 'https://wa.me/' + YOUR_PHONE + '?text=' + encodeURIComponent(msg);
-    window.open(url, '_blank');
+    var waURL = 'https://wa.me/' + YOUR_PHONE + '?text=' + msg;
     
-    // تنظيف وإغلاق
-    document.getElementById('custName').value = '';
-    document.getElementById('custPhone').value = '';
-    document.getElementById('custAddress').value = '';
-    document.getElementById('custNotes').value = '';
-    orderModal.classList.remove('active'); modal.classList.remove('active');
-    document.body.style.overflow = '';
-    showToast('✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً');
+    // فتح الواتساب في نافذة مخفية
+    var hiddenWindow = window.open(waURL, '_blank', 'width=1,height=1,left=-1000,top=-1000');
+    
+    // لو المتصفح منع الفتح، نستخدم iframe
+    if(!hiddenWindow){
+        var iframe = document.createElement('iframe');
+        iframe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;border:none;opacity:0;pointer-events:none';
+        iframe.src = waURL;
+        document.body.appendChild(iframe);
+        setTimeout(function(){ document.body.removeChild(iframe); }, 3000);
+    } else {
+        setTimeout(function(){ if(hiddenWindow && !hiddenWindow.closed) hiddenWindow.close(); }, 1500);
+    }
+    
+    // تنظيف وإغلاق بعد شوية
+    setTimeout(function(){
+        document.getElementById('custName').value = '';
+        document.getElementById('custPhone').value = '';
+        document.getElementById('custAddress').value = '';
+        document.getElementById('custNotes').value = '';
+        orderModal.classList.remove('active'); modal.classList.remove('active');
+        document.body.style.overflow = '';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب';
+        spinner.style.display = 'none';
+        showToast('✅ تم إرسال طلبك بنجاح!<br>سنتواصل معك قريباً');
+    }, 2000);
 }
 
 // ========== تصنيفات ==========
@@ -465,4 +484,4 @@ document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classLis
 })();
 </script>
 </body>
-                                                                                 </html>
+                </html>
