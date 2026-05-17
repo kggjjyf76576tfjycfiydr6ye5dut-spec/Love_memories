@@ -2,947 +2,486 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>العربي - مستحضرات تجميل أصلية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>العربي للأخشاب - استيراد وتصدير</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: #0a0a0a;
-            color: #fff;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        /* شاشة الترحيب */
-        .landing {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #000, #1a1a1a, #0a0a0a);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity .8s, visibility .8s;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .landing.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        
-        .landing .logo {
-            font-size: 4rem;
-            animation: float 3s infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        
-        .landing h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #d4af37;
-            letter-spacing: 3px;
-            margin: 8px 0;
-        }
-        
-        .landing .sub {
-            font-size: 1rem;
-            color: #ccc;
-            opacity: .9;
-        }
-        
-        .btn-gold {
-            padding: 12px 32px;
-            font-size: 1rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #d4af37, #b8960f);
-            color: #000;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: .3s;
-            letter-spacing: 1px;
-        }
-        
-        .btn-gold:active {
-            transform: scale(.95);
-        }
-        
-        /* المحتوى الرئيسي */
-        .main-content {
-            min-height: 100vh;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 80px;
-        }
-        
-        .main-content.visible {
-            display: flex;
-        }
-        
-        /* الهيدر الثابت */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 500;
-            background: rgba(0, 0, 0, .95);
-            padding: 8px 12px;
-            text-align: center;
-            border-bottom: 2px solid #d4af37;
-            backdrop-filter: blur(10px);
-        }
-        
-        .header h2 {
-            font-size: 1.2rem;
-            font-weight: 900;
-            color: #d4af37;
-        }
-        
-        .search-box {
-            display: flex;
-            gap: 6px;
-            width: 100%;
-            max-width: 400px;
-            margin: 6px auto 0;
-            background: rgba(255, 255, 255, .08);
-            border: 1px solid #333;
-            border-radius: 50px;
-            padding: 4px 12px;
-        }
-        
-        .search-box input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: .85rem;
-            outline: none;
-            font-family: 'Cairo', sans-serif;
-        }
-        
-        .search-box input::placeholder {
-            color: #666;
-            font-size: .75rem;
-        }
-        
-        .search-box button {
-            background: #d4af37;
-            border: none;
-            color: #000;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: .75rem;
-            flex-shrink: 0;
-        }
-        
-        /* أزرار التصنيفات - متجاوبة */
-        .cats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            padding: 12px 8px;
-            width: 100%;
-            margin: 5px 0;
-        }
-        
-        .cats button {
-            padding: 6px 14px;
-            font-size: .8rem;
-            font-weight: 600;
-            background: transparent;
-            border: 1px solid #d4af37;
-            color: #d4af37;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: .3s;
-            white-space: nowrap;
-        }
-        
-        .cats button:active,
-        .cats button.active {
-            background: #d4af37;
-            color: #000;
-        }
-        
-        /* معرض المنتجات - حل مشكلة التليفون */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-            gap: 12px;
-            width: 95%;
-            max-width: 600px;
-            padding: 5px 0 20px;
-            margin: 0 auto;
-        }
-        
-        /* تحسين شكل الكارت على التليفون */
-        .card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            transition: .2s;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card:active {
-            transform: scale(.97);
-            border-color: #d4af37;
-        }
-        
-        .card img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            background: #111;
-        }
-        
-        .card .info {
-            padding: 8px 6px;
-            text-align: center;
-            flex: 1;
-        }
-        
-        .card .info h3 {
-            font-size: .8rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-            line-height: 1.3;
-            /* منع تكسير النص */
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .card .info .price {
-            font-size: .95rem;
-            font-weight: 900;
-            color: #d4af37;
-        }
-        
-        .card .badge {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: #d4af37;
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 15px;
-            font-size: .6rem;
-            font-weight: 700;
-        }
-        
-        /* النوافذ المنبثقة */
-        .modal,
-        .order-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, .95);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 12px;
-        }
-        
-        .modal.active,
-        .order-modal.active {
-            display: flex;
-        }
-        
-        .modal-content,
-        .order-modal-content {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-            background: #1a1a1a;
-            border: 1px solid #d4af37;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(212, 175, 55, .2);
-            animation: fadeIn .4s;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .modal img {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
-            border-bottom: 2px solid #d4af37;
-            background: #111;
-        }
-        
-        .modal .m-info {
-            padding: 12px;
-            text-align: center;
-        }
-        
-        .modal .m-info h3 {
-            font-size: 1.1rem;
-            font-weight: 900;
-            color: #d4af37;
-            margin-bottom: 6px;
-        }
-        
-        /* أزرار الكمية */
-        .qty-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 10px 0;
-        }
-        
-        .qty-controls button {
-            width: 36px;
-            height: 36px;
-            border: 1px solid #d4af37;
-            background: transparent;
-            color: #d4af37;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        
-        .qty-controls input {
-            width: 70px;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 700;
-            border: 1px solid #d4af37;
-            background: transparent;
-            color: #fff;
-            border-radius: 8px;
-            padding: 8px;
-            outline: none;
-        }
-        
-        .total-price {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #d4af37;
-            margin: 8px 0;
-        }
-        
-        /* أزرار الإغلاق */
-        .close-modal,
-        .close-order {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: #d4af37;
-            border: none;
-            color: #000;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-        
-        /* نموذج الطلب */
-        .form-group {
-            margin-bottom: 12px;
-        }
-        
-        .form-group label {
-            display: block;
-            color: #ccc;
-            font-size: .8rem;
-            margin-bottom: 4px;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 8px;
-            color: #fff;
-            font-family: 'Cairo', sans-serif;
-            font-size: .85rem;
-        }
-        
-        .btn-submit {
-            padding: 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #25D366, #128C7E);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        /* قسم التواصل */
-        .contact {
-            width: 95%;
-            max-width: 500px;
-            margin: 15px;
-            padding: 15px;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .contact-cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-        
-        .c-card {
-            background: #0a0a0a;
-            border: 1px solid #2a2a2a;
-            border-radius: 10px;
-            padding: 12px;
-            flex: 1;
-            min-width: 130px;
-        }
-        
-        .c-card .name {
-            font-size: .8rem;
-            font-weight: 900;
-            color: #fff;
-            margin: 4px 0;
-        }
-        
-        .call-btn {
-            display: inline-block;
-            margin-top: 6px;
-            padding: 4px 12px;
-            background: #25D366;
-            color: #000;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: .7rem;
-            font-weight: 700;
-        }
-        
-        /* شات الذكي */
-        .chat-widget {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            z-index: 9999;
-        }
-        
-        .chat-toggle {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #1a1a1a, #000);
-            border: 2px solid #d4af37;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: #d4af37;
-            box-shadow: 0 5px 25px rgba(212, 175, 55, .3);
-        }
-        
-        .chat-panel {
-            display: none;
-            position: fixed;
-            bottom: 75px;
-            left: 10px;
-            width: calc(100vw - 20px);
-            max-width: 320px;
-            height: 55vh;
-            max-height: 400px;
-            background: #111;
-            border: 1px solid #d4af37;
-            border-radius: 12px;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .chat-panel.open {
-            display: flex;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .msg {
-            max-width: 85%;
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-size: .75rem;
-            line-height: 1.5;
-        }
-        
-        .msg.bot {
-            background: #1a1a1a;
-            color: #ddd;
-            align-self: flex-start;
-            border: 1px solid #333;
-        }
-        
-        .msg.user {
-            background: #d4af37;
-            color: #000;
-            align-self: flex-end;
-            font-weight: 600;
-        }
-        
-        .chat-input-area {
-            display: flex;
-            gap: 6px;
-            padding: 8px;
-            border-top: 1px solid #333;
-        }
-        
-        .chat-input-area input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #d4af37;
-            background: transparent;
-            color: #fff;
-            border-radius: 25px;
-            outline: none;
-            font-size: .75rem;
-        }
-        
-        .chat-input-area button {
-            background: #d4af37;
-            border: none;
-            color: #000;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        /* الفوتر */
-        .footer {
-            text-align: center;
-            padding: 12px;
-            margin: 10px;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 12px;
-            width: 95%;
-            max-width: 500px;
-        }
-        
-        .btn-back {
-            margin: 10px;
-            padding: 8px 20px;
-            background: transparent;
-            border: 1px solid #d4af37;
-            color: #d4af37;
-            border-radius: 30px;
-            cursor: pointer;
-        }
-        
-        .success-toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #25D366;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 700;
-            z-index: 9999;
-            font-size: .85rem;
-            display: none;
-            text-align: center;
-        }
-        
-        .success-toast.show {
-            display: block;
-            animation: slideDown .5s ease;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 1rem;
-            color: #555;
-            grid-column: 1/-1;
-        }
-        
-        .badge-green {
-            background: #25D366;
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 15px;
-            font-size: .7rem;
-            font-weight: 700;
-            display: inline-block;
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+        
+        .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#000,#1a1a1a,#0a0a0a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;transition:opacity .8s,visibility .8s;padding:20px;text-align:center}
+        .landing.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .landing .logo{font-size:4rem;animation:float 3s infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+        .landing h1{font-size:2.8rem;font-weight:900;color:#d4af37;letter-spacing:3px;margin:8px 0}
+        .landing .sub{font-size:1.2rem;color:#ccc;opacity:.9}
+        .landing .slogan{font-size:1rem;color:#888;margin:15px 0 30px;line-height:1.6}
+        .btn-gold{padding:14px 40px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:.3s;letter-spacing:1px}
+        .btn-gold:active{transform:scale(.95)}
+        
+        .main-content{min-height:100vh;display:none;flex-direction:column;align-items:center;padding-top:100px}
+        .main-content.visible{display:flex}
+        
+        .header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.95);padding:10px 12px;text-align:center;border-bottom:2px solid #d4af37;backdrop-filter:blur(10px)}
+        .header h2{font-size:1.3rem;font-weight:900;color:#d4af37;letter-spacing:2px}
+        .header p{font-size:.7rem;color:#aaa}
+        .search-box{display:flex;gap:6px;width:100%;max-width:400px;margin:8px auto 0;background:rgba(255,255,255,.08);border:1px solid #333;border-radius:50px;padding:6px 12px}
+        .search-box input{flex:1;background:transparent;border:none;color:#fff;font-size:.9rem;outline:none;font-family:'Cairo',sans-serif;min-width:0}
+        .search-box input::placeholder{color:#666;font-size:.8rem}
+        .search-box button{background:#d4af37;border:none;color:#000;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.8rem;flex-shrink:0}
+        .search-results{color:#d4af37;font-size:.75rem;margin-top:4px}
+        
+        .cats{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 8px;width:100%;margin:10px 0}
+        .cats button{padding:7px 14px;font-size:.8rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer;transition:.3s;white-space:nowrap}
+        .cats button:active,.cats button.active{background:#d4af37;color:#000}
+        
+        .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:96%;max-width:600px;padding-bottom:20px}
+        .no-results{text-align:center;padding:40px 20px;font-size:1.2rem;color:#555;grid-column:1/-1}
+        
+        .card{position:relative;border-radius:12px;overflow:hidden;background:#1a1a1a;border:1px solid #2a2a2a;transition:.2s;aspect-ratio:3/4;cursor:pointer}
+        .card:active{transform:scale(.97);border-color:#d4af37}
+        .card img{width:100%;height:65%;object-fit:cover}
+        .card .info{padding:10px 8px;text-align:center}
+        .card .info h3{font-size:.8rem;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.3}
+        .card .info .price{font-size:1rem;font-weight:900;color:#d4af37}
+        .card .badge{position:absolute;top:8px;right:8px;background:#d4af37;color:#000;padding:3px 10px;border-radius:15px;font-size:.65rem;font-weight:700}
+        
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:15px}
+        .modal.active{display:flex}
+        .modal-content{position:relative;width:100%;max-width:420px;background:#1a1a1a;border:1px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(212,175,55,.2);animation:fadeIn .4s;max-height:85vh;overflow-y:auto}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .modal img{width:100%;max-height:35vh;object-fit:cover;border-bottom:2px solid #d4af37}
+        .modal .m-info{padding:15px;text-align:center}
+        .modal .m-info h3{font-size:1.3rem;font-weight:900;color:#d4af37;margin-bottom:6px}
+        .modal .m-info .desc{font-size:.85rem;color:#aaa;margin-bottom:12px;line-height:1.7}
+        
+        .qty-box{background:#111;border:1px solid #333;border-radius:10px;padding:12px;margin:10px 0}
+        .qty-box label{display:block;font-weight:700;color:#fff;margin-bottom:6px;font-size:.9rem}
+        .qty-controls{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px}
+        .qty-controls button{width:32px;height:32px;border:1px solid #d4af37;background:transparent;color:#d4af37;font-size:1.1rem;font-weight:700;border-radius:6px;cursor:pointer}
+        .qty-controls button:active{background:#d4af37;color:#000}
+        .qty-controls input{width:60px;text-align:center;font-size:1.1rem;font-weight:700;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:6px;padding:6px;outline:none}
+        .price-details{text-align:center;padding:6px}
+        .price-details .unit-price{font-size:.8rem;color:#888;margin-bottom:2px}
+        .price-details .total-price{font-size:1.4rem;font-weight:900;color:#d4af37}
+        .badge-green{display:inline-block;background:#25D366;color:#000;padding:3px 10px;border-radius:15px;font-size:.7rem;font-weight:700;margin-top:5px;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+        .info-text{color:#888;font-size:.75rem;margin-top:3px}
+        
+        .close-modal{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
+        
+        .order-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:3000;justify-content:center;align-items:center;padding:15px}
+        .order-modal.active{display:flex}
+        .order-modal-content{position:relative;width:100%;max-width:400px;background:#1a1a1a;border:1px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(212,175,55,.2);animation:fadeIn .4s;max-height:85vh;overflow-y:auto}
+        .order-modal-content .o-header{background:linear-gradient(135deg,#000,#1a1a1a);padding:12px 15px;text-align:center;border-bottom:1px solid #d4af37}
+        .order-modal-content .o-header h3{color:#d4af37;font-size:1.1rem;font-weight:900}
+        .order-modal-content .o-body{padding:15px}
+        .form-group{margin-bottom:12px}
+        .form-group label{display:block;color:#ccc;font-size:.8rem;margin-bottom:4px;font-weight:600}
+        .form-group label span{color:#ff4444}
+        .form-group input,.form-group textarea{width:100%;padding:10px 12px;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-family:'Cairo',sans-serif;font-size:.9rem;outline:none;transition:.3s}
+        .form-group input:focus,.form-group textarea:focus{border-color:#d4af37}
+        .form-group textarea{min-height:60px;resize:vertical}
+        .order-summary{background:#111;border:1px solid #333;border-radius:8px;padding:10px;margin-bottom:15px;text-align:center}
+        .order-summary h4{color:#d4af37;font-size:.9rem;margin-bottom:6px}
+        .order-summary p{color:#aaa;font-size:.8rem;margin:2px 0}
+        .btn-submit{padding:12px;font-size:1.1rem;font-weight:700;background:linear-gradient(45deg,#25D366,#128C7E);color:#fff;border:none;border-radius:50px;cursor:pointer;width:100%}
+        .btn-submit:active{transform:scale(.97)}
+        .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+        .close-order{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
+        
+        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:15px 30px;border-radius:50px;font-weight:700;z-index:9999;font-size:.95rem;display:none;box-shadow:0 10px 40px rgba(37,211,102,.6);text-align:center}
+        .success-toast.show{display:block;animation:slideDown .5s ease}
+        @keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-30px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        
+        .btn-back{margin:15px;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;font-weight:600}
+        .btn-back:active{background:#d4af37;color:#000}
+        
+        .contact{width:96%;max-width:500px;margin:15px;padding:20px 15px;background:#111;border:1px solid #333;border-radius:12px;text-align:center}
+        .contact h2{font-size:1.3rem;font-weight:900;color:#d4af37;margin-bottom:15px}
+        .contact-cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+        .c-card{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:15px;flex:1;min-width:140px;max-width:160px;text-align:center}
+        .c-card .icon{font-size:1.5rem;margin-bottom:4px}
+        .c-card .role{font-size:.75rem;font-weight:700;color:#d4af37}
+        .c-card .name{font-size:.9rem;font-weight:900;color:#fff;margin:4px 0}
+        .c-card .phone{direction:ltr;font-weight:700;font-size:.8rem;color:#ccc}
+        .c-card .phone i{color:#25D366;margin:0 3px}
+        .c-card .call-btn{display:inline-block;margin-top:6px;padding:5px 15px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-size:.75rem;font-weight:700}
+        .contact .note{margin-top:15px;padding:10px;background:#000;color:#d4af37;border-radius:8px;font-size:.8rem;font-weight:600;border:1px solid #333;line-height:1.6}
+        
+        .footer{text-align:center;padding:15px;margin:15px;color:#fff;background:#111;border:1px solid #333;border-radius:12px;width:96%;max-width:500px}
+        .footer .f-name{font-size:1.1rem;font-weight:900;color:#d4af37}
+        .social{margin-top:10px;padding-top:10px;border-top:1px solid #2a2a2a;display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+        .social a,.social span{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:50px;text-decoration:none;font-size:.75rem;font-weight:600;color:#fff}
+        .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#fff;color:#000}
+        .social .ph{background:transparent;border:1px solid #d4af37;color:#d4af37;direction:ltr}
+        
+        .chat-widget{position:fixed;bottom:15px;left:15px;z-index:9999}
+        .chat-toggle{width:50px;height:50px;background:linear-gradient(135deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#d4af37;box-shadow:0 5px 25px rgba(212,175,55,.3);animation:pulse 2s infinite}
+        .chat-toggle.open{animation:none}
+        .chat-panel{display:none;position:fixed;bottom:75px;left:10px;width:calc(100vw - 20px);max-width:350px;height:55vh;max-height:450px;background:#111;border:1px solid #d4af37;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.8);flex-direction:column;overflow:hidden}
+        .chat-panel.open{display:flex}
+        .chat-header{background:linear-gradient(135deg,#000,#1a1a1a);padding:12px;text-align:center;color:#d4af37;border-bottom:1px solid #d4af37}
+        .chat-header h3{font-size:.9rem;font-weight:900}
+        .chat-header p{font-size:.65rem;opacity:.7;margin-top:2px}
+        .chat-messages{flex:1;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
+        .msg{max-width:85%;padding:8px 12px;border-radius:12px;font-size:.8rem;line-height:1.6;animation:msgIn .3s ease}
+        @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        .msg.bot{background:#1a1a1a;color:#ddd;align-self:flex-start;border-radius:12px 12px 12px 4px;border:1px solid #333}
+        .msg.user{background:#d4af37;color:#000;align-self:flex-end;border-radius:12px 12px 4px 12px;font-weight:600}
+        .chat-input-area{display:flex;gap:6px;padding:10px;border-top:1px solid #333;background:#0a0a0a}
+        .chat-input-area input{flex:1;padding:8px 12px;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:25px;outline:none;font-family:'Cairo',sans-serif;font-size:.8rem;min-width:0}
+        .chat-input-area input::placeholder{color:#666;font-size:.75rem}
+        .chat-input-area button{background:#d4af37;border:none;color:#000;width:35px;height:35px;border-radius:50%;cursor:pointer;font-size:.9rem;flex-shrink:0}
+        .quick-btns{display:flex;flex-wrap:wrap;gap:4px;padding:6px 10px;border-bottom:1px solid #333}
+        .quick-btn{padding:5px 10px;font-size:.65rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:15px;cursor:pointer;white-space:nowrap}
+        .quick-btn:active{background:#d4af37;color:#000}
+        
+        .loading-spinner{display:none;width:30px;height:30px;border:3px solid rgba(255,255,255,.3);border-top:3px solid #25D366;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px}
+        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
     </style>
 </head>
 <body>
 
-<div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً</div>
+<div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح!<br>سنتواصل معك قريباً</div>
 
 <div class="landing" id="landing">
-    <div class="logo"><i class="fas fa-gem"></i></div>
-    <h1>العرابي</h1>
-    <div class="sub">مستحضرات تجميل أصلية 100%</div>
-    <button class="btn-gold" id="startBtn"><i class="fas fa-shopping-bag"></i> تصفح المنتجات</button>
+    <div class="logo"><i class="fas fa-tree"></i></div>
+    <h1>العربي للأخشاب</h1>
+    <div class="sub">استيراد وتصدير الأخشاب والبليتات</div>
+    <div class="slogan"><i class="fas fa-star"></i> أجود أنواع الأخشاب الأوروبية والإسكندنافية <i class="fas fa-star"></i></div>
+    <button class="btn-gold" id="startBtn"><i class="fas fa-boxes"></i> تصفح المنتجات</button>
 </div>
 
 <div class="main-content" id="main">
     <div class="header">
-        <h2><i class="fas fa-gem"></i> العرابي</h2>
+        <h2><i class="fas fa-tree"></i> العربي للأخشاب</h2>
+        <p>استيراد وتصدير - بليتات - أخشاب بناء</p>
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
+            <input type="text" id="searchInput" placeholder="🔍 ابحث عن نوع خشب أو بليت...">
             <button onclick="filter()"><i class="fas fa-search"></i></button>
         </div>
+        <div class="search-results" id="searchResults"></div>
     </div>
 
     <div class="cats" id="cats">
-        <button class="active" data-cat="all">الكل</button>
-        <button data-cat="face">وجه</button>
-        <button data-cat="eyes">عين</button>
-        <button data-cat="lips">شفاه</button>
-        <button data-cat="hair">شعر</button>
-        <button data-cat="body">جسم</button>
-        <button data-cat="makeup">مكياج</button>
+        <button class="active" data-cat="all"><i class="fas fa-th-large"></i> الكل</button>
+        <button data-cat="wood"><i class="fas fa-tree"></i> أخشاب</button>
+        <button data-cat="pallet"><i class="fas fa-pallet"></i> بليتات</button>
+        <button data-cat="import"><i class="fas fa-ship"></i> استيراد</button>
+        <button data-cat="export"><i class="fas fa-plane"></i> تصدير</button>
+        <button data-cat="plywood"><i class="fas fa-layer-group"></i> ألواح</button>
     </div>
 
     <div class="gallery" id="gallery"></div>
-    
     <button class="btn-back" id="backBtn"><i class="fas fa-home"></i> العودة للرئيسية</button>
 
     <div class="contact">
         <h2><i class="fas fa-phone-alt"></i> للتواصل</h2>
         <div class="contact-cards">
-            <div class="c-card">
-                <div class="name">محمود عبدالسميع العرابي</div>
-                <a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a>
-            </div>
-            <div class="c-card">
-                <div class="name">وليد عبدالسميع العرابي</div>
-                <a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a>
-            </div>
-            <div class="c-card">
-                <div class="name">مازن محمد العرابي</div>
-                <a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a>
-            </div>
+            <div class="c-card"><div class="icon"><i class="fas fa-user-tie"></i></div><div class="role">الاستاذ</div><div class="name">محمود عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i> 01000000000</div><a href="tel:01000000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon"><i class="fas fa-user-tie"></i></div><div class="role">الاستاذ</div><div class="name">وليد عبدالسميع العربي</div><div class="phone"><i class="fab fa-whatsapp"></i> 01200000000</div><a href="tel:01200000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
+            <div class="c-card"><div class="icon"><i class="fas fa-laptop-code"></i></div><div class="role">البشمهندس</div><div class="name">مازن محمد العربي</div><div class="phone"><i class="fab fa-whatsapp"></i> 01500000000</div><a href="tel:01500000000" class="call-btn"><i class="fas fa-phone"></i> اتصال</a></div>
         </div>
+        <div class="note"><i class="fas fa-check-circle"></i> استيراد من أوروبا | بليتات جميع المقاسات | <i class="fas fa-truck"></i> توصيل لجميع المحافظات</div>
     </div>
 
     <div class="footer">
-        صُنع بواسطة <strong style="color:#d4af37">البشمهندس مازن العرابي</strong>
+        <i class="fas fa-bolt"></i> صُنع بواسطة<br>
+        <span class="f-name">البشمهندس مازن العربي</span>
+        <div class="social">
+            <span class="ph"><i class="fab fa-whatsapp"></i> 01100257625</span>
+            <a href="https://wa.me/201100257625" class="wa"><i class="fab fa-whatsapp"></i> واتساب</a>
+            <a href="https://www.facebook.com/share/1J5pRHd8g5/?mibextid=wwXIfr" class="fb"><i class="fab fa-facebook-f"></i> فيسبوك</a>
+            <a href="https://www.instagram.com/mazenalaraby10" class="ig"><i class="fab fa-instagram"></i> انستجرام</a>
+            <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="tt"><i class="fab fa-tiktok"></i> تيك توك</a>
+        </div>
+        <span style="font-size:.65rem;opacity:.4;display:block;margin-top:8px"><i class="far fa-copyright"></i> 2026 جميع الحقوق محفوظة</span>
     </div>
 </div>
 
-<!-- مودال المنتج -->
+<!-- ===== مودال المنتج ===== -->
 <div class="modal" id="modal">
     <div class="modal-content">
         <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
         <img id="modalImg" src="" alt="">
         <div class="m-info">
             <h3 id="modalName"></h3>
-            <p id="modalDesc" style="color:#aaa; font-size:.8rem; margin:8px 0;"></p>
-            <div class="qty-controls">
-                <button id="qtyMinus"><i class="fas fa-minus"></i></button>
-                <input type="number" id="qtyInput" value="1" min="1">
-                <button id="qtyPlus"><i class="fas fa-plus"></i></button>
+            <div class="desc" id="modalDesc"></div>
+            <div class="qty-box">
+                <label><i class="fas fa-cubes"></i> الكمية (متر مكعب / لوح / بليت)</label>
+                <div class="qty-controls">
+                    <button id="qtyMinus"><i class="fas fa-minus"></i></button>
+                    <input type="number" id="qtyInput" value="1" min="1" max="10000">
+                    <button id="qtyPlus"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="price-details">
+                    <div class="unit-price" id="unitPriceText"></div>
+                    <div class="total-price" id="totalPriceText"></div>
+                    <div id="wholesaleBadge"></div>
+                    <div class="info-text" id="wholesaleInfo"></div>
+                </div>
             </div>
-            <div class="total-price" id="totalPriceText"></div>
-            <div id="wholesaleBadge"></div>
-            <button class="btn-gold" onclick="openOrderForm()" style="width:100%; margin-top:12px;"><i class="fas fa-shopping-cart"></i> طلب المنتج الآن</button>
+            <button class="btn-gold" onclick="openOrderForm()" style="width:100%;margin-top:8px"><i class="fas fa-shopping-cart"></i> طلب المنتج الآن</button>
         </div>
     </div>
 </div>
 
-<!-- مودال بيانات العميل -->
+<!-- ===== مودال بيانات العميل ===== -->
 <div class="order-modal" id="orderModal">
     <div class="order-modal-content">
         <button class="close-order" id="closeOrder"><i class="fas fa-times"></i></button>
-        <div style="padding:15px">
-            <h3 style="color:#d4af37; margin-bottom:12px;">بيانات الطلب</h3>
-            <div style="background:#111; padding:10px; border-radius:8px; margin-bottom:15px;">
-                <p><strong>المنتج:</strong> <span id="summaryName"></span></p>
-                <p><strong>الكمية:</strong> <span id="summaryQty"></span></p>
-                <p><strong>الإجمالي:</strong> <span id="summaryTotal"></span></p>
+        <div class="o-header"><h3><i class="fas fa-clipboard-list"></i> بيانات الطلب</h3></div>
+        <div class="o-body">
+            <div class="order-summary">
+                <h4><i class="fas fa-shopping-bag"></i> ملخص الطلب</h4>
+                <p><b>المنتج:</b> <span id="summaryName"></span></p>
+                <p><b>الكمية:</b> <span id="summaryQty"></span></p>
+                <p><b>الإجمالي:</b> <span id="summaryTotal"></span></p>
             </div>
-            <div class="form-group">
-                <label>الاسم الكامل *</label>
-                <input type="text" id="custName" placeholder="أدخل اسمك">
-            </div>
-            <div class="form-group">
-                <label>رقم الهاتف *</label>
-                <input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr">
-            </div>
-            <div class="form-group">
-                <label>العنوان بالتفصيل *</label>
-                <textarea id="custAddress" rows="2" placeholder="المحافظة - المدينة - الشارع"></textarea>
-            </div>
+            <div class="form-group"><label><i class="fas fa-user"></i> الاسم الكامل <span>*</span></label><input type="text" id="custName" placeholder="أدخل اسمك الكامل"></div>
+            <div class="form-group"><label><i class="fas fa-phone"></i> رقم الهاتف <span>*</span></label><input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr"></div>
+            <div class="form-group"><label><i class="fas fa-map-marker-alt"></i> العنوان بالتفصيل <span>*</span></label><textarea id="custAddress" placeholder="المحافظة - المدينة - الشارع - رقم المنزل"></textarea></div>
+            <div class="form-group"><label><i class="fas fa-sticky-note"></i> ملاحظات إضافية</label><textarea id="custNotes" placeholder="أي ملاحظات تريد إضافتها..."></textarea></div>
+            <div class="loading-spinner" id="loadingSpinner"></div>
             <button class="btn-submit" id="btnSubmit" onclick="submitOrder()"><i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب</button>
         </div>
     </div>
 </div>
 
-<!-- شات -->
+<!-- ===== شات AI ===== -->
 <div class="chat-widget">
     <div class="chat-toggle" id="chatToggle"><i class="fas fa-comment-dots"></i></div>
     <div class="chat-panel" id="chatPanel">
+        <div class="chat-header"><h3><i class="fas fa-robot"></i> المساعد الذكي - العربي للأخشاب</h3><p>صُمم بواسطة البشمهندس مازن العربي</p></div>
+        <div class="quick-btns">
+            <button class="quick-btn" onclick="sendQuick('من أنت؟')"><i class="fas fa-question-circle"></i> من أنت؟</button>
+            <button class="quick-btn" onclick="sendQuick('أنواع الخشب المتاحة')"><i class="fas fa-tree"></i> أنواع الخشب</button>
+            <button class="quick-btn" onclick="sendQuick('طلب بليتات')"><i class="fas fa-pallet"></i> بليتات</button>
+            <button class="quick-btn" onclick="sendQuick('أسعار التصدير')"><i class="fas fa-ship"></i> تصدير</button>
+            <button class="quick-btn" onclick="sendQuick('سياسة الاسترجاع')"><i class="fas fa-undo"></i> استرجاع</button>
+        </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="msg bot">مرحباً! أنا المساعد الذكي. اسألني أي شيء عن المنتجات أو الطلب.</div>
+            <div class="msg bot"><i class="fas fa-hand-paper"></i> مرحباً بك في العربي للأخشاب! أنا المساعد الذكي. اسألني عن أنواع الخشب، البليتات، الاستيراد والتصدير. <i class="fas fa-tree"></i></div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="اكتب استفسارك...">
+            <input type="text" id="chatInput" placeholder="اكتب استفسارك..." onkeydown="if(event.key==='Enter')sendMessage()">
             <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 </div>
 
 <script>
-    // رقم الواتساب
-    var YOUR_PHONE = '201100257625';
+// ========== رقم الواتساب ==========
+var YOUR_PHONE = '201100257625';
+
+// ========== بيانات المنتجات الجديدة ==========
+var products = [
+    // أخشاب
+    {id:1, img:"img1", name:"خشب زان روماني", cat:"wood", desc:"خشب زان درجة أولى روماني مجفف. مناسب للأثاث والديكورات الداخلية. الطول: 2-4 متر، السماكة: 25-50 مم.", price:12500},
+    {id:2, img:"img2", name:"خشب سويدي موسكي", cat:"wood", desc:"خشب سويدي معالج لبناء الشدات والقوالب. قوة تحمل عالية. أطوال مختلفة.", price:8700},
+    {id:3, img:"img3", name:"خشب بندق تركي", cat:"wood", desc:"خشب تركي درجة أولى للأبواب والشبابيك. مقاوم للرطوبة. تجفيف صناعي.", price:14300},
+    {id:4, img:"img4", name:"خشب بلوط ألماني", cat:"wood", desc:"بلوط صلب للأرضيات والسلالم. تحمل عالي. سماكات مختلفة حتى 50 مم.", price:19500},
+    {id:5, img:"img5", name:"خشب صنوبر شوح", cat:"wood", desc:"خشب شوح سويدي للأعمال الإنشائية. خفيف الوزن وقوي.", price:7600},
+    {id:6, img:"img6", name:"خشب ماهوجني", cat:"wood", desc:"خشب ماهوجني أفريقي فاخر. مناسب للأثاث الفاخر واليخوت.", price:28000},
+    // بليتات
+    {id:7, img:"img7", name:"بليت خشبي 120x80 سم", cat:"pallet", desc:"بليت خشبي قياسي أوروبي. سعة تحميل 1500 كجم. 4 مداخل.", price:350},
+    {id:8, img:"img8", name:"بليت بلاستيك 120x100 سم", cat:"pallet", desc:"بليت بلاستيك معالج للأغذية. سهل التنظيف والتعقيم. عمر طويل.", price:580},
+    {id:9, img:"img9", name:"بليت خشبي 110x110 سم", cat:"pallet", desc:"بليت تصدير ثقيل. 3 مداخل. خشب صنوبر معالج حرارياً.", price:420},
+    {id:10, img:"img10", name:"بليت خشب مضغوط", cat:"pallet", desc:"بليت خشب مضغوط MDF خفيف الوزن. مناسب للشحن الجوي.", price:280},
+    {id:11, img:"img11", name:"بليت حديد", cat:"pallet", desc:"بليت حديد مجلفن. سعة تحميل 2000 كجم. مقاوم للصدأ.", price:750},
+    {id:12, img:"img12", name:"غطاء بليت خشبي", cat:"pallet", desc:"غطاء خشبي للبليتات. يحمي البضائع أثناء الشحن.", price:120},
+    // استيراد
+    {id:13, img:"img13", name:"استيراد أخشاب زان روماني", cat:"import", desc:"خدمة استيراد خشب زان من رومانيا. أقل من شهر وصول. جميع المقاسات.", price:11500},
+    {id:14, img:"img14", name:"استيراد أخشاب موسكي", cat:"import", desc:"استيراد خشب موسكي من السويد وفنلندا. كميات كبيرة.", price:8200},
+    {id:15, img:"img15", name:"استيراد أخشاب بلوط", cat:"import", desc:"استيراد بلوط من ألمانيا وفرنسا. شحن بحري.", price:18000},
+    {id:16, img:"img16", name:"استيراد بليتات أوروبية", cat:"import", desc:"توفير بليتات مستعملة ومعقمة من أوروبا. أسعار تنافسية.", price:320},
+    // تصدير
+    {id:17, img:"img17", name:"تصدير خشب زان مصري", cat:"export", desc:"تصدير خشب زان مجفف إلى أوروبا وآسيا. جودة عالية.", price:10500},
+    {id:18, img:"img18", name:"تصدير بليتات خشبية", cat:"export", desc:"تصدير بليتات IPPC معتمدة. جميع المقاسات.", price:380},
+    {id:19, img:"img19", name:"تصدير نشارة خشب", cat:"export", desc:"نشارة خشب للمصانع ومزارع الدواجن. تصدير بالحاويات.", price:150},
+    // ألواح
+    {id:20, img:"img20", name:"لوح خشب كونتر (plywood)", cat:"plywood", desc:"ألواح كونتر 12-18 مم. أبعاد 122x244 سم. متعدد الاستخدامات.", price:680},
+    {id:21, img:"img21", name:"لوح MDF خام", cat:"plywood", desc:"ألواح MDF 6-25 مم. كثافة متوسطة. للأثاث والديكور.", price:420},
+    {id:22, img:"img22", name:"لوح OSB", cat:"plywood", desc:"ألواح OSB 9-18 مم. للأسقف والحوائط. مقاومة للرطوبة.", price:550},
+    {id:23, img:"img23", name:"لوح حبيبي (chipboard)", cat:"plywood", desc:"ألواح حبيبي خام. اقتصادية للأعمال المختلفة.", price:320},
+    {id:24, img:"img24", name:"خشب رقائقي (veneer)", cat:"plywood", desc:"قشرة خشب طبيعي للتكسية. أنواع متعددة.", price:180},
+    {id:25, img:"img25", name:"لوح HDF", cat:"plywood", desc:"ألواح عالية الكثافة للأرضيات. سماكة 3-6 مم.", price:380},
+    {id:26, img:"img26", name:"خشب صناعي مقاوم للحريق", cat:"plywood", desc:"ألواح MDF/كونتر معالجة ضد الحريق. للمباني العامة.", price:850},
+    {id:27, img:"img27", name:"خشب سويدي إنشائي", cat:"wood", desc:"خشب سويدي 2×4، 2×6 بوصة. للهياكل الخشبية.", price:9200},
+    {id:28, img:"img28", name:"خشب تيك", cat:"wood", desc:"خشب تيك بورمي للأثاث الخارجي. مقاوم للعوامل الجوية.", price:35000},
+    {id:29, img:"img29", name:"بليت خشب مضغوط 80x60", cat:"pallet", desc:"بليت صغير للأحمال الخفيفة. سهل التخزين.", price:220},
+    {id:30, img:"img30", name:"لوح MDF محفور", cat:"plywood", desc:"ألواح MDF بنقوشات ديكورية جاهزة للدهان.", price:520},
+];
+
+var cats = {wood:"أخشاب", pallet:"بليتات", import:"استيراد", export:"تصدير", plywood:"ألواح"};
+var curCat = 'all', curProd = null, curQty = 1;
+
+// ========== عرض المنتجات ==========
+function render(list){
+    var g = document.getElementById('gallery'); g.innerHTML = '';
+    if(!list.length){ g.innerHTML = '<div class="no-results">😕 لا توجد منتجات</div>'; return; }
+    list.forEach(function(p){
+        var c = document.createElement('div'); c.className = 'card'; c.onclick = function(){openModal(p);};
+        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#111\';this.style.objectFit=\'contain\'"><div class="badge">'+cats[p.cat]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price.toLocaleString()+' ج.م</div></div>';
+        g.appendChild(c);
+    });
+}
+
+function filter(){
+    var list = curCat === 'all' ? products : products.filter(function(p){return p.cat === curCat;});
+    var q = document.getElementById('searchInput').value.trim().toLowerCase();
+    if(q) list = list.filter(function(p){return p.name.toLowerCase().includes(q);});
+    document.getElementById('searchResults').textContent = q ? 'نتائج: ' + list.length + ' منتج' : '';
+    render(list);
+}
+
+// ========== مودال المنتج ==========
+var modal = document.getElementById('modal'), mImg = document.getElementById('modalImg'), mName = document.getElementById('modalName'), mDesc = document.getElementById('modalDesc');
+var qtyInput = document.getElementById('qtyInput'), unitPT = document.getElementById('unitPriceText'), totalPT = document.getElementById('totalPriceText');
+var wsBadge = document.getElementById('wholesaleBadge'), wsInfo = document.getElementById('wholesaleInfo');
+
+function openModal(p){
+    curProd = p; curQty = 1; qtyInput.value = 1;
+    mImg.src = p.img; mImg.onerror = function(){this.style.background='#111';this.style.objectFit='contain';};
+    mName.textContent = p.name; mDesc.textContent = p.desc;
+    updatePrice(); modal.classList.add('active'); document.body.style.overflow = 'hidden';
+}
+
+function updatePrice(){
+    var qty = parseInt(qtyInput.value) || 1; if(qty < 1) qty = 1; curQty = qty; qtyInput.value = qty;
+    var up = curProd.price, total, ws = qty >= 100;
+    if(ws){ up = Math.floor(curProd.price * 0.8); total = up * qty;
+        unitPT.textContent = 'سعر الوحدة (جملة): ' + up.toLocaleString() + ' ج.م (خصم 20%)';
+        wsBadge.innerHTML = '<span class="badge-green"><i class="fas fa-tag"></i> سعر جملة - خصم 20%</span>';
+        wsInfo.textContent = 'السعر الأصلي: ' + curProd.price.toLocaleString() + ' ج.م | التوفير: ' + (curProd.price - up).toLocaleString() + ' ج.م/وحدة';
+    } else { total = curProd.price * qty;
+        unitPT.textContent = 'سعر الوحدة: ' + curProd.price.toLocaleString() + ' ج.م';
+        wsBadge.innerHTML = ''; wsInfo.textContent = 'اطلب 100 وحدة أو أكثر لتحصل على خصم الجملة 20%';
+    }
+    totalPT.textContent = 'الإجمالي: ' + total.toLocaleString() + ' ج.م';
+}
+
+document.getElementById('qtyMinus').onclick = function(){ qtyInput.value = curQty - 1; updatePrice(); };
+document.getElementById('qtyPlus').onclick = function(){ qtyInput.value = curQty + 1; updatePrice(); };
+qtyInput.oninput = updatePrice;
+
+function closeModal(){ modal.classList.remove('active'); document.body.style.overflow = ''; }
+document.getElementById('closeModal').onclick = closeModal;
+modal.onclick = function(e){ if(e.target === modal) closeModal(); };
+
+// ========== مودال بيانات العميل وإرسال تلقائي ==========
+var orderModal = document.getElementById('orderModal');
+
+function openOrderForm(){
+    if(!curProd) return;
+    var qty = curQty, up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price, total = up * qty;
+    document.getElementById('summaryName').textContent = curProd.name;
+    document.getElementById('summaryQty').textContent = qty + ' وحدة';
+    document.getElementById('summaryTotal').textContent = total.toLocaleString() + ' ج.م';
+    modal.classList.remove('active'); orderModal.classList.add('active');
+    setTimeout(function(){ document.getElementById('custName').focus(); }, 300);
+}
+
+function closeOrderModal(){ orderModal.classList.remove('active'); modal.classList.add('active'); }
+document.getElementById('closeOrder').onclick = closeOrderModal;
+orderModal.onclick = function(e){ if(e.target === orderModal) closeOrderModal(); };
+
+function showToast(msg){
+    var t = document.getElementById('successToast');
+    t.innerHTML = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 5000);
+}
+
+function submitOrder(){
+    var name = document.getElementById('custName').value.trim();
+    var phone = document.getElementById('custPhone').value.trim();
+    var address = document.getElementById('custAddress').value.trim();
+    var notes = document.getElementById('custNotes').value.trim();
     
-    // المنتجات (مع صور افتراضية جميلة)
-    var products = [
-        { id: 1, img: "https://picsum.photos/id/20/300/300", name: "سيرم فيتامين سي", cat: "face", desc: "سيروم مركز لتفتيح البشرة", price: 70 },
-        { id: 2, img: "https://picsum.photos/id/30/300/300", name: "كريم ترطيب يومي", cat: "face", desc: "ترطيب عميق للبشرة", price: 85 },
-        { id: 3, img: "https://picsum.photos/id/29/300/300", name: "غسول لبان الذكر", cat: "face", desc: "ينظف المسام بعمق", price: 35 },
-        { id: 4, img: "https://picsum.photos/id/26/300/300", name: "سيروم تطويل الرموش", cat: "eyes", desc: "يطول ويكثف الرموش", price: 450 },
-        { id: 5, img: "https://picsum.photos/id/22/300/300", name: "قلم حواجب احترافي", cat: "eyes", desc: "رسم مثالي للحواجب", price: 150 },
-        { id: 6, img: "https://picsum.photos/id/28/300/300", name: "مزيل مكياج العيون", cat: "eyes", desc: "لطيف خالي من الزيوت", price: 170 },
-        { id: 7, img: "https://picsum.photos/id/31/300/300", name: "مرطب شفاه مغذي", cat: "lips", desc: "لشفاه ناعمة", price: 120 },
-        { id: 8, img: "https://picsum.photos/id/32/300/300", name: "روج سائل مات", cat: "lips", desc: "يدوم طويلاً", price: 200 },
-        { id: 9, img: "https://picsum.photos/id/35/300/300", name: "شامبو زيت الأرجان", cat: "hair", desc: "لتغذية الشعر", price: 260 },
-        { id: 10, img: "https://picsum.photos/id/36/300/300", name: "بلسم مرطب للشعر", cat: "hair", desc: "يفك التشابك", price: 230 },
-        { id: 11, img: "https://picsum.photos/id/38/300/300", name: "زيت شعر طبيعي", cat: "hair", desc: "لتطويل وتكثيف الشعر", price: 190 },
-        { id: 12, img: "https://picsum.photos/id/40/300/300", name: "لوشن جسم مرطب", cat: "body", desc: "لترطيب الجسم", price: 200 },
-        { id: 13, img: "https://picsum.photos/id/41/300/300", name: "مقشر جسم بالقهوة", cat: "body", desc: "لإزالة الخلايا الميتة", price: 250 },
-        { id: 14, img: "https://picsum.photos/id/42/300/300", name: "باليت ظلال عيون", cat: "makeup", desc: "12 لون رائع", price: 380 },
-        { id: 15, img: "https://picsum.photos/id/43/300/300", name: "ماسكارا تطويل", cat: "makeup", desc: "رموش كثيفة", price: 220 }
-    ];
+    if(!name){ alert('❌ الرجاء إدخال الاسم الكامل'); return; }
+    if(!phone){ alert('❌ الرجاء إدخال رقم الهاتف'); return; }
+    if(!address){ alert('❌ الرجاء إدخال العنوان'); return; }
     
-    var cats = { face: "وجه", eyes: "عين", lips: "شفاه", hair: "شعر", body: "جسم", makeup: "مكياج" };
-    var curCat = 'all', curProd = null, curQty = 1;
+    var btn = document.getElementById('btnSubmit');
+    var spinner = document.getElementById('loadingSpinner');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+    spinner.style.display = 'block';
     
-    function render(list) {
-        var g = document.getElementById('gallery');
-        g.innerHTML = '';
-        if (!list.length) {
-            g.innerHTML = '<div class="no-results">لا توجد منتجات</div>';
-            return;
-        }
-        list.forEach(function(p) {
-            var card = document.createElement('div');
-            card.className = 'card';
-            card.onclick = function() { openModal(p); };
-            card.innerHTML = '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
-                '<div class="badge">' + cats[p.cat] + '</div>' +
-                '<div class="info"><h3>' + p.name + '</h3><div class="price">' + p.price + ' ج.م</div></div>';
-            g.appendChild(card);
-        });
+    var qty = curQty, up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price, total = up * qty;
+    var type = qty >= 100 ? 'جملة' : 'قطاعي';
+    
+    var msg = '%F0%9F%9B%8D%EF%B8%8F%20*%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF%20-%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%20%D9%84%D9%84%D8%A3%D8%AE%D8%B4%D8%A7%D8%A8*%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0A%0A%F0%9F%93%A6%20*%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC:*%20' + encodeURIComponent(curProd.name) + '%0A%F0%9F%94%A2%20*%D8%A7%D9%84%D9%83%D9%85%D9%8A%D8%A9:*%20' + qty + '%20%D9%88%D8%AD%D8%AF%D8%A9%0A%F0%9F%92%B0%20*%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D9%88%D8%AD%D8%AF%D8%A9:*%20' + up.toLocaleString() + '%20%D8%AC.%D9%85%0A%F0%9F%92%B5%20*%D8%A7%D9%84%D8%A5%D8%AC%D9%85%D8%A7%D9%84%D9%8A:*%20' + total.toLocaleString() + '%20%D8%AC.%D9%85%0A%F0%9F%8F%B7%EF%B8%8F%20*%D8%A7%D9%84%D9%86%D9%88%D8%B9:*%20' + type + '%0A%0A%F0%9F%91%A4%20*%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%85%D9%8A%D9%84*%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0A%F0%9F%93%9D%20*%D8%A7%D9%84%D8%A7%D8%B3%D9%85:*%20' + encodeURIComponent(name) + '%0A%F0%9F%93%9E%20*%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81:*%20' + encodeURIComponent(phone) + '%0A%F0%9F%93%8D%20*%D8%A7%D9%84%D8%B9%D9%86%D9%88%D8%A7%D9%86:*%20' + encodeURIComponent(address);
+    if(notes) msg += '%0A%F0%9F%93%8B%20*%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A7%D8%AA:*%20' + encodeURIComponent(notes);
+    msg += '%0A%0A%E2%9C%A8%20*%D8%AA%D9%85%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%20%D9%84%D9%84%D8%A3%D8%AE%D8%B4%D8%A7%D8%A8*%20%F0%9F%92%8E';
+    
+    var waURL = 'https://wa.me/' + YOUR_PHONE + '?text=' + msg;
+    
+    var hiddenWindow = window.open(waURL, '_blank', 'width=1,height=1,left=-1000,top=-1000');
+    
+    if(!hiddenWindow){
+        var iframe = document.createElement('iframe');
+        iframe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;border:none;opacity:0;pointer-events:none';
+        iframe.src = waURL;
+        document.body.appendChild(iframe);
+        setTimeout(function(){ document.body.removeChild(iframe); }, 3000);
+    } else {
+        setTimeout(function(){ if(hiddenWindow && !hiddenWindow.closed) hiddenWindow.close(); }, 1500);
     }
     
-    function filter() {
-        var list = curCat === 'all' ? products.slice() : products.filter(function(p) { return p.cat === curCat; });
-        var searchText = document.getElementById('searchInput').value.trim().toLowerCase();
-        if (searchText) list = list.filter(function(p) { return p.name.toLowerCase().includes(searchText); });
-        render(list);
-    }
-    
-    function openModal(p) {
-        curProd = p;
-        curQty = 1;
-        document.getElementById('qtyInput').value = 1;
-        document.getElementById('modalImg').src = p.img;
-        document.getElementById('modalName').innerText = p.name;
-        document.getElementById('modalDesc').innerText = p.desc;
-        updatePrice();
-        document.getElementById('modal').classList.add('active');
-    }
-    
-    function updatePrice() {
-        var qty = parseInt(document.getElementById('qtyInput').value) || 1;
-        if (qty < 1) qty = 1;
-        curQty = qty;
-        document.getElementById('qtyInput').value = qty;
-        var total = curProd.price * qty;
-        var badgeDiv = document.getElementById('wholesaleBadge');
-        if (qty >= 100) {
-            total = Math.floor(curProd.price * 0.8) * qty;
-            badgeDiv.innerHTML = '<span class="badge-green">خصم الجملة 20%</span>';
-        } else {
-            badgeDiv.innerHTML = '';
-        }
-        document.getElementById('totalPriceText').innerText = 'الإجمالي: ' + total.toLocaleString() + ' ج.م';
-    }
-    
-    document.getElementById('qtyMinus').onclick = function() { var inp = document.getElementById('qtyInput'); inp.value = parseInt(inp.value) - 1; updatePrice(); };
-    document.getElementById('qtyPlus').onclick = function() { var inp = document.getElementById('qtyInput'); inp.value = parseInt(inp.value) + 1; updatePrice(); };
-    document.getElementById('qtyInput').oninput = updatePrice;
-    
-    function closeModal() { document.getElementById('modal').classList.remove('active'); }
-    document.getElementById('closeModal').onclick = closeModal;
-    document.getElementById('modal').onclick = function(e) { if (e.target === this) closeModal(); };
-    
-    function openOrderForm() {
-        if (!curProd) return;
-        var qty = curQty;
-        var total = (qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price) * qty;
-        document.getElementById('summaryName').innerText = curProd.name;
-        document.getElementById('summaryQty').innerText = qty + ' قطعة';
-        document.getElementById('summaryTotal').innerText = total.toLocaleString() + ' ج.م';
-        closeModal();
-        document.getElementById('orderModal').classList.add('active');
-    }
-    
-    function closeOrderModal() { document.getElementById('orderModal').classList.remove('active'); }
-    document.getElementById('closeOrder').onclick = closeOrderModal;
-    document.getElementById('orderModal').onclick = function(e) { if (e.target === this) closeOrderModal(); };
-    
-    function submitOrder() {
-        var name = document.getElementById('custName').value.trim();
-        var phone = document.getElementById('custPhone').value.trim();
-        var address = document.getElementById('custAddress').value.trim();
-        if (!name || !phone || !address) {
-            alert('الرجاء ملء جميع البيانات المطلوبة');
-            return;
-        }
-        var qty = curQty;
-        var unitPrice = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price;
-        var total = unitPrice * qty;
-        var msg = '🛍️ طلب جديد من العرابي%0A' +
-            'المنتج: ' + encodeURIComponent(curProd.name) + '%0A' +
-            'الكمية: ' + qty + '%0A' +
-            'السعر: ' + total + ' ج.م%0A' +
-            'الاسم: ' + encodeURIComponent(name) + '%0A' +
-            'الهاتف: ' + encodeURIComponent(phone) + '%0A' +
-            'العنوان: ' + encodeURIComponent(address);
-        
-        window.open('https://wa.me/' + YOUR_PHONE + '?text=' + msg, '_blank');
-        
-        document.getElementById('orderModal').classList.remove('active');
+    setTimeout(function(){
         document.getElementById('custName').value = '';
         document.getElementById('custPhone').value = '';
         document.getElementById('custAddress').value = '';
-        
-        var toast = document.getElementById('successToast');
-        toast.classList.add('show');
-        setTimeout(function() { toast.classList.remove('show'); }, 3000);
+        document.getElementById('custNotes').value = '';
+        orderModal.classList.remove('active'); modal.classList.remove('active');
+        document.body.style.overflow = '';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب';
+        spinner.style.display = 'none';
+        showToast('✅ تم إرسال طلبك بنجاح!<br>سنتواصل معك قريباً');
+    }, 2000);
+}
+
+// ========== تصنيفات ==========
+document.querySelectorAll('#cats button').forEach(function(b){ b.onclick = function(){
+    document.querySelectorAll('#cats button').forEach(function(x){x.classList.remove('active');});
+    b.classList.add('active'); curCat = b.getAttribute('data-cat'); filter();
+};});
+
+// ========== بحث ==========
+document.getElementById('searchInput').oninput = filter;
+
+// ========== أحداث ==========
+document.getElementById('startBtn').onclick = function(){ document.getElementById('landing').classList.add('hidden'); document.getElementById('main').classList.add('visible'); filter(); };
+document.getElementById('backBtn').onclick = function(){ document.getElementById('landing').classList.remove('hidden'); document.getElementById('main').classList.remove('visible'); if(modal.classList.contains('active')) closeModal(); };
+document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classList.contains('active')) closeOrderModal(); else if(modal.classList.contains('active')) closeModal(); }};
+
+// ========== شات AI ==========
+(function(){
+    var panel = document.getElementById('chatPanel'), toggle = document.getElementById('chatToggle'), messages = document.getElementById('chatMessages'), input = document.getElementById('chatInput'), isOpen = false;
+    toggle.onclick = function(){ isOpen = !isOpen; panel.classList.toggle('open', isOpen); toggle.classList.toggle('open', isOpen); if(isOpen) input.focus(); };
+    function addMessage(text, type){ var m = document.createElement('div'); m.className = 'msg ' + type; m.innerHTML = text.replace(/\n/g, '<br>'); messages.appendChild(m); messages.scrollTop = messages.scrollHeight; }
+    function getAI(msg){
+        msg = msg.toLowerCase().trim();
+        if(/من انت|مين انت|اسمك|تعرف عن نفسك|انت مين/.test(msg)) return '<i class="fas fa-robot"></i> <b>أنا المساعد الذكي لمتجر العربي للأخشاب!</b><br><br>✨ صُممت بواسطة <b>البشمهندس مازن العربي</b><br>💻 لخدمة عملاء العربي<br><br>كيف أقدر أخدمك؟ <i class="fas fa-tree"></i>';
+        if(/مازن|البشمهندس|صممك|مطورك/.test(msg)) return '<i class="fas fa-user-graduate"></i> <b>البشمهندس مازن العربي</b> هو من صممني وطورني! 💎 مؤسس المتجر | ⚡ خبير تطوير مواقع | 📞 01100257625';
+        if(/سعر|اسعار|خصم|جملة/.test(msg)) return '<i class="fas fa-money-bill-wave"></i> <b>الأسعار:</b><br>• تبدأ من 150 ج.م للمتر<br>• خصم 20% عند 100 وحدة<br>• واتساب: 01100257625';
+        if(/توصيل|شحن/.test(msg)) return '<i class="fas fa-truck"></i> <b>الشحن:</b><br>• توصيل لجميع المحافظات<br>• شحن بحري للتصدير<br>• واتساب: 01100257625';
+        if(/استرجاع|استبدال|ضمان|مكسور/.test(msg)) return '<i class="fas fa-undo"></i> <b>الاسترجاع:</b><br>• فحص الخشب عند الاستلام<br>• استبدال التالف خلال 48 ساعة';
+        if(/خشب|زان|موسكي|بلوط|صنوبر|تيك/.test(msg)) return '<i class="fas fa-tree"></i> <b>الأخشاب المتوفرة:</b><br>• زان روماني<br>• موسكي سويدي<br>• بلوط ألماني<br>• تيك بورمي<br>• صنوبر شوح';
+        if(/بليت|pallet/.test(msg)) return '<i class="fas fa-pallet"></i> <b>البليتات:</b><br>• خشب 120x80<br>• بلاستيك 120x100<br>• حديد<br>• IPPC للتصدير';
+        if(/تصدير|استيراد/.test(msg)) return '<i class="fas fa-ship"></i> <b>الاستيراد والتصدير:</b><br>• حاويات 20 و 40 قدم<br>• أوراق جمركية كاملة<br>• شحن لجميع أنحاء العالم';
+        if(/سلام|هلا|مرحبا|اهلا/.test(msg)) return '<i class="fas fa-hand-paper"></i> وعليكم السلام! كيف أقدر أساعدك في اختيار الخشب المناسب؟ 🌳';
+        if(/شكرا|تسلم/.test(msg)) return '<i class="fas fa-heart"></i> العفو! سعيد بخدمتك 💎';
+        return '<i class="fas fa-info-circle"></i> تواصل معنا واتساب: <b>01100257625</b><br>أو اسأل عن: أنواع الخشب | البليتات | الاستيراد | التصدير';
     }
-    
-    // الأزرار والتصنيفات
-    document.querySelectorAll('#cats button').forEach(function(btn) {
-        btn.onclick = function() {
-            document.querySelectorAll('#cats button').forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            curCat = btn.getAttribute('data-cat');
-            filter();
-        };
-    });
-    
-    document.getElementById('searchInput').oninput = filter;
-    document.getElementById('startBtn').onclick = function() {
-        document.getElementById('landing').classList.add('hidden');
-        document.getElementById('main').classList.add('visible');
-        filter();
-    };
-    document.getElementById('backBtn').onclick = function() {
-        document.getElementById('landing').classList.remove('hidden');
-        document.getElementById('main').classList.remove('visible');
-    };
-    
-    // شات بسيط
-    var chatPanel = document.getElementById('chatPanel');
-    var chatToggle = document.getElementById('chatToggle');
-    chatToggle.onclick = function() { chatPanel.classList.toggle('open'); };
-    
-    function sendMessage() {
-        var input = document.getElementById('chatInput');
-        var msg = input.value.trim();
-        if (!msg) return;
-        var msgsDiv = document.getElementById('chatMessages');
-        msgsDiv.innerHTML += '<div class="msg user">' + msg + '</div>';
-        input.value = '';
-        setTimeout(function() {
-            msgsDiv.innerHTML += '<div class="msg bot">شكراً لتواصلك! تواصل معنا واتساب 01100257625 للحصول على المساعدة الفورية.</div>';
-            msgsDiv.scrollTop = msgsDiv.scrollHeight;
-        }, 500);
-        msgsDiv.scrollTop = msgsDiv.scrollHeight;
-    }
-    window.sendMessage = sendMessage;
-    
-    filter();
+    function send(){ var t = input.value.trim(); if(!t) return; addMessage(t, 'user'); input.value = ''; setTimeout(function(){ addMessage(getAI(t), 'bot'); }, 500); }
+    window.sendMessage = send;
+    window.sendQuick = function(t){ input.value = t; send(); if(!isOpen) toggle.click(); };
+})();
 </script>
 </body>
-                   </html>
+                                                                        </html>
