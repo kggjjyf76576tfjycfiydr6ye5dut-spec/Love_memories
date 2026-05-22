@@ -66,19 +66,10 @@
         .btn-back{margin:15px auto;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;display:block;width:200px;text-align:center}
         .contact{width:95%;max-width:500px;margin:15px auto;padding:20px;background:#111;border:1px solid #333;border-radius:12px;text-align:center}
         .contact h2{color:#d4af37;margin-bottom:15px}
-        .contact-cards{display:flex;justify-content:center}
-        .c-card{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:20px;width:280px}
-        .c-card .icon{font-size:2rem;margin-bottom:8px}
-        .c-card .role{color:#d4af37;font-weight:700}
-        .c-card .name{font-size:1.2rem;font-weight:900;margin:5px 0}
-        .c-card .phone{direction:ltr;color:#ccc}
-        .c-card .call-btn{display:inline-block;margin-top:8px;padding:8px 20px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-weight:700}
-        .footer{text-align:center;padding:15px;margin:15px auto;background:#111;border:1px solid #333;border-radius:12px;width:95%;max-width:500px}
-        .footer .f-name{color:#d4af37;font-weight:900}
-        .social{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px;padding-top:10px;border-top:1px solid #2a2a2a}
-        .social a,.social span{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:50px;text-decoration:none;font-size:.75rem;color:#fff}
-        .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#fff;color:#000}
-        .social .ph{border:1px solid #d4af37;color:#d4af37;background:transparent}
+        .contact .phone-number{direction:ltr;font-size:1.3rem;font-weight:900;color:#fff;margin:10px 0}
+        .contact .phone-number i{color:#25D366;margin:0 5px}
+        .contact .call-btn{display:inline-block;margin-top:8px;padding:10px 25px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem}
+        .footer{text-align:center;padding:15px;margin:15px auto;background:#111;border:1px solid #333;border-radius:12px;width:95%;max-width:500px;color:#888;font-size:.8rem}
     </style>
 </head>
 <body>
@@ -114,36 +105,15 @@
     <div class="gallery" id="gallery"></div>
     <button class="btn-back" id="backBtn">🏠 العودة للرئيسية</button>
 
-    <!-- ============================================ -->
-    <!-- تم التغيير: البشمهندس مازن محمد العربي -->
-    <!-- ============================================ -->
     <div class="contact">
         <h2>📞 للتواصل</h2>
-        <div class="contact-cards">
-            <div class="c-card">
-                <div class="icon">👨‍💻</div>
-                <div class="role">البشمهندس</div>
-                <div class="name">مازن محمد العربي</div>
-                <div class="phone"><i class="fab fa-whatsapp"></i> 01100257625</div>
-                <a href="tel:01100257625" class="call-btn">📞 اتصال</a>
-            </div>
-        </div>
+        <div class="phone-number"><i class="fab fa-whatsapp"></i> 01100257625</div>
+        <a href="tel:01100257625" class="call-btn">📞 اتصال</a>
         <p style="color:#aaa;margin-top:15px;font-size:.8rem">✅ استيراد من أوروبا | بليتات جميع المقاسات | 🚚 توصيل لجميع المحافظات</p>
     </div>
 
-    <!-- ============================================ -->
-    <!-- تم التغيير: البشمهندس مازن العربي -->
-    <!-- ============================================ -->
     <div class="footer">
-        ⚡ صُنع بواسطة<br>
-        <span class="f-name">البشمهندس مازن العربي</span>
-        <div class="social">
-            <span class="ph"><i class="fab fa-whatsapp"></i> 01100257625</span>
-            <a href="https://wa.me/201100257625" class="wa">واتساب</a>
-            <a href="https://www.facebook.com/share/1J5pRHd8g5/" class="fb">فيسبوك</a>
-            <a href="https://www.instagram.com/mazenalaraby10" class="ig">انستجرام</a>
-            <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="tt">تيك توك</a>
-        </div>
+        © 2026 جميع الحقوق محفوظة
     </div>
 </div>
 
@@ -190,9 +160,6 @@
 </div>
 
 <script>
-// ============================================
-// تم التغيير: رقم الواتساب 201100257625
-// ============================================
 var YOUR_PHONE = '201100257625';
 
 var products = [
@@ -313,4 +280,4 @@ document.getElementById('startBtn').onclick = function(){ document.getElementByI
 document.getElementById('backBtn').onclick = function(){ document.getElementById('landing').classList.remove('hidden'); document.getElementById('main').classList.remove('visible'); };
 </script>
 </body>
-    </html>
+</html>
