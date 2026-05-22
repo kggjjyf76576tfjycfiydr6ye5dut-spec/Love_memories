@@ -2,22 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>العربي للأخشاب</title>
-    
     <meta name="theme-color" content="#0a0a0a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="العربي للأخشاب">
-    
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItin2YTZgti12Kog2YTYp9mE2KfZhdiz2KfYqiIsCiAgInNob3J0X25hbWUiOiAi2KfZhNmC2LXZhdiz2KfYqiIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMGEwYTBhIiwKICAidGhlbWVfY29sb3IiOiAiI2Q0YWYzNyIsCiAgImljb25zIjogW10KfQ==">
-    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden}
-        
+        body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff}
         .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#000,#1a1a1a,#0a0a0a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;text-align:center;padding:20px}
         .landing.hidden{display:none}
         .landing .logo{font-size:5rem;animation:float 3s infinite}
@@ -25,30 +17,23 @@
         .landing h1{font-size:2.5rem;font-weight:900;color:#d4af37;margin:10px 0}
         .landing p{font-size:1.1rem;color:#ccc}
         .btn-gold{padding:15px 45px;font-size:1.2rem;font-weight:700;background:#d4af37;color:#000;border:none;border-radius:50px;cursor:pointer;margin-top:25px}
-        
         .main-content{min-height:100vh;display:none;padding-top:90px}
         .main-content.visible{display:block}
-        
         .header{position:fixed;top:0;left:0;right:0;z-index:500;background:#000;padding:10px;text-align:center;border-bottom:2px solid #d4af37}
         .header h2{font-size:1.3rem;color:#d4af37}
-        
         .search-box{display:flex;gap:5px;width:90%;max-width:400px;margin:8px auto;background:rgba(255,255,255,.1);border:1px solid #333;border-radius:50px;padding:5px 10px}
         .search-box input{flex:1;background:transparent;border:none;color:#fff;font-size:.9rem;outline:none;font-family:'Cairo',sans-serif}
         .search-box button{background:#d4af37;border:none;color:#000;width:30px;height:30px;border-radius:50%;cursor:pointer}
-        
         .cats{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:10px}
         .cats button{padding:7px 14px;font-size:.8rem;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer}
         .cats button.active{background:#d4af37;color:#000}
-        
         .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:95%;max-width:600px;margin:0 auto;padding-bottom:20px}
-        
         .card{position:relative;border-radius:12px;overflow:hidden;background:#1a1a1a;border:1px solid #2a2a2a;aspect-ratio:3/4;cursor:pointer}
         .card img{width:100%;height:65%;object-fit:cover}
         .card .info{padding:10px;text-align:center}
         .card .info h3{font-size:.8rem;color:#fff;margin-bottom:3px}
         .card .info .price{font-size:1rem;font-weight:900;color:#d4af37}
         .card .badge{position:absolute;top:8px;right:8px;background:#d4af37;color:#000;padding:3px 10px;border-radius:15px;font-size:.65rem}
-        
         .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:15px}
         .modal.active{display:flex}
         .modal-content{width:100%;max-width:400px;background:#1a1a1a;border:1px solid #d4af37;border-radius:15px;overflow:hidden;max-height:85vh;overflow-y:auto}
@@ -56,15 +41,12 @@
         .modal .m-info{padding:15px;text-align:center}
         .modal .m-info h3{font-size:1.2rem;color:#d4af37;margin-bottom:8px}
         .modal .m-info .desc{font-size:.85rem;color:#aaa;margin-bottom:12px}
-        
         .qty-box{background:#111;border:1px solid #333;border-radius:10px;padding:12px;margin:10px 0}
         .qty-controls{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px}
         .qty-controls button{width:30px;height:30px;border:1px solid #d4af37;background:transparent;color:#d4af37;border-radius:5px;cursor:pointer;font-size:1.1rem}
         .qty-controls input{width:60px;text-align:center;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:5px;padding:5px;outline:none}
         .total-price{font-size:1.5rem;font-weight:900;color:#d4af37}
-        
         .close-modal{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;width:30px;height:30px;border-radius:50%;cursor:pointer;font-weight:700}
-        
         .order-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:3000;justify-content:center;align-items:center;padding:15px}
         .order-modal.active{display:flex}
         .order-modal-content{width:100%;max-width:380px;background:#1a1a1a;border:1px solid #d4af37;border-radius:15px;overflow:hidden;max-height:85vh;overflow-y:auto}
@@ -79,12 +61,9 @@
         .order-summary p{color:#aaa;font-size:.8rem}
         .btn-submit{padding:12px;font-size:1.1rem;font-weight:700;background:#25D366;color:#fff;border:none;border-radius:50px;cursor:pointer;width:100%}
         .close-order{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;width:30px;height:30px;border-radius:50%;cursor:pointer}
-        
         .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:12px 25px;border-radius:50px;font-weight:700;z-index:9999;display:none}
         .success-toast.show{display:block}
-        
         .btn-back{margin:15px auto;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;display:block;width:200px;text-align:center}
-        
         .contact{width:95%;max-width:500px;margin:15px auto;padding:20px;background:#111;border:1px solid #333;border-radius:12px;text-align:center}
         .contact h2{color:#d4af37;margin-bottom:15px}
         .contact-cards{display:flex;justify-content:center}
@@ -94,30 +73,17 @@
         .c-card .name{font-size:1.2rem;font-weight:900;margin:5px 0}
         .c-card .phone{direction:ltr;color:#ccc}
         .c-card .call-btn{display:inline-block;margin-top:8px;padding:8px 20px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-weight:700}
-        
         .footer{text-align:center;padding:15px;margin:15px auto;background:#111;border:1px solid #333;border-radius:12px;width:95%;max-width:500px}
         .footer .f-name{color:#d4af37;font-weight:900}
         .social{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px;padding-top:10px;border-top:1px solid #2a2a2a}
         .social a,.social span{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:50px;text-decoration:none;font-size:.75rem;color:#fff}
         .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#fff;color:#000}
         .social .ph{border:1px solid #d4af37;color:#d4af37;background:transparent}
-        
-        .install-banner{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:2px solid #d4af37;padding:15px 20px;border-radius:15px;z-index:999;text-align:center;width:90%;max-width:400px}
-        .install-banner.show{display:block}
-        .install-banner button{margin:8px 5px 0;padding:10px 25px;border-radius:50px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;border:none}
-        .install-banner .btn-install{background:#d4af37;color:#000}
-        .install-banner .btn-close{background:transparent;color:#888;border:1px solid #555}
     </style>
 </head>
 <body>
 
 <div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح!</div>
-
-<div class="install-banner" id="installBanner">
-    <p>📱 تثبيت تطبيق العربي للأخشاب</p>
-    <button class="btn-install" onclick="installApp()">✨ تثبيت الآن</button>
-    <button class="btn-close" onclick="document.getElementById('installBanner').classList.remove('show')">✕ إغلاق</button>
-</div>
 
 <div class="landing" id="landing">
     <div class="logo">🪵</div>
@@ -148,6 +114,9 @@
     <div class="gallery" id="gallery"></div>
     <button class="btn-back" id="backBtn">🏠 العودة للرئيسية</button>
 
+    <!-- ============================================ -->
+    <!-- تم التغيير: البشمهندس مازن محمد العربي -->
+    <!-- ============================================ -->
     <div class="contact">
         <h2>📞 للتواصل</h2>
         <div class="contact-cards">
@@ -162,6 +131,9 @@
         <p style="color:#aaa;margin-top:15px;font-size:.8rem">✅ استيراد من أوروبا | بليتات جميع المقاسات | 🚚 توصيل لجميع المحافظات</p>
     </div>
 
+    <!-- ============================================ -->
+    <!-- تم التغيير: البشمهندس مازن العربي -->
+    <!-- ============================================ -->
     <div class="footer">
         ⚡ صُنع بواسطة<br>
         <span class="f-name">البشمهندس مازن العربي</span>
@@ -218,37 +190,9 @@
 </div>
 
 <script>
-var deferredPrompt;
-window.addEventListener('beforeinstallprompt', function(e){
-    e.preventDefault();
-    deferredPrompt = e;
-    document.getElementById('installBanner').classList.add('show');
-});
-
-window.addEventListener('appinstalled', function(){
-    document.getElementById('installBanner').classList.remove('show');
-    deferredPrompt = null;
-});
-
-function installApp(){
-    if(deferredPrompt){
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function(result){
-            document.getElementById('installBanner').classList.remove('show');
-            deferredPrompt = null;
-        });
-    } else {
-        alert('📱 للتثبيت:\n\n1. افتح المتصفح (Chrome)\n2. اضغط ⁝ (الثلاث نقط)\n3. اختار "تثبيت التطبيق"');
-    }
-}
-
-if('serviceWorker' in navigator){
-    var swCode = 'self.addEventListener("install",function(e){e.waitUntil(caches.open("v1").then(function(c){return c.addAll(["/"])}))});self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request)}))});';
-    var blob = new Blob([swCode], {type: 'application/javascript'});
-    var swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).catch(function(){});
-}
-
+// ============================================
+// تم التغيير: رقم الواتساب 201100257625
+// ============================================
 var YOUR_PHONE = '201100257625';
 
 var products = [
@@ -367,7 +311,6 @@ document.querySelectorAll('#cats button').forEach(function(b){ b.onclick = funct
 document.getElementById('searchInput').oninput = filter;
 document.getElementById('startBtn').onclick = function(){ document.getElementById('landing').classList.add('hidden'); document.getElementById('main').classList.add('visible'); filter(); };
 document.getElementById('backBtn').onclick = function(){ document.getElementById('landing').classList.remove('hidden'); document.getElementById('main').classList.remove('visible'); };
-document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classList.contains('active')) closeOrderModal(); else if(modal.classList.contains('active')) closeModal(); }};
 </script>
 </body>
     </html>
