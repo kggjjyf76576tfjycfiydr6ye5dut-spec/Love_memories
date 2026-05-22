@@ -148,7 +148,6 @@
     <div class="gallery" id="gallery"></div>
     <button class="btn-back" id="backBtn">🏠 العودة للرئيسية</button>
 
-    <!-- ===== قسم التواصل الجديد ===== -->
     <div class="contact">
         <h2>📞 للتواصل</h2>
         <div class="contact-cards">
@@ -176,7 +175,6 @@
     </div>
 </div>
 
-<!-- مودال المنتج -->
 <div class="modal" id="modal">
     <div class="modal-content">
         <button class="close-modal" id="closeModal">✕</button>
@@ -199,7 +197,6 @@
     </div>
 </div>
 
-<!-- مودال الطلب -->
 <div class="order-modal" id="orderModal">
     <div class="order-modal-content">
         <button class="close-order" id="closeOrder">✕</button>
@@ -221,7 +218,6 @@
 </div>
 
 <script>
-// ========== PWA Install ==========
 var deferredPrompt;
 window.addEventListener('beforeinstallprompt', function(e){
     e.preventDefault();
@@ -246,7 +242,6 @@ function installApp(){
     }
 }
 
-// ========== Service Worker ==========
 if('serviceWorker' in navigator){
     var swCode = 'self.addEventListener("install",function(e){e.waitUntil(caches.open("v1").then(function(c){return c.addAll(["/"])}))});self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request)}))});';
     var blob = new Blob([swCode], {type: 'application/javascript'});
@@ -254,10 +249,8 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register(swUrl).catch(function(){});
 }
 
-// ========== رقم الواتساب الجديد ==========
 var YOUR_PHONE = '201100257625';
 
-// ========== المنتجات ==========
 var products = [
     {id:1, img:"img1", name:"خشب زان روماني", cat:"wood", desc:"خشب زان درجة أولى مجفف للأثاث والديكورات", price:12500},
     {id:2, img:"img2", name:"خشب سويدي موسكي", cat:"wood", desc:"خشب سويدي معالج للشدات والقوالب", price:8700},
