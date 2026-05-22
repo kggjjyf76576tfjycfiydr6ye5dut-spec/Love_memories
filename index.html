@@ -2,211 +2,241 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>العربي للأخشاب - استيراد وتصدير</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="العربي للأخشاب">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
+    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff}
+        body{font-family:'Cairo',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
         
-        .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#000,#1a1a1a,#0a0a0a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;text-align:center;padding:20px}
-        .landing.hidden{display:none}
+        .landing{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#000,#1a1a1a,#0a0a0a);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;transition:opacity .8s,visibility .8s;padding:20px;text-align:center}
+        .landing.hidden{opacity:0;visibility:hidden;pointer-events:none}
         .landing .logo{font-size:5rem;animation:float 3s infinite}
         @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-        .landing h1{font-size:3rem;font-weight:900;color:#d4af37;margin:10px 0}
-        .landing p{font-size:1.2rem;color:#ccc;margin:5px 0}
-        .landing .slogan{color:#888;margin:15px 0 30px}
-        .btn-gold{padding:15px 45px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer}
+        .landing h1{font-size:2.8rem;font-weight:900;color:#d4af37;letter-spacing:3px;margin:8px 0}
+        .landing .sub{font-size:1.2rem;color:#ccc;opacity:.9}
+        .landing .slogan{font-size:1rem;color:#888;margin:15px 0 30px;line-height:1.6}
+        .btn-gold{padding:14px 40px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:.3s;letter-spacing:1px}
+        .btn-gold:active{transform:scale(.95)}
         
-        .main-content{min-height:100vh;display:none;padding-top:100px}
-        .main-content.visible{display:block}
+        .main-content{min-height:100vh;display:none;flex-direction:column;align-items:center;padding-top:100px}
+        .main-content.visible{display:flex}
         
-        .header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.95);padding:10px;text-align:center;border-bottom:2px solid #d4af37}
-        .header h2{font-size:1.5rem;font-weight:900;color:#d4af37}
-        .header p{font-size:.8rem;color:#aaa}
+        .header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.95);padding:10px 12px;text-align:center;border-bottom:2px solid #d4af37;backdrop-filter:blur(10px)}
+        .header h2{font-size:1.3rem;font-weight:900;color:#d4af37;letter-spacing:2px}
+        .header p{font-size:.7rem;color:#aaa}
+        .search-box{display:flex;gap:6px;width:100%;max-width:400px;margin:8px auto 0;background:rgba(255,255,255,.08);border:1px solid #333;border-radius:50px;padding:6px 12px}
+        .search-box input{flex:1;background:transparent;border:none;color:#fff;font-size:.9rem;outline:none;font-family:'Cairo',sans-serif;min-width:0}
+        .search-box input::placeholder{color:#666;font-size:.8rem}
+        .search-box button{background:#d4af37;border:none;color:#000;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.8rem;flex-shrink:0}
+        .search-results{color:#d4af37;font-size:.75rem;margin-top:4px}
         
-        .search-box{display:flex;gap:5px;width:90%;max-width:400px;margin:8px auto;background:rgba(255,255,255,.1);border:1px solid #333;border-radius:50px;padding:5px 10px}
-        .search-box input{flex:1;background:transparent;border:none;color:#fff;font-size:.9rem;outline:none;font-family:'Cairo',sans-serif}
-        .search-box input::placeholder{color:#666}
-        .search-box button{background:#d4af37;border:none;color:#000;width:30px;height:30px;border-radius:50%;cursor:pointer}
+        .cats{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 8px;width:100%;margin:10px 0}
+        .cats button{padding:7px 14px;font-size:.8rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer;transition:.3s;white-space:nowrap}
+        .cats button:active,.cats button.active{background:#d4af37;color:#000}
         
-        .cats{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:10px;margin:10px 0}
-        .cats button{padding:7px 15px;font-size:.8rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer}
-        .cats button.active,.cats button:hover{background:#d4af37;color:#000}
+        .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:96%;max-width:600px;padding-bottom:20px}
+        .no-results{text-align:center;padding:40px 20px;font-size:1.2rem;color:#555;grid-column:1/-1}
         
-        .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:95%;max-width:600px;margin:0 auto;padding-bottom:20px}
-        .no-results{text-align:center;padding:40px;color:#555;grid-column:1/-1}
-        
-        .card{position:relative;border-radius:12px;overflow:hidden;background:#1a1a1a;border:1px solid #2a2a2a;aspect-ratio:3/4;cursor:pointer}
-        .card:active{border-color:#d4af37}
+        .card{position:relative;border-radius:12px;overflow:hidden;background:#1a1a1a;border:1px solid #2a2a2a;transition:.2s;aspect-ratio:3/4;cursor:pointer}
+        .card:active{transform:scale(.97);border-color:#d4af37}
         .card img{width:100%;height:65%;object-fit:cover}
-        .card .info{padding:10px;text-align:center}
-        .card .info h3{font-size:.8rem;font-weight:700;color:#fff;margin-bottom:3px}
+        .card .info{padding:10px 8px;text-align:center}
+        .card .info h3{font-size:.8rem;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.3}
         .card .info .price{font-size:1rem;font-weight:900;color:#d4af37}
         .card .badge{position:absolute;top:8px;right:8px;background:#d4af37;color:#000;padding:3px 10px;border-radius:15px;font-size:.65rem;font-weight:700}
         
         .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:15px}
         .modal.active{display:flex}
-        .modal-content{position:relative;width:100%;max-width:400px;background:#1a1a1a;border:1px solid #d4af37;border-radius:15px;overflow:hidden;max-height:85vh;overflow-y:auto}
+        .modal-content{position:relative;width:100%;max-width:420px;background:#1a1a1a;border:1px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(212,175,55,.2);animation:fadeIn .4s;max-height:85vh;overflow-y:auto}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         .modal img{width:100%;max-height:35vh;object-fit:cover;border-bottom:2px solid #d4af37}
         .modal .m-info{padding:15px;text-align:center}
-        .modal .m-info h3{font-size:1.3rem;font-weight:900;color:#d4af37;margin-bottom:8px}
+        .modal .m-info h3{font-size:1.3rem;font-weight:900;color:#d4af37;margin-bottom:6px}
         .modal .m-info .desc{font-size:.85rem;color:#aaa;margin-bottom:12px;line-height:1.7}
         
         .qty-box{background:#111;border:1px solid #333;border-radius:10px;padding:12px;margin:10px 0}
-        .qty-box label{display:block;font-weight:700;color:#fff;margin-bottom:6px}
-        .qty-controls{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px}
-        .qty-controls button{width:30px;height:30px;border:1px solid #d4af37;background:transparent;color:#d4af37;font-size:1.1rem;font-weight:700;border-radius:5px;cursor:pointer}
-        .qty-controls input{width:60px;text-align:center;font-size:1.1rem;font-weight:700;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:5px;padding:5px;outline:none}
-        .price-details{text-align:center}
-        .price-details .unit-price{font-size:.8rem;color:#888}
-        .price-details .total-price{font-size:1.5rem;font-weight:900;color:#d4af37}
-        .badge-green{display:inline-block;background:#25D366;color:#000;padding:3px 10px;border-radius:15px;font-size:.7rem;font-weight:700;margin:5px 0}
-        .info-text{color:#888;font-size:.75rem}
+        .qty-box label{display:block;font-weight:700;color:#fff;margin-bottom:6px;font-size:.9rem}
+        .qty-controls{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px}
+        .qty-controls button{width:32px;height:32px;border:1px solid #d4af37;background:transparent;color:#d4af37;font-size:1.1rem;font-weight:700;border-radius:6px;cursor:pointer}
+        .qty-controls button:active{background:#d4af37;color:#000}
+        .qty-controls input{width:60px;text-align:center;font-size:1.1rem;font-weight:700;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:6px;padding:6px;outline:none}
+        .price-details{text-align:center;padding:6px}
+        .price-details .unit-price{font-size:.8rem;color:#888;margin-bottom:2px}
+        .price-details .total-price{font-size:1.4rem;font-weight:900;color:#d4af37}
+        .badge-green{display:inline-block;background:#25D366;color:#000;padding:3px 10px;border-radius:15px;font-size:.7rem;font-weight:700;margin-top:5px;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+        .info-text{color:#888;font-size:.75rem;margin-top:3px}
         
-        .close-modal{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
+        .close-modal{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
         
         .order-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:3000;justify-content:center;align-items:center;padding:15px}
         .order-modal.active{display:flex}
-        .order-modal-content{position:relative;width:100%;max-width:380px;background:#1a1a1a;border:1px solid #d4af37;border-radius:15px;overflow:hidden;max-height:85vh;overflow-y:auto}
-        .order-modal-content .o-header{background:linear-gradient(135deg,#000,#1a1a1a);padding:12px;text-align:center;border-bottom:1px solid #d4af37}
-        .order-modal-content .o-header h3{color:#d4af37;font-size:1.1rem}
+        .order-modal-content{position:relative;width:100%;max-width:400px;background:#1a1a1a;border:1px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 0 30px rgba(212,175,55,.2);animation:fadeIn .4s;max-height:85vh;overflow-y:auto}
+        .order-modal-content .o-header{background:linear-gradient(135deg,#000,#1a1a1a);padding:12px 15px;text-align:center;border-bottom:1px solid #d4af37}
+        .order-modal-content .o-header h3{color:#d4af37;font-size:1.1rem;font-weight:900}
         .order-modal-content .o-body{padding:15px}
         .form-group{margin-bottom:12px}
         .form-group label{display:block;color:#ccc;font-size:.8rem;margin-bottom:4px;font-weight:600}
         .form-group label span{color:#ff4444}
-        .form-group input,.form-group textarea{width:100%;padding:10px;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-family:'Cairo',sans-serif;font-size:.9rem;outline:none}
+        .form-group input,.form-group textarea{width:100%;padding:10px 12px;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-family:'Cairo',sans-serif;font-size:.9rem;outline:none;transition:.3s}
         .form-group input:focus,.form-group textarea:focus{border-color:#d4af37}
         .form-group textarea{min-height:60px;resize:vertical}
         .order-summary{background:#111;border:1px solid #333;border-radius:8px;padding:10px;margin-bottom:15px;text-align:center}
         .order-summary h4{color:#d4af37;font-size:.9rem;margin-bottom:6px}
         .order-summary p{color:#aaa;font-size:.8rem;margin:2px 0}
         .btn-submit{padding:12px;font-size:1.1rem;font-weight:700;background:linear-gradient(45deg,#25D366,#128C7E);color:#fff;border:none;border-radius:50px;cursor:pointer;width:100%}
-        .close-order{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
+        .btn-submit:active{transform:scale(.97)}
+        .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+        .close-order{position:absolute;top:8px;left:8px;background:#d4af37;border:none;color:#000;font-size:1rem;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;font-weight:700}
         
-        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:12px 25px;border-radius:50px;font-weight:700;z-index:9999;font-size:.9rem;display:none}
-        .success-toast.show{display:block}
+        .success-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#25D366;color:#fff;padding:15px 30px;border-radius:50px;font-weight:700;z-index:9999;font-size:.95rem;display:none;box-shadow:0 10px 40px rgba(37,211,102,.6);text-align:center}
+        .success-toast.show{display:block;animation:slideDown .5s ease}
+        @keyframes slideDown{from{opacity:0;transform:translateX(-50%) translateY(-30px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
         
-        .btn-back{margin:15px;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;display:block;text-align:center;width:200px;margin:15px auto}
+        .btn-back{margin:15px;padding:10px 25px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;font-weight:600}
+        .btn-back:active{background:#d4af37;color:#000}
         
-        .contact{width:95%;max-width:500px;margin:15px auto;padding:20px;background:#111;border:1px solid #333;border-radius:12px;text-align:center}
+        .install-banner{display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:2px solid #d4af37;padding:15px 20px;border-radius:15px;z-index:999;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.8)}
+        .install-banner.show{display:block}
+        .install-banner button{display:block;margin:10px auto 0;padding:10px 30px;background:#d4af37;color:#000;border:none;border-radius:50px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif}
+        
+        .contact{width:96%;max-width:500px;margin:15px;padding:20px 15px;background:#111;border:1px solid #333;border-radius:12px;text-align:center}
         .contact h2{font-size:1.3rem;font-weight:900;color:#d4af37;margin-bottom:15px}
-        .contact-cards{display:flex;justify-content:center}
-        .c-card{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:20px;width:250px;text-align:center}
-        .c-card .icon{font-size:2rem;margin-bottom:8px}
-        .c-card .role{font-size:.9rem;font-weight:700;color:#d4af37}
-        .c-card .name{font-size:1.2rem;font-weight:900;color:#fff;margin:5px 0}
-        .c-card .phone{direction:ltr;font-weight:700;font-size:1rem;color:#ccc}
+        .contact-cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+        .c-card{background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:20px;min-width:220px;max-width:280px;text-align:center}
+        .c-card .icon{font-size:2rem;margin-bottom:6px}
+        .c-card .role{font-size:.85rem;font-weight:700;color:#d4af37}
+        .c-card .name{font-size:1.1rem;font-weight:900;color:#fff;margin:5px 0}
+        .c-card .phone{direction:ltr;font-weight:700;font-size:.95rem;color:#ccc}
         .c-card .phone i{color:#25D366;margin:0 3px}
-        .c-card .call-btn{display:inline-block;margin-top:8px;padding:8px 20px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-size:.85rem;font-weight:700}
-        .contact .note{margin-top:15px;padding:10px;background:#000;color:#d4af37;border-radius:8px;font-size:.8rem;font-weight:600;border:1px solid #333}
+        .c-card .call-btn{display:inline-block;margin-top:8px;padding:6px 20px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-size:.85rem;font-weight:700}
+        .contact .note{margin-top:15px;padding:10px;background:#000;color:#d4af37;border-radius:8px;font-size:.8rem;font-weight:600;border:1px solid #333;line-height:1.6}
         
-        .footer{text-align:center;padding:15px;margin:15px auto;color:#fff;background:#111;border:1px solid #333;border-radius:12px;width:95%;max-width:500px}
-        .footer .f-name{font-size:1.2rem;font-weight:900;color:#d4af37}
+        .footer{text-align:center;padding:15px;margin:15px;color:#fff;background:#111;border:1px solid #333;border-radius:12px;width:96%;max-width:500px}
+        .footer .f-name{font-size:1.1rem;font-weight:900;color:#d4af37}
         .social{margin-top:10px;padding-top:10px;border-top:1px solid #2a2a2a;display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
         .social a,.social span{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:50px;text-decoration:none;font-size:.75rem;font-weight:600;color:#fff}
         .social .wa{background:#25D366}.social .fb{background:#1877F2}.social .ig{background:#E4405F}.social .tt{background:#fff;color:#000}
+        .social a:hover{transform:scale(1.05)}
         .social .ph{background:transparent;border:1px solid #d4af37;color:#d4af37;direction:ltr}
         
         .chat-widget{position:fixed;bottom:15px;left:15px;z-index:9999}
-        .chat-toggle{width:50px;height:50px;background:linear-gradient(135deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#d4af37}
-        .chat-panel{display:none;position:fixed;bottom:75px;left:10px;width:calc(100vw - 20px);max-width:350px;height:55vh;background:#111;border:1px solid #d4af37;border-radius:12px;flex-direction:column;overflow:hidden}
+        .chat-toggle{width:50px;height:50px;background:linear-gradient(135deg,#1a1a1a,#000);border:2px solid #d4af37;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#d4af37;box-shadow:0 5px 25px rgba(212,175,55,.3);animation:pulse 2s infinite}
+        .chat-toggle.open{animation:none}
+        .chat-panel{display:none;position:fixed;bottom:75px;left:10px;width:calc(100vw - 20px);max-width:350px;height:55vh;max-height:450px;background:#111;border:1px solid #d4af37;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.8);flex-direction:column;overflow:hidden}
         .chat-panel.open{display:flex}
         .chat-header{background:linear-gradient(135deg,#000,#1a1a1a);padding:12px;text-align:center;color:#d4af37;border-bottom:1px solid #d4af37}
         .chat-header h3{font-size:.9rem;font-weight:900}
-        .chat-messages{flex:1;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
-        .msg{max-width:85%;padding:8px 12px;border-radius:12px;font-size:.8rem;line-height:1.6}
-        .msg.bot{background:#1a1a1a;color:#ddd;align-self:flex-start;border:1px solid #333}
-        .msg.user{background:#d4af37;color:#000;align-self:flex-end}
+        .chat-header p{font-size:.65rem;opacity:.7;margin-top:2px}
+        .chat-messages{flex:1;padding:12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
+        .msg{max-width:85%;padding:8px 12px;border-radius:12px;font-size:.8rem;line-height:1.6;animation:msgIn .3s ease}
+        @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        .msg.bot{background:#1a1a1a;color:#ddd;align-self:flex-start;border-radius:12px 12px 12px 4px;border:1px solid #333}
+        .msg.user{background:#d4af37;color:#000;align-self:flex-end;border-radius:12px 12px 4px 12px;font-weight:600}
         .chat-input-area{display:flex;gap:6px;padding:10px;border-top:1px solid #333;background:#0a0a0a}
-        .chat-input-area input{flex:1;padding:8px 12px;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:25px;outline:none;font-family:'Cairo',sans-serif;font-size:.8rem}
-        .chat-input-area button{background:#d4af37;border:none;color:#000;width:35px;height:35px;border-radius:50%;cursor:pointer}
+        .chat-input-area input{flex:1;padding:8px 12px;border:1px solid #d4af37;background:transparent;color:#fff;border-radius:25px;outline:none;font-family:'Cairo',sans-serif;font-size:.8rem;min-width:0}
+        .chat-input-area input::placeholder{color:#666;font-size:.75rem}
+        .chat-input-area button{background:#d4af37;border:none;color:#000;width:35px;height:35px;border-radius:50%;cursor:pointer;font-size:.9rem;flex-shrink:0}
         .quick-btns{display:flex;flex-wrap:wrap;gap:4px;padding:6px 10px;border-bottom:1px solid #333}
         .quick-btn{padding:5px 10px;font-size:.65rem;font-weight:600;background:transparent;border:1px solid #d4af37;color:#d4af37;border-radius:15px;cursor:pointer;white-space:nowrap}
+        .quick-btn:active{background:#d4af37;color:#000}
+        
+        .loading-spinner{display:none;width:30px;height:30px;border:3px solid rgba(255,255,255,.3);border-top:3px solid #25D366;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px}
+        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
     </style>
 </head>
 <body>
 
 <div class="success-toast" id="successToast">✅ تم إرسال طلبك بنجاح!<br>سنتواصل معك قريباً</div>
 
-<!-- ===== شاشة البداية ===== -->
+<div class="install-banner" id="installBanner">
+    <p>📱 تثبيت التطبيق على هاتفك</p>
+    <button onclick="installApp()">تثبيت الآن</button>
+</div>
+
 <div class="landing" id="landing">
     <div class="logo">🪵</div>
     <h1>العربي للأخشاب</h1>
-    <p>استيراد وتصدير الأخشاب والبليتات</p>
-    <p class="slogan">✨ أجود أنواع الأخشاب الأوروبية والإسكندنافية ✨</p>
-    <button class="btn-gold" id="startBtn">📦 تصفح المنتجات</button>
+    <div class="sub">استيراد وتصدير الأخشاب والبليتات</div>
+    <div class="slogan"><i class="fas fa-star"></i> أجود أنواع الأخشاب الأوروبية والإسكندنافية <i class="fas fa-star"></i></div>
+    <button class="btn-gold" id="startBtn"><i class="fas fa-boxes"></i> تصفح المنتجات</button>
 </div>
 
-<!-- ===== المحتوى الرئيسي ===== -->
 <div class="main-content" id="main">
     <div class="header">
         <h2>🪵 العربي للأخشاب</h2>
         <p>استيراد وتصدير - بليتات - أخشاب بناء</p>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="🔍 ابحث عن نوع خشب أو بليت...">
-            <button onclick="filter()">🔍</button>
+            <button onclick="filter()"><i class="fas fa-search"></i></button>
         </div>
-        <div id="searchResults" style="text-align:center;color:#d4af37;font-size:.8rem;margin-top:5px"></div>
+        <div class="search-results" id="searchResults"></div>
     </div>
 
     <div class="cats" id="cats">
-        <button class="active" data-cat="all">✨ الكل</button>
-        <button data-cat="wood">🪵 أخشاب</button>
-        <button data-cat="pallet">🔲 بليتات</button>
-        <button data-cat="import">🚢 استيراد</button>
-        <button data-cat="export">✈️ تصدير</button>
-        <button data-cat="plywood">📐 ألواح</button>
+        <button class="active" data-cat="all"><i class="fas fa-th-large"></i> الكل</button>
+        <button data-cat="wood"><i class="fas fa-tree"></i> أخشاب</button>
+        <button data-cat="pallet"><i class="fas fa-pallet"></i> بليتات</button>
+        <button data-cat="import"><i class="fas fa-ship"></i> استيراد</button>
+        <button data-cat="export"><i class="fas fa-plane"></i> تصدير</button>
+        <button data-cat="plywood"><i class="fas fa-layer-group"></i> ألواح</button>
     </div>
 
     <div class="gallery" id="gallery"></div>
-    <button class="btn-back" id="backBtn">🏠 العودة للرئيسية</button>
+    <button class="btn-back" id="backBtn"><i class="fas fa-home"></i> العودة للرئيسية</button>
 
-    <!-- ===== التواصل ===== -->
     <div class="contact">
-        <h2>📞 للتواصل</h2>
+        <h2><i class="fas fa-phone-alt"></i> للتواصل</h2>
         <div class="contact-cards">
             <div class="c-card">
-                <div class="icon">👷‍♂️</div>
+                <div class="icon"><i class="fas fa-user-astronaut"></i></div>
                 <div class="role">المعلم</div>
                 <div class="name">محمد سبول</div>
                 <div class="phone"><i class="fab fa-whatsapp"></i> 01118778460</div>
-                <a href="tel:01118778460" class="call-btn">📞 اتصال</a>
+                <a href="tel:01118778460" class="call-btn"><i class="fas fa-phone"></i> اتصال</a>
             </div>
         </div>
-        <div class="note">✅ استيراد من أوروبا | بليتات جميع المقاسات | 🚚 توصيل لجميع المحافظات</div>
+        <div class="note"><i class="fas fa-check-circle"></i> استيراد من أوروبا | بليتات جميع المقاسات | <i class="fas fa-truck"></i> توصيل لجميع المحافظات</div>
     </div>
 
-    <!-- ===== فوتر ===== -->
     <div class="footer">
-        ⚡ صُنع بواسطة<br>
+        <i class="fas fa-bolt"></i> صُنع بواسطة<br>
         <span class="f-name">البشمهندس مازن العربي</span>
         <div class="social">
             <span class="ph"><i class="fab fa-whatsapp"></i> 01100257625</span>
             <a href="https://wa.me/201100257625" class="wa"><i class="fab fa-whatsapp"></i> واتساب</a>
-            <a href="https://www.facebook.com/share/1J5pRHd8g5/" class="fb"><i class="fab fa-facebook-f"></i> فيسبوك</a>
+            <a href="https://www.facebook.com/share/1J5pRHd8g5/?mibextid=wwXIfr" class="fb"><i class="fab fa-facebook-f"></i> فيسبوك</a>
             <a href="https://www.instagram.com/mazenalaraby10" class="ig"><i class="fab fa-instagram"></i> انستجرام</a>
             <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="tt"><i class="fab fa-tiktok"></i> تيك توك</a>
         </div>
-        <span style="font-size:.65rem;opacity:.4;display:block;margin-top:8px">© 2026 جميع الحقوق محفوظة</span>
+        <span style="font-size:.65rem;opacity:.4;display:block;margin-top:8px"><i class="far fa-copyright"></i> 2026 جميع الحقوق محفوظة</span>
     </div>
 </div>
 
 <!-- ===== مودال المنتج ===== -->
 <div class="modal" id="modal">
     <div class="modal-content">
-        <button class="close-modal" id="closeModal">✕</button>
+        <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
         <img id="modalImg" src="" alt="">
         <div class="m-info">
             <h3 id="modalName"></h3>
             <div class="desc" id="modalDesc"></div>
             <div class="qty-box">
-                <label>📦 الكمية (متر مكعب / لوح / بليت)</label>
+                <label><i class="fas fa-cubes"></i> الكمية (متر مكعب / لوح / بليت)</label>
                 <div class="qty-controls">
-                    <button id="qtyMinus">−</button>
+                    <button id="qtyMinus"><i class="fas fa-minus"></i></button>
                     <input type="number" id="qtyInput" value="1" min="1" max="10000">
-                    <button id="qtyPlus">+</button>
+                    <button id="qtyPlus"><i class="fas fa-plus"></i></button>
                 </div>
                 <div class="price-details">
                     <div class="unit-price" id="unitPriceText"></div>
@@ -215,7 +245,7 @@
                     <div class="info-text" id="wholesaleInfo"></div>
                 </div>
             </div>
-            <button class="btn-gold" onclick="openOrderForm()" style="width:100%;margin-top:8px">🛒 طلب المنتج الآن</button>
+            <button class="btn-gold" onclick="openOrderForm()" style="width:100%;margin-top:8px"><i class="fas fa-shopping-cart"></i> طلب المنتج الآن</button>
         </div>
     </div>
 </div>
@@ -223,46 +253,70 @@
 <!-- ===== مودال بيانات العميل ===== -->
 <div class="order-modal" id="orderModal">
     <div class="order-modal-content">
-        <button class="close-order" id="closeOrder">✕</button>
-        <div class="o-header"><h3>📋 بيانات الطلب</h3></div>
+        <button class="close-order" id="closeOrder"><i class="fas fa-times"></i></button>
+        <div class="o-header"><h3><i class="fas fa-clipboard-list"></i> بيانات الطلب</h3></div>
         <div class="o-body">
             <div class="order-summary">
-                <h4>🛍️ ملخص الطلب</h4>
+                <h4><i class="fas fa-shopping-bag"></i> ملخص الطلب</h4>
                 <p><b>المنتج:</b> <span id="summaryName"></span></p>
                 <p><b>الكمية:</b> <span id="summaryQty"></span></p>
                 <p><b>الإجمالي:</b> <span id="summaryTotal"></span></p>
             </div>
-            <div class="form-group"><label>👤 الاسم الكامل *</label><input type="text" id="custName" placeholder="أدخل اسمك الكامل"></div>
-            <div class="form-group"><label>📞 رقم الهاتف *</label><input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr"></div>
-            <div class="form-group"><label>📍 العنوان بالتفصيل *</label><textarea id="custAddress" placeholder="المحافظة - المدينة - الشارع - رقم المنزل"></textarea></div>
-            <div class="form-group"><label>📝 ملاحظات إضافية</label><textarea id="custNotes" placeholder="أي ملاحظات تريد إضافتها..."></textarea></div>
-            <button class="btn-submit" onclick="submitOrder()">📩 تأكيد وإرسال الطلب</button>
+            <div class="form-group"><label><i class="fas fa-user"></i> الاسم الكامل <span>*</span></label><input type="text" id="custName" placeholder="أدخل اسمك الكامل"></div>
+            <div class="form-group"><label><i class="fas fa-phone"></i> رقم الهاتف <span>*</span></label><input type="tel" id="custPhone" placeholder="01xxxxxxxxx" dir="ltr"></div>
+            <div class="form-group"><label><i class="fas fa-map-marker-alt"></i> العنوان بالتفصيل <span>*</span></label><textarea id="custAddress" placeholder="المحافظة - المدينة - الشارع - رقم المنزل"></textarea></div>
+            <div class="form-group"><label><i class="fas fa-sticky-note"></i> ملاحظات إضافية</label><textarea id="custNotes" placeholder="أي ملاحظات تريد إضافتها..."></textarea></div>
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <button class="btn-submit" id="btnSubmit" onclick="submitOrder()"><i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب</button>
         </div>
     </div>
 </div>
 
 <!-- ===== شات AI ===== -->
 <div class="chat-widget">
-    <div class="chat-toggle" id="chatToggle">💬</div>
+    <div class="chat-toggle" id="chatToggle"><i class="fas fa-comment-dots"></i></div>
     <div class="chat-panel" id="chatPanel">
-        <div class="chat-header"><h3>🤖 المساعد الذكي</h3></div>
+        <div class="chat-header"><h3><i class="fas fa-robot"></i> المساعد الذكي - العربي للأخشاب</h3><p>صُمم بواسطة البشمهندس مازن العربي</p></div>
         <div class="quick-btns">
-            <button class="quick-btn" onclick="sendQuick('من أنت؟')">❓ من أنت؟</button>
-            <button class="quick-btn" onclick="sendQuick('أنواع الخشب')">🪵 أنواع الخشب</button>
-            <button class="quick-btn" onclick="sendQuick('طلب بليتات')">🔲 بليتات</button>
-            <button class="quick-btn" onclick="sendQuick('أسعار التصدير')">🚢 تصدير</button>
+            <button class="quick-btn" onclick="sendQuick('من أنت؟')"><i class="fas fa-question-circle"></i> من أنت؟</button>
+            <button class="quick-btn" onclick="sendQuick('أنواع الخشب المتاحة')"><i class="fas fa-tree"></i> أنواع الخشب</button>
+            <button class="quick-btn" onclick="sendQuick('طلب بليتات')"><i class="fas fa-pallet"></i> بليتات</button>
+            <button class="quick-btn" onclick="sendQuick('أسعار التصدير')"><i class="fas fa-ship"></i> تصدير</button>
+            <button class="quick-btn" onclick="sendQuick('سياسة الاسترجاع')"><i class="fas fa-undo"></i> استرجاع</button>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="msg bot">👋 مرحباً بك في العربي للأخشاب! أنا المساعد الذكي. اسألني أي شيء! 🪵</div>
+            <div class="msg bot"><i class="fas fa-hand-paper"></i> مرحباً بك في العربي للأخشاب! أنا المساعد الذكي. اسألني عن أنواع الخشب، البليتات، الاستيراد والتصدير. 🪵</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="اكتب استفسارك..." onkeydown="if(event.key==='Enter')sendMessage()">
-            <button onclick="sendMessage()">📩</button>
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 </div>
 
 <script>
+// ========== PWA - Service Worker ==========
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBanner').classList.add('show');
+});
+
+function installApp(){
+    if(deferredPrompt){
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(result){
+            document.getElementById('installBanner').classList.remove('show');
+            deferredPrompt = null;
+        });
+    }
+}
+
 // ========== رقم الواتساب ==========
 var YOUR_PHONE = '201118778460';
 
@@ -289,7 +343,7 @@ function render(list){
     if(!list.length){ g.innerHTML = '<div class="no-results">😕 لا توجد منتجات</div>'; return; }
     list.forEach(function(p){
         var c = document.createElement('div'); c.className = 'card'; c.onclick = function(){openModal(p);};
-        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy"><div class="badge">'+cats[p.cat]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price.toLocaleString()+' ج.م</div></div>';
+        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.background=\'#1a1a1a\';this.style.objectFit=\'cover\'"><div class="badge">'+cats[p.cat]+'</div><div class="info"><h3>'+p.name+'</h3><div class="price">'+p.price.toLocaleString()+' ج.م</div></div>';
         g.appendChild(c);
     });
 }
@@ -309,7 +363,7 @@ var wsBadge = document.getElementById('wholesaleBadge'), wsInfo = document.getEl
 
 function openModal(p){
     curProd = p; curQty = 1; qtyInput.value = 1;
-    mImg.src = p.img;
+    mImg.src = p.img; mImg.onerror = function(){this.style.background='#1a1a1a';this.style.objectFit='cover';};
     mName.textContent = p.name; mDesc.textContent = p.desc;
     updatePrice(); modal.classList.add('active'); document.body.style.overflow = 'hidden';
 }
@@ -319,7 +373,7 @@ function updatePrice(){
     var up = curProd.price, total, ws = qty >= 100;
     if(ws){ up = Math.floor(curProd.price * 0.8); total = up * qty;
         unitPT.textContent = 'سعر الوحدة (جملة): ' + up.toLocaleString() + ' ج.م (خصم 20%)';
-        wsBadge.innerHTML = '<span class="badge-green">🏷️ سعر جملة - خصم 20%</span>';
+        wsBadge.innerHTML = '<span class="badge-green"><i class="fas fa-tag"></i> سعر جملة - خصم 20%</span>';
         wsInfo.textContent = 'السعر الأصلي: ' + curProd.price.toLocaleString() + ' ج.م | التوفير: ' + (curProd.price - up).toLocaleString() + ' ج.م/وحدة';
     } else { total = curProd.price * qty;
         unitPT.textContent = 'سعر الوحدة: ' + curProd.price.toLocaleString() + ' ج.م';
@@ -336,7 +390,7 @@ function closeModal(){ modal.classList.remove('active'); document.body.style.ove
 document.getElementById('closeModal').onclick = closeModal;
 modal.onclick = function(e){ if(e.target === modal) closeModal(); };
 
-// ========== مودال بيانات العميل ==========
+// ========== مودال بيانات العميل وإرسال تلقائي ==========
 var orderModal = document.getElementById('orderModal');
 
 function openOrderForm(){
@@ -356,7 +410,7 @@ orderModal.onclick = function(e){ if(e.target === orderModal) closeOrderModal();
 function showToast(msg){
     var t = document.getElementById('successToast');
     t.innerHTML = msg; t.classList.add('show');
-    setTimeout(function(){ t.classList.remove('show'); }, 4000);
+    setTimeout(function(){ t.classList.remove('show'); }, 5000);
 }
 
 function submitOrder(){
@@ -369,33 +423,43 @@ function submitOrder(){
     if(!phone){ alert('❌ الرجاء إدخال رقم الهاتف'); return; }
     if(!address){ alert('❌ الرجاء إدخال العنوان'); return; }
     
+    var btn = document.getElementById('btnSubmit');
+    var spinner = document.getElementById('loadingSpinner');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+    spinner.style.display = 'block';
+    
     var qty = curQty, up = qty >= 100 ? Math.floor(curProd.price * 0.8) : curProd.price, total = up * qty;
     var type = qty >= 100 ? 'جملة' : 'قطاعي';
     
-    var msg = '🛍️ *طلب جديد - العربي للأخشاب*\n━━━━━━━━━━━━━━━\n\n';
-    msg += '📦 *المنتج:* ' + curProd.name + '\n';
-    msg += '🔢 *الكمية:* ' + qty + ' وحدة\n';
-    msg += '💰 *سعر الوحدة:* ' + up.toLocaleString() + ' ج.م\n';
-    msg += '💵 *الإجمالي:* ' + total.toLocaleString() + ' ج.م\n';
-    msg += '🏷️ *النوع:* ' + type + '\n\n';
-    msg += '👤 *بيانات العميل*\n━━━━━━━━━━━━━━━\n';
-    msg += '📝 *الاسم:* ' + name + '\n';
-    msg += '📞 *الهاتف:* ' + phone + '\n';
-    msg += '📍 *العنوان:* ' + address + '\n';
-    if(notes) msg += '📋 *ملاحظات:* ' + notes + '\n';
-    msg += '\n✨ *تم الطلب من موقع العربي للأخشاب* 💎';
+    var msg = '🛍️ *طلب جديد - العربي للأخشاب*\n━━━━━━━━━━━━━━━\n\n📦 *المنتج:* ' + curProd.name + '\n🔢 *الكمية:* ' + qty + ' وحدة\n💰 *سعر الوحدة:* ' + up.toLocaleString() + ' ج.م\n💵 *الإجمالي:* ' + total.toLocaleString() + ' ج.م\n🏷️ *النوع:* ' + type + '\n\n👤 *بيانات العميل*\n━━━━━━━━━━━━━━━\n📝 *الاسم:* ' + name + '\n📞 *الهاتف:* ' + phone + '\n📍 *العنوان:* ' + address;
+    if(notes) msg += '\n📋 *ملاحظات:* ' + notes;
+    msg += '\n\n✨ *تم الطلب من موقع العربي للأخشاب* 💎';
     
     var waURL = 'https://wa.me/' + YOUR_PHONE + '?text=' + encodeURIComponent(msg);
-    window.open(waURL, '_blank');
+    var hiddenWindow = window.open(waURL, '_blank', 'width=1,height=1,left=-1000,top=-1000');
+    if(!hiddenWindow){
+        var iframe = document.createElement('iframe');
+        iframe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;border:none;opacity:0;pointer-events:none';
+        iframe.src = waURL;
+        document.body.appendChild(iframe);
+        setTimeout(function(){ document.body.removeChild(iframe); }, 3000);
+    } else {
+        setTimeout(function(){ if(hiddenWindow && !hiddenWindow.closed) hiddenWindow.close(); }, 1500);
+    }
     
-    // تنظيف
-    document.getElementById('custName').value = '';
-    document.getElementById('custPhone').value = '';
-    document.getElementById('custAddress').value = '';
-    document.getElementById('custNotes').value = '';
-    orderModal.classList.remove('active'); modal.classList.remove('active');
-    document.body.style.overflow = '';
-    showToast('✅ تم إرسال طلبك بنجاح!<br>سنتواصل معك قريباً');
+    setTimeout(function(){
+        document.getElementById('custName').value = '';
+        document.getElementById('custPhone').value = '';
+        document.getElementById('custAddress').value = '';
+        document.getElementById('custNotes').value = '';
+        orderModal.classList.remove('active'); modal.classList.remove('active');
+        document.body.style.overflow = '';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد وإرسال الطلب';
+        spinner.style.display = 'none';
+        showToast('✅ تم إرسال طلبك بنجاح!<br>سنتواصل معك قريباً');
+    }, 2000);
 }
 
 // ========== تصنيفات ==========
@@ -415,19 +479,21 @@ document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classLis
 // ========== شات AI ==========
 (function(){
     var panel = document.getElementById('chatPanel'), toggle = document.getElementById('chatToggle'), messages = document.getElementById('chatMessages'), input = document.getElementById('chatInput'), isOpen = false;
-    toggle.onclick = function(){ isOpen = !isOpen; panel.classList.toggle('open', isOpen); if(isOpen) input.focus(); };
+    toggle.onclick = function(){ isOpen = !isOpen; panel.classList.toggle('open', isOpen); toggle.classList.toggle('open', isOpen); if(isOpen) input.focus(); };
     function addMessage(text, type){ var m = document.createElement('div'); m.className = 'msg ' + type; m.innerHTML = text.replace(/\n/g, '<br>'); messages.appendChild(m); messages.scrollTop = messages.scrollHeight; }
     function getAI(msg){
         msg = msg.toLowerCase().trim();
-        if(/من انت|مين انت/.test(msg)) return '🤖 <b>أنا المساعد الذكي لمتجر العربي للأخشاب!</b><br><br>✨ صُممت بواسطة <b>البشمهندس مازن العربي</b><br>💻 لخدمة عملاء العربي<br><br>كيف أقدر أخدمك؟ 🪵';
-        if(/سعر|اسعار|خصم|جملة/.test(msg)) return '💰 <b>الأسعار:</b><br>• تبدأ من 350 ج.م<br>• خصم 20% عند 100 وحدة<br>• واتساب: 01118778460';
-        if(/توصيل|شحن/.test(msg)) return '🚚 <b>الشحن:</b><br>• توصيل لجميع المحافظات<br>• شحن بحري للتصدير<br>• واتساب: 01118778460';
-        if(/استرجاع|استبدال/.test(msg)) return '↩️ <b>الاسترجاع:</b><br>• فحص الخشب عند الاستلام<br>• استبدال التالف خلال 48 ساعة';
-        if(/خشب|زان|موسكي/.test(msg)) return '🪵 <b>الأخشاب:</b><br>• زان روماني - 12,500 ج.م<br>• موسكي سويدي - 8,700 ج.م';
-        if(/بليت/.test(msg)) return '🔲 <b>البليتات:</b><br>• خشب 120x80 - 350 ج.م<br>• بلاستيك 120x100 - 580 ج.م';
-        if(/سلام|هلا|مرحبا/.test(msg)) return '👋 وعليكم السلام! كيف أقدر أساعدك؟ 🌳';
-        if(/شكرا|تسلم/.test(msg)) return '🤗 العفو! سعيد بخدمتك 💎';
-        return '📞 تواصل معنا واتساب: <b>01118778460</b>';
+        if(/من انت|مين انت|اسمك|تعرف عن نفسك|انت مين/.test(msg)) return '<i class="fas fa-robot"></i> <b>أنا المساعد الذكي لمتجر العربي للأخشاب!</b><br><br>✨ صُممت بواسطة <b>البشمهندس مازن العربي</b><br>💻 لخدمة عملاء العربي<br><br>كيف أقدر أخدمك؟ 🪵';
+        if(/مازن|البشمهندس|صممك|مطورك/.test(msg)) return '<i class="fas fa-user-graduate"></i> <b>البشمهندس مازن العربي</b> هو من صممني وطورني! 💎 مؤسس المتجر | ⚡ خبير تطوير مواقع | 📞 01100257625';
+        if(/سعر|اسعار|خصم|جملة/.test(msg)) return '<i class="fas fa-money-bill-wave"></i> <b>الأسعار:</b><br>• تبدأ من 120 ج.م<br>• خصم 20% عند 100 وحدة<br>• واتساب: 01118778460';
+        if(/توصيل|شحن/.test(msg)) return '<i class="fas fa-truck"></i> <b>الشحن:</b><br>• توصيل لجميع المحافظات<br>• شحن بحري للتصدير<br>• واتساب: 01118778460';
+        if(/استرجاع|استبدال|ضمان|مكسور/.test(msg)) return '<i class="fas fa-undo"></i> <b>الاسترجاع:</b><br>• فحص الخشب عند الاستلام<br>• استبدال التالف خلال 48 ساعة';
+        if(/خشب|زان|موسكي|بلوط|صنوبر|تيك/.test(msg)) return '<i class="fas fa-tree"></i> <b>الأخشاب المتوفرة:</b><br>• زان روماني<br>• موسكي سويدي<br>• كونتر و MDF';
+        if(/بليت|pallet/.test(msg)) return '<i class="fas fa-pallet"></i> <b>البليتات:</b><br>• خشب 120x80<br>• بلاستيك 120x100<br>• IPPC للتصدير';
+        if(/تصدير|استيراد/.test(msg)) return '<i class="fas fa-ship"></i> <b>الاستيراد والتصدير:</b><br>• حاويات 20 و 40 قدم<br>• أوراق جمركية كاملة<br>• شحن لجميع أنحاء العالم';
+        if(/سلام|هلا|مرحبا|اهلا/.test(msg)) return '<i class="fas fa-hand-paper"></i> وعليكم السلام! كيف أقدر أساعدك في اختيار الخشب المناسب؟ 🌳';
+        if(/شكرا|تسلم/.test(msg)) return '<i class="fas fa-heart"></i> العفو! سعيد بخدمتك 💎';
+        return '<i class="fas fa-info-circle"></i> تواصل معنا واتساب: <b>01118778460</b><br>أو اسأل عن: أنواع الخشب | البليتات | الاستيراد | التصدير';
     }
     function send(){ var t = input.value.trim(); if(!t) return; addMessage(t, 'user'); input.value = ''; setTimeout(function(){ addMessage(getAI(t), 'bot'); }, 500); }
     window.sendMessage = send;
@@ -435,4 +501,4 @@ document.onkeydown = function(e){ if(e.key === 'Escape'){ if(orderModal.classLis
 })();
 </script>
 </body>
-                                            </html>
+                </html>
