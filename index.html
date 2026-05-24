@@ -4,222 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>العربي للمقاولات - بناء وتشييد</title>
-    <meta name="theme-color" content="#1a1a2e">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Cairo',sans-serif;color:#fff;overflow-x:hidden}
         
-        /* ===== خلفية متحركة ===== */
         .bg-slideshow{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:-1}
         .bg-slideshow .slide{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.5s ease}
         .bg-slideshow .slide.active{opacity:1}
         .bg-overlay{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.75);z-index:-1}
         
-        /* ===== شاشة البداية ===== */
-        .landing{position:fixed;top:0;left:0;width:100%;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;text-align:center;padding:20px;transition:opacity .8s,visibility .8s}
-        .landing.hidden{opacity:0;visibility:hidden;pointer-events:none}
-        .landing .logo{font-size:5rem;animation:float 3s infinite}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-        .landing h1{font-size:3rem;font-weight:900;color:#d4af37;letter-spacing:5px;margin:10px 0;text-shadow:0 0 30px rgba(212,175,55,.6)}
-        .landing .sub{font-size:1.3rem;color:#ccc}
-        .landing .slogan{font-size:1rem;color:#888;margin:10px 0 30px}
-        .btn-gold{padding:16px 50px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:.3s}
-        .btn-gold:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(212,175,55,.6)}
+        .landing-page{position:fixed;top:0;left:0;width:100%;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;text-align:center;padding:20px;transition:opacity .8s ease,visibility .8s ease}
+        .landing-page.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .company-logo{font-size:5rem;animation:floating 3s infinite}
+        @keyframes floating{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+        .company-name{font-size:3rem;font-weight:900;color:#d4af37;letter-spacing:5px;margin:10px 0;text-shadow:0 0 30px rgba(212,175,55,.6)}
+        .company-desc{font-size:1.3rem;color:#ccc}
+        .company-slogan{font-size:1rem;color:#888;margin:10px 0 30px}
+        .golden-btn{padding:16px 50px;font-size:1.2rem;font-weight:700;background:linear-gradient(45deg,#d4af37,#b8960f);color:#000;border:none;border-radius:50px;cursor:pointer;transition:all .3s ease}
+        .golden-btn:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(212,175,55,.6)}
         
-        /* ===== المحتوى الرئيسي ===== */
         .main-content{min-height:100vh;display:none;padding-top:80px}
         .main-content.visible{display:block}
         
-        .header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.9);padding:12px;text-align:center;border-bottom:2px solid #d4af37;backdrop-filter:blur(10px)}
-        .header h2{font-size:1.4rem;color:#d4af37}
+        .site-header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(0,0,0,.9);padding:12px;text-align:center;border-bottom:2px solid #d4af37;backdrop-filter:blur(10px)}
+        .site-header h2{font-size:1.4rem;color:#d4af37}
         
-        .container{max-width:1000px;margin:0 auto;padding:20px}
+        .container{max-width:1100px;margin:0 auto;padding:20px}
         
-        /* ===== تصنيفات ===== */
-        .cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:25px}
-        .cats button{padding:10px 20px;font-size:.85rem;font-weight:600;background:rgba(0,0,0,.5);border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer;transition:.3s;backdrop-filter:blur(5px)}
-        .cats button.active,.cats button:hover{background:#d4af37;color:#000}
+        .categories-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:25px}
+        .cat-btn{padding:10px 20px;font-size:.85rem;font-weight:600;background:rgba(0,0,0,.5);border:1px solid #d4af37;color:#d4af37;border-radius:50px;cursor:pointer;transition:all .3s ease;backdrop-filter:blur(5px)}
+        .cat-btn.active,.cat-btn:hover{background:#d4af37;color:#000}
         
-        /* ===== معرض ===== */
-        .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
-        .card{position:relative;border-radius:15px;overflow:hidden;background:rgba(0,0,0,.6);border:1px solid rgba(212,175,55,.3);cursor:pointer;transition:.3s;backdrop-filter:blur(5px)}
-        .card:hover{transform:translateY(-8px);border-color:#d4af37;box-shadow:0 15px 40px rgba(212,175,55,.3)}
-        .card img{width:100%;height:200px;object-fit:cover}
-        .card .info{padding:15px;text-align:center}
-        .card .info h3{font-size:1rem;color:#d4af37;margin-bottom:5px}
-        .card .info p{font-size:.8rem;color:#aaa;line-height:1.6}
-        .card .badge{position:absolute;top:10px;right:10px;background:#d4af37;color:#000;padding:4px 12px;border-radius:20px;font-size:.7rem;font-weight:700}
+        .projects-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px}
         
-        /* ===== مودال ===== */
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:15px}
-        .modal.active{display:flex}
-        .modal-content{width:100%;max-width:500px;background:#1a1a1a;border:1px solid #d4af37;border-radius:15px;overflow:hidden;max-height:85vh;overflow-y:auto}
-        .modal img{width:100%;max-height:300px;object-fit:cover;border-bottom:2px solid #d4af37}
-        .modal .m-info{padding:20px;text-align:center}
-        .modal .m-info h3{font-size:1.4rem;color:#d4af37;margin-bottom:10px}
-        .modal .m-info .desc{font-size:.9rem;color:#aaa;line-height:1.8;margin-bottom:15px}
-        .close-modal{position:absolute;top:10px;left:10px;background:#d4af37;border:none;color:#000;width:35px;height:35px;border-radius:50%;cursor:pointer;font-weight:700;font-size:1.2rem}
+        .project-card{position:relative;border-radius:20px;overflow:hidden;background:rgba(0,0,0,.7);border:1px solid rgba(212,175,55,.4);cursor:pointer;transition:all .4s ease;backdrop-filter:blur(10px);group}
+        .project-card:hover{transform:translateY(-12px);border-color:#d4af37;box-shadow:0 20px 50px rgba(212,175,55,.4)}
+        .project-card img{width:100%;height:220px;object-fit:cover;transition:all .4s ease}
+        .project-card:hover img{transform:scale(1.05)}
+        .project-card .card-info{padding:20px;text-align:center}
+        .project-card .card-info h3{font-size:1.1rem;color:#d4af37;margin-bottom:8px}
+        .project-card .card-info .card-stats{display:flex;justify-content:center;gap:15px;margin-bottom:10px}
+        .project-card .card-info .card-stats span{font-size:.75rem;color:#aaa;background:rgba(212,175,55,.1);padding:4px 10px;border-radius:15px}
+        .project-card .card-info p{font-size:.8rem;color:#bbb;line-height:1.6}
+        .project-card .card-badge{position:absolute;top:12px;right:12px;background:#d4af37;color:#000;padding:5px 14px;border-radius:20px;font-size:.7rem;font-weight:700}
         
-        .btn-back{margin:20px auto;padding:12px 30px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-size:1rem;border-radius:30px;cursor:pointer;display:block}
+        .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.95);z-index:2000;justify-content:center;align-items:center;padding:20px}
+        .modal-overlay.active{display:flex}
+        .modal-box{width:100%;max-width:650px;background:#1a1a1a;border:1px solid #d4af37;border-radius:20px;overflow:hidden;max-height:85vh;overflow-y:auto;animation:modalIn .5s ease}
+        @keyframes modalIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+        .modal-box img{width:100%;max-height:350px;object-fit:cover;border-bottom:2px solid #d4af37}
+        .modal-box .modal-details{padding:25px;text-align:center}
+        .modal-box .modal-details h3{font-size:1.6rem;color:#d4af37;margin-bottom:15px}
+        .modal-box .modal-details .modal-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:15px}
+        .modal-box .modal-details .modal-stats span{background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.3);padding:8px 15px;border-radius:20px;font-size:.8rem;color:#ccc}
+        .modal-box .modal-details p{font-size:.9rem;color:#bbb;line-height:2}
+        .modal-close{position:absolute;top:12px;left:12px;background:#d4af37;border:none;color:#000;width:35px;height:35px;border-radius:50%;cursor:pointer;font-weight:700;font-size:1.2rem;z-index:10}
         
-        /* ===== تواصل ===== */
-        .contact{background:rgba(0,0,0,.6);border:1px solid rgba(212,175,55,.4);border-radius:15px;padding:25px;text-align:center;margin:20px 0;backdrop-filter:blur(10px)}
-        .contact h2{color:#d4af37;margin-bottom:20px}
-        .contact .phone{font-size:1.5rem;font-weight:900;direction:ltr;margin:10px 0}
-        .contact .phone i{color:#25D366;margin:0 5px}
-        .contact .call-btn{display:inline-block;margin:8px;padding:10px 25px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-weight:700}
+        .back-btn{margin:25px auto;padding:14px 35px;background:transparent;border:2px solid #d4af37;color:#d4af37;font-size:1.1rem;border-radius:30px;cursor:pointer;display:block;transition:all .3s ease;font-weight:600}
+        .back-btn:hover{background:#d4af37;color:#000}
         
-        /* ===== توقيع ===== */
-        .signature{background:rgba(0,0,0,.6);border:1px solid rgba(212,175,55,.4);border-radius:15px;padding:25px;text-align:center;margin:20px 0;backdrop-filter:blur(10px)}
-        .signature .f-name{font-size:1.3rem;font-weight:900;color:#d4af37;margin:10px 0}
-        .signature .social{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:15px}
-        .signature .social a{display:inline-flex;align-items:center;gap:5px;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:.85rem;font-weight:600;color:#fff;transition:.3s}
-        .signature .social a:hover{transform:scale(1.05)}
-        .signature .social .wa{background:#25D366}.signature .social .fb{background:#1877F2}
-        .signature .social .ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
-        .signature .social .tt{background:#000;border:1px solid #fff}
+        .contact-section{background:rgba(0,0,0,.6);border:1px solid rgba(212,175,55,.4);border-radius:20px;padding:30px;text-align:center;margin:25px 0;backdrop-filter:blur(10px)}
+        .contact-section h2{color:#d4af37;margin-bottom:20px;font-size:1.5rem}
+        .contact-section .phone-number{font-size:1.8rem;font-weight:900;direction:ltr;margin:10px 0}
+        .contact-section .phone-number i{color:#25D366;margin:0 8px}
+        .contact-section .call-btn{display:inline-block;margin:10px;padding:12px 30px;background:#25D366;color:#000;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;transition:all .3s ease}
+        .contact-section .call-btn:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(37,211,102,.4)}
+        
+        .signature-section{background:rgba(0,0,0,.6);border:1px solid rgba(212,175,55,.4);border-radius:20px;padding:30px;text-align:center;margin:25px 0;backdrop-filter:blur(10px)}
+        .signature-section .dev-name{font-size:1.5rem;font-weight:900;color:#d4af37;margin:10px 0}
+        .signature-section .social-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:15px}
+        .signature-section .social-links a{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:50px;text-decoration:none;font-size:.9rem;font-weight:600;color:#fff;transition:all .3s ease}
+        .signature-section .social-links a:hover{transform:scale(1.05)}
+        .s-wa{background:#25D366}.s-fb{background:#1877F2}.s-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}.s-tt{background:#000;border:1px solid #fff}
     </style>
 </head>
 <body>
 
-<!-- ===== خلفية متحركة ===== -->
-<div class="bg-slideshow" id="bgSlideshow">
-    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1590279765347-8c5f1b8e0a5c?w=1200')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200')"></div>
-</div>
-<div class="bg-overlay"></div>
+    <div class="bg-slideshow" id="bgSlideshow">
+        <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200')"></div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200')"></div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200')"></div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1590279765347-8c5f1b8e0a5c?w=1200')"></div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200')"></div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200')"></div>
+    </div>
+    <div class="bg-overlay"></div>
 
-<!-- ===== شاشة البداية ===== -->
-<div class="landing" id="landing">
-    <div class="logo">🏗️</div>
-    <h1>العربي للمقاولات</h1>
-    <div class="sub">بناء وتشييد - ترميم - تشطيبات</div>
-    <div class="slogan">✨ نبني مستقبلك بجودة عالمية ✨</div>
-    <button class="btn-gold" id="startBtn">🏗️ تصفح أعمالنا</button>
-</div>
+    <div class="landing-page" id="landingPage">
+        <div class="company-logo">🏗️</div>
+        <h1 class="company-name">العربي للمقاولات</h1>
+        <p class="company-desc">بناء وتشييد - ترميم - تشطيبات</p>
+        <p class="company-slogan">✨ نبني مستقبلك بجودة عالمية ✨</p>
+        <button class="golden-btn" id="startBtn">🏗️ تصفح أعمالنا</button>
+    </div>
 
-<!-- ===== المحتوى الرئيسي ===== -->
-<div class="main-content" id="main">
-    <div class="header"><h2>🏗️ العربي للمقاولات</h2></div>
-    
-    <div class="container">
-        <div class="cats" id="cats">
-            <button class="active" data-cat="all">✨ الكل</button>
-            <button data-cat="buildings">🏢 عمارات سكنية</button>
-            <button data-cat="villas">🏡 فلل وقصور</button>
-            <button data-cat="commercial">🏬 محلات تجارية</button>
-            <button data-cat="entertainment">🎯 أماكن ترفيهية</button>
-            <button data-cat="restoration">🔧 ترميم وتشطيبات</button>
-        </div>
-        <div class="gallery" id="gallery"></div>
-        <button class="btn-back" id="backBtn">🏠 العودة للرئيسية</button>
+    <div class="main-content" id="mainContent">
+        <div class="site-header"><h2>🏗️ العربي للمقاولات</h2></div>
         
-        <div class="contact">
-            <h2>📞 للتواصل</h2>
-            <div class="phone"><i class="fab fa-whatsapp"></i> 01100257625</div>
-            <a href="tel:01100257625" class="call-btn">📞 اتصال الآن</a>
-            <p style="color:#aaa;margin-top:10px;font-size:.8rem">✅ مقاولات عامة | بناء وتشييد | ترميم | تشطيبات | ديكورات</p>
-        </div>
-        
-        <div class="signature">
-            ⚡ صُنع بواسطة<br>
-            <span class="f-name">البشمهندس مازن العربي</span>
-            <div class="social">
-                <a href="https://wa.me/201100257625" class="wa"><i class="fab fa-whatsapp"></i> واتساب</a>
-                <a href="https://www.facebook.com/share/1J5pRHd8g5/" class="fb"><i class="fab fa-facebook-f"></i> فيسبوك</a>
-                <a href="https://www.instagram.com/mazenalaraby10" class="ig"><i class="fab fa-instagram"></i> انستجرام</a>
-                <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="tt"><i class="fab fa-tiktok"></i> تيك توك</a>
+        <div class="container">
+            <div class="categories-bar" id="categoriesBar">
+                <button class="cat-btn active" data-category="all">✨ الكل</button>
+                <button class="cat-btn" data-category="buildings">🏢 عمارات</button>
+                <button class="cat-btn" data-category="villas">🏡 فلل</button>
+                <button class="cat-btn" data-category="commercial">🏬 تجاري</button>
+                <button class="cat-btn" data-category="entertainment">🎯 ترفيهي</button>
+                <button class="cat-btn" data-category="restoration">🔧 ترميم</button>
             </div>
-            <span style="font-size:.7rem;opacity:.5;display:block;margin-top:10px">© 2026 جميع الحقوق محفوظة</span>
+            
+            <div class="projects-gallery" id="projectsGallery"></div>
+            
+            <button class="back-btn" id="backBtn">🏠 العودة للرئيسية</button>
+            
+            <div class="contact-section">
+                <h2>📞 للتواصل</h2>
+                <div class="phone-number"><i class="fab fa-whatsapp"></i> 01100257625</div>
+                <a href="tel:01100257625" class="call-btn">📞 اتصال الآن</a>
+                <p style="color:#aaa;margin-top:15px;font-size:.85rem">✅ مقاولات عامة | بناء وتشييد | ترميم | تشطيبات | ديكورات</p>
+            </div>
+            
+            <div class="signature-section">
+                ⚡ صُنع بواسطة<br>
+                <span class="dev-name">البشمهندس مازن العربي</span>
+                <div class="social-links">
+                    <a href="https://wa.me/201100257625" class="s-wa"><i class="fab fa-whatsapp"></i> واتساب</a>
+                    <a href="https://www.facebook.com/share/1J5pRHd8g5/" class="s-fb"><i class="fab fa-facebook-f"></i> فيسبوك</a>
+                    <a href="https://www.instagram.com/mazenalaraby10" class="s-ig"><i class="fab fa-instagram"></i> انستجرام</a>
+                    <a href="https://www.tiktok.com/@mazenmohamedalaraby" class="s-tt"><i class="fab fa-tiktok"></i> تيك توك</a>
+                </div>
+                <span style="font-size:.7rem;opacity:.5;display:block;margin-top:12px">© 2026 جميع الحقوق محفوظة</span>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- ===== مودال التفاصيل ===== -->
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <button class="close-modal" id="closeModal">✕</button>
-        <img id="modalImg" src="" alt="">
-        <div class="m-info">
-            <h3 id="modalName"></h3>
-            <div class="desc" id="modalDesc"></div>
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeModalBtn">✕</button>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-details">
+                <h3 id="modalTitle"></h3>
+                <div class="modal-stats" id="modalStats"></div>
+                <p id="modalDescription"></p>
+            </div>
         </div>
     </div>
-</div>
 
 <script>
-// ===== خلفية متحركة =====
-var slides = document.querySelectorAll('#bgSlideshow .slide');
-var currentSlide = 0;
-setInterval(function(){
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-}, 4000);
+    var slides = document.querySelectorAll('#bgSlideshow .slide');
+    var slideIndex = 0;
+    setInterval(function(){slides[slideIndex].classList.remove('active');slideIndex=(slideIndex+1)%slides.length;slides[slideIndex].classList.add('active')},4000);
 
-// ===== رقم الواتساب =====
-var YOUR_PHONE = '201100257625';
+    var phoneNumber = '201100257625';
 
-// ===== المشاريع =====
-var projects = [
-    {id:1, img:"https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&h=350&fit=crop", name:"عمارة النخيل السكنية", cat:"buildings", desc:"عمارة سكنية 12 دور - 48 شقة فاخرة. تم البناء بأحدث المواصفات الهندسية. واجهات زجاجية وجرانيت. مداخل رخام ومصاعد كهربائية."},
-    {id:2, img:"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&h=350&fit=crop", name:"برج السلام الإداري", cat:"buildings", desc:"برج إداري 20 دور. مكاتب فاخرة. نظام تكييف مركزي. 4 مصاعد. جراج تحت الأرض. أنظمة أمان ذكية."},
-    {id:3, img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=350&fit=crop", name:"فيلا الياسمين", cat:"villas", desc:"فيلا 600م² - 3 طوابق. مسبح خارجي. حديقة 200م². تشطيب سوبر لوكس. رخام إيطالي. مطبخ أمريكي."},
-    {id:4, img:"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&h=350&fit=crop", name:"قصر الأندلس", cat:"villas", desc:"قصر 1200م². 5 غرف نوم ماستر. 2 مسبح. ملحق خارجي. جلسات عربية. مدخل رخامي فخم. مصعد داخلي."},
-    {id:5, img:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&h=350&fit=crop", name:"مول النخيل التجاري", cat:"commercial", desc:"مول تجاري 3 طوابق. 60 محل. هايبر ماركت. منطقة ألعاب. فود كورت. مواقف 500 سيارة."},
-    {id:6, img:"https://images.unsplash.com/photo-1590279765347-8c5f1b8e0a5c?w=500&h=350&fit=crop", name:"سوق الذهب", cat:"commercial", desc:"سوق تجاري 40 محل. واجهات زجاجية. تكييف مركزي. أنظمة أمان. سلالم كهربائية."},
-    {id:7, img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&h=350&fit=crop", name:"كافيه الروyal", cat:"entertainment", desc:"كافيه راقي 300م². ديكورات خشبية. جلسات داخلية وخارجية. إضاءة مخفية. بار متكامل. أنظمة صوت."},
-    {id:8, img:"https://images.unsplash.com/photo-1552566626-52f8b828add9?w=500&h=350&fit=crop", name:"مطعم الشلال", cat:"entertainment", desc:"مطعم سياحي 500م². شلالات مائية. جلسات عائلية. تكييف. مطبخ مركزي. ديكورات طبيعية."},
-    {id:9, img:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=500&h=350&fit=crop", name:"قاعة أفراح الياسمين", cat:"entertainment", desc:"قاعة 1000 شخص. مدخل فندقي. إضاءة ليزر. أنظمة صوت. مطبخ. بار. غرف VIP."},
-    {id:10, img:"https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=500&h=350&fit=crop", name:"ترميم فيلا القلعة", cat:"restoration", desc:"ترميم فيلا تاريخية. إصلاح أساسات. ترميم واجهات. تحديث سباكة وكهرباء. دهانات. أرضيات رخام."},
-    {id:11, img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=350&fit=crop", name:"تشطيب شقة 200م", cat:"restoration", desc:"تشطيب سوبر لوكس. أرضيات باركيه. أسقف جبس. إضاءة مخفية. مطبخ راكب. تكييف مركزي."},
-    {id:12, img:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=350&fit=crop", name:"عمارة الياقوت", cat:"buildings", desc:"عمارة 8 أدوار. 24 شقة. واجهة كلادينج. عازل حراري. خزان أرضي وعلوي. مصعد."},
-];
+    var projectsData = [
+        {id:1,image:"https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&h=350&fit=crop",title:"عمارة النخيل السكنية",category:"buildings",stats:["12 دور","48 شقة","مساحة 2000م²"],description:"عمارة سكنية فاخرة بقلب المدينة. تم تصميمها على الطراز الحديث مع واجهات زجاجية بالكامل. تحتوي على 48 شقة متنوعة المساحات من 120م² إلى 250م². مدخل رخامي فخم مع 2 مصعد كهربائي. جراج تحت الأرض يتسع لـ 48 سيارة. أنظمة أمان وكاميرات مراقبة. تم الانتهاء من المشروع في 18 شهر."},
+        {id:2,image:"https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=500&h=350&fit=crop",title:"برج السلام الإداري",category:"buildings",stats:["20 دور","مكاتب فاخرة","مساحة 5000م²"],description:"برج إداري متكامل يضم مكاتب إدارية ومساحات عمل مشتركة. واجهات زجاجية عازلة للحرارة. نظام تكييف مركزي ذكي. 4 مصاعد عالية السرعة. قاعات اجتماعات مجهزة بأحدث التقنيات. كافيتريا وصالة رياضية للموظفين. أنظمة أمان متطورة وبصمة دخول. تم التنفيذ خلال 24 شهر."},
+        {id:3,image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=350&fit=crop",title:"فيلا الياسمين",category:"villas",stats:["600م²","3 طوابق","مسبح"],description:"فيلا سكنية راقية على مساحة 600م². تصميم مفتوح يجمع بين الأصالة والحداثة. 3 طوابق مع مصعد داخلي. 5 غرف نوم منها 2 ماستر. مسبح خارجي مع جاكوزي. حديقة منسقة 200م². رخام إيطالي في الأرضيات. مطبخ أمريكي مجهز بالكامل. نظام تكييف مركزي وتدفئة أرضية. تشطيب سوبر لوكس."},
+        {id:4,image:"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&h=350&fit=crop",title:"قصر الأندلس",category:"villas",stats:["1200م²","5 غرف ماستر","2 مسبح"],description:"قصر فاخر على الطراز الأندلسي. مساحة بناء 1200م² على أرض 3000م². مدخل رخامي ببهو ارتفاع 8 أمتار. 5 أجنحة نوم ماستر كاملة. 2 مسبح (داخلي وخارجي). ملحق خارجي للضيوف. جلسات عربية تراثية. نافورة مركزية وحدائق غناء. مصعد داخلي يخدم جميع الطوابق. أنظمة ذكية للتحكم في الإضاءة والتكييف."},
+        {id:5,image:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&h=350&fit=crop",title:"مول النخيل التجاري",category:"commercial",stats:["3 طوابق","60 محل","مواقف 500"],description:"مول تجاري متكامل على مساحة 10000م². يضم 60 محلاً تجارياً متنوعاً. هايبر ماركت كبير. منطقة ألعاب ترفيهية للأطفال. فود كورت يضم 12 مطعماً. صالة سينما 6 شاشات. مواقف سيارات تتسع لـ 500 سيارة. أنظمة تكييف وتهوية مركزية. سلالم كهربائية ومصاعد بانورامية."},
+        {id:6,image:"https://images.unsplash.com/photo-1590279765347-8c5f1b8e0a5c?w=500&h=350&fit=crop",title:"سوق الذهب",category:"commercial",stats:["40 محل","2 طابق","تكييف مركزي"],description:"سوق تجاري متخصص في الذهب والمجوهرات. تصميم فاخر بواجهات زجاجية مؤمنة. 40 محلاً مجهزاً بأحدث أنظمة الأمان. خزائن مركزية وغرفة حراسة 24 ساعة. أنظمة كاميرات مراقبة عالية الدقة. تكييف مركزي وإضاءة LED موفرة. سلالم كهربائية ومصاعد خدمة."},
+        {id:7,image:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&h=350&fit=crop",title:"كافيه الرويال",category:"entertainment",stats:["300م²","جلسات 80","ديكور خشبي"],description:"كافيه راقي بتصميم عصري. مساحة 300م² مقسمة بين جلسات داخلية وخارجية. ديكورات خشبية طبيعية مع إضاءة مخفية. بار متكامل لتحضير المشروبات الساخنة والباردة. نظام صوتي متطور. شاشات عرض للمباريات. ركن خاص للعائلات. تكييف مركزي ومدفأة شتوية."},
+        {id:8,image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?w=500&h=350&fit=crop",title:"مطعم الشلال",category:"entertainment",stats:["500م²","200 شخص","شلالات"],description:"مطعم سياحي فريد بتصميم مستوحى من الطبيعة. شلالات مائية صناعية تحيط بمنطقة الجلوس. جلسات عائلية وخاصة. مطبخ مركزي مجهز بأحدث المعدات. منيو عالمي وعربي. منطقة ألعاب للأطفال. مواقف خاصة تتسع لـ 100 سيارة. تكييف مركزي وتدفئة."},
+        {id:9,image:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=500&h=350&fit=crop",title:"قاعة أفراح الياسمين",category:"entertainment",stats:["1000 شخص","مدخل فندقي","إضاءة ليزر"],description:"قاعة أفراح كبرى تستوعب 1000 شخص. مدخل فندقي فخم مع استقبال. إضاءة ليزر وأنظمة صوت احترافية. مسرح متكامل للفرق الموسيقية. مطبخ تحضيري للولائم. غرف خاصة للعروسين ولـ VIP. بار للمشروبات. أنظمة تكييف مركزية تغطي كامل المساحة."},
+        {id:10,image:"https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=500&h=350&fit=crop",title:"ترميم فيلا القلعة",category:"restoration",stats:["فيلا تاريخية","ترميم كامل","6 أشهر"],description:"مشروع ترميم شامل لفيلا تاريخية عمرها 80 عاماً. تدعيم الأساسات ومعالجة الرطوبة. ترميم الواجهات الحجرية الأصلية. تحديث كامل لشبكات السباكة والكهرباء. تركيب أنظمة تكييف حديثة. دهانات بمواد صديقة للبيئة. أرضيات رخام إيطالي. الحفاظ على الطابع المعماري الأصلي."},
+        {id:11,image:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=350&fit=crop",title:"تشطيب شقة 200م",category:"restoration",stats:["200م²","سوبر لوكس","3 أشهر"],description:"تشطيب شقة سوبر لوكس على مساحة 200م². أرضيات باركيه ألماني. أسقف جبس بورد بتصميمات حديثة. إضاءة مخفية LED في جميع الغرف. مطبخ راكب بالكامل. تكييف مركزي. دهانات جرافيات. نجارة موبيليا حسب الطلب. عوازل صوت وحرارة."},
+        {id:12,image:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&h=350&fit=crop",title:"عمارة الياقوت",category:"buildings",stats:["8 أدوار","24 شقة","واجهة كلادينج"],description:"عمارة سكنية حديثة 8 أدوار. واجهات كلادينج عازلة للحرارة. 24 شقة بمساحات متنوعة. خزان أرضي وعلوي بسعة كبيرة. مصعد كهربائي. أنظمة أمان متكاملة. مدخل رخامي. مواقف سيارات. تم البناء خلال 14 شهر."},
+        {id:13,image:"https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=500&h=350&fit=crop",title:"فيلا السحاب",category:"villas",stats:["800م²","4 طوابق","روف"],description:"فيلا عصرية بتصميم فريد. مساحة 800م² على 4 طوابق. روف علوي مع جلسة خارجية. 6 غرف نوم. مسبح داخلي مدفأ. قبو للسيارات. نظام منزلي ذكي. أسانسير خاص. حديقة شتوية."},
+        {id:14,image:"https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=500&h=350&fit=crop",title:"مول الحياة",category:"commercial",stats:["5 طوابق","100 محل","سينما"],description:"مول تجاري ضخم على مساحة 15000م². 100 محل تجاري. هايبر ماركت. 8 صالات سينما. منطقة تزلج على الجليد. مدينة ألعاب داخلية. فود كورت 20 مطعم. مواقف 1000 سيارة."},
+        {id:15,image:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=350&fit=crop",title:"مطعم المرسى",category:"entertainment",stats:["800م²","إطلالة بحرية","300 شخص"],description:"مطعم سياحي على الواجهة البحرية. إطلالة بانورامية على البحر. 3 طوابق مع مصعد. تراسات خارجية. مطبخ عالمي. قسم خاص للمأكولات البحرية. ديكورات بحرية فاخرة."},
+        {id:16,image:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&h=350&fit=crop",title:"قصر المرمر",category:"villas",stats:["1500م²","7 غرف","3 مسابح"],description:"قصر فاخر من الرخام الإيطالي. مساحة 1500م². 7 أجنحة نوم. 3 مسابح (داخلي، خارجي، أطفال). قاعة سينما منزلية. سبا وجيم. غرفة ساونا وبخار. ملعب تنس خاص."},
+        {id:17,image:"https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&h=350&fit=crop",title:"برج الأعمال",category:"buildings",stats:["25 دور","مساحات مكتبية","ذكي"],description:"برج أعمال ذكي بتقنيات متطورة. 25 دوراً من المكاتب الفاخرة. أنظمة ذكية للتحكم. 6 مصاعد فائقة السرعة. مهبط طائرات. قاعات مؤتمرات. نادي صحي. مطاعم وكافيهات."},
+        {id:18,image:"https://images.unsplash.com/photo-1600566753086-00f18f6b0050?w=500&h=350&fit=crop",title:"ترميم مسجد تاريخي",category:"restoration",stats:["200 عام","ترميم دقيق","سنة"],description:"ترميم مسجد أثري عمره 200 عام. ترميم الزخارف الإسلامية. تدعيم الأعمدة الرخامية. تجديد المئذنة. تركيب أنظمة صوت وإضاءة حديثة. سجاد فاخر. تكييف مركزي مخفي."},
+        {id:19,image:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&h=350&fit=crop",title:"فندق النخلة",category:"entertainment",stats:["150 غرفة","5 نجوم","منتجع"],description:"فندق 5 نجوم على مساحة 20000م². 150 غرفة وجناح. 3 مطاعم عالمية. سبا ومركز تجميل. 2 مسبح. قاعة مؤتمرات 500 شخص. نادي رياضي. حدائق استوائية."},
+        {id:20,image:"https://images.unsplash.com/photo-1600573472591-ee6a563aaec9?w=500&h=350&fit=crop",title:"كمبوند الياسمين",category:"buildings",stats:["50 فيلا","نادي","حراسة"],description:"كمبوند سكني متكامل يضم 50 فيلا. نادي اجتماعي ورياضي. 3 مسابح. ملاعب رياضية. منطقة ألعاب أطفال. حراسة 24 ساعة. بوابات إلكترونية. حدائق ومساحات خضراء."},
+        {id:21,image:"https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=500&h=350&fit=crop",title:"تشطيب دوبلكس 300م",category:"restoration",stats:["300م²","دوبلكس","شهرين"],description:"تشطيب دوبلكس فاخر 300م². سلم داخلي رخام. أرضيات بورسلين إسباني. أسقف جبس مع إضاءة مخفية. مطبخ إيطالي راكب. 4 غرف نوم. تكييف مركزي. دهانات ديكورية."},
+        {id:22,image:"https://images.unsplash.com/photo-1600585154084-2e5fe0c39198?w=500&h=350&fit=crop",title:"كافيه النسمة",category:"entertainment",stats:["200م²","حديقة","60 شخص"],description:"كافيه هادئ في حديقة. جلسات خارجية بين الأشجار. برجولات خشبية. نافورة مياه. إضاءة رومانسية. قائمة مشروبات متنوعة. موسيقى هادئة."},
+    ];
 
-var cats = {buildings:"عمارات", villas:"فلل", commercial:"تجاري", entertainment:"ترفيهي", restoration:"ترميم"};
-var curCat = 'all';
+    var categoriesLabels = {buildings:"عمارات",villas:"فلل",commercial:"تجاري",entertainment:"ترفيهي",restoration:"ترميم"};
+    var activeCategory = 'all';
 
-function render(list){
-    var g = document.getElementById('gallery'); g.innerHTML = '';
-    if(!list.length){ g.innerHTML = '<div style="text-align:center;padding:40px;color:#888;grid-column:1/-1">😕 لا توجد مشاريع</div>'; return; }
-    list.forEach(function(p){
-        var c = document.createElement('div'); c.className = 'card'; c.onclick = function(){openModal(p);};
-        c.innerHTML = '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy"><div class="badge">'+cats[p.cat]+'</div><div class="info"><h3>'+p.name+'</h3><p>'+p.desc.substring(0,60)+'...</p></div>';
-        g.appendChild(c);
+    function displayProjects(list){
+        var gallery = document.getElementById('projectsGallery');
+        gallery.innerHTML = '';
+        if(!list.length){gallery.innerHTML='<div style="text-align:center;padding:50px;color:#888;grid-column:1/-1;font-size:1.2rem">😕 لا توجد مشاريع مطابقة</div>';return}
+        list.forEach(function(p){
+            var card = document.createElement('div');
+            card.className = 'project-card';
+            card.onclick = function(){openModal(p)};
+            card.innerHTML = '<img src="'+p.image+'" alt="'+p.title+'" loading="lazy"><div class="card-badge">'+categoriesLabels[p.category]+'</div><div class="card-info"><h3>'+p.title+'</h3><div class="card-stats">'+p.stats.map(function(s){return'<span>'+s+'</span>'}).join('')+'</div><p>'+p.description.substring(0,70)+'...</p></div>';
+            gallery.appendChild(card);
+        });
+    }
+
+    function filterProjects(){
+        var list = activeCategory === 'all' ? projectsData : projectsData.filter(function(p){return p.category === activeCategory});
+        displayProjects(list);
+    }
+
+    var modal = document.getElementById('projectModal');
+    var modalImage = document.getElementById('modalImage');
+    var modalTitle = document.getElementById('modalTitle');
+    var modalStats = document.getElementById('modalStats');
+    var modalDescription = document.getElementById('modalDescription');
+
+    function openModal(p){
+        modalImage.src = p.image;
+        modalTitle.textContent = p.title;
+        modalStats.innerHTML = p.stats.map(function(s){return'<span>'+s+'</span>'}).join('');
+        modalDescription.textContent = p.description;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(){modal.classList.remove('active');document.body.style.overflow = ''}
+    document.getElementById('closeModalBtn').onclick = closeModal;
+    modal.onclick = function(e){if(e.target === modal)closeModal()};
+
+    document.querySelectorAll('#categoriesBar .cat-btn').forEach(function(btn){
+        btn.onclick = function(){
+            document.querySelectorAll('#categoriesBar .cat-btn').forEach(function(b){b.classList.remove('active')});
+            btn.classList.add('active');
+            activeCategory = btn.getAttribute('data-category');
+            filterProjects();
+        };
     });
-}
 
-function filter(){
-    var list = curCat === 'all' ? projects : projects.filter(function(p){return p.cat === curCat;});
-    render(list);
-}
+    document.getElementById('startBtn').onclick = function(){
+        document.getElementById('landingPage').classList.add('hidden');
+        document.getElementById('mainContent').classList.add('visible');
+        filterProjects();
+    };
 
-var modal = document.getElementById('modal'), mImg = document.getElementById('modalImg'), mName = document.getElementById('modalName'), mDesc = document.getElementById('modalDesc');
-
-function openModal(p){
-    mImg.src = p.img;
-    mName.textContent = p.name;
-    mDesc.textContent = p.desc;
-    modal.classList.add('active'); document.body.style.overflow = 'hidden';
-}
-
-function closeModal(){ modal.classList.remove('active'); document.body.style.overflow = ''; }
-document.getElementById('closeModal').onclick = closeModal;
-modal.onclick = function(e){ if(e.target === modal) closeModal(); };
-
-document.querySelectorAll('#cats button').forEach(function(b){ b.onclick = function(){
-    document.querySelectorAll('#cats button').forEach(function(x){x.classList.remove('active');});
-    b.classList.add('active'); curCat = b.getAttribute('data-cat'); filter();
-};});
-
-document.getElementById('startBtn').onclick = function(){ document.getElementById('landing').classList.add('hidden'); document.getElementById('main').classList.add('visible'); filter(); };
-document.getElementById('backBtn').onclick = function(){ document.getElementById('landing').classList.remove('hidden'); document.getElementById('main').classList.remove('visible'); };
+    document.getElementById('backBtn').onclick = function(){
+        document.getElementById('landingPage').classList.remove('hidden');
+        document.getElementById('mainContent').classList.remove('visible');
+    };
 </script>
 </body>
 </html>
