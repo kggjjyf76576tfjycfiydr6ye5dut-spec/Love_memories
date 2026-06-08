@@ -131,6 +131,14 @@
             font-weight: bold;
             font-size: 1.2rem;
             border-right: 5px solid var(--gold);
+            text-align: center;
+        }
+        .manager-card .phone {
+            font-size: 0.9rem;
+            color: #b96f30;
+            margin-top: 6px;
+            direction: ltr;
+            display: inline-block;
         }
         .info-bar {
             background: #e7d2bc;
@@ -241,6 +249,16 @@
             font-size: 1rem;
             cursor: pointer;
         }
+        .phone-highlight {
+            background: #2c1a12;
+            color: var(--gold);
+            padding: 0.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            direction: ltr;
+            display: inline-block;
+            margin: 0 5px;
+        }
         footer {
             background: #1f140e;
             color: #e7d9cf;
@@ -260,7 +278,6 @@
                 font-size: 2rem;
             }
         }
-        /* تذييل تنبيه الصور */
         .local-images-note {
             background: #f0e4d5;
             border-top: 2px solid #d4b48c;
@@ -268,6 +285,28 @@
             text-align: center;
             font-size: 0.85rem;
             color: #4a2c1a;
+        }
+        .call-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .call-btn {
+            background: #2c7840;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        .call-btn i {
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -295,8 +334,16 @@
 <div class="management">
     <h3><i class="fas fa-users"></i> فريق الإدارة</h3>
     <div class="managers">
-        <div class="manager-card"><i class="fas fa-user-tie"></i> الأستاذ / وليد عبدالسميع <br> <span style="font-size: 0.8rem;">المدير العام</span></div>
-        <div class="manager-card"><i class="fas fa-user-check"></i> الأستاذ / عبدالحليم علي <br> <span style="font-size: 0.8rem;">مدير العمليات والتطوير</span></div>
+        <div class="manager-card">
+            <i class="fas fa-user-tie"></i> الأستاذ / وليد عبدالسميع <br> 
+            <span style="font-size: 0.8rem;">المدير العام</span>
+            <div class="phone"><i class="fas fa-phone-alt"></i> <span dir="ltr">01112091752</span></div>
+        </div>
+        <div class="manager-card">
+            <i class="fas fa-user-check"></i> الأستاذ / عبدالحليم علي <br> 
+            <span style="font-size: 0.8rem;">مدير العمليات والتطوير</span>
+            <div class="phone"><i class="fas fa-phone-alt"></i> <span dir="ltr">01010536166</span></div>
+        </div>
     </div>
     <p style="margin-top: 1rem; color: #5a3e2e;">تحت إدارتهما، نضمن توفير الطبالي الجديد والمستعمل بجودة فائقة وأسعار تنافسية.</p>
 </div>
@@ -312,29 +359,40 @@
 
 <div class="contact" id="contact">
     <div class="section-title">تواصل معنا</div>
-    <p>للاستفسار عن الطبالي الجديد أو القديم، أو لأي مقاس خاص، اترك رسالة وسنرد عليك فوراً.</p>
+    <p>للاستفسار عن الطبالي الجديد أو القديم، أو لأي مقاس خاص، يمكنك الاتصال أو إرسال رسالة.</p>
+    
+    <!-- أرقام التواصل واضحة للطلبات -->
+    <div style="background: #d9c2a6; padding: 1rem; border-radius: 50px; margin: 1rem auto; max-width: 400px;">
+        <i class="fas fa-headset"></i> <strong>رقم استقبال الطلبات:</strong> 
+        <span dir="ltr" style="font-weight: bold; font-size: 1.2rem;">01100257625</span>
+    </div>
+    
     <form id="contactForm" action="#" method="post">
         <input type="text" placeholder="الاسم الكامل" required>
         <input type="tel" placeholder="رقم الهاتف" required>
         <textarea rows="3" placeholder="المقاس المطلوب (مثال: 1200*1000 جديد/قديم) والكمية ..."></textarea>
         <button type="submit">إرسال طلب عرض سعر <i class="fas fa-paper-plane"></i></button>
     </form>
-    <p style="margin-top: 1rem; font-size: 0.9rem;">هاتف: 01022558877 | البريد: sales@brotherswood.com</p>
+    
+    <div class="call-buttons">
+        <a href="tel:01100257625" class="call-btn"><i class="fas fa-phone"></i> طلبات: 01100257625</a>
+        <a href="tel:01112091752" class="call-btn"><i class="fab fa-whatsapp"></i> وليد عبدالسميع</a>
+        <a href="tel:01010536166" class="call-btn"><i class="fab fa-whatsapp"></i> عبدالحليم علي</a>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">بريد إلكتروني: sales@brotherswood.com</p>
 </div>
 
 <footer>
     <p>© 2025 شركة الإخوة – خبراء الطبالي بجميع المقاسات (جديد ومستعمل).</p>
-    <p>إدارة: وليد عبدالسميع & عبدالحليم علي</p>
-    <p><i class="fas fa-cubes"></i> مقاسات متعددة – جودة – سرعة تسليم</p>
+    <p>إدارة: وليد عبدالسميع (01112091752) & عبدالحليم علي (01010536166)</p>
+    <p><i class="fas fa-phone"></i> للطلبات: 01100257625  |  <i class="fas fa-cubes"></i> مقاسات متعددة – جودة – سرعة تسليم</p>
 </footer>
 
 <div class="local-images-note">
-    <i class="fas fa-image"></i> الصور المستخدمة: img1.jpg , img2.jpg ... img10.jpg — يرجى وضع هذه الصور في نفس مجلد صفحة الموقع (أو تعديل المسار في الكود).
+    <i class="fas fa-image"></i> الصور المستخدمة: img1.jpg , img2.jpg ... img10.jpg — يرجى وضع هذه الصور في نفس مجلد صفحة الموقع.
 </div>
 
 <script>
-    // قائمة المنتجات مع تحديد صورة محلية من img1 إلى img10
-    // يمكنك تغيير امتداد الصورة (jpg, png, webp) حسب ملفاتك
     const products = [
         { name: "طبالي يورو جديد (1200x800)", desc: "مقاس قياسي أوروبي، خشب معالج، صالح للتصدير، تحمل عالي.", price: "من 245 جنيه", img: "img1.jpg", badge: "جديد - يورو" },
         { name: "طبالي أمريكي جديد (1200x1000)", desc: "مقاس أمريكي 48x40 إنش تقريباً، يستخدم في المستودعات الكبرى.", price: "من 350 جنيه", img: "img2.jpg", badge: "جديد - أمريكي" },
@@ -346,8 +404,8 @@
         { name: "طبالي قديم مقاس 1000x1200 (مخزون)", desc: "طبالي أمريكي قديم لكن قوي، مناسب للمصانع دون الحاجة لجودة جديدة.", price: "من 110 جنيه", img: "img8.jpg", badge: "قديم - جيد" },
         { name: "طبالي خفيف للشحن (جديد)", desc: "مقاس 800x600 أو أي مقاس خفيف، وزن منخفض واقتصادي.", price: "من 170 جنيه", img: "img9.jpg", badge: "جديد - خفيف" },
         { name: "طبالي معاد تدويره (خليط قديم وجديد)", desc: "ألواح جديدة وهيكل قديم، حل وسط بين الجودة والسعر.", price: "من 140 جنيه", img: "img10.jpg", badge: "هجين" },
-        { name: "طبالي صناعي مقاس 1300x1100 (جديد)", desc: "مقاس خاص للصناعات المعدنية والثقيلة، قدرة تحمل عالية.", price: "من 480 جنيه", img: "img1.jpg", badge: "مقاس ضخم" },      // إعادة استخدام img1
-        { name: "طبالي قديم متنوع (أي مقاس بكمية)", desc: "عندنا جميع المقاسات مستعملة – استلم بكميات كبيرة حسب طلبك.", price: "يبدأ من 80 جنيه", img: "img2.jpg", badge: "كل المقاسات قديم" }    // إعادة استخدام img2
+        { name: "طبالي صناعي مقاس 1300x1100 (جديد)", desc: "مقاس خاص للصناعات المعدنية والثقيلة، قدرة تحمل عالية.", price: "من 480 جنيه", img: "img1.jpg", badge: "مقاس ضخم" },
+        { name: "طبالي قديم متنوع (أي مقاس بكمية)", desc: "عندنا جميع المقاسات مستعملة – استلم بكميات كبيرة حسب طلبك.", price: "يبدأ من 80 جنيه", img: "img2.jpg", badge: "كل المقاسات قديم" }
     ];
 
     const grid = document.getElementById('products-grid');
@@ -355,10 +413,8 @@
         products.forEach(p => {
             const card = document.createElement('div');
             card.className = 'product-card';
-            // ملاحظة: إذا أردت مسار مجلد مثل "images/img1.jpg" يمكنك تعديل السطر التالي
-            const imgPath = p.img;   // افتراض أن الصورة في نفس مجلد الـ html
             card.innerHTML = `
-                <div class="product-img" style="background-image: url('${imgPath}'); background-size: cover; background-position: center;"></div>
+                <div class="product-img" style="background-image: url('${p.img}'); background-size: cover; background-position: center;"></div>
                 <div class="product-info">
                     <span class="product-badge"><i class="fas fa-tag"></i> ${p.badge}</span>
                     <h3>${p.name}</h3>
@@ -369,7 +425,7 @@
             `;
             const btn = card.querySelector('.btn-inquire');
             btn.addEventListener('click', () => {
-                alert(`مرحباً، منتج: ${p.name}\nيمكنك الحصول على هذا النوع بأي كمية. للاستفسار عن الأسعار والتسليم، يرجى الاتصال بإدارة الأستاذ وليد عبدالسميع أو الأستاذ عبدالحليم علي على 01022558877`);
+                alert(`مرحباً، منتج: ${p.name}\nيمكنك الحصول على هذا النوع بأي كمية.\nللاستفسار اتصل على رقم الطلبات: 01100257625\nأو تواصل مع إدارة وليد 01112091752 أو عبدالحليم 01010536166`);
             });
             grid.appendChild(card);
         });
@@ -379,9 +435,9 @@
     const contactForm = document.getElementById('contactForm');
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('تم استلام طلبك بنجاح – سيتواصل معك فريق شركة الإخوة لتأكيد المقاسات والكمية. شكراً لك.');
+        alert('تم استلام طلبك بنجاح – سيتواصل معك فريق شركة الإخوة عبر رقم الهاتف الذي أرسلته. للاستفسار السريع: 01100257625');
         contactForm.reset();
     });
 </script>
 </body>
-</html>
+    </html>
